@@ -13,7 +13,7 @@ function drawBlock( x, y ) {
 function render() {
     ctx.clearRect( 0, 0, W, H );
 
-    keyPress(keyCode);
+    procKeyEvent();
 
     ctx.strokeStyle = 'black';
     for ( var x = 0; x < COLS; ++x ) {

@@ -5,18 +5,25 @@ var interval;
 var current; // current moving shape
 var currentX, currentY; // position of current shape
 var shapes = [
-    [ 1, 1, 1, 1 ],
-    [ 1, 1, 1, 0,
+    [ 0, 0, 0, 0,
+      1, 1, 1, 1 ],
+    [ 0, 0, 0, 0,
+      1, 1, 1, 0,
       1 ],
-    [ 1, 1, 1, 0,
+    [ 0, 0, 0, 0,
+      1, 1, 1, 0,
       0, 0, 1 ],
-    [ 1, 1, 0, 0,
+    [ 0, 0, 0, 0,
+      1, 1, 0, 0,
       1, 1 ],
-    [ 1, 1, 0, 0,
+    [ 0, 0, 0, 0,
+      1, 1, 0, 0,
       0, 1, 1 ],
-    [ 0, 1, 1, 0,
+    [ 0, 0, 0, 0,
+      0, 1, 1, 0,
       1, 1 ],
-    [ 0, 1, 0, 0,
+    [ 0, 0, 0, 0,
+      0, 1, 0, 0,
       1, 1, 1 ]
 ];
 var colors = [
@@ -120,8 +127,8 @@ function clearLines() {
     }
 }
 
-function keyPress( key ) {
-    switch ( key ) {
+function procKeyEvent() {
+    switch ( keyCode ) {
         case 'left':
             if ( valid( -1 ) ) {
                 --currentX;
@@ -142,6 +149,7 @@ function keyPress( key ) {
             if ( valid( 0, 0, rotated ) ) {
                 current = rotated;
             }
+            keyCode='';
             break;
     }
 }
