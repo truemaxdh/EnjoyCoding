@@ -30,13 +30,13 @@
         <canvas width='300' height='600'></canvas>
         <div id="btn_controller" class="ui-body ui-body-a ui-corner-all" style="text-align:center;">
             <button class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r" style="width:50px;height:50px;"
-                id='btn_up'>&larr;</button>
+                ontouchstart="keyCode='left';" ontouchend="keyCode='';">&larr;</button>
             <button class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r" style="width:50px;height:50px;"
-                onmousedown="keyCode='rotate';" onmouseup="keyCode='';">&uarr;</button>
+                ontouchstart="keyCode='rotate';" ontouchend="keyCode='';">&uarr;</button>
             <button class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r" style="width:50px;height:50px;"
-                onmousedown="keyCode='right';" onmouseup="keyCode='';">&rarr;</button>
+                ontouchstart="keyCode='right';" ontouchend="keyCode='';">&rarr;</button>
             <button class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r" style="width:50px;height:50px;"
-                onmousedown="keyCode='down';" onmouseup="keyCode='';">&darr;</button>
+                ontouchstart="keyCode='down';" ontouchend="keyCode='';">&darr;</button>
         </div>
     </body>
 </html>

@@ -16,22 +16,6 @@ function keyEvtLink() {
 
     document.body.onkeyup = function( e ) {
         keyCode = '';
-    };
-
-    document.getElementById('btn_up').ontouchstart = function(e) {
-        keyCode='left';
-    };
-
-    document.getElementById('btn_up').ontouchend = function(e) {
-        keyCode='';
-    };
-
-    document.getElementById('btn_up').onmousedown = function(e) {
-        keyCode='left';
-    };
-
-    document.getElementById('btn_up').onmouseup = function(e) {
-        keyCode='';
-    };
+    }
 }
 
