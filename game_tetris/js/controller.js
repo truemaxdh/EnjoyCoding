@@ -16,6 +16,14 @@ function keyEvtLink() {
 
     document.body.onkeyup = function( e ) {
         keyCode = '';
-    }
+    };
+
+    document.getElementById('btn_up').addEventListener('touchstart', function(ev) {
+        keyCode='left';
+    });
+
+    document.getElementById('btn_up').addEventListener('touchend', function(ev) {
+        keyCode='';
+    });
 }
 
