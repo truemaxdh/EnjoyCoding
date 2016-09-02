@@ -1,8 +1,8 @@
-var canvas = document.getElementsByTagName( 'canvas' )[ 0 ];
-var ctx = canvas.getContext( '2d' );
+var canvas;
+var ctx;
 var W = 300, H = 600;
 var BLOCK_W = W / COLS, BLOCK_H = H / ROWS;
-
+var render_interval;
 // draw a single square at (x, y)
 function drawBlock( x, y ) {
     ctx.fillRect( BLOCK_W * x, BLOCK_H * y, BLOCK_W - 1 , BLOCK_H - 1 );
@@ -12,6 +12,8 @@ function drawBlock( x, y ) {
 // draws the board and the moving shape
 function render() {
     ctx.clearRect( 0, 0, W, H );
+
+    keyPress(keyCode);
 
     ctx.strokeStyle = 'black';
     for ( var x = 0; x < COLS; ++x ) {
@@ -35,4 +37,10 @@ function render() {
     }
 }
 
-setInterval( render, 100 );
+function render_init() {
+    canvas = document.getElementsByTagName( 'canvas' )[ 0 ];
+    ctx = canvas.getContext( '2d' );
+
+    clearInterval(render_interval);
+    render_interval = setInterval( render, 100 );
+}
