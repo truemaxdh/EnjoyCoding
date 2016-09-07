@@ -1,8 +1,10 @@
 var COLS = 12, ROWS = 20;
 var BLOCK_WH = 5;
 var board = [];
+var score;
 var lose;
 var interval;
+var objInterval;
 var current; // current moving shape
 var currentX, currentY; // position of current shape
 // var shapes = [
@@ -165,7 +167,7 @@ function tick() {
 }
 
 function gameOver() {
-    clearInterval(interval);
+    clearInterval(objInterval);
     location.href="index.html";
 }
 
@@ -200,27 +202,31 @@ function rotate( current ) {
 
 // check if any lines are filled and clear them
 function clearLines() {
+    var combo = 0;
     for ( var y = ROWS - 1; y >= 0; --y ) {
-        var rowFilled = false;
-        var filledCnt = 0;
+        var rowFilled = true;
+        var unfilledCnt = 0;
         for ( var x = 0; x < COLS; ++x ) {
-            if ( board[ y ][ x ] != 0 ) {
-                filledCnt++;
-                if (filledCnt >= 8) {
-                    rowFilled = true;
+            if ( board[ y ][ x ] == 0 ) {
+                unfilledCnt++;
+                if (unfilledCnt > 2) {
+                    rowFilled = false;
                     break;
                 }
-            } else {
-                filledCnt = 0;
-            }
+            } 
         }
         if ( rowFilled ) {
+            score += ++combo * 10; 
+            document.getElementById( 'score_board' ).innerHTML = 'Score : ' + score;
             document.getElementById( 'clearsound' ).play();
             for ( var yy = y; yy > 0; --yy ) {
                 for ( var x = 0; x < COLS; ++x ) {
                     board[ yy ][ x ] = board[ yy - 1 ][ x ];
                 }
             }
+            clearInterval(objInterval);
+            interval -= 10;
+            objInterval = setInterval( tick, interval );
             ++y;
         }
     }
@@ -285,11 +291,13 @@ function valid( offsetX, offsetY, newCurrent ) {
 }
 
 function newGame() {
-    clearInterval(interval);
+    clearInterval(objInterval);
     init();
+    score = 0;
     newShape();
     lose = false;
-    interval = setInterval( tick, 500 );
+    interval = 500;
+    objInterval = setInterval( tick, interval );
 
     keyEvtLink();
 

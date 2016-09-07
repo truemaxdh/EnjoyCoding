@@ -13,20 +13,23 @@
 		h1 { 
 			color: #d54d7b; 
 			font-family: "Comic Sans MS"; 
-			font-size: 130px;  
-			margin-bottom: 0px; 
-			margin-top: 40px; 
+			font-size: 7em;  
 			text-align: center; 
 			text-shadow: 0 1px 1px #fff; 
+			position : relative;
+			top: 30%;
+			transform: translateY(-50%);
 		}
 		
 		h2 { 
 			color: #CEF0D4; 
 			font-family: 'Lucida Console'; 
-			font-size: 100px; 
-			margin: 0 0 50px; 
+			font-size: 4em; 
 			text-align: center; 
-			text-shadow: 1px 1px 2px #082b34; 
+			text-shadow: 1px 1px 2px #082b34;
+			position : relative;
+			top: 30%;
+			transform: translateY(-50%); 
 		}
 
 		.border_round {
@@ -34,11 +37,15 @@
 			-webkit-border-radius: 				.3125em;
 			border-radius: 						.3125em;
 		}
+
+		#main {
+			height:94vh;
+		}
 	</style>
 </head>
 <body>
-	<div class="border_round" style="height:94vh;">
-		<h1>PentoDrop</h1>
+	<div id = "main" class="border_round">
+		<h1>Pentomix</h1>
 		<h2><a href="./game.html" rel="external">Start</a></h2>
 	</div>
 </body>
