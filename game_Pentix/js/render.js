@@ -1,6 +1,6 @@
 var canvas;
 var ctx;
-var W = 360, H = 600;
+var W = 600, H = 1000;
 var BLOCK_W = W / COLS, BLOCK_H = H / ROWS;
 var render_interval;
 // draw a single square at (x, y)
