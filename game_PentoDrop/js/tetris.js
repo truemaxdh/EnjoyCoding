@@ -1,33 +1,112 @@
-var COLS = 10, ROWS = 20;
+var COLS = 12, ROWS = 20;
+var BLOCK_WH = 5;
 var board = [];
 var lose;
 var interval;
 var current; // current moving shape
 var currentX, currentY; // position of current shape
+// var shapes = [
+//     [ 0, 0, 0, 0,
+//       1, 1, 1, 1 ],
+//     [ 0, 0, 0, 0,
+//       1, 1, 1, 0,
+//       1 ],
+//     [ 0, 0, 0, 0,
+//       1, 1, 1, 0,
+//       0, 0, 1 ],
+//     [ 0, 0, 0, 0,
+//       1, 1, 0, 0,
+//       1, 1 ],
+//     [ 0, 0, 0, 0,
+//       1, 1, 0, 0,
+//       0, 1, 1 ],
+//     [ 0, 0, 0, 0,
+//       0, 1, 1, 0,
+//       1, 1 ],
+//     [ 0, 0, 0, 0,
+//       0, 1, 0, 0,
+//       1, 1, 1 ]
+// ];
+
 var shapes = [
-    [ 0, 0, 0, 0,
-      1, 1, 1, 1 ],
-    [ 0, 0, 0, 0,
-      1, 1, 1, 0,
+    // 5
+    [ 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0,
+      1, 1, 1, 1, 1 ],
+    // 4
+    [ 0, 0, 0, 0, 0,
+      1, 1, 1, 1, 0,
       1 ],
-    [ 0, 0, 0, 0,
-      1, 1, 1, 0,
+    [ 0, 0, 0, 0, 0,
+      1, 1, 1, 1, 0,
+      0, 1 ],
+    [ 0, 0, 0, 0, 0,
+      1, 1, 1, 1, 0,
       0, 0, 1 ],
-    [ 0, 0, 0, 0,
-      1, 1, 0, 0,
+    [ 0, 0, 0, 0, 0,
+      1, 1, 1, 1, 0,
+      0, 0, 0, 1 ],
+    // 3
+    [ 0, 0, 0, 0, 0,
+      0, 1, 1, 1, 0,
       1, 1 ],
-    [ 0, 0, 0, 0,
-      1, 1, 0, 0,
+    [ 0, 0, 0, 0, 0,
+      0, 1, 1, 1, 0,
       0, 1, 1 ],
-    [ 0, 0, 0, 0,
-      0, 1, 1, 0,
-      1, 1 ],
-    [ 0, 0, 0, 0,
-      0, 1, 0, 0,
-      1, 1, 1 ]
+    [ 0, 0, 0, 0, 0,
+      0, 1, 1, 1, 0,
+      0, 0, 1, 1 ],
+    [ 0, 0, 0, 0, 0,
+      0, 1, 1, 1, 0,
+      0, 0, 0, 1, 1 ],
+    [ 0, 0, 0, 0, 0,
+      0, 1, 1, 1, 0,
+      0, 1, 0, 0, 0,
+      0, 1 ],
+    [ 0, 0, 0, 0, 0,
+      0, 1, 1, 1, 0,
+      0, 0, 1, 0, 0,
+      0, 0, 1 ],
+    [ 0, 0, 0, 0, 0,
+      0, 1, 1, 1, 0,
+      0, 0, 0, 1, 0, 
+      0, 0, 0, 1 ],
+    // 2
+    [ 0, 0, 0, 0, 0,
+      0, 1, 1, 0, 0,
+      0, 1, 0, 0, 0,
+      0, 1, 1 ],
+    [ 0, 0, 0, 0, 0,
+      0, 0, 1, 1, 0,
+      0, 1, 1, 0, 0,
+      0, 1 ],
+    [ 0, 0, 0, 0, 0,
+      0, 0, 1, 1, 0,
+      0, 1, 1, 0, 0,
+      0, 0, 1 ],
+    [ 0, 0, 0, 0, 0,
+      0, 1, 1, 0, 0,
+      0, 0, 1, 1, 0,
+      0, 0, 1 ],
+    [ 0, 0, 0, 0, 0,
+      0, 1, 1, 0, 0,
+      0, 0, 1, 0, 0,
+      0, 0, 1, 1 ],
+    [ 0, 0, 0, 0, 0,
+      0, 0, 1, 1, 0,
+      0, 0, 1, 0, 0,
+      0, 1, 1 ],
+    [ 0, 0, 0, 0, 0,
+      0, 0, 1, 0, 0,
+      0, 1, 1, 1, 0,
+      0, 0, 1 ]
 ];
+
+
 var colors = [
-    'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple'
+    'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple',
+    'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple',
+    'cyan', 'orange', 'blue', 'yellow', 'red'
 ];
 
 // creates a new 4x4 shape in global variable 'current'
@@ -37,10 +116,13 @@ function newShape() {
     var shape = shapes[ id ]; // maintain id for color filling
 
     current = [];
-    for ( var y = 0; y < 4; ++y ) {
+    // for ( var y = 0; y < 4; ++y ) {
+    for ( var y = 0; y < BLOCK_WH; ++y ) {
         current[ y ] = [];
-        for ( var x = 0; x < 4; ++x ) {
-            var i = 4 * y + x;
+        // for ( var x = 0; x < 4; ++x ) {
+        for ( var x = 0; x < BLOCK_WH; ++x ) {
+            // var i = 4 * y + x;
+            var i = BLOCK_WH * y + x;
             if ( typeof shape[ i ] != 'undefined' && shape[ i ] ) {
                 current[ y ][ x ] = id + 1;
             }
@@ -50,8 +132,8 @@ function newShape() {
         }
     }
     // position where the shape will evolve
-    currentX = 5;
-    currentY = 0;
+    currentX = 2;
+    currentY = -1;
 }
 
 // clears the board
@@ -74,17 +156,25 @@ function tick() {
         freeze();
         clearLines();
         if (lose) {
-            newGame();
+            alert("LOSE");
+            gameOver();
             return false;
         }
         newShape();
     }
 }
 
+function gameOver() {
+    clearInterval(interval);
+    location.href="index.html";
+}
+
 // stop shape at its position and fix it to board
 function freeze() {
-    for ( var y = 0; y < 4; ++y ) {
-        for ( var x = 0; x < 4; ++x ) {
+    // for ( var y = 0; y < 4; ++y ) {
+    for ( var y = 0; y < BLOCK_WH; ++y ) {
+        // for ( var x = 0; x < 4; ++x ) {
+        for ( var x = 0; x < BLOCK_WH; ++x ) {
             if ( current[ y ][ x ] ) {
                 board[ y + currentY ][ x + currentX ] = current[ y ][ x ];
             }
@@ -95,10 +185,13 @@ function freeze() {
 // returns rotates the rotated shape 'current' perpendicularly anticlockwise
 function rotate( current ) {
     var newCurrent = [];
-    for ( var y = 0; y < 4; ++y ) {
+    // for ( var y = 0; y < 4; ++y ) {
+    for ( var y = 0; y < BLOCK_WH; ++y ) {
         newCurrent[ y ] = [];
-        for ( var x = 0; x < 4; ++x ) {
-            newCurrent[ y ][ x ] = current[ 3 - x ][ y ];
+        // for ( var x = 0; x < 4; ++x ) {
+        for ( var x = 0; x < BLOCK_WH; ++x ) {
+            // newCurrent[ y ][ x ] = current[ 3 - x ][ y ];
+            newCurrent[ y ][ x ] = current[ BLOCK_WH - 1 - x ][ y ];
         }
     }
 
@@ -108,11 +201,17 @@ function rotate( current ) {
 // check if any lines are filled and clear them
 function clearLines() {
     for ( var y = ROWS - 1; y >= 0; --y ) {
-        var rowFilled = true;
+        var rowFilled = false;
+        var filledCnt = 0;
         for ( var x = 0; x < COLS; ++x ) {
-            if ( board[ y ][ x ] == 0 ) {
-                rowFilled = false;
-                break;
+            if ( board[ y ][ x ] != 0 ) {
+                filledCnt++;
+                if (filledCnt >= 8) {
+                    rowFilled = true;
+                    break;
+                }
+            } else {
+                filledCnt = 0;
             }
         }
         if ( rowFilled ) {
@@ -164,8 +263,10 @@ function valid( offsetX, offsetY, newCurrent ) {
 
 
 
-    for ( var y = 0; y < 4; ++y ) {
-        for ( var x = 0; x < 4; ++x ) {
+    // for ( var y = 0; y < 4; ++y ) {
+    for ( var y = 0; y < BLOCK_WH; ++y ) {
+        // for ( var x = 0; x < 4; ++x ) {
+        for ( var x = 0; x < BLOCK_WH; ++x ) {
             if ( newCurrent[ y ][ x ] ) {
                 if ( typeof board[ y + offsetY ] == 'undefined'
                   || typeof board[ y + offsetY ][ x + offsetX ] == 'undefined'
@@ -173,7 +274,8 @@ function valid( offsetX, offsetY, newCurrent ) {
                   || x + offsetX < 0
                   || y + offsetY >= ROWS
                   || x + offsetX >= COLS ) {
-                    if (offsetY == 1) lose = true; // lose if the current shape at the top row when checked
+                    // if (offsetY == 1) lose = true; // lose if the current shape at the top row when checked
+                    if (offsetY < 1) lose = true; // lose if the current shape at the top row when checked
                     return false;
                 }
             }
@@ -187,7 +289,7 @@ function newGame() {
     init();
     newShape();
     lose = false;
-    interval = setInterval( tick, 250 );
+    interval = setInterval( tick, 500 );
 
     keyEvtLink();
 

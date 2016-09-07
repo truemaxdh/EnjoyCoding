@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML5 Tetris</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, height=device-height">
+        <title>Tetris</title>
+        
+        <!-- jQuery Mobile link-->
+        <!--<link rel="stylesheet" href="../jquery_mobile/jquery.mobile-1.4.5.min.css">-->
+        <link rel="shortcut icon" href="../favicon.ico">
+        <!--<script src="../jquery_mobile/jquery.min.js"></script>
+        <script src="../jquery_mobile/jquery.mobile-1.4.5.min.js"></script>-->
+        
+        <!-- Game link-->
+        <link rel='stylesheet' href='style.css' />
+        <script src='js/tetris.js'></script>
+        <script src='js/controller.js'></script>
+        <script src='js/render.js'></script>
+        <style>
+            .float_left{ 
+                float:left; 
+            }
+            body {
+                text-align: center; 
+            }
+            .border_round {
+                border: 1px solid black;
+                -webkit-border-radius: 				.3125em;
+                border-radius: 						.3125em;
+            }
+            h1 { 
+                color: #d54d7b; 
+                font-family: "Comic Sans MS"; 
+                font-size: 80px;  
+                margin-bottom: 0px; 
+                margin-top: 20px; 
+                text-align: center; 
+                text-shadow: 0 1px 1px #fff; 
+            }
+            h2 { 
+                color: #d54d7b; 
+                font-family: "Comic Sans MS"; 
+                font-size: 60px;  
+                margin-bottom: 0px; 
+                margin-top: 20px; 
+                text-align: center; 
+                text-shadow: 0 1px 1px #fff; 
+            }
+            canvas {
+                width:54vh;
+                height:90vh;
+                margin: auto;
+                
+            }
+            #controller {
+                width:27vh;
+                height:90vh;
+                margin-top: 0px;
+            }
+        </style>
+    </head>
+    <body onload="newGame()">
+        <audio id="clearsound" src="sound/pop.ogg" preload="auto"></audio>
+        
+            <canvas width="360" height="600" class="float_left border_round"></canvas>
+            <div id="controller" class="float_left border_round">
+                <div>                    
+                    <h1>Score:</h1>
+                    <h2 id="score">0000</h2>
+                </div>
+                <div>
+                    <button class="border_round" style="width:50px;height:50px;"
+                        ontouchstart="keyCode='rotate';" ontouchend="keyCode='';">&uarr;</button>
+                        <br>
+                    <button class="border_round" style="width:50px;height:50px;"
+                        ontouchstart="keyCode='left';" ontouchend="keyCode='';">&larr;</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="border_round" style="width:50px;height:50px;"
+                        ontouchstart="keyCode='right';" ontouchend="keyCode='';">&rarr;</button>
+                        <br>
+                    <button class="border_round" style="width:50px;height:50px;"
+                        ontouchstart="keyCode='down';" ontouchend="keyCode='';">&darr;</button>
+                </div>
+            </div>            
+        
+    
+    </body>
+</html>

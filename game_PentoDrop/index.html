@@ -5,10 +5,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, height=device-height">
 	<title>Tetris</title>
-	<link rel="stylesheet" href="../jquery_mobile/jquery.mobile-1.4.5.min.css">
+	<!--<link rel="stylesheet" href="../jquery_mobile/jquery.mobile-1.4.5.min.css">
 	<link rel="shortcut icon" href="../favicon.ico">
 	<script src="../jquery_mobile/jquery.min.js"></script>
-	<script src="../jquery_mobile/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../jquery_mobile/jquery.mobile-1.4.5.min.js"></script>-->
 	<style>
 		h1 { 
 			color: #d54d7b; 
@@ -29,17 +29,17 @@
 			text-shadow: 1px 1px 2px #082b34; 
 		}
 
-
+		.border_round {
+			border: 1px solid black;
+			-webkit-border-radius: 				.3125em;
+			border-radius: 						.3125em;
+		}
 	</style>
 </head>
 <body>
-	<div data-role="page" id="testpage">
-		<div class="ui-content" role="main">
-			<div class="ui-body ui-body-a ui-corner-all" style="height:94vh;">
-				<h1>Tetris</h1>
-				<h2><a href="./game.html" rel="external">Start</a></h2>
-			</div>
-		</div>
+	<div class="border_round" style="height:94vh;">
+		<h1>PentoDrop</h1>
+		<h2><a href="./game.html" rel="external">Start</a></h2>
 	</div>
 </body>
 </html>

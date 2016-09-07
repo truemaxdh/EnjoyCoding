@@ -1,6 +1,6 @@
 var canvas;
 var ctx;
-var W = 300, H = 600;
+var W = 360, H = 600;
 var BLOCK_W = W / COLS, BLOCK_H = H / ROWS;
 var render_interval;
 // draw a single square at (x, y)
@@ -27,8 +27,10 @@ function render() {
 
     ctx.fillStyle = 'red';
     ctx.strokeStyle = 'black';
-    for ( var y = 0; y < 4; ++y ) {
-        for ( var x = 0; x < 4; ++x ) {
+    // for ( var y = 0; y < 4; ++y ) {
+    for ( var y = 0; y < BLOCK_WH; ++y ) {
+        // for ( var x = 0; x < 4; ++x ) {
+        for ( var x = 0; x < BLOCK_WH; ++x ) {
             if ( current[ y ][ x ] ) {
                 ctx.fillStyle = colors[ current[ y ][ x ] - 1 ];
                 drawBlock( currentX + x, currentY + y );
