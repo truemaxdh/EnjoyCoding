@@ -1,0 +1,9 @@
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="cordova-plugin-multidex" version="1.0.0">
+  <name>cordova-plugin-multidex</name>
+  <description>This plugin enables multi-dexing for the Android version of your application.</description>
+  <keywords>cordova,multidex</keywords>
+  <platform name="android">
+    <hook type="before_compile" src="scripts/android/setupApplicationName.js"/>
+    <framework src="src/android/multidex.gradle" type="gradleReference" custom="true"/>
+  </platform>
+</plugin>

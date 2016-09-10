@@ -1,0 +1,9 @@
+android {
+  defaultConfig {
+    multiDexEnabled true
+
+    dexOptions {
+      javaMaxHeapSize "4g"
+    }
+  }
+}
