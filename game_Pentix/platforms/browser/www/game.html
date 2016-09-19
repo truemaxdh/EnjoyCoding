@@ -18,9 +18,6 @@
         <script src='js/controller.js'></script>
         <script src='js/render.js'></script>
         <style>
-            .float_left{ 
-                float:left; 
-            }
             body {
                 text-align: center; 
             }
@@ -42,13 +39,25 @@
                 height:94vh;
                 margin: auto;
             }
-            canvas {
+           
+            #game_canvas {
                 width:48vh;
                 height:80vh;
             }
             
             #controller {
-                
+                user-select: none;
+                -ms-user-select: none; 
+                -moz-user-select: -moz-none;
+                -khtml-user-select: none;
+                -webkit-user-select: none;
+            }
+            .button {
+                width:50px;
+                height:50px;
+                line-height:50px;
+                display: inline-block;
+                text-align: center;
             }
         </style>
     </head>
@@ -58,16 +67,16 @@
             <div id="score_board">
                 Score : 0
             </div>
-            <canvas width="700" height="1000" class="border_round"></canvas>
-            <div id="controller">
-                <button class="border_round" style="width:50px;height:50px;"
-                    ontouchstart="keyCode='rotate';" ontouchend="keyCode='';">&uarr;</button>
-                <button class="border_round" style="width:50px;height:50px;"
-                    ontouchstart="keyCode='down';" ontouchend="keyCode='';">&darr;</button>
-                <button class="border_round" style="width:50px;height:50px;"
-                    ontouchstart="keyCode='left';" ontouchend="keyCode='';">&larr;</button>
-                <button class="border_round" style="width:50px;height:50px;"
-                    ontouchstart="keyCode='right';" ontouchend="keyCode='';">&rarr;</button>
+            <canvas id="game_canvas" width="700" height="1000" class="border_round"></canvas>
+            <div id="controller" width="220">
+                <div class="border_round button"
+                    ontouchstart="keyCode='rotate';" ontouchend="keyCode='';">&uarr;</div>
+                <div class="border_round button"
+                    ontouchstart="keyCode='down';" ontouchend="keyCode='';">&darr;</div>
+                <div class="border_round button"
+                    ontouchstart="keyCode='left';" ontouchend="keyCode='';">&larr;</div>
+                <div class="border_round button"
+                    ontouchstart="keyCode='right';" ontouchend="keyCode='';">&rarr;</div>
             </div>            
         </div>    
     </body>

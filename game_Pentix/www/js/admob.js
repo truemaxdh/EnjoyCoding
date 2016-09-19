@@ -1,6 +1,6 @@
 function onDeviceReady() {
     document.removeEventListener('deviceready', onDeviceReady, false);
-    alert("!!");
+    
     // Set AdMobAds options: 
     admob.setOptions({
     publisherId:          "ca-app-pub-7307479428475282/6915509453"//,  // Required 
@@ -14,7 +14,8 @@ function onDeviceReady() {
     admob.createBannerView();
     
     // Request interstitial (will present automatically when autoShowInterstitial is set to true) 
-    admob.requestInterstitialAd();
+    //admob.requestInterstitialAd();
 }
-    alert("!!!!");
+
+
 document.addEventListener("deviceready", onDeviceReady, false);
