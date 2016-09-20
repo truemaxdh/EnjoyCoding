@@ -251,13 +251,13 @@ function procKeyEvent() {
             }
             break;
         case 'rotate':
-            //if (rotBlTmr--==0) {
+            if (rotBlTmr--==0) {
                 var rotated = rotate( current );
                 if ( valid( 0, 0, rotated ) ) {
                     current = rotated;
                 }
-                //rotBlTmr = 3;
-            //}
+                rotBlTmr = 1;
+            }
             break;
     }
 }

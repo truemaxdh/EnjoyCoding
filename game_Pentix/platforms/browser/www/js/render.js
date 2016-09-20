@@ -44,5 +44,5 @@ function render_init() {
     ctx = canvas.getContext( '2d' );
 
     clearInterval(render_interval);
-    render_interval = setInterval( render, 100 );
+    render_interval = setInterval( render, 250 );
 }
