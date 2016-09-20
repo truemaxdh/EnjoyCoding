@@ -111,8 +111,8 @@ var colors = [
     'cyan', 'orange', 'blue', 'yellow', 'red'
 ];
 
-// creates a new 4x4 shape in global variable 'current'
-// 4x4 so as to cover the size when the shape is rotated
+// creates a new 5x5 shape in global variable 'current'
+// 5x5 so as to cover the size when the shape is rotated
 function newShape() {
     var id = Math.floor( Math.random() * shapes.length );
     var shape = shapes[ id ]; // maintain id for color filling
@@ -251,13 +251,13 @@ function procKeyEvent() {
             }
             break;
         case 'rotate':
-            if (rotBlTmr--==0) {
+            //if (rotBlTmr--==0) {
                 var rotated = rotate( current );
                 if ( valid( 0, 0, rotated ) ) {
                     current = rotated;
                 }
-                rotBlTmr = 3;
-            }
+                //rotBlTmr = 3;
+            //}
             break;
     }
 }
