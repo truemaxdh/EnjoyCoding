@@ -19,6 +19,10 @@
                         {
                             "xml": "<feature name=\"AdMobAds\"><param name=\"android-package\" value=\"com.appfeel.cordova.admob.AdMobAds\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Game\"><param name=\"android-package\" value=\"com.cranberrygame.cordova.plugin.game.Game\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -39,6 +43,34 @@
                         {
                             "xml": "<activity android:configChanges=\"keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize\" android:name=\"com.google.android.gms.ads.AdActivity\" android:theme=\"@android:style/Theme.Translucent\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<meta-data android:name=\"com.google.android.gms.version\" android:value=\"@integer/google_play_services_version\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<meta-data android:name=\"com.google.android.gms.games.APP_ID\" android:value=\"@string/app_id\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "res/values/ids.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<string name=\"app_id\">816297656629</string>",
+                            "count": 1
                         }
                     ]
                 }
@@ -57,6 +89,13 @@
         },
         "cordova-plugin-multidex": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-extras-google-play-services": {
+            "PACKAGE_NAME": "com.pgmaru.SimplePentix"
+        },
+        "cordova-plugin-game": {
+            "APP_ID": "816297656629",
+            "PACKAGE_NAME": "com.pgmaru.SimplePentix"
         }
     },
     "dependent_plugins": {},
@@ -77,12 +116,22 @@
                 "window.admob",
                 "window.tappx"
             ]
+        },
+        {
+            "id": "cordova-plugin-game.game",
+            "file": "plugins/cordova-plugin-game/www/game.js",
+            "pluginId": "cordova-plugin-game",
+            "clobbers": [
+                "window.game"
+            ]
         }
     ],
     "plugin_metadata": {
         "cordova-plugin-whitelist": "1.2.2",
         "cordova-connectivity-monitor": "1.2.2",
         "cordova-admob": "4.1.11",
-        "cordova-plugin-multidex": "1.0.0"
+        "cordova-plugin-multidex": "1.0.0",
+        "cordova-plugin-extras-google-play-services": "1.0.5",
+        "cordova-plugin-game": "1.0.120"
     }
 }

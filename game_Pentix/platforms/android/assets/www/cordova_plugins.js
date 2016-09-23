@@ -16,6 +16,14 @@ module.exports = [
             "window.admob",
             "window.tappx"
         ]
+    },
+    {
+        "id": "cordova-plugin-game.game",
+        "file": "plugins/cordova-plugin-game/www/game.js",
+        "pluginId": "cordova-plugin-game",
+        "clobbers": [
+            "window.game"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -24,7 +32,9 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.2.2",
     "cordova-connectivity-monitor": "1.2.2",
     "cordova-admob": "4.1.11",
-    "cordova-plugin-multidex": "1.0.0"
+    "cordova-plugin-multidex": "1.0.0",
+    "cordova-plugin-extras-google-play-services": "1.0.5",
+    "cordova-plugin-game": "1.0.120"
 };
 // BOTTOM OF METADATA
 });

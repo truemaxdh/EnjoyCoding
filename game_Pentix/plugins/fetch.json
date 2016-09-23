@@ -31,5 +31,24 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "cordova-plugin-game": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-game"
+        },
+        "is_top_level": true,
+        "variables": {
+            "APP_ID": "816297656629"
+        }
+    },
+    "cordova-plugin-extras-google-play-services": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/cranberrygame/cordova-plugin-extras-google-play-services",
+            "subdir": "."
+        },
+        "is_top_level": false,
+        "variables": {}
     }
 }

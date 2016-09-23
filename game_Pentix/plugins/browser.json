@@ -15,6 +15,9 @@
         },
         "cordova-plugin-multidex": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-game": {
+            "PACKAGE_NAME": "com.pgmaru.SimplePentix"
         }
     },
     "dependent_plugins": {

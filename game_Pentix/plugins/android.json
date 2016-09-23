@@ -15,11 +15,18 @@
         },
         "cordova-plugin-multidex": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-game": {
+            "APP_ID": "816297656629",
+            "PACKAGE_NAME": "com.pgmaru.SimplePentix"
         }
     },
     "dependent_plugins": {
         "cordova-connectivity-monitor": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-extras-google-play-services": {
+            "PACKAGE_NAME": "com.pgmaru.SimplePentix"
         }
     }
 }

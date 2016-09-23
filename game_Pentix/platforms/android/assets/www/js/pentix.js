@@ -7,6 +7,7 @@ var interval;
 var objInterval;
 var current; // current moving shape
 var currentX, currentY; // position of current shape
+var cleardLines;
 // var shapes = [
 //     [ 0, 0, 0, 0,
 //       1, 1, 1, 1 ],
@@ -216,6 +217,11 @@ function clearLines() {
             } 
         }
         if ( rowFilled ) {
+            cleardLines++;
+            switch (cleardLines) {
+                
+            }
+
             score += ++combo * 10; 
             document.getElementById( 'score_board' ).innerHTML = 'Score : ' + score;
             document.getElementById( 'clearsound' ).play();
@@ -297,6 +303,7 @@ function newGame() {
     clearInterval(objInterval);
     init();
     score = 0;
+    cleardLines = 0;
     newShape();
     lose = false;
     interval = 500;
