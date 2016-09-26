@@ -159,7 +159,6 @@ function tick() {
         freeze();
         clearLines();
         if (lose) {
-            alert("LOSE");
             gameOver();
             return false;
         }
@@ -169,7 +168,16 @@ function tick() {
 
 function gameOver() {
     clearInterval(objInterval);
-    location.href="index.html";
+    window.game.submitScore(leaderboardId, score);
+    window.game.onSubmitScoreSucceeded = function() {
+        OpenUserResult();
+    };
+    window.game.onSubmitScoreFailed = function() {
+        OpenUserResult();
+    };
+
+    document.getElementById('user_score').innerHTML = score;
+
 }
 
 // stop shape at its position and fix it to board
@@ -218,10 +226,7 @@ function clearLines() {
         }
         if ( rowFilled ) {
             cleardLines++;
-            switch (cleardLines) {
-                
-            }
-
+            chkAndUnlockAchievement(cleardLines);
             score += ++combo * 10; 
             document.getElementById( 'score_board' ).innerHTML = 'Score : ' + score;
             document.getElementById( 'clearsound' ).play();

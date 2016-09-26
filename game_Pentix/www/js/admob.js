@@ -1,15 +1,6 @@
-function onDeviceReady() {
-    document.removeEventListener('deviceready', onDeviceReady, false);
-    
-    // Set AdMobAds options: 
-    admob.setOptions({
-    publisherId:          "ca-app-pub-7307479428475282/6915509453"//,  // Required 
-    // interstitialAdId:     "ca-app-pub-XXXXXXXXXXXXXXXX/IIIIIIIIII",  // Optional 
-    // tappxIdiOS:           "/XXXXXXXXX/Pub-XXXX-iOS-IIII",            // Optional 
-    // tappxIdAndroid:       "/XXXXXXXXX/Pub-XXXX-Android-AAAA",        // Optional 
-    // tappxShare:           0.5                                        // Optional 
-    });
-    
+function ShowAdmob() {
+    document.removeEventListener('deviceready', ShowAdmob, false);
+
     // Start showing banners (atomatic when autoShowBanner is set to true) 
     admob.createBannerView();
     
@@ -17,5 +8,12 @@ function onDeviceReady() {
     //admob.requestInterstitialAd();
 }
 
+function HideAdmob() {
+    document.removeEventListener('deviceready', HideAdmob, false);
 
-document.addEventListener("deviceready", onDeviceReady, false);
+    admob.destroyBannerView();
+}
+
+function SetDeviceReady(showAd) {
+    document.addEventListener("deviceready", showAd ? ShowAdmob : HideAdmob, false);
+}

@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>HTML5 Tetris</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, height=device-height">
-        <title>Tetris</title>
+        <!--<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, height=device-height">-->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height">
+
+        <title>Simple Pentix</title>
         
-        <!-- jQuery Mobile link-->
-        <!--<link rel="stylesheet" href="../jquery_mobile/jquery.mobile-1.4.5.min.css">-->
         <link rel="shortcut icon" href="../favicon.ico">
-        <!--<script src="../jquery_mobile/jquery.min.js"></script>
-        <script src="../jquery_mobile/jquery.mobile-1.4.5.min.js"></script>-->
-        
+        <link rel="stylesheet" type="text/css" href="css/overlay.css">
+
         <!-- Game link-->
+        <script src="js/admob.js"></script>
+        <script src='js/google_play_game.js'></script>
         <script src='js/pentix.js'></script>
         <script src='js/controller.js'></script>
         <script src='js/render.js'></script>
@@ -60,7 +62,7 @@
             }
         </style>
     </head>
-    <body onload="newGame()">
+    <body onload="SetDeviceReady(true);newGame();">
         <audio id="clearsound" src="sound/pop.ogg" preload="auto"></audio>
         <div id="game_page">
             <div id="score_board">
@@ -77,6 +79,21 @@
                 <div class="border_round button"
                     ontouchstart="keyCode='right';" ontouchend="keyCode='';">&rarr;</div>
             </div>            
+        </div>
+        
+        <!-- The overlay -->
+        <div id="user_result" class="overlay">
+
+            <!-- Button to close the overlay navigation -->
+            <a href="javascript:void(0)" class="closebtn" onclick="CloseUserResult()">&times;</a>
+
+            <!-- Overlay content -->
+            <div class="overlay-content">
+                <img id="user_img" />
+                You Scored <div id="user_score" />
+                <a href="#" onclick="ShowAchievements();">Show Achievements</a>
+                <a href="#" onclick="ShowHighScores();">Show High Scores</a>
+            </div>
         </div>    
     </body>
 </html>
