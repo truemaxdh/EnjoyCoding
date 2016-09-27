@@ -1,4 +1,18 @@
 /* common */
+@font-face {
+    font-family: "Sniglet-Regular";
+    src: url("../fonts/Sniglet-Regular.ttf") format("opentype");   
+    /* Make sure you defined the correct path, which is related to
+        the location of your file `my_css.css` */ 
+}
+
+@font-face {
+    font-family: "Sniglet-ExtraBold";
+    src: url("../fonts/Sniglet-ExtraBold.ttf") format("opentype");   
+    /* Make sure you defined the correct path, which is related to
+        the location of your file `my_css.css` */ 
+}
+
 .border_round {
     border: 1px solid black;
     -webkit-border-radius: 				.3125em;
@@ -8,7 +22,7 @@
 /* menu */
 h1 { 
     color: #d54d7b; 
-    font-family: "Sniglet"; 
+    font-family: "Sniglet-ExtraBold"; 
     font-size: 10vw;  
     text-align: center; 
     text-shadow: 0 1px 1px #fff; 
@@ -16,7 +30,7 @@ h1 {
 
 h2 { 
     color: #CEF0D4; 
-    font-family: 'Sniglet'; 
+    font-family: 'Sniglet-Regular'; 
     font-size: 6vw; 
     text-align: center; 
     text-shadow: 1px 1px 2px #082b34;
@@ -24,7 +38,7 @@ h2 {
 
 h3 { 
     color: #CEF0D4; 
-    font-family: 'Sniglet'; 
+    font-family: 'Sniglet-Regular'; 
     font-size: 3vw; 
     text-align: center; 
     text-shadow: 1px 1px 2px #082b34;
