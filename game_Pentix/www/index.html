@@ -35,49 +35,59 @@
         <!--<meta name="viewport" content="width=device-width, height=device-height">-->
 		<!--<meta charset="utf-8">-->
 		<title>Simple Pentix</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<script type="text/javascript" src="cordova.js"></script>
-		<script src="js/google_game_setup.js"></script>
-		<style>
-			h1 { 
-				color: #d54d7b; 
-				font-family: "Comic Sans MS"; 
-				font-size: 10vw;  
-				text-align: center; 
-				text-shadow: 0 1px 1px #fff; 
-			}
-			
-			h2 { 
-				color: #CEF0D4; 
-				font-family: 'Lucida Console'; 
-				font-size: 7vw; 
-				text-align: center; 
-				text-shadow: 1px 1px 2px #082b34;
-			}
-
-			.border_round {
-				border: 1px solid black;
-				-webkit-border-radius: 				.3125em;
-				border-radius: 						.3125em;
-			}
-
-			#main {
-				width:98vw;
-				height:94vh;
-			}
-
-			#text {
-				position : relative;
-				top: 30%;
-				transform: translateY(-50%);
-			}
-		</style>
+		<script src="js/google_services.js"></script>
+		
+        <!-- Game link-->
+        <script src='js/pentix.js'></script>
+        <script src='js/controller.js'></script>
+        <script src='js/render.js'></script>
     </head>
     <body>
-        <div id = "main" class="border_round">
-			<div id = "text">
+        <div id = "intro" class="menu border_round">
+			<div class = "text">
 				<h1>Simple<br>Pentix</h1>
-				<h2>Welcome!!<br>Wait for a while!!</h2>
+				<h3>Welcome!!<br>Wait for a while!!</h3>
 			</div>
 		</div>
+		<div id = "menu" class="menu border_round">
+			<div class = "text">
+				<h1>Simple<br>Pentix</h1>
+				<h2><a href="#" onclick="pageChange('game');">Start</a></h2>
+			</div>
+		</div>
+        <div id = "game">
+			<audio id="clearsound" src="sound/pop.ogg" preload="auto"></audio>
+            <div id="score_board">
+                Score : 0
+            </div>
+            <canvas id="game_canvas" width="700" height="1000" class="border_round"></canvas>
+            <div id="controller" width="220">
+                <div class="border_round button"
+                    ontouchstart="keyCode='rotate';rotBlTmr=0" ontouchend="keyCode='';">&uarr;</div>
+                <div class="border_round button"
+                    ontouchstart="keyCode='down';" ontouchend="keyCode='';">&darr;</div>
+                <div class="border_round button"
+                    ontouchstart="keyCode='left';" ontouchend="keyCode='';">&larr;</div>
+                <div class="border_round button"
+                    ontouchstart="keyCode='right';" ontouchend="keyCode='';">&rarr;</div>
+            </div>            
+        </div>
+        
+        <!-- The overlay -->
+        <div id="user_result" class="overlay">
+
+            <!-- Button to close the overlay navigation -->
+            <a href="javascript:void(0)" class="closebtn" onclick="CloseUserResult()">&times;</a>
+
+            <!-- Overlay content -->
+			<div class="overlay-content">
+				<img id="user_img" />
+				<div class="text">You Scored <div id="user_score"></div></div>
+				<a href="#" onclick="ShowAchievements();">Show Achievements</a>
+				<a href="#" onclick="ShowHighScores();">Show High Scores</a>
+			</div>
+        </div>  
     </body>
 </html>
