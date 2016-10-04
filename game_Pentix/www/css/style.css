@@ -28,21 +28,6 @@ h1 {
     text-shadow: 0 1px 1px #fff; 
 }
 
-h2 { 
-    color: #CC33AA; 
-    font-family: 'Sniglet-Regular'; 
-    font-size: 3vw; 
-    text-align: center; 
-    text-shadow: 1px 1px 2px #082b34;
-}
-
-h2 a {
-    text-decoration: none;
-}
-h2 a:hover, h2 a:focus {
-    color: #CC33AA;
-}
-
 h3 { 
     color: #CEF0D4; 
     font-family: 'Sniglet-Regular'; 
@@ -60,6 +45,20 @@ h3 {
     position : relative;
     top: 40%;
     transform: translateY(-50%);
+}
+
+.text a { 
+    color: #AADD33; 
+    font-family: 'Sniglet-Regular'; 
+    font-size: 30px;; 
+    text-align: center; 
+    text-shadow: 1px 1px 2px #082b34;
+    text-decoration: none;
+    display: block; 
+}
+
+.text a:hover, .text a:focus {
+    color: #11AA88;
 }
 
 /* game */
