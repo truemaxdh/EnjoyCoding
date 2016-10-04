@@ -51,7 +51,7 @@ h3 {
 
 .text {
     position : relative;
-    top: 40%;
+    top: 50%;
     transform: translateY(-50%);
 }
 
