@@ -29,11 +29,18 @@ h1 {
 }
 
 h2 { 
-    color: #CEF0D4; 
+    color: #CC33AA; 
     font-family: 'Sniglet-Regular'; 
-    font-size: 6vw; 
+    font-size: 2vw; 
     text-align: center; 
     text-shadow: 1px 1px 2px #082b34;
+}
+
+h2 a {
+    text-decoration: none;
+}
+h2 a:hover, h2 a:focus {
+    color: #CC33AA;
 }
 
 h3 { 
@@ -51,7 +58,7 @@ h3 {
 
 .text {
     position : relative;
-    top: 50%;
+    top: 40%;
     transform: translateY(-50%);
 }
 
