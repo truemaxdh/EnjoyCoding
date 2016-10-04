@@ -48,7 +48,7 @@ h3 {
 }
 
 .text a { 
-    color: #AADD33; 
+    color: #FFF; 
     font-family: 'Sniglet-Regular'; 
     font-size: 25px; 
     text-align: center; 
@@ -58,7 +58,7 @@ h3 {
 }
 
 .text a:hover, .text a:focus {
-    color: #11AA88;
+    color: #DD8800;
 }
 
 /* game */
