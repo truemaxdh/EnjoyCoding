@@ -135,7 +135,7 @@ function newShape() {
         }
     }
     // position where the shape will evolve
-    currentX = 2;
+    currentX = 5;
     currentY = -1;
 }
 
@@ -168,14 +168,17 @@ function tick() {
 
 function gameOver() {
     clearInterval(objInterval);
-    window.game.submitScore(leaderboardId, score);
-    window.game.onSubmitScoreSucceeded = function() {
+    if (isApp) {
+        window.game.submitScore(leaderboardId, score);
+        window.game.onSubmitScoreSucceeded = function() {
+            OpenUserResult();
+        };
+        window.game.onSubmitScoreFailed = function() {
+            OpenUserResult();
+        };
+    } else {
         OpenUserResult();
-    };
-    window.game.onSubmitScoreFailed = function() {
-        OpenUserResult();
-    };
-
+    }
     document.getElementById('user_score').innerHTML = score;
 
 }
@@ -313,8 +316,6 @@ function newGame() {
     lose = false;
     interval = 500;
     objInterval = setInterval( tick, interval );
-
-    keyEvtLink();
-
+    
     render_init();
 }

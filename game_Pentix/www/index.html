@@ -65,13 +65,13 @@
             <canvas id="game_canvas" width="700" height="1000" class="border_round"></canvas>
             <div id="controller" width="220">
                 <div class="border_round button"
-                    ontouchstart="keyCode='rotate';rotBlTmr=0" ontouchend="keyCode='';">&uarr;</div>
+                    ontouchstart="keyCode='rotate'; rotBlTmr=0; return false;" ontouchend="keyCode=''; return false;">&uarr;</div>
                 <div class="border_round button"
-                    ontouchstart="keyCode='down';" ontouchend="keyCode='';">&darr;</div>
+                    ontouchstart="keyCode='down'; return false;" ontouchend="keyCode=''; return false;">&darr;</div>
                 <div class="border_round button"
-                    ontouchstart="keyCode='left';" ontouchend="keyCode='';">&larr;</div>
+                    ontouchstart="keyCode='left'; return false;" ontouchend="keyCode=''; return false;">&larr;</div>
                 <div class="border_round button"
-                    ontouchstart="keyCode='right';" ontouchend="keyCode='';">&rarr;</div>
+                    ontouchstart="keyCode='right'; return false;" ontouchend="keyCode=''; return false;">&rarr;</div>
             </div>            
         </div>
         

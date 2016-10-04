@@ -11,12 +11,15 @@ function keyEvtLink() {
             //keyPress( keys[ e.keyCode ] );
             keyCode=keys[ e.keyCode ];
             //render();
+
+            return false;
         }
     };
 
     document.body.onkeyup = function( e ) {
         keyCode = '';
         rotBlTmr = 0;
+        return false;
     }
 }
 
