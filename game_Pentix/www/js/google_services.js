@@ -113,7 +113,8 @@ function onLoad() {
 }
 
 var isApp;
-if (location.href.indexOf('CodingIsFun') < 0) {
+if (location.href.indexOf('CodingIsFun') < 0 &&
+    location.href.indexOf('localhost') < 0) {
     isApp = true;
     document.addEventListener("deviceready", onDeviceReady, false);
 } else {

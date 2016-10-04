@@ -23,17 +23,9 @@
 h1 { 
     color: #d54d7b; 
     font-family: "Sniglet-ExtraBold"; 
-    font-size: 10vw;  
+    font-size: 55px;/*10vw;*/  
     text-align: center; 
     text-shadow: 0 1px 1px #fff; 
-}
-
-h2 { 
-    color: #CEF0D4; 
-    font-family: 'Sniglet-Regular'; 
-    font-size: 6vw; 
-    text-align: center; 
-    text-shadow: 1px 1px 2px #082b34;
 }
 
 h3 { 
@@ -51,8 +43,22 @@ h3 {
 
 .text {
     position : relative;
-    top: 30%;
+    top: 50%;
     transform: translateY(-50%);
+}
+
+.text a { 
+    color: #FFF; 
+    font-family: 'Sniglet-Regular'; 
+    font-size: 25px; 
+    text-align: center; 
+    text-shadow: 1px 1px 2px #082b34;
+    text-decoration: none;
+    display: block; 
+}
+
+.text a:hover, .text a:focus {
+    color: #DD8800;
 }
 
 /* game */
