@@ -28,22 +28,81 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <!--<link rel="stylesheet" type="text/css" href="css/index.css">-->
         <title>Hello World</title>
+        <style>
+            #bg_canvas {
+                width:24vh;
+                height:90vh;
+                display:none;
+            }
+
+            #game_canvas {
+                width:72vh;
+                height:90vh;
+            }
+        </style>
+        <script type="text/javascript">
+            var img_sea = new Image();
+            var img_sea2 = new Image();
+            var img_island = new Image();
+            var img_airplane = new Image();
+            var canv_bg;
+            var ctx_bg;
+            var canv_game;
+            var ctx_game;
+            var bg_y = 1800;
+
+            var x = 310;
+            var y = 750;
+
+            img_sea.src = 'img/sea.png';
+            img_sea2.src = 'img/sea2.png';
+            img_island.src = 'img/island.png';
+            img_airplane.src = 'img/airplane.png';
+            function loadAndDraw() {
+                canv_bg = document.getElementById('bg_canvas');
+                ctx_bg = canv_bg.getContext('2d');
+
+                for (var i = 0; i < 10; i++) {
+                    var img_sea_rnd = (Math.random() < 0.5) ? img_sea : img_sea2;
+                    for (var j = 0; j < 4; j++) {
+                        var img_rnd = (Math.random() < 0.8) ? img_sea_rnd : img_island;
+                        ctx_bg.drawImage(img_rnd, j * 180, i * 180);
+                    }
+                }
+                
+                ctx_bg.drawImage(canv_bg, 0, 0, 720, 900, 0, 1800, 720, 900);
+                canv_game = document.getElementById('game_canvas');
+                ctx_game = canv_game.getContext('2d');
+                setInterval(render_scroll, 50);
+                
+            }
+
+            function render_scroll() {
+                ctx_game.drawImage(canv_bg, 0, bg_y, 720, 900, 0, 0, 720, 900);
+                ctx_game.drawImage(img_airplane, x, y);
+                bg_y -= 3;
+                if (bg_y < 0) bg_y = 1800;
+            }
+
+        </script>
     </head>
-    <body>
-        <div class="app">
+    <body onload="loadAndDraw();">
+        <canvas id="bg_canvas" width="720" height="2700" style="border:1px solid #d3d3d3;"></canvas>
+        <canvas id="game_canvas" width="720" height="900" style="border:1px solid #d3d3d3;"></canvas>
+        <!--<div class="app">
             <h1>Apache Cordova</h1>
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
             </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+        </div>-->
+        <!--<script type="text/javascript" src="cordova.js"></script>-->
+        <!--<script type="text/javascript" src="js/index.js"></script>-->
     </body>
 </html>
