@@ -8,15 +8,18 @@ function init_user_input() {
         user_x = e.screenX;
         user_y = e.screenY;
         user_pressing = true;
+        return false;
     }
 
     canv_game.onmouseup = function (e) {
         user_pressing = false;
+        return false;
     }
 
     canv_game.onmousemove = function(e) {
         user_x = e.screenX;
         user_y = e.screenY;
+        return false;
     }
 
     canv_game.ontouchstart = function (e) {
@@ -25,14 +28,17 @@ function init_user_input() {
         user_x = e.screenX;
         user_y = e.screenY;
         user_pressing = true;
+        return false;
     }
 
     canv_game.ontouchend = function (e) {
         user_pressing = false;
+        return false;
     }
 
     canv_game.ontouchmove = function(e) {
         user_x = e.screenX;
         user_y = e.screenY;
+        return false;
     }
 }
