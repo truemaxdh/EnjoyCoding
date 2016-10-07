@@ -23,6 +23,7 @@ function init_user_input() {
     }
 
     canv_game.ontouchstart = function (e) {
+        alert(e.screenX);
         user_x_ori = e.screenX;
         user_y_ori = e.screenY;
         user_x = e.screenX;
