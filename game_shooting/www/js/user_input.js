@@ -23,11 +23,11 @@ function init_user_input() {
     }
 
     canv_game.ontouchstart = function (e) {
-        alert(e.screenX);
-        user_x_ori = e.screenX;
-        user_y_ori = e.screenY;
-        user_x = e.screenX;
-        user_y = e.screenY;
+        alert(e.touches[0].screenX);
+        user_x_ori = e.touches[0].screenX;
+        user_y_ori = e.touches[0].screenY;
+        user_x = e.touches[0].screenX;
+        user_y = e.touches[0].screenY;
         user_pressing = true;
         return false;
     }
@@ -38,8 +38,8 @@ function init_user_input() {
     }
 
     canv_game.ontouchmove = function(e) {
-        user_x = e.screenX;
-        user_y = e.screenY;
+        user_x = e.touches[0].screenX;
+        user_y = e.touches[0].screenY;
         return false;
     }
 }
