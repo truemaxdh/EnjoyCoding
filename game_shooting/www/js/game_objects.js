@@ -5,6 +5,7 @@ function objJet() {
     this.img.src = 'img/airplane.png';
     this.render = function(ctx_game) {
         ctx_game.drawImage(this.img, this.x, this.y);
+        ctx_game.fillText(this.x + ',' + this.y, 20,50);
     }
 }
 
