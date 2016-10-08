@@ -25,10 +25,10 @@ function init_user_input() {
     }
 
     canv_game.ontouchstart = function (e) {
-        user_x_ori = e.touches[0].offsetX;
-        user_y_ori = e.touches[0].offsetY;
-        user_x = e.touches[0].offsetX;
-        user_y = e.touches[0].offsetY;
+        user_x_ori = e.touches[0].clientX * scale_f;
+        user_y_ori = e.touches[0].clientY * scale_f;
+        user_x = e.touches[0].clientX * scale_f;
+        user_y = e.touches[0].clientY * scale_f;
         user_pressing = true;
         return false;
     }
@@ -39,8 +39,8 @@ function init_user_input() {
     }
 
     canv_game.ontouchmove = function(e) {
-        user_x = e.touches[0].offsetX;
-        user_y = e.touches[0].offsetY;
+        user_x = e.touches[0].clientX * scale_f;
+        user_y = e.touches[0].clientY * scale_f;
         return false;
     }
 }
