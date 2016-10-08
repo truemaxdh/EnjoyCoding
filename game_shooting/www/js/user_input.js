@@ -1,9 +1,11 @@
 var user_x_ori, user_y_ori;
 var user_x, user_y;
 var user_pressing = false;
-var scale_f;
+
 function init_user_input() {
+    alert(canv_game.width);
     var scale_f = canv_game.width / canv_game.clientWidth;
+    alert(scale_f);
     canv_game.onmousedown = function (e) {
         user_x_ori = e.offsetX * scale_f;
         user_y_ori = e.layerY * scale_f;
