@@ -11,8 +11,6 @@ var bg_y = 1800;
 var imgs = [img_sea, img_sea2, img_island];
 var URLs = ['img/sea.png', 'img/sea2.png', 'img/island.png'];
 
-var o_jet = new objJet(); 
-
 function render_init() {
     canv_bg = document.getElementById('bg_canvas');
     ctx_bg = canv_bg.getContext('2d');
@@ -20,8 +18,6 @@ function render_init() {
     canv_game = document.getElementById('game_canvas');
     ctx_game = canv_game.getContext('2d');
 
-    o_jet.x = 310;
-    o_jet.y = 750; 
     var imagesOK = 0; 
     for (var i=0; i<imgs.length; i++) {
         imgs[i].onload = function(){ 
@@ -53,9 +49,13 @@ function render() {
     if (missile_first != null) {
         missile_first.render(ctx_game);
     }
+    if (coin_first != null) {
+        coin_first.render(ctx_game);
+    }
     o_jet.render(ctx_game);
     ctx_game.font = "30px Arial"
     ctx_game.fillText(user_x + ',' + user_y, 20, 30);
+    ctx_game.fillText(o_jet.x + ',' + o_jet.y, 20,50);
 }
 function render_scroll() {
     ctx_game.drawImage(canv_bg, 0, bg_y, 720, 900, 0, 0, 720, 900);
