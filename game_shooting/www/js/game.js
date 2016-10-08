@@ -26,8 +26,15 @@ function newGame() {
     objInterval = setInterval(tick, 50);
 }
 
+function gameOver() {
+    alert("game over");
+}
+
 function tick() {
     proc_user_input();
+    if (collision_check()) {
+        gameOver();
+    }
     new_coin();
     render();
 }
@@ -76,4 +83,38 @@ function new_coin() {
             coin_last = o_coin;
         }
     }
+}
+
+function collision_check() {
+    // check collision of missiles and coins
+    var o_missile = missile_first;
+    while(o_missile != null) {
+        var m_x0 = o_missile.x;
+        var m_x1 = m_x0 + o_missile.img.width;
+        var m_y0 = o_missile.y;
+        var m_y1 = m_y0 + o_missile.img.height;
+        var o_coin = coin_first;
+        while(o_coin != null) {
+            var c_x0 = o_coin.x;
+            var c_x1 = c_x0 + o_coin.img.width;
+            var c_y0 = o_coin.y;
+            var c_y1 = c_y0 + o_coin.img.height;
+            if (m_x0 < c_x1 && m_x1 > c_x0 && m_y0 < c_y1 && m_y1 > c_y0) {
+                if (o_coin.prev == null) {
+                    coin_first = o_coin.next;
+                } else {
+                    o_coin.prev.next = o_coin.next;
+                }
+                if (o_coin.next == null) {
+                    coin_last = o_coin.prev;
+                } else {
+                    o_coin.next.prev = o_coin.prev;
+                }
+            }
+            o_coin = o_coin.next;            
+        }
+        o_missile = o_missile.next;
+    }
+
+    // check collision of coins and airplane
 }
