@@ -1,22 +1,38 @@
+// concerning game frame
 var objInterval;
+var o_game_over;
+var gameover_flag;
+
+// concerning score
 var score;
 
+// concerning airplane
 var o_jet;
-var missile_first, missile_last;
+var missile_ends = [null, null];
 var missile_interval_cnt;
 
-var coin_first, coin_last;
-var coin_interval_cnt;
+// concerning coins
+var coin_ends = [null, null];
+var coin_bullet_ends = [null, null]; 
 
+// concerning stage
+var tick_cnt;
+var stage;
+var stage_design = [[200, 35, 100], [400, 30, 80], [600, 25, 60], [800, 20, 40], [1000, 15, 20], [1200, 10, 10]];
+var upcoming_interval_cnt;
 function game_init() {
+    gameover_flag = false;
     score = 0;
     missile_interval_cnt = 0;
-    coin_interval_cnt = 0;
-
-    missile_first = null, missile_last = null;
-    coin_first = null, coin_last = null;
-
-    o_jet = new objJet(310, 750); 
+    tick_cnt = 0;
+    stage = 0;
+    
+    o_game_over = null;
+    o_jet = new objJet(310, 750);
+    
+    missile_ends[0] = null, missile_ends[1] = null;
+    coin_ends[0] = null, coin_ends[1] = null;
+    coin_bullet_ends[0] = null, coin_bullet_ends[1] = null;
 }
 
 function newGame() {
@@ -27,16 +43,28 @@ function newGame() {
 }
 
 function gameOver() {
-    alert("game over");
+    if (o_game_over == null) {
+        gameover_flag = true;
+        o_game_over = new objGameOver();
+        o_jet.game_over();
+    } else if (o_game_over.count_down-- == 0) {
+        alert("game over");
+        newGame();
+        return;
+    }
+    o_game_over.render(ctx_game);
 }
 
 function tick() {
     proc_user_input();
-    if (collision_check()) {
-        gameOver();
-    }
-    new_coin();
+    upcoming_obj();
+    
     render();
+    if (gameover_flag) {
+        gameOver();
+    } else {
+        collision_check();
+    }    
 }
 
 function proc_user_input() {
@@ -51,15 +79,7 @@ function proc_user_input() {
 
         if (missile_interval_cnt++==0) {
             var o_missile = new objMissile(o_jet.x, o_jet.y);
-
-            if (missile_first==null) {
-                missile_first = o_missile;
-                missile_last = o_missile;
-            } else {
-                o_missile.prev = missile_last;
-                missile_last.next = o_missile;
-                missile_last = o_missile;
-            }
+            push_to_chain(o_missile, missile_ends);  
         } else if (missile_interval_cnt == 5) {
             missile_interval_cnt = 0;
         }
@@ -68,53 +88,96 @@ function proc_user_input() {
     }
 }
 
-function new_coin() {
-    if (coin_interval_cnt++ == 35) {
-        coin_interval_cnt = 0;
+function upcoming_obj() {
+    tick_cnt++;
+    
+    // get stage
+    if (stage < (stage_design.length - 1) && tick_cnt > stage_design[stage][0]) {
+        stage++;
+    }
 
+    if ((tick_cnt % stage_design[stage][1]) == 0) {
         var o_coin = new objCoin(o_jet.x, o_jet.y);
+        push_to_chain(o_coin, coin_ends);  
+    }
 
-        if (coin_first==null) {
-            coin_first = o_coin;
-            coin_last = o_coin;
-        } else {
-            o_coin.prev = coin_last;
-            coin_last.next = o_coin;
-            coin_last = o_coin;
-        }
+    if ((tick_cnt % stage_design[stage][2]) == 0) {
+        var o_coin_bullet = new objCoinBullet(o_jet.x, o_jet.y);
+        push_to_chain(o_coin_bullet, coin_bullet_ends);  
     }
 }
 
 function collision_check() {
     // check collision of missiles and coins
-    var o_missile = missile_first;
+    var o_missile;
+    o_missile = missile_ends[0];
     while(o_missile != null) {
-        var m_x0 = o_missile.x;
-        var m_x1 = m_x0 + o_missile.img.width;
-        var m_y0 = o_missile.y;
-        var m_y1 = m_y0 + o_missile.img.height;
-        var o_coin = coin_first;
-        while(o_coin != null) {
-            var c_x0 = o_coin.x;
-            var c_x1 = c_x0 + o_coin.img.width;
-            var c_y0 = o_coin.y;
-            var c_y1 = c_y0 + o_coin.img.height;
-            if (m_x0 < c_x1 && m_x1 > c_x0 && m_y0 < c_y1 && m_y1 > c_y0) {
-                if (o_coin.prev == null) {
-                    coin_first = o_coin.next;
-                } else {
-                    o_coin.prev.next = o_coin.next;
-                }
-                if (o_coin.next == null) {
-                    coin_last = o_coin.prev;
-                } else {
-                    o_coin.next.prev = o_coin.prev;
-                }
-            }
-            o_coin = o_coin.next;            
+        var o_coin = collision_obj_grp(o_missile, coin_ends); 
+        if (o_coin != null) {
+            remove_from_chain(o_coin, coin_ends);
+            remove_from_chain(o_missile, missile_ends);
         }
         o_missile = o_missile.next;
     }
 
     // check collision of coins and airplane
+    var o_coin = collision_obj_grp(o_jet, coin_ends);
+    if (o_coin != null) {
+        remove_from_chain(o_coin, coin_ends);
+        gameover_flag = true;
+    }
+
+    // check collision of coin bullet and airplane
+    var o_coin_bullet = collision_obj_grp(o_jet, coin_bullet_ends);
+    if (o_coin_bullet != null) {
+        remove_from_chain(o_coin_bullet, coin_bullet_ends);
+        gameover_flag = true;
+    }
+}
+
+function push_to_chain(obj, ends) {
+    if (ends[0]==null) {
+        ends[0] = obj;
+        ends[1] = obj;
+    } else {
+        obj.prev = ends[1];
+        ends[1].next = obj;
+        ends[1] = obj;
+    } 
+}
+
+function remove_from_chain(obj, ends) {
+    if (obj.prev == null) {
+        ends[0] = obj.next;
+    } else {
+        obj.prev.next = obj.next;
+    }
+    if (obj.next == null) {
+        ends[1] = obj.prev;
+    } else {
+        obj.next.prev = obj.prev;
+    }
+}
+
+function collision_obj_grp(obj, ends) {
+    var ret = null;
+    var o_x0 = obj.x;
+    var o_x1 = o_x0 + obj.img.width;
+    var o_y0 = obj.y;
+    var o_y1 = o_y0 + obj.img.height;
+    
+    var t = ends[0];
+    while(t != null) {
+        var t_x0 = t.x;
+        var t_x1 = t_x0 + t.img.width;
+        var t_y0 = t.y;
+        var t_y1 = t_y0 + t.img.height;
+        if (o_x0 < t_x1 && o_x1 > t_x0 && o_y0 < t_y1 && o_y1 > t_y0) {
+            ret = t;
+            break;
+        }
+        t = t.next;            
+    }
+
+    return ret;
 }

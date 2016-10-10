@@ -1,0 +1,26 @@
+/* common */
+@font-face {
+    font-family: "Sniglet-Regular";
+    src: url("../fonts/Sniglet-Regular.ttf") format("opentype");   
+    /* Make sure you defined the correct path, which is related to
+        the location of your file `my_css.css` */ 
+}
+
+@font-face {
+    font-family: "Sniglet-ExtraBold";
+    src: url("../fonts/Sniglet-ExtraBold.ttf") format("opentype");   
+    /* Make sure you defined the correct path, which is related to
+        the location of your file `my_css.css` */ 
+}
+
+/* game_contents */
+#bg_canvas {
+    width:24vh;
+    height:90vh;
+    display:none;
+}
+
+#game_canvas {
+    width:72vh;
+    height:90vh;
+}

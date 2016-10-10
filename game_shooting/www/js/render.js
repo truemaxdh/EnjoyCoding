@@ -46,16 +46,23 @@ function draw_bg_canv() {
 
 function render() {
     render_scroll();
-    if (missile_first != null) {
-        missile_first.render(ctx_game);
+    if (missile_ends[0] != null) {
+        missile_ends[0].render(ctx_game);
     }
-    if (coin_first != null) {
-        coin_first.render(ctx_game);
+    if (coin_ends[0] != null) {
+        coin_ends[0].render(ctx_game);
     }
+    if (coin_bullet_ends[0] != null) {
+        coin_bullet_ends[0].render(ctx_game);
+    }
+
     o_jet.render(ctx_game);
+        
     ctx_game.font = "30px Arial"
-    ctx_game.fillText(user_x + ',' + user_y, 20, 30);
-    ctx_game.fillText(o_jet.x + ',' + o_jet.y, 20,50);
+    ctx_game.fillText(tick_cnt, 20, 30);
+    ctx_game.fillText('stage : ' + stage, 20,50);
+    ctx_game.fillText('%[1] : ' + tick_cnt % stage_design[stage][1], 20,80);
+    
 }
 function render_scroll() {
     ctx_game.drawImage(canv_bg, 0, bg_y, 720, 900, 0, 0, 720, 900);
