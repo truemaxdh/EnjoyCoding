@@ -17,6 +17,9 @@
     specific language governing permissions and limitations
     under the License.
 -->
+<!-- 게임 제목 : Shooting Dream
+     내용 : 어느날, 비행기를 몰면서 돈을 모으는 꿈을 꾼다. 그러다 돈이나 방해물에 충돌하면 꿈에서 깬다.
+-->
 <html>
     <head>
         <!--
@@ -33,62 +36,16 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <!--<link rel="stylesheet" type="text/css" href="css/index.css">-->
-        <title>Hello World</title>
-        <style>
-            #bg_canvas {
-                width:24vh;
-                height:90vh;
-            }
-
-            #game_canvas {
-                width:72vh;
-                height:90vh;
-            }
-        </style>
-        <script type="text/javascript">
-            var img_sea = new Image();
-            var img_sea2 = new Image();
-            var img_island = new Image();
-            var img_bg = new Image();
-            var canv_game;
-            var ctx_game;
-            var y = 1800;
-
-            img_sea.src = 'img/sea.png';
-            img_sea2.src = 'img/sea2.png';
-            img_island.src = 'img/island.png';
-
-            function loadAndDraw() {
-                var canv_bg = document.getElementById('bg_canvas');
-                var ctx_bg = canv_bg.getContext('2d');
-
-                for (var i = 0; i < 10; i++) {
-                    var img_sea_rnd = (Math.random() < 0.5) ? img_sea : img_sea2;
-                    for (var j = 0; j < 4; j++) {
-                        var img_rnd = (Math.random() < 0.8) ? img_sea_rnd : img_island;
-                        ctx_bg.drawImage(img_rnd, j * 180, i * 180);
-                    }
-                }
-                
-                ctx_bg.drawImage(canv_bg, 0, 0, 720, 900, 0, 1800, 720, 900);
-                alert(canv_bg.toDataURL());
-                img_bg.src = canv_bg.toDataURL();
-                canv_game = document.getElementById('game_canvas');
-                ctx_game = canv_game.getContext('2d');
-                setInterval(render_scroll, 50);
-                
-            }
-
-            function render_scroll() {
-                alert("A");
-                ctx_game.drawImage(img_bg, 0, y, 720, 900, 0, 0, 720, 900);
-                y -= 3;
-                if (y < 0) y = 1800;
-            }
-
-        </script>
+        <title>Simple Shooting</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="js/game_objects.js"></script>
+        <script src="js/render.js"></script>
+        <script src="js/user_input.js"></script>
+        <script src="js/game.js"></script>
+        <script src="js/device_init.js"></script>
     </head>
-    <body onload="loadAndDraw();">
+    <body>
         <canvas id="bg_canvas" width="720" height="2700" style="border:1px solid #d3d3d3;"></canvas>
         <canvas id="game_canvas" width="720" height="900" style="border:1px solid #d3d3d3;"></canvas>
         <!--<div class="app">
