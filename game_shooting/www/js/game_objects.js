@@ -19,17 +19,17 @@ var URL_gameObjs = [
     'img/coin_bullet.png'
 ];
 
-function game_objects_init(callback) {
-    var imagesOK = 0; 
+// function game_objects_init() {
+//     var imagesOK = 0; 
     for (var i=0; i<img_gameObjs.length; i++) {
-        img_gameObjs[i].onload = function(){ 
-            if (++imagesOK>=img_gameObjs.length ) {
-                callback();
-            }
-        };
+        // img_gameObjs[i].onload = function(){ 
+        //     if (++imagesOK>=img_gameObjs.length ) {
+        //         callback();
+        //     }
+        // };
         img_gameObjs[i].src = URL_gameObjs[i];
     }    
-}
+//}
 
 function gameobj(x, y) {
     this.x = x;

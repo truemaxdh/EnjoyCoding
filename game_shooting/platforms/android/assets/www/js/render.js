@@ -11,7 +11,7 @@ var bg_y = 1800;
 var imgs = [img_sea, img_sea2, img_island];
 var URLs = ['img/sea.png', 'img/sea2.png', 'img/island.png'];
 
-function render_init(callback1, callback2) {
+function render_init() {
     canv_bg = document.getElementById('bg_canvas');
     ctx_bg = canv_bg.getContext('2d');
 
@@ -22,15 +22,14 @@ function render_init(callback1, callback2) {
     for (var i=0; i<imgs.length; i++) {
         imgs[i].onload = function(){ 
             if (++imagesOK>=imgs.length ) {
-                draw_bg_canv(callback1, callback2);
+                draw_bg_canv();
             }
         };
         imgs[i].src = URLs[i];
     }    
 }
 
-function draw_bg_canv(callback1, callback2) {
-    
+function draw_bg_canv() {    
     for (var i = 0; i < 10; i++) {
         var img_sea_rnd = (Math.random() < 0.5) ? img_sea : img_sea2;
         for (var j = 0; j < 4; j++) {
@@ -40,8 +39,6 @@ function draw_bg_canv(callback1, callback2) {
     }
     
     ctx_bg.drawImage(canv_bg, 0, 0, 720, 900, 0, 1800, 720, 900);  
-
-    callback1(callback2);
 }
 
 function render() {

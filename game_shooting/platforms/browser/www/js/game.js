@@ -54,9 +54,20 @@ function gameOver() {
         o_game_over = new objGameOver();
         o_jet.game_over();
     } else if (o_game_over.count_down-- == 0) {
-        alert("game over");
-        newGame();
-        return;
+        clearInterval(objInterval);
+        if (isApp) {
+            window.game.submitScore(leaderboardId, score);
+            window.game.onSubmitScoreSucceeded = function() {
+                OpenUserResult();
+            };
+            window.game.onSubmitScoreFailed = function() {
+                OpenUserResult();
+            };
+        } else {
+            OpenUserResult();
+        }
+        document.getElementById('user_score').innerHTML = score;
+//        return;
     }
     o_game_over.render(ctx_game);
 }
@@ -122,6 +133,7 @@ function collision_check() {
             remove_from_chain(o_coin, coin_ends);
             remove_from_chain(o_missile, missile_ends);
             score += o_coin.coin_num;
+            chkAndUnlockAchievement(score);
         }
         o_missile = o_missile.next;
     }

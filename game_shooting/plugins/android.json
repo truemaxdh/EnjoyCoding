@@ -12,11 +12,18 @@
         },
         "cordova-plugin-admob-simple": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-game": {
+            "APP_ID": "64860208704",
+            "PACKAGE_NAME": "com.pgmaru.ShootingDream"
         }
     },
     "dependent_plugins": {
         "cordova-admob-sdklibs": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-extras-google-play-services": {
+            "PACKAGE_NAME": "com.pgmaru.ShootingDream"
         }
     }
 }
