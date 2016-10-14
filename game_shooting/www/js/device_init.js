@@ -27,6 +27,10 @@ function onDeviceReady() {
     render_init();
     init_user_input();
 
+    ///////////
+    // AdMob //
+    ///////////
+    initAd();
     ///////////////////////////
     // Google Game Services  //
     ///////////////////////////

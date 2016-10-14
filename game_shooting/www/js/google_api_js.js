@@ -110,14 +110,3 @@ function ShowAchievements() {
 function ShowHighScores() {
     window.game.showLeaderboard(leaderboardId);
 }
-
-var isApp;
-if (location.href.indexOf('CodingIsFun') < 0 &&
-    location.href.indexOf('localhost') < 0) {
-    isApp = true;
-    document.addEventListener("deviceready", onDeviceReady, false);
-} else {
-    isApp = false;
-    addEventListener("load", onLoad);
-}
-
