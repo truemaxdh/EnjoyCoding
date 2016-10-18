@@ -43,7 +43,7 @@ h3 {
 }
 
 .text a { 
-    color: #FFF;     
+    color: #4d7bd5;     
     font-size: 25px; 
     text-align: center; 
     text-shadow: 1px 1px 2px #082b34;
@@ -52,7 +52,7 @@ h3 {
 }
 
 .text a:hover, .text a:focus {
-    color: #4d7bd5;
+    color: #2d5bb5;
 }
 
 
