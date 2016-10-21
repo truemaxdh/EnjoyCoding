@@ -1,15 +1,16 @@
 var img_sea = new Image();
 var img_sea2 = new Image();
 var img_island = new Image();
-//var img_airplane = new Image();
+var img_pause = new Image();
+
 var canv_bg;
 var ctx_bg;
 var canv_game;
 var ctx_game;
 var bg_y = 1800;
 
-var imgs = [img_sea, img_sea2, img_island];
-var URLs = ['img/sea.png', 'img/sea2.png', 'img/island.png'];
+var imgs = [img_sea, img_sea2, img_island, img_pause];
+var URLs = ['img/sea.png', 'img/sea2.png', 'img/island.png', 'img/pause.png'];
 
 function render_init() {
     canv_bg = document.getElementById('bg_canvas');
@@ -61,6 +62,8 @@ function render() {
     ctx_game.fillText('Stage : ' + stage, 300,50);
     //ctx_game.fillText('%[1] : ' + tick_cnt % stage_design[stage][1], 20,80);
     
+    ctx_game.drawImage(img_pause, 0, 0, 40, 40, 660, 20, 40, 40)
+
 }
 function render_scroll() {
     ctx_game.drawImage(canv_bg, 0, bg_y, 720, 900, 0, 0, 720, 900);

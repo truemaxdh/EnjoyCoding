@@ -48,6 +48,15 @@ function newGame() {
     objInterval = setInterval(tick, 50);
 }
 
+function togglePause() {
+    if (objInterval > 0) {
+        clearInterval(objInterval);
+        objInterval = -1;
+    } else {
+        objInterval = setInterval(tick, 50);
+    }
+}
+
 function gameOver() {
     if (o_game_over == null) {
         gameover_flag = true;

@@ -319,3 +319,12 @@ function newGame() {
     
     render_init();
 }
+
+function togglePause() {
+    if (objInterval > 0) {
+        clearInterval(objInterval);
+        objInterval = -1;
+    } else {
+        objInterval = setInterval( tick, interval );
+    }
+}

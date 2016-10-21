@@ -68,10 +68,11 @@ body {
 
 #score_board { 
     /*color: #d54d7b; */
-    font-family: "Comic Sans MS"; 
+    font-family: "Sniglet-Regular"; 
     font-size: 2.0em;  
     text-align: center; 
     text-shadow: 0 1px 1px black; 
+    color: #DD8800;
 }
 
 #game_page {

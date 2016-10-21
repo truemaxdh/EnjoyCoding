@@ -13,9 +13,9 @@ function pageChange(newpageID) {
     }
 
     if (newpageID=='menu') {
-        showHideBanner(true);
+        //showHideBanner(true);
     } else if (newpageID=='game') {
-        showHideBanner(false);
+        //showHideBanner(false);
         newGame();
     } 
 }
