@@ -8,6 +8,10 @@ function init_user_input() {
     canv_game.onmousedown = function (e) {
         user_x_ori = e.layerX * scale_f;
         user_y_ori = e.layerY * scale_f;
+
+        if (user_x_ori >= 660 && user_y_ori <= 60) {
+            togglePause();
+        }
         user_x = e.layerX  * scale_f;
         user_y = e.layerY * scale_f;
         user_pressing = true;

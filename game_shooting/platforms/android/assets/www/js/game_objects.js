@@ -98,7 +98,7 @@ function objCoinGray(x, y, type) {
 function objCoinBullet(x, y) {
     var rnd_x = Math.floor(Math.random() * 720);
     gameobj.call(this, rnd_x, 0);
-    this.step_y = 15;
+    this.step_y = 20;
     this.step_x = (x - rnd_x) * this.step_y / y;
     this.img = img_coin_bullet;
 }

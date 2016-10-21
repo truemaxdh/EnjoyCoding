@@ -3,8 +3,8 @@ function showHideBanner(bShow) {
         if (bShow) {
             // Set AdMobAds options: //
             admob.setOptions({
-            publisherId:          "ca-app-pub-7307479428475282/6915509453"//,  // Required 
-            // interstitialAdId:     "ca-app-pub-XXXXXXXXXXXXXXXX/IIIIIIIIII",  // Optional 
+            publisherId:          "ca-app-pub-7307479428475282/6915509453",  // Required 
+            interstitialAdId:     "ca-app-pub-7307479428475282/5184863454"//,  // Optional 
             // tappxIdiOS:           "/XXXXXXXXX/Pub-XXXX-iOS-IIII",            // Optional 
             // tappxIdAndroid:       "/XXXXXXXXX/Pub-XXXX-Android-AAAA",        // Optional 
             // tappxShare:           0.5                                        // Optional 
@@ -14,7 +14,7 @@ function showHideBanner(bShow) {
             admob.createBannerView();
             
             // Request interstitial (will present automatically when autoShowInterstitial is set to true) 
-            //admob.requestInterstitialAd();
+            admob.requestInterstitialAd();
         } else {
             admob.destroyBannerView();
         }

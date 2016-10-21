@@ -36,14 +36,14 @@ h3 {
 }
 
 .text {
+    font-family: 'Sniglet-Regular'; 
     position : relative;
     top: 50%;
     transform: translateY(-50%);
 }
 
 .text a { 
-    color: #FFF; 
-    font-family: 'Sniglet-Regular'; 
+    color: #4d7bd5;     
     font-size: 25px; 
     text-align: center; 
     text-shadow: 1px 1px 2px #082b34;
@@ -52,7 +52,7 @@ h3 {
 }
 
 .text a:hover, .text a:focus {
-    color: #4d7bd5;
+    color: #2d5bb5;
 }
 
 
@@ -102,6 +102,7 @@ body {
     padding: 8px;
     text-decoration: none;
     font-size: 36px;
+    font-family: 'Sniglet-Regular'; 
     color: #818181;
     display: block; /* Display block instead of inline */
     transition: 0.3s; /* Transition effects on hover (color) */

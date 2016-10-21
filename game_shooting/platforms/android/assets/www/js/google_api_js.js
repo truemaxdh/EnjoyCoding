@@ -29,6 +29,7 @@ function initAd(){
             window.plugins.AdMob.createInterstitialView();	//get the interstitials ready to be shown 
             window.plugins.AdMob.requestInterstitialAd();
  
+            showHideBanner(true);
         } else {
             //alert( 'admob plugin not ready' ); 
         }
