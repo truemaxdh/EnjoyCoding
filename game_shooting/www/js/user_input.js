@@ -6,13 +6,15 @@ function init_user_input() {
     var scale_f = canv_game.width / canv_game.clientWidth;
     
     canv_game.onmousedown = function (e) {
-        user_x_ori = e.layerX * scale_f;
-        user_y_ori = e.layerY * scale_f;
-        if (user_x_ori >= 480 && user_y_ori <= 60) {
+        user_x = e.clientX  * scale_f;
+        user_y = e.clientY * scale_f;
+        user_x_ori = user_x;
+        user_y_ori = user_y;
+        
+        if (user_y_ori <= 60) {
             togglePause();
         }
-        user_x = e.layerX  * scale_f;
-        user_y = e.layerY * scale_f;
+        
         user_pressing = true;
         return false;
     }
@@ -29,13 +31,15 @@ function init_user_input() {
     }
 
     canv_game.ontouchstart = function (e) {
-        user_x_ori = e.touches[0].clientX * scale_f;
-        user_y_ori = e.touches[0].clientY * scale_f;
-        if (user_x_ori >= 480 && user_y_ori <= 60) {
-            togglePause();
-        }
         user_x = e.touches[0].clientX * scale_f;
         user_y = e.touches[0].clientY * scale_f;
+        user_x_ori = user_x;
+        user_y_ori = user_y;
+        
+        if (user_y <= 60) {
+            togglePause();
+        }
+        
         user_pressing = true;
         return false;
     }
