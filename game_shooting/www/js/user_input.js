@@ -8,8 +8,7 @@ function init_user_input() {
     canv_game.onmousedown = function (e) {
         user_x_ori = e.layerX * scale_f;
         user_y_ori = e.layerY * scale_f;
-
-        if (user_x_ori >= 660 && user_y_ori <= 60) {
+        if (user_x_ori >= 480 && user_y_ori <= 60) {
             togglePause();
         }
         user_x = e.layerX  * scale_f;
@@ -32,6 +31,9 @@ function init_user_input() {
     canv_game.ontouchstart = function (e) {
         user_x_ori = e.touches[0].clientX * scale_f;
         user_y_ori = e.touches[0].clientY * scale_f;
+        if (user_x_ori >= 480 && user_y_ori <= 60) {
+            togglePause();
+        }
         user_x = e.touches[0].clientX * scale_f;
         user_y = e.touches[0].clientY * scale_f;
         user_pressing = true;
