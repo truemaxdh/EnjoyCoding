@@ -33,13 +33,13 @@ function render_init() {
 function draw_bg_canv() {    
     for (var i = 0; i < 10; i++) {
         var img_sea_rnd = (Math.random() < 0.5) ? img_sea : img_sea2;
-        for (var j = 0; j < 4; j++) {
+        for (var j = 0; j < 3; j++) {
             var img_rnd = (Math.random() < 0.8) ? img_sea_rnd : img_island;
             ctx_bg.drawImage(img_rnd, j * 180, i * 180);
         }
     }
     
-    ctx_bg.drawImage(canv_bg, 0, 0, 720, 900, 0, 1800, 720, 900);  
+    ctx_bg.drawImage(canv_bg, 0, 0, 540, 900, 0, 1800, 540, 900);  
 }
 
 function render() {
@@ -59,14 +59,14 @@ function render() {
     ctx_game.fillStyle = '#ffa500';
     ctx_game.font = '35px Sniglet-ExtraBold';
     ctx_game.fillText('Score : ' + score, 20, 50);
-    ctx_game.fillText('Stage : ' + stage, 300,50);
+    ctx_game.fillText('Stage : ' + stage, 270,50);
     //ctx_game.fillText('%[1] : ' + tick_cnt % stage_design[stage][1], 20,80);
     
-    ctx_game.drawImage(img_pause, 0, 0, 40, 40, 660, 20, 40, 40)
+    ctx_game.drawImage(img_pause, 0, 0, 40, 40, 480, 20, 40, 40)
 
 }
 function render_scroll() {
-    ctx_game.drawImage(canv_bg, 0, bg_y, 720, 900, 0, 0, 720, 900);
+    ctx_game.drawImage(canv_bg, 0, bg_y, 540, 900, 0, 0, 540, 900);
     bg_y -= 3;
     if (bg_y < 0) bg_y = 1800;
 }
