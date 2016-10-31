@@ -106,11 +106,11 @@ var shapes = [
 ];
 
 
-var colors = [
-    'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple',
-    'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple',
-    'cyan', 'orange', 'blue', 'yellow', 'red'
-];
+// var colors = [
+//     'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple',
+//     'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple',
+//     'cyan', 'orange', 'blue', 'yellow', 'red'
+// ];
 
 // creates a new 5x5 shape in global variable 'current'
 // 5x5 so as to cover the size when the shape is rotated
@@ -231,7 +231,7 @@ function clearLines() {
             cleardLines++;
             chkAndUnlockAchievement(cleardLines);
             score += ++combo * 10; 
-            document.getElementById( 'score_board' ).innerHTML = 'Score : ' + score;
+            document.getElementById( 'score_num' ).innerHTML = score;
             document.getElementById( 'clearsound' ).play();
             for ( var yy = y; yy > 0; --yy ) {
                 for ( var x = 0; x < COLS; ++x ) {
@@ -276,6 +276,34 @@ function procKeyEvent() {
     }
 }
 
+function procTouchEvent() {
+    keyCode = '';
+    if (user_pressing) {
+        var dx = user_x - user_x_ori;
+        var dy = user_y - user_y_ori;
+        if (dx > BLOCK_W) {
+            keyCode = 'right';
+            user_x_ori = user_x_ori + BLOCK_W;
+            do_rotate = false;
+        } else if (dx < - BLOCK_W) {
+            keyCode = 'left';
+            user_x_ori = user_x_ori - BLOCK_W;
+            do_rotate = false;
+        }
+        if (dy > BLOCK_H) {
+            keyCode = 'down';
+            user_y_ori = user_y_ori + BLOCK_H;
+            do_rotate = false;
+        }
+    } else {
+        if (do_rotate) {
+            rotBlTmr = 0;
+            keyCode = 'rotate';
+            do_rotate = false;
+        }
+    }
+}
+
 // checks if the resulting position of current shape will be feasible
 function valid( offsetX, offsetY, newCurrent ) {
     offsetX = offsetX || 0;
@@ -317,7 +345,9 @@ function newGame() {
     interval = 500;
     objInterval = setInterval( tick, interval );
     
-    render_init();
+    //render_init();
+    clearInterval(render_interval);
+    render_interval = setInterval( render, 100 );
 }
 
 function togglePause() {

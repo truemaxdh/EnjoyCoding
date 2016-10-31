@@ -97,6 +97,8 @@ function onDeviceReady() {
     ///////////////////////////
     window.game.setUp();
     window.game.login();
+    render_init();
+    keyEvtLink();
     window.game.onLoginSucceeded = function(result) {
 		//var playerDetail = result;
         pageChange('menu');
@@ -108,6 +110,7 @@ function onDeviceReady() {
 
 // Do this when run on web
 function onLoad() {
+    render_init();
     keyEvtLink();
     pageChange('menu');
 }

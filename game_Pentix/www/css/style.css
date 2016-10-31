@@ -75,6 +75,10 @@ body {
     color: #DD8800;
 }
 
+#score_num {
+    display : inline;
+}
+
 #game_page {
     width:54vh;
     height:94vh;
@@ -84,6 +88,7 @@ body {
 #game_canvas {
     width:48vh;
     height:80vh;
+    background-image: URL("../img/bg.png");
 }
 
 #controller {

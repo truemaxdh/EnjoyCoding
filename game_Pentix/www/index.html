@@ -62,10 +62,10 @@
         <div id = "game">
 			<audio id="clearsound" src="sound/pop.ogg" preload="auto"></audio>
             <div id="score_board">
-                Score : 0
+                Score : <div id="score_num">0</div>
                 <img src="pause.png" align="right" onclick="togglePause();">
             </div>
-            <canvas id="game_canvas" width="700" height="1000" class="border_round"></canvas>
+            <canvas id="game_canvas" width="700" height="1000"></canvas>
             <div id="controller" width="220">
                 <div class="border_round button"
                     ontouchstart="keyCode='rotate'; rotBlTmr=0; return false;" ontouchend="keyCode=''; return false;">&uarr;</div>
