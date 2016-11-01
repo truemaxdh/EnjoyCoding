@@ -266,7 +266,7 @@ function procTouchEvent() {
     if (user_pressing) {
         var dx = user_x - user_x_ori;
         var dy = user_y - user_y_ori;
-        if (dx < Math.abs(BLOCK_W / 2) && dy < Math.abs(BLOCK_H / 2)) {
+        if (Math.abs(dx) < (BLOCK_W / 2) && Math.abs(dy) < (BLOCK_H / 2)) {
             return;
         }
 
