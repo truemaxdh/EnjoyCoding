@@ -51,6 +51,7 @@ function keyEvtLink() {
     }
 
     canvas.ontouchstart = function (e) {
+        alert("A");
         user_x = e.touches[0].clientX * scale_f;
         user_y = e.touches[0].clientY * scale_f;
         user_x_ori = user_x;
