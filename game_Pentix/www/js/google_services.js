@@ -33,10 +33,10 @@ function pageChange(newpageID) {
         }
     }
 
-    if (newpageID=='menu') {
+    /*if (newpageID=='menu') {
         showHideBanner(true);
-    } else if (newpageID=='game') {
-        showHideBanner(false);
+    } else */if (newpageID=='game') {
+        //showHideBanner(false);
         newGame();
     } 
 }
@@ -91,6 +91,8 @@ function ShowHighScores() {
 // Do this when run as app
 function onDeviceReady() {
     document.removeEventListener('deviceready', onDeviceReady, false);
+    
+    showHideBanner(true);
     
     ///////////////////////////
     // Google Game Services  //

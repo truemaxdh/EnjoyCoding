@@ -50,7 +50,7 @@ function keyEvtLink() {
         return false;
     }
 
-    canvas.ontouchstart = function (e) {
+    document.body.ontouchstart = function (e) {
         user_x = e.touches[0].clientX * scale_f;
         user_y = e.touches[0].clientY * scale_f;
         user_x_ori = user_x;
@@ -61,12 +61,12 @@ function keyEvtLink() {
         return false;
     }
 
-    canvas.ontouchend = function (e) {
+    document.body.ontouchend = function (e) {
         user_pressing = false;
         return false;
     }
 
-    canvas.ontouchmove = function(e) {
+    document.body.ontouchmove = function(e) {
         user_x = e.touches[0].clientX * scale_f;
         user_y = e.touches[0].clientY * scale_f;
         return false;

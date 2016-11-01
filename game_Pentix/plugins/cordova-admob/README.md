@@ -16,6 +16,29 @@ Or
 
 
 ---
+## Plugin update (phonega/cordova cli) ##
+
+`cordova-admob~4.1.15` and later are now updated to Firebase (ios 7.13.1 and later and managed by gradle in android)
+
+To update the plugin you should remove the plugin ad add it again:
+
+```
+$ cordova plugin rm cordova-admob
+$ npm cache clear
+$ cordova plugin add cordova-admob
+```
+
+Sometimes removing the plugin causes an error (it's been reported to cordova https://issues.apache.org/jira/browse/CB-12083). If that happens, remove first `cordova-libgoogleadmobads` manually:
+
+
+```
+$ rm plugins/cordova-libgoogleadmobads/ -rf
+$ cordova plugin rm cordova-admob
+$ npm cache clear
+$ cordova plugin add cordova-admob
+```
+
+---
 ## Testimonials ##
 
 * [Visual Scale Android](https://play.google.com/store/apps/details?id=com.appfeel.visualanalogscale), [Visual Scale iOS](https://itunes.apple.com/app/id940214847?mt=8), a free app to help doctors and physiotherapists in their daily work:
@@ -33,8 +56,8 @@ Or
 ---
 ## Platform SDK supported ##
 
-* iOS, using AdMob SDK for iOS, v7.3.1
-* Android, using Google Play Service for Android, v7.5
+* iOS, using AdMob SDK for iOS, v7.13.1
+* Android, using latest Google Play Service for Android (managed by gradle)
 
 
 ---
@@ -86,7 +109,12 @@ To start showing ads, place the following code in your `onDeviceReady` callback.
     document.addEventListener("deviceready", onDeviceReady, false);
 ```
 
+
+
+
 If you don't specify tappxId, no tappx requests will be placed (even if you specify a tappxShare). [See Tappx configuration](https://github.com/appfeel/admob-google-cordova/wiki/Tappx-configuration) for more detailed info.
+
+:warning: Be sure to only fire on "deviceready" otherwise, the plugin would not work.
 
 ---
 ## Full documentation ##

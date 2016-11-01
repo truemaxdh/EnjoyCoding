@@ -1,8 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.pgmaru.SimplePentix" version="1.0.16" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.pgmaru.SimplePentix" version="1.0.17" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="Whitelist">
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
+    </feature>
+    <feature name="Game">
+        <param name="android-package" value="com.cranberrygame.cordova.plugin.game.Game" />
     </feature>
     <feature name="connectivity">
         <param name="android-package" value="com.appfeel.cordova.connectivity.Connectivity" />
@@ -10,10 +13,7 @@
     <feature name="AdMobAds">
         <param name="android-package" value="com.appfeel.cordova.admob.AdMobAds" />
     </feature>
-    <feature name="Game">
-        <param name="android-package" value="com.cranberrygame.cordova.plugin.game.Game" />
-    </feature>
-    <name>SimplePentix</name>
+    <name>CrayonPentix</name>
     <description>
         A sample Pentix game
     </description>

@@ -105,13 +105,6 @@ var shapes = [
       0, 0, 1 ]
 ];
 
-
-// var colors = [
-//     'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple',
-//     'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple',
-//     'cyan', 'orange', 'blue', 'yellow', 'red'
-// ];
-
 // creates a new 5x5 shape in global variable 'current'
 // 5x5 so as to cover the size when the shape is rotated
 function newShape() {
@@ -119,12 +112,9 @@ function newShape() {
     var shape = shapes[ id ]; // maintain id for color filling
 
     current = [];
-    // for ( var y = 0; y < 4; ++y ) {
     for ( var y = 0; y < BLOCK_WH; ++y ) {
         current[ y ] = [];
-        // for ( var x = 0; x < 4; ++x ) {
         for ( var x = 0; x < BLOCK_WH; ++x ) {
-            // var i = 4 * y + x;
             var i = BLOCK_WH * y + x;
             if ( typeof shape[ i ] != 'undefined' && shape[ i ] ) {
                 current[ y ][ x ] = id + 1;
@@ -185,9 +175,7 @@ function gameOver() {
 
 // stop shape at its position and fix it to board
 function freeze() {
-    // for ( var y = 0; y < 4; ++y ) {
     for ( var y = 0; y < BLOCK_WH; ++y ) {
-        // for ( var x = 0; x < 4; ++x ) {
         for ( var x = 0; x < BLOCK_WH; ++x ) {
             if ( current[ y ][ x ] ) {
                 board[ y + currentY ][ x + currentX ] = current[ y ][ x ];
@@ -199,12 +187,9 @@ function freeze() {
 // returns rotates the rotated shape 'current' perpendicularly anticlockwise
 function rotate( current ) {
     var newCurrent = [];
-    // for ( var y = 0; y < 4; ++y ) {
     for ( var y = 0; y < BLOCK_WH; ++y ) {
         newCurrent[ y ] = [];
-        // for ( var x = 0; x < 4; ++x ) {
         for ( var x = 0; x < BLOCK_WH; ++x ) {
-            // newCurrent[ y ][ x ] = current[ 3 - x ][ y ];
             newCurrent[ y ][ x ] = current[ BLOCK_WH - 1 - x ][ y ];
         }
     }
@@ -238,9 +223,9 @@ function clearLines() {
                     board[ yy ][ x ] = board[ yy - 1 ][ x ];
                 }
             }
-            clearInterval(objInterval);
-            interval -= 10;
-            objInterval = setInterval( tick, interval );
+            //clearInterval(objInterval);
+            //interval -= 10;
+            //objInterval = setInterval( tick, interval );
             ++y;
         }
     }
@@ -281,19 +266,21 @@ function procTouchEvent() {
     if (user_pressing) {
         var dx = user_x - user_x_ori;
         var dy = user_y - user_y_ori;
+        if (dx < Math.abs(BLOCK_W / 2) && dy < Math.abs(BLOCK_H / 2)) {
+            return;
+        }
+
+        do_rotate = false;
         if (dx > BLOCK_W) {
             keyCode = 'right';
             user_x_ori = user_x_ori + BLOCK_W;
-            do_rotate = false;
         } else if (dx < - BLOCK_W) {
             keyCode = 'left';
             user_x_ori = user_x_ori - BLOCK_W;
-            do_rotate = false;
         }
         if (dy > BLOCK_H) {
             keyCode = 'down';
             user_y_ori = user_y_ori + BLOCK_H;
-            do_rotate = false;
         }
     } else {
         if (do_rotate) {

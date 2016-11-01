@@ -7,31 +7,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-admob": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-admob"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-connectivity-monitor": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-connectivity-monitor"
-        },
-        "is_top_level": false,
-        "variables": {}
-    },
-    "cordova-plugin-multidex": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/solent/cordova-plugin-multidex",
-            "subdir": "."
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-game": {
         "source": {
             "type": "registry",
@@ -47,6 +22,22 @@
             "type": "git",
             "url": "https://github.com/cranberrygame/cordova-plugin-extras-google-play-services",
             "subdir": "."
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-admob": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-admob"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-connectivity-monitor": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-connectivity-monitor"
         },
         "is_top_level": false,
         "variables": {}

@@ -7,17 +7,14 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-admob": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "cordova-plugin-multidex": {
+        "cordova-plugin-game": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "cordova-plugin-game": {
-            "PACKAGE_NAME": "com.pgmaru.SimplePentix"
+        "cordova-admob": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },
     "dependent_plugins": {

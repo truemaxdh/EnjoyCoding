@@ -7,24 +7,29 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-game": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
         "cordova-connectivity-monitor": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
         "cordova-admob": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "cordova-plugin-multidex": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "cordova-plugin-game": {
-            "PACKAGE_NAME": "com.pgmaru.SimplePentix"
         }
     },
     "dependent_plugins": {},
     "modules": [
+        {
+            "file": "plugins/cordova-plugin-game/www/game.js",
+            "id": "cordova-plugin-game.game",
+            "pluginId": "cordova-plugin-game",
+            "clobbers": [
+                "window.game"
+            ]
+        },
         {
             "file": "plugins/cordova-connectivity-monitor/www/connectivity.js",
             "id": "cordova-connectivity-monitor.connectivity",
@@ -41,21 +46,12 @@
                 "window.admob",
                 "window.tappx"
             ]
-        },
-        {
-            "file": "plugins/cordova-plugin-game/www/game.js",
-            "id": "cordova-plugin-game.game",
-            "pluginId": "cordova-plugin-game",
-            "clobbers": [
-                "window.game"
-            ]
         }
     ],
     "plugin_metadata": {
+        "cordova-plugin-whitelist": "1.3.0",
+        "cordova-plugin-game": "1.0.120",
         "cordova-connectivity-monitor": "1.2.2",
-        "cordova-admob": "4.1.11",
-        "cordova-plugin-whitelist": "1.2.2",
-        "cordova-plugin-multidex": "1.0.0",
-        "cordova-plugin-game": "1.0.120"
+        "cordova-admob": "4.1.16"
     }
 }
