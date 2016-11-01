@@ -1,4 +1,4 @@
-var COLS = 14, ROWS = 20;
+var COLS = 15, ROWS = 20;
 var BLOCK_WH = 5;
 var board = [];
 var score;
