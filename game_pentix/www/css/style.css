@@ -13,25 +13,12 @@
         the location of your file `my_css.css` */ 
 }
 
-.border_round {
-    border: 1px solid black;
-    -webkit-border-radius: 				.3125em;
-    border-radius: 						.3125em;
-}
-
 body {
     text-align: center; 
     margin : 0px;
     padding : 0px;
 }
-
 /* menu */
-#intro, #menu {
-    /*width:57vh;*/
-    height:94vh;
-    text-align: center; 
-    /*background-image: URL("../img/bg.png");*/
-}
 h1 { 
     color: #d54d7b; 
     font-family: "Sniglet-ExtraBold"; 
@@ -46,6 +33,11 @@ h3 {
     font-size: 3vw; 
     text-align: center; 
     text-shadow: 1px 1px 2px #082b34;
+}
+
+.menu {
+    width:98vw;
+    height:94vh;
 }
 
 .text {
