@@ -27,8 +27,9 @@ body {
 
 /* menu */
 #intro, #menu {
-    width:57vh;
+    /*width:57vh;*/
     height:94vh;
+    text-align: center; 
     /*background-image: URL("../img/bg.png");*/
 }
 h1 { 
