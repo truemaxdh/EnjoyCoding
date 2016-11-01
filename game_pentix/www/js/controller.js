@@ -28,7 +28,7 @@ function keyEvtLink() {
     }
 
     var scale_f = canvas.width / canvas.clientWidth;
-    document.body.onmousedown = function (e) {
+    canvas.onmousedown = function (e) {
         user_x = e.clientX  * scale_f;
         user_y = e.clientY * scale_f;
         user_x_ori = user_x;
@@ -39,18 +39,18 @@ function keyEvtLink() {
         return false;
     }
 
-    document.body.onmouseup = function (e) {
+    canvas.onmouseup = function (e) {
         user_pressing = false;
         return false;
     }
 
-    document.body.onmousemove = function(e) {
+    canvas.onmousemove = function(e) {
         user_x = e.layerX * scale_f;
         user_y = e.layerY * scale_f;
         return false;
     }
 
-    document.body.ontouchstart = function (e) {
+    canvas.ontouchstart = function (e) {
         user_x = e.touches[0].clientX * scale_f;
         user_y = e.touches[0].clientY * scale_f;
         user_x_ori = user_x;
@@ -61,12 +61,12 @@ function keyEvtLink() {
         return false;
     }
 
-    document.body.ontouchend = function (e) {
+    canvas.ontouchend = function (e) {
         user_pressing = false;
         return false;
     }
 
-    document.body.ontouchmove = function(e) {
+    canvas.ontouchmove = function(e) {
         user_x = e.touches[0].clientX * scale_f;
         user_y = e.touches[0].clientY * scale_f;
         return false;
