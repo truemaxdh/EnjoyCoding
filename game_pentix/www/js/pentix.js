@@ -331,6 +331,7 @@ function newGame() {
     lose = false;
     interval = 500;
     objInterval = setInterval( tick, interval );
+    document.getElementById( 'score_num' ).innerHTML = score;
     
     //render_init();
     clearInterval(render_interval);
