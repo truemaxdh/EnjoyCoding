@@ -33,10 +33,10 @@ function pageChange(newpageID) {
         }
     }
 
-    /*if (newpageID=='menu') {
-        showHideBanner(true);
-    } else */if (newpageID=='game') {
-        //showHideBanner(false);
+    if (newpageID=='menu') {
+        removeEvt();
+    } else if (newpageID=='game') {
+        addEvt();
         newGame();
     } 
 }
@@ -100,7 +100,7 @@ function onDeviceReady() {
     window.game.setUp();
     window.game.login();
     render_init();
-    keyEvtLink();
+    //keyEvtLink();
     window.game.onLoginSucceeded = function(result) {
 		//var playerDetail = result;
         pageChange('menu');
@@ -113,7 +113,7 @@ function onDeviceReady() {
 // Do this when run on web
 function onLoad() {
     render_init();
-    keyEvtLink();
+    //keyEvtLink();
     pageChange('menu');
 }
 

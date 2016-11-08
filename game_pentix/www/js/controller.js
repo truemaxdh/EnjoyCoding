@@ -4,7 +4,7 @@ var user_x_ori, user_y_ori;
 var user_x, user_y;
 var user_pressing = false;
 var do_rotate = false;
-function keyEvtLink() {
+function addEvt() {
     document.body.onkeydown = function( e ) {
         var keys = {
             37: 'left',
@@ -28,7 +28,7 @@ function keyEvtLink() {
     }
 
     var scale_f = canvas.width / canvas.clientWidth;
-    canvas.onmousedown = function (e) {
+    document.body.onmousedown = function (e) {
         user_x = e.clientX  * scale_f;
         user_y = e.clientY * scale_f;
         user_x_ori = user_x;
@@ -39,18 +39,18 @@ function keyEvtLink() {
         return false;
     }
 
-    canvas.onmouseup = function (e) {
+    document.body.onmouseup = function (e) {
         user_pressing = false;
         return false;
     }
 
-    canvas.onmousemove = function(e) {
-        user_x = e.layerX * scale_f;
-        user_y = e.layerY * scale_f;
+    document.body.onmousemove = function(e) {
+        user_x = e.clientX * scale_f;
+        user_y = e.clientY * scale_f;
         return false;
     }
 
-    canvas.ontouchstart = function (e) {
+    document.body.ontouchstart = function (e) {
         user_x = e.touches[0].clientX * scale_f;
         user_y = e.touches[0].clientY * scale_f;
         user_x_ori = user_x;
@@ -61,15 +61,40 @@ function keyEvtLink() {
         return false;
     }
 
-    canvas.ontouchend = function (e) {
+    document.body.ontouchend = function (e) {
         user_pressing = false;
         return false;
     }
 
-    canvas.ontouchmove = function(e) {
+    document.body.ontouchmove = function(e) {
         user_x = e.touches[0].clientX * scale_f;
         user_y = e.touches[0].clientY * scale_f;
         return false;
     }
 }
 
+function removeEvt() {
+    document.body.onkeydown = function( e ) {
+    };
+
+    document.body.onkeyup = function( e ) {
+    }
+
+    document.body.onmousedown = function (e) {
+    }
+
+    document.body.onmouseup = function (e) {
+    }
+
+    document.body.onmousemove = function(e) {
+    }
+
+    document.body.ontouchstart = function (e) {
+    }
+
+    document.body.ontouchend = function (e) {
+    }
+
+    document.body.ontouchmove = function(e) {
+    }
+}

@@ -14,8 +14,6 @@ for (var i = 0; i < 12; i++) {
 
 // draw a single square at (x, y)
 function drawBlock( x, y, tile_id ) {
-    //ctx.fillRect( BLOCK_W * x, BLOCK_H * y, BLOCK_W - 1 , BLOCK_H - 1 );
-    //ctx.strokeRect( BLOCK_W * x, BLOCK_H * y, BLOCK_W - 1 , BLOCK_H - 1 );
     ctx.drawImage(imgs[tile_id], 0, 0, 50, 50, BLOCK_W * x, BLOCK_H * y, BLOCK_W - 1 , BLOCK_H - 1);
 }
 
@@ -31,20 +29,14 @@ function render() {
     for ( var x = 0; x < COLS; ++x ) {
         for ( var y = 0; y < ROWS; ++y ) {
             if ( board[ y ][ x ] ) {
-                //ctx.fillStyle = colors[ board[ y ][ x ] - 1 ];
                 drawBlock( x, y, (board[ y ][ x ] - 1) % 12 );
             }
         }
     }
 
-    //ctx.fillStyle = 'red';
-    //ctx.strokeStyle = 'black';
-    // for ( var y = 0; y < 4; ++y ) {
     for ( var y = 0; y < BLOCK_WH; ++y ) {
-        // for ( var x = 0; x < 4; ++x ) {
         for ( var x = 0; x < BLOCK_WH; ++x ) {
             if ( current[ y ][ x ] ) {
-                //ctx.fillStyle = colors[ current[ y ][ x ] - 1 ];
                 drawBlock( currentX + x, currentY + y, (current[ y ][ x ] - 1) % 12 );
             }
         }
@@ -52,6 +44,21 @@ function render() {
 
     ctx.drawImage(img_bg, 0, 0, 700, 1000, 0, 0, W, H);
 
+}
+
+function render_gameover() {
+    var c_x = ctx.canvas.width / 2;
+    var c_y = ctx.canvas.height / 2;
+    
+    // create radial gradient
+    var grd = ctx.createRadialGradient(c_x, c_y, 10, c_x, c_y, 150);
+    // light blue
+    grd.addColorStop(0, 'yellow');
+    // dark blue
+    grd.addColorStop(1, '#004CB3');
+    ctx.fillStyle = grd;
+    ctx.font = '50px Sniglet-ExtraBold';
+    ctx.fillText('GameOver', c_x - 130, c_y - 25);
 }
 
 function render_init() {

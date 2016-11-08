@@ -3,8 +3,10 @@ var BLOCK_WH = 5;
 var board = [];
 var score;
 var lose;
-var interval;
+var interval = 50;
 var objInterval;
+var move_wait_limit = 15;
+var move_wait_cnt;
 var current; // current moving shape
 var currentX, currentY; // position of current shape
 var cleardLines;
@@ -141,23 +143,32 @@ function init() {
 
 // keep the element moving down, creating new shapes and clearing lines
 function tick() {
-    if ( valid( 0, 1 ) ) {
-        ++currentY;
-    }
-    // if the element settled
-    else {
-        freeze();
-        clearLines();
-        if (lose) {
-            gameOver();
-            return false;
+    render();
+    if (++move_wait_cnt == move_wait_limit) {
+        move_wait_cnt = 0;
+            
+        if ( valid( 0, 1 ) ) {
+            ++currentY;
         }
-        newShape();
+        // if the element settled
+        else {
+            freeze();
+            clearLines();
+            if (lose) {
+                gameOver();
+                return false;
+            }
+            newShape();
+        }
     }
+
+    setTimeout(tick, interval);
 }
 
 function gameOver() {
-    clearInterval(objInterval);
+    //clearInterval(objInterval);
+    removeEvt();
+    render_gameover();
     if (isApp) {
         window.game.submitScore(leaderboardId, score);
         window.game.onSubmitScoreSucceeded = function() {
@@ -323,19 +334,20 @@ function valid( offsetX, offsetY, newCurrent ) {
 }
 
 function newGame() {
-    clearInterval(objInterval);
+    //clearInterval(objInterval);
     init();
     score = 0;
     cleardLines = 0;
     newShape();
     lose = false;
-    interval = 500;
-    objInterval = setInterval( tick, interval );
+    //interval = 50;
+    // objInterval = setInterval( tick, interval );
     document.getElementById( 'score_num' ).innerHTML = score;
-    
+    move_wait_cnt = 0;
+    setTimeout(tick, interval);
     //render_init();
-    clearInterval(render_interval);
-    render_interval = setInterval( render, 100 );
+    //clearInterval(render_interval);
+    //render_interval = setInterval( render, 100 );
 }
 
 function togglePause() {
