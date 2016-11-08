@@ -29,7 +29,8 @@ function addEvt() {
 
     var scale_f = canvas.width / canvas.clientWidth;
     document.body.onmousedown = function (e) {
-        if (e.clientY < 36) {
+        if (e.clientY < 40) {
+            togglePause();
             return true;
         }
         user_x = e.clientX  * scale_f;
@@ -48,7 +49,8 @@ function addEvt() {
     }
 
     document.body.onmousemove = function(e) {
-        if (e.clientY < 36) {
+        if (e.clientY < 40) {
+            togglePause();
             return true;
         }
         user_x = e.clientX * scale_f;
@@ -57,7 +59,8 @@ function addEvt() {
     }
 
     document.body.ontouchstart = function (e) {
-        if (e.clientY < 36) {
+        if (e.clientY < 40) {
+            togglePause();
             return true;
         }
         user_x = e.touches[0].clientX * scale_f;
@@ -76,7 +79,8 @@ function addEvt() {
     }
 
     document.body.ontouchmove = function(e) {
-        if (e.clientY < 36) {
+        if (e.clientY < 40) {
+            togglePause();
             return true;
         }
         user_x = e.touches[0].clientX * scale_f;

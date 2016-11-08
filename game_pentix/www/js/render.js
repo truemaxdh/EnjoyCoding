@@ -43,9 +43,9 @@ function render_current() {
 
 function render_boarder() {
     ctx.drawImage(img_bg, 0, 0, 700, 1000, 0, 0, W, H);
-    ctx.fillStyle = '#ffa500';
-    ctx.font = '35px Sniglet-Regular';
-    ctx.fillText('Usery : ' + user_y + ',UserX : ' + Math.floor(user_x), 20, 50);
+    // ctx.fillStyle = '#ffa500';
+    // ctx.font = '35px Sniglet-Regular';
+    // ctx.fillText('Usery : ' + user_y + ',UserX : ' + Math.floor(user_x), 20, 50);
 }
 function render_gameover() {
     var c_x = ctx.canvas.width / 2;
