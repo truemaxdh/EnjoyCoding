@@ -10,6 +10,7 @@ var move_wait_cnt;
 var current; // current moving shape
 var currentX, currentY; // position of current shape
 var cleardLines;
+var paused = false;
 // var shapes = [
 //     [ 0, 0, 0, 0,
 //       1, 1, 1, 1 ],
@@ -143,7 +144,11 @@ function init() {
 
 // keep the element moving down, creating new shapes and clearing lines
 function tick() {
-    render();
+    procTouchEvent();
+    procKeyEvent();
+    render_board();
+    render_current();
+    render_boarder();
     if (++move_wait_cnt == move_wait_limit) {
         move_wait_cnt = 0;
             
@@ -152,7 +157,7 @@ function tick() {
                 gameOver();
             } else {
                 freeze();
-                clearLines();
+                clearLines(ROWS, 0);
             }
             return false;
         }
@@ -162,7 +167,9 @@ function tick() {
         }
     }
 
-    setTimeout(tick, interval);
+    if (!paused) {
+        setTimeout(tick, interval);
+    }    
 }
 
 function gameOver() {
@@ -210,9 +217,6 @@ function rotate( current ) {
 
 // check if any lines are filled and clear them
 function clearLines(y, combo) {
-    y = y || ROWS;
-    combo = combo || 0;
-    var test = 3;
     //for ( var y = ROWS - 1; y >= 0; --y ) {
     if (--y >= 0) {
         var rowFilled = true;
@@ -222,8 +226,9 @@ function clearLines(y, combo) {
                 break;
             } 
         }
-        if (--test > 0) rowFilled = true;
+ 
         if ( rowFilled ) {
+            
             cleardLines++;
             if (isApp) {
                 chkAndUnlockAchievement(cleardLines);
@@ -237,7 +242,8 @@ function clearLines(y, combo) {
                 }
             }
             ++y;
-            render();
+            render_board();
+            render_boarder(); 
             setTimeout(clearLines, 500, y, combo);
         } else {
             clearLines(y, combo);
@@ -357,10 +363,9 @@ function newGame() {
 }
 
 function togglePause() {
-    if (objInterval > 0) {
-        clearInterval(objInterval);
-        objInterval = -1;
-    } else {
-        objInterval = setInterval( tick, interval );
+    paused = !paused;
+    if (!paused) {
+        tick();
     }
+
 }

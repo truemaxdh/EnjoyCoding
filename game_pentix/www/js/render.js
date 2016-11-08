@@ -18,14 +18,10 @@ function drawBlock( x, y, tile_id ) {
 }
 
 // draws the board and the moving shape
-function render() {
+function render_board() {
     ctx.clearRect( 0, 0, W, H );
-    
-    procTouchEvent();
-
-    procKeyEvent();
-
-    ctx.strokeStyle = 'black';
+        
+    //ctx.strokeStyle = 'black';
     for ( var x = 0; x < COLS; ++x ) {
         for ( var y = 0; y < ROWS; ++y ) {
             if ( board[ y ][ x ] ) {
@@ -33,7 +29,9 @@ function render() {
             }
         }
     }
+}
 
+function render_current() {
     for ( var y = 0; y < BLOCK_WH; ++y ) {
         for ( var x = 0; x < BLOCK_WH; ++x ) {
             if ( current[ y ][ x ] ) {
@@ -41,11 +39,11 @@ function render() {
             }
         }
     }
-
-    ctx.drawImage(img_bg, 0, 0, 700, 1000, 0, 0, W, H);
-
 }
 
+function render_boarder() {
+    ctx.drawImage(img_bg, 0, 0, 700, 1000, 0, 0, W, H);
+}
 function render_gameover() {
     var c_x = ctx.canvas.width / 2;
     var c_y = ctx.canvas.height / 2;

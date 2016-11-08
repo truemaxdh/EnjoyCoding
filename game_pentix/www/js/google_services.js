@@ -33,9 +33,10 @@ function pageChange(newpageID) {
         }
     }
 
-    if (newpageID=='menu') {
-        removeEvt();
-    } else if (newpageID=='game') {
+    // if (newpageID=='menu') {
+    //     //removeEvt();
+    // } else 
+    if (newpageID=='game') {
         addEvt();
         newGame();
     } 
