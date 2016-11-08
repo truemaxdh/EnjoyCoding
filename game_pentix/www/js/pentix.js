@@ -225,7 +225,9 @@ function clearLines() {
         }
         if ( rowFilled ) {
             cleardLines++;
-            chkAndUnlockAchievement(cleardLines);
+            if (isApp) {
+                chkAndUnlockAchievement(cleardLines);
+            }            
             score += ++combo * 10; 
             document.getElementById( 'score_num' ).innerHTML = score;
             document.getElementById( 'clearsound' ).play();
