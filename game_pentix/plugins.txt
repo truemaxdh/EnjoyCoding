@@ -1,0 +1,5 @@
+cordova-admob 4.1.16 "AdMob Google Ads + Tappx"
+cordova-connectivity-monitor 1.2.2 "Connectivity Monitoring"
+cordova-plugin-extras-google-play-services 1.0.5 "Google Play Services for Android"
+cordova-plugin-game 1.0.120 "Cordova Game plugin"
+cordova-plugin-whitelist 1.3.0 "Whitelist"
