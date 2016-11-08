@@ -147,18 +147,18 @@ function tick() {
     if (++move_wait_cnt == move_wait_limit) {
         move_wait_cnt = 0;
             
-        if ( valid( 0, 1 ) ) {
-            ++currentY;
+        if ( !valid( 0, 1 ) ) {
+            if (lose) {
+                gameOver();
+            } else {
+                freeze();
+                clearLines();
+            }
+            return false;
         }
         // if the element settled
         else {
-            freeze();
-            clearLines();
-            if (lose) {
-                gameOver();
-                return false;
-            }
-            newShape();
+            ++currentY;
         }
     }
 
@@ -209,20 +209,20 @@ function rotate( current ) {
 }
 
 // check if any lines are filled and clear them
-function clearLines() {
-    var combo = 0;
-    for ( var y = ROWS - 1; y >= 0; --y ) {
+function clearLines(y, combo) {
+    y = y || ROWS;
+    combo = combo || 0;
+    var test = 3;
+    //for ( var y = ROWS - 1; y >= 0; --y ) {
+    if (--y >= 0) {
         var rowFilled = true;
-        //var unfilledCnt = 0;
         for ( var x = 0; x < COLS; ++x ) {
             if ( board[ y ][ x ] == 0 ) {
-                //unfilledCnt++;
-                //if (unfilledCnt > 2) {
-                    rowFilled = false;
-                    break;
-                //}
+                rowFilled = false;
+                break;
             } 
         }
+        if (--test > 0) rowFilled = true;
         if ( rowFilled ) {
             cleardLines++;
             if (isApp) {
@@ -236,11 +236,15 @@ function clearLines() {
                     board[ yy ][ x ] = board[ yy - 1 ][ x ];
                 }
             }
-            //clearInterval(objInterval);
-            //interval -= 10;
-            //objInterval = setInterval( tick, interval );
             ++y;
+            render();
+            setTimeout(clearLines, 500, y, combo);
+        } else {
+            clearLines(y, combo);
         }
+    } else {
+        newShape();
+        setTimeout(tick, interval);
     }
 }
 
