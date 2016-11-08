@@ -59,7 +59,7 @@ function addEvt() {
     }
 
     document.body.ontouchstart = function (e) {
-        if (e.clientY < 40) {
+        if (e.touches[0].clientY < 40) {
             togglePause();
             return true;
         }
@@ -79,7 +79,7 @@ function addEvt() {
     }
 
     document.body.ontouchmove = function(e) {
-        if (e.clientY < 40) {
+        if (e.touches[0].clientY < 40) {
             togglePause();
             return true;
         }
