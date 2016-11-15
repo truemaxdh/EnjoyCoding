@@ -2,7 +2,7 @@ var COLS = 15, ROWS = 20;
 var BLOCK_WH = 5;
 var board = [];
 var score;
-var lose;
+//var lose;
 var interval = 50;
 var objInterval;
 var move_wait_limit = 15;
@@ -153,7 +153,7 @@ function tick() {
         move_wait_cnt = 0;
             
         if ( !valid( 0, 1 ) ) {
-            if (lose) {
+            if (currentY < 0) {
                 gameOver();
             } else {
                 freeze();
@@ -336,7 +336,7 @@ function valid( offsetX, offsetY, newCurrent ) {
                   || y + offsetY >= ROWS
                   || x + offsetX >= COLS ) {
                     // if (offsetY == 1) lose = true; // lose if the current shape at the top row when checked
-                    if (offsetY < 1) lose = true; // lose if the current shape at the top row when checked
+                    // if (offsetY < 1) lose = true; // lose if the current shape at the top row when checked
                     return false;
                 }
             }
@@ -351,7 +351,7 @@ function newGame() {
     score = 0;
     cleardLines = 0;
     newShape();
-    lose = false;
+    //lose = false;
     //interval = 50;
     // objInterval = setInterval( tick, interval );
     document.getElementById( 'score_num' ).innerHTML = score;
