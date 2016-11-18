@@ -51,14 +51,14 @@ function render_gameover() {
     var c_x = ctx.canvas.width / 2;
     var c_y = ctx.canvas.height / 2;
     
-    // create radial gradient
-    var grd = ctx.createRadialGradient(c_x, c_y, 10, c_x, c_y, 150);
-    // light blue
-    //grd.addColorStop(0, 'yellow');
-    grd.addColorStop(0, '#d54d7b');
-    // dark blue
-    grd.addColorStop(1, '#004CB3');
-    ctx.fillStyle = grd;
+    // // create radial gradient
+    // var grd = ctx.createRadialGradient(c_x, c_y, 10, c_x, c_y, 150);
+    // // light blue
+    // grd.addColorStop(0, '#d54d7b');
+    // // dark blue
+    // grd.addColorStop(1, '#004CB3');
+    // ctx.fillStyle = grd;
+    ctx.fillStyle = 'black';
     ctx.font = '50px Sniglet-ExtraBold';
     ctx.fillText('GameOver', c_x - 130, c_y - 25);
 }
