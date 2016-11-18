@@ -4,6 +4,7 @@ var user_x_ori, user_y_ori;
 var user_x, user_y;
 var user_pressing = false;
 var do_rotate = false;
+var keyPressed = false;
 function addEvt() {
     document.body.onkeydown = function( e ) {
         var keys = {
@@ -16,7 +17,7 @@ function addEvt() {
             //keyPress( keys[ e.keyCode ] );
             keyCode=keys[ e.keyCode ];
             //render();
-
+            keyPressed = true;
             return false;
         }
     };
