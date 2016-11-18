@@ -27,10 +27,10 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <icon src="icon.png" />
-    <platform name="android">
+    <!--<platform name="android">
         <icon src="icon_ldpi.png" density="ldpi" />
         <icon src="icon_mdpi.png" density="mdpi" />
         <icon src="icon_hdpi.png" density="hdpi" />
         <icon src="icon_xhdpi.png" density="xhdpi" />
-     </platform>
+     </platform>-->
 </widget>
