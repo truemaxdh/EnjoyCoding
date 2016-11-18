@@ -144,8 +144,11 @@ function init() {
 
 // keep the element moving down, creating new shapes and clearing lines
 function tick() {
-    procTouchEvent();
+    if (!keyPressed) {
+        procTouchEvent();
+    }
     procKeyEvent();
+    keyPressed = false;
     render_board();
     render_current();
     render_boarder();
@@ -300,8 +303,7 @@ function procTouchEvent() {
         } else if (dx < - BLOCK_W) {
             keyCode = 'left';
             user_x_ori = user_x_ori - BLOCK_W;
-        }
-        if (dy > BLOCK_H) {
+        } else if (dy > BLOCK_H) {
             keyCode = 'down';
             user_y_ori = user_y_ori + BLOCK_H;
         }
