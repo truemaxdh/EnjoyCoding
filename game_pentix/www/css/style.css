@@ -27,37 +27,35 @@ h1 {
     text-shadow: 0 1px 1px #fff; 
 }
 
-h3 { 
-    color: #CEF0D4; 
-    font-family: 'Sniglet-Regular'; 
-    font-size: 3vw; 
-    text-align: center; 
-    text-shadow: 1px 1px 2px #082b34;
-}
-
 .menu {
-    width:98vw;
+    /*width:98vw;*/
     height:94vh;
+    background-image: url('../img/menu_bg.png') ; 
+    background-repeat : no-repeat;
+    background-position : center center;
 }
 
 .text {
     font-family: 'Sniglet-Regular'; 
     position : relative;
     top: 50%;
-    transform: translateY(-50%);
+    /*transform: translateY(-50%);*/
 }
 
 .text a { 
-    color: #d54d7b; 
-    font-size: 25px; 
+    /*color: #d54d7b; */
+    color: #000; 
+    font-size: 26px; 
     text-align: center; 
-    text-shadow: 1px 1px 2px #082b34;
+    text-shadow: 1px 1px 2px #b25;
     text-decoration: none;
     display: block; 
 }
 
 .text a:hover, .text a:focus {
-    color: #DD8800;
+    /*color: #d54d7b;*/
+    color: #d54d7b;
+    text-shadow: 1px 1px 2px #000;
 }
 
 /* game */

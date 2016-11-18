@@ -10,11 +10,11 @@ function showHideBanner(bShow) {
             // tappxShare:           0.5                                        // Optional 
             });
             
+            // Request interstitial (will present automatically when autoShowInterstitial is set to true) 
+            adMob.createInterstitialView();
+
             // Start showing banners (atomatic when autoShowBanner is set to true) 
             admob.createBannerView();
-            
-            // Request interstitial (will present automatically when autoShowInterstitial is set to true) 
-            admob.requestInterstitialAd();
         } else {
             admob.destroyBannerView();
         }

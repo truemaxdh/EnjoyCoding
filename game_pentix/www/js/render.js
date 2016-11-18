@@ -54,7 +54,8 @@ function render_gameover() {
     // create radial gradient
     var grd = ctx.createRadialGradient(c_x, c_y, 10, c_x, c_y, 150);
     // light blue
-    grd.addColorStop(0, 'yellow');
+    //grd.addColorStop(0, 'yellow');
+    grd.addColorStop(0, '#d54d7b');
     // dark blue
     grd.addColorStop(1, '#004CB3');
     ctx.fillStyle = grd;

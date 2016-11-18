@@ -47,23 +47,25 @@
     <body>
         <div id = "intro" class="menu">
 			<div class = "text">
-				<h1>Crayon<br>Pentix</h1>
-				<h3>Welcome!!<br>Wait for a while!!</h3>
+				<!--<h1>Crayon<br>Pentix</h1>-->
+				<br>
+                <a>Welcome!!<br>Wait for a while!!</a>
 			</div>
 		</div>
 		<div id = "menu" class="menu">
 			<div class = "text">
-				<h1>Crayon<br>Pentix</h1>
-				<a href="#" onclick="pageChange('game');">Start</a>
-                <a href="#" onclick="ShowAchievements();">Show Achievements</a>
-				<a href="#" onclick="ShowHighScores();">Show High Scores</a>
+				<!--<h1>Crayon<br>Pentix</h1>-->
+                <br>
+				<a href="#" onclick="pageChange('game');"><b>Start</b></a>
+                <a href="#" onclick="ShowAchievements();"><b>Show Achievements</b></a>
+				<a href="#" onclick="ShowHighScores();"><b>Show High Scores</b></a>
 			</div>
 		</div>
         <div id = "game">
 			<audio id="clearsound" src="sound/pop.ogg" preload="auto"></audio>
             <div id="score_board">
                 Score : <div id="score_num">0</div>
-                <img src="pause.png" align="right" onclick="togglePause();">
+                <img src="img/pause.png" align="right" onclick="togglePause();">
             </div>
             <canvas id="game_canvas" width="700" height="1000"></canvas>
             <!--<div id="controller" width="220">
