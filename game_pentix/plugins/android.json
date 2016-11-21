@@ -7,7 +7,7 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-admob": {
+        "cordova-plugin-admob-simple": {
             "PACKAGE_NAME": "com.pgmaru.SimplePentix"
         },
         "cordova-plugin-game": {
@@ -19,7 +19,7 @@
         }
     },
     "dependent_plugins": {
-        "cordova-connectivity-monitor": {
+        "cordova-admob-sdklibs": {
             "PACKAGE_NAME": "com.pgmaru.SimplePentix"
         },
         "cordova-plugin-extras-google-play-services": {
