@@ -85,10 +85,12 @@ function jump() {
 }
 
 function startGame() {
-  setTimeout(tick, 50);
+  requestAnimationFrame(tick);
 }
 
 function tick() {
+  requestAnimationFrame(tick);
+  
   // collition check
   var car_pos = document.getElementById("car").getBoundingClientRect();
   var obs_pos = document.getElementById("obstacle").getBoundingClientRect();
@@ -100,8 +102,6 @@ function tick() {
       (car_pos.top + car_pos.height) > obs_pos.top &&
        car_pos.top < (obs_pos.top + obs_pos.height)) {
     alert("game over");
-  } else {
-    setTimeout(tick, 50);
   }
 }
 </script>
