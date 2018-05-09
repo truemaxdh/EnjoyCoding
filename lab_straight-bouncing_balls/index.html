@@ -1,0 +1,74 @@
+<html>
+<head>
+<style>
+body {
+  background-color: black;
+}
+.ball {
+  position: absolute;
+  left:0px;
+  top:0px;
+  border-radius: 50%;
+  //background-color: white;
+}
+</style>
+<script>
+var balls = [];
+var balls_speed = [];
+var balls_cnt = 25;
+function getRnd(range) {
+  return Math.random() * range;
+}
+
+function getRGBStr(r, g, b, a) {
+  return "rgba(" + r + "," + g + "," + b + "," + a + ")";
+}
+
+function tick() {
+  requestAnimationFrame(tick);
+  
+  // collition check
+  for (var i=0; i < balls_cnt; i++) {
+    var ball_pos = balls[i].getBoundingClientRect();
+    ball_pos.left = parseInt(ball_pos.left);
+    ball_pos.top = parseInt(ball_pos.top);
+    
+    if (ball_pos.left == 0 && ball_pos.top == 0) {
+      balls[i].style.left = "700";
+      balls[i].style.top = "700";
+      //console.log(1);
+    } else {
+      if (ball_pos.left == balls[i].style.left.replace("px","")) {
+        balls[i].style.left = 700 - parseInt(balls[i].style.left.replace("px",""));
+        //console.log(balls[i].style.left);
+      }
+      if (ball_pos.top == balls[i].style.top.replace("px","")) {
+        balls[i].style.top = 700 - parseInt(balls[i].style.top.replace("px",""));
+        //console.log(balls[i].style.top);
+      }
+    }
+  }
+}
+
+function init() {
+  for (var i=0; i <balls_cnt; i++) {
+    var newEl = document.createElement("div");
+    var rndSz = getRnd(100) + 20;
+    newEl.style.width = rndSz;
+    newEl.style.height = rndSz;
+    // newEl.style.backgroundColor=getRGBStr(getRnd(255), getRnd(255), getRnd(255), 0.98);
+    newEl.style.background="linear-gradient(to top left, " + getRGBStr(getRnd(255), getRnd(255), getRnd(255), 1) + ", white)";
+    newEl.setAttribute("class", "ball");
+    
+    newEl.style.transition = "left " + (getRnd(4) + 1) + "s linear, top " + (getRnd(4) +1) + "s linear";
+    document.body.appendChild(newEl);
+    balls.push(newEl);
+    
+  }
+  setTimeout(tick, 10);
+}
+</script>
+</head>
+<body onload="init();">
+</body>
+</html>
