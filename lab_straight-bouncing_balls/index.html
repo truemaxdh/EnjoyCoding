@@ -9,38 +9,31 @@ body {
   left:0px;
   top:0px;
   border-radius: 50%;
-  background-color:rgba(100.564,255.564,150.564,0.95654);
 }
 </style>
 <script>
 var balls = [];
 var balls_speed = [];
-var balls_cnt = 1;
+var balls_cnt = 25;
 var clW, clH;
 function getRnd(range) {
   return Math.random() * range;
 }
-
 function getRGBStr(r, g, b, a) {
-  return "rgba(" + r + "," + g + "," + b + "," + a + ")";
+  return "rgba(" + parseInt(r) + "," + parseInt(g) + "," + parseInt(b) + "," + parseInt(a) + ")";
 }
-
 function getPxNum(strPx) {
   return parseInt(strPx.replace("px",""))
 }
-var cnt = 0;
 function tick() {
-  if (cnt++ < 20)
-    requestAnimationFrame(tick);
-    
+  requestAnimationFrame(tick);
+  
   // collition check
   for (var i=0; i < balls_cnt; i++) {
     var ball_pos = balls[i].getBoundingClientRect();
     ball_pos.left = parseInt(ball_pos.left);
     ball_pos.top = parseInt(ball_pos.top);
-    alert(ball_pos.left);
-    alert(ball_pos.top);
-  
+    
     if (ball_pos.left == 0 && ball_pos.top == 0) {
       balls[i].style.left = clW - getPxNum(balls[i].style.width);
       balls[i].style.top = clH - getPxNum(balls[i].style.height);
@@ -57,18 +50,18 @@ function tick() {
     }
   }
 }
-
 function init() {
   for (var i=0; i <balls_cnt; i++) {
     var newEl = document.createElement("div");
     var rndSz = getRnd(100) + 50;
     newEl.style.width = rndSz;
     newEl.style.height = rndSz;
-    //newEl.style.backgroundColor=getRGBStr(getRnd(255), getRnd(255), getRnd(255), 0.98);
-    //newEl.style.background = "linear-gradient(to top left, "
-    //                             + getRGBStr(getRnd(255) + 1, getRnd(255) + 1, getRnd(255) + 1, getRnd(0.5) + 0.5)
+    // newEl.style.backgroundColor=getRGBStr(getRnd(255), getRnd(255), getRnd(255), 0.98);
+    newEl.style.background = "linear-gradient(to top left, "
+                                 + getRGBStr(getRnd(255) + 1, getRnd(255) + 1, getRnd(255) + 1, getRnd(0.5) + 0.5)
                                  + ", white)";
     newEl.setAttribute("class", "ball");
+    
     newEl.style.WebkitTransition = "left " + (getRnd(4) + 1) + "s linear, top " + (getRnd(4) +1) + "s linear";
     newEl.style.transition = "left " + (getRnd(4) + 1) + "s linear, top " + (getRnd(4) +1) + "s linear";
     document.body.appendChild(newEl);
@@ -84,6 +77,5 @@ function init() {
 </script>
 </head>
 <body onload="init();">
-  <font color="white">12</font>
 </body>
 </html>
