@@ -20,7 +20,7 @@ function getRnd(range) {
   return Math.random() * range;
 }
 function getRGBStr(r, g, b, a) {
-  return "rgba(" + parseInt(r) + "," + parseInt(g) + "," + parseInt(b) + "," + parseInt(a) + ")";
+  return "rgba(" + parseInt(r) + "," + parseInt(g) + "," + parseInt(b) + "," + a + ")";
 }
 function getPxNum(strPx) {
   return parseInt(strPx.replace("px",""))
