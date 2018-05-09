@@ -16,12 +16,17 @@ body {
 var balls = [];
 var balls_speed = [];
 var balls_cnt = 25;
+var clW, clH;
 function getRnd(range) {
   return Math.random() * range;
 }
 
 function getRGBStr(r, g, b, a) {
   return "rgba(" + r + "," + g + "," + b + "," + a + ")";
+}
+
+function getPxNum(strPx) {
+  return parseInt(strPx.replace("px",""))
 }
 
 function tick() {
@@ -34,16 +39,16 @@ function tick() {
     ball_pos.top = parseInt(ball_pos.top);
     
     if (ball_pos.left == 0 && ball_pos.top == 0) {
-      balls[i].style.left = "700";
-      balls[i].style.top = "700";
-      //console.log(1);
+      balls[i].style.left = clW - getPxNum(balls[i].style.width);
+      balls[i].style.top = clH - getPxNum(balls[i].style.height);
+      //console.log(clW);
     } else {
-      if (ball_pos.left == balls[i].style.left.replace("px","")) {
-        balls[i].style.left = 700 - parseInt(balls[i].style.left.replace("px",""));
+      if (ball_pos.left == getPxNum(balls[i].style.left)) {
+        balls[i].style.left = clW - getPxNum(balls[i].style.width) - getPxNum(balls[i].style.left);
         //console.log(balls[i].style.left);
       }
-      if (ball_pos.top == balls[i].style.top.replace("px","")) {
-        balls[i].style.top = 700 - parseInt(balls[i].style.top.replace("px",""));
+      if (ball_pos.top == getPxNum(balls[i].style.top)) {
+        balls[i].style.top = clH - getPxNum(balls[i].style.height) - getPxNum(balls[i].style.top);
         //console.log(balls[i].style.top);
       }
     }
@@ -53,11 +58,13 @@ function tick() {
 function init() {
   for (var i=0; i <balls_cnt; i++) {
     var newEl = document.createElement("div");
-    var rndSz = getRnd(100) + 20;
+    var rndSz = getRnd(100) + 50;
     newEl.style.width = rndSz;
     newEl.style.height = rndSz;
     // newEl.style.backgroundColor=getRGBStr(getRnd(255), getRnd(255), getRnd(255), 0.98);
-    newEl.style.background="linear-gradient(to top left, " + getRGBStr(getRnd(255), getRnd(255), getRnd(255), 1) + ", white)";
+    newEl.style.background = "linear-gradient(to top left, "
+                                 + getRGBStr(getRnd(255) + 1, getRnd(255) + 1, getRnd(255) + 1, getRnd(0.5) + 0.5)
+                                 + ", white)";
     newEl.setAttribute("class", "ball");
     
     newEl.style.transition = "left " + (getRnd(4) + 1) + "s linear, top " + (getRnd(4) +1) + "s linear";
@@ -65,6 +72,10 @@ function init() {
     balls.push(newEl);
     
   }
+  
+  clW = document.documentElement.clientWidth - 1;
+  clH = document.documentElement.clientHeight - 1;
+  
   setTimeout(tick, 10);
 }
 </script>
