@@ -27,17 +27,18 @@ function getRGBStr(r, g, b, a) {
 function getPxNum(strPx) {
   return parseInt(strPx.replace("px",""))
 }
-
+var cnt = 0;
 function tick() {
-  requestAnimationFrame(tick);
-  alert(balls[0].style.left);
+  if (cnt < 20)
+    requestAnimationFrame(tick);
     
   // collition check
   for (var i=0; i < balls_cnt; i++) {
     var ball_pos = balls[i].getBoundingClientRect();
     ball_pos.left = parseInt(ball_pos.left);
     ball_pos.top = parseInt(ball_pos.top);
-    
+    alert(ball_pos.left);
+  
     if (ball_pos.left == 0 && ball_pos.top == 0) {
       balls[i].style.left = clW - getPxNum(balls[i].style.width);
       balls[i].style.top = clH - getPxNum(balls[i].style.height);
