@@ -30,7 +30,8 @@ function getPxNum(strPx) {
 
 function tick() {
   requestAnimationFrame(tick);
-  
+  alert(balls[i].style.left);
+    
   // collition check
   for (var i=0; i < balls_cnt; i++) {
     var ball_pos = balls[i].getBoundingClientRect();
@@ -65,10 +66,8 @@ function init() {
                                  + getRGBStr(getRnd(255) + 1, getRnd(255) + 1, getRnd(255) + 1, getRnd(0.5) + 0.5)
                                  + ", white)";
     newEl.setAttribute("class", "ball");
-    alert(1);
     newEl.style.WebkitTransition = "left " + (getRnd(4) + 1) + "s linear, top " + (getRnd(4) +1) + "s linear";
     newEl.style.transition = "left " + (getRnd(4) + 1) + "s linear, top " + (getRnd(4) +1) + "s linear";
-    alert(newEl.style.WebkitTransition);
     document.body.appendChild(newEl);
     balls.push(newEl);
     
@@ -82,6 +81,6 @@ function init() {
 </script>
 </head>
 <body onload="init();">
-  <font color="white">1</font>
+  <font color="white">12</font>
 </body>
 </html>
