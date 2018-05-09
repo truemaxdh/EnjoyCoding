@@ -9,13 +9,12 @@ body {
   left:0px;
   top:0px;
   border-radius: 50%;
-  //background-color: white;
 }
 </style>
 <script>
 var balls = [];
 var balls_speed = [];
-var balls_cnt = 1;
+var balls_cnt = 25;
 var clW, clH;
 function getRnd(range) {
   return Math.random() * range;
@@ -41,7 +40,6 @@ function tick() {
     if (ball_pos.left == 0 && ball_pos.top == 0) {
       balls[i].style.left = clW - getPxNum(balls[i].style.width);
       balls[i].style.top = clH - getPxNum(balls[i].style.height);
-      alert(balls[i].style.left);
       //console.log(clW);
     } else {
       if (ball_pos.left == getPxNum(balls[i].style.left)) {
@@ -69,6 +67,7 @@ function init() {
     newEl.setAttribute("class", "ball");
     
     newEl.style.transition = "left " + (getRnd(4) + 1) + "s linear, top " + (getRnd(4) +1) + "s linear";
+    newEl.style.webkitTransition = "left " + (getRnd(4) + 1) + "s linear, top " + (getRnd(4) +1) + "s linear";
     document.body.appendChild(newEl);
     balls.push(newEl);
     
@@ -76,8 +75,7 @@ function init() {
   
   clW = document.documentElement.clientWidth - 1;
   clH = document.documentElement.clientHeight - 1;
-  alert(clW);
-  alert(clH);
+  
   setTimeout(tick, 10);
 }
 </script>
