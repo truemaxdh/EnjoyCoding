@@ -15,7 +15,7 @@ body {
 <script>
 var balls = [];
 var balls_speed = [];
-var balls_cnt = 25;
+var balls_cnt = 1;
 var clW, clH;
 function getRnd(range) {
   return Math.random() * range;
@@ -41,6 +41,7 @@ function tick() {
     if (ball_pos.left == 0 && ball_pos.top == 0) {
       balls[i].style.left = clW - getPxNum(balls[i].style.width);
       balls[i].style.top = clH - getPxNum(balls[i].style.height);
+      alert(balls[i].style.left);
       //console.log(clW);
     } else {
       if (ball_pos.left == getPxNum(balls[i].style.left)) {
@@ -76,6 +77,7 @@ function init() {
   clW = document.documentElement.clientWidth - 1;
   clH = document.documentElement.clientHeight - 1;
   alert(clW);
+  alert(clH);
   setTimeout(tick, 10);
 }
 </script>
