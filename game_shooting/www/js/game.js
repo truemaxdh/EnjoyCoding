@@ -116,7 +116,7 @@ function proc_user_input() {
         if (missile_interval_cnt++==0) {
             var o_missile = new objMissile(o_jet.x, o_jet.y);
             push_to_chain(o_missile, missile_ends);  
-        } else if (missile_interval_cnt == 5) {
+        } else if (missile_interval_cnt == 10) {
             missile_interval_cnt = 0;
         }
     } else {
