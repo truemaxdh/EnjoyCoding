@@ -155,8 +155,8 @@ function upcoming_obj() {
 function collision_check() {
     // check collision of missiles and coins
     var o_missile;
-    o_missile = missile_ends[0];
-    while(o_missile != null) {
+    o_missile = missile_ends[0].next;
+    while(o_missile.next != null) {
         var o_coin = collision_obj_grp(o_missile, coin_ends); 
         if (o_coin != null && --o_coin.durability <= 0) {
             remove_from_chain(o_coin, coin_ends);
@@ -209,8 +209,8 @@ function collision_obj_grp(obj, ends) {
     var o_y0 = obj.y;
     var o_y1 = o_y0 + obj.img.height;
     
-    var t = ends[0];
-    while(t != null) {
+    var t = ends[0].next;
+    while(t.next != null) {
         var t_x0 = t.x;
         var t_x1 = t_x0 + t.img.width;
         var t_y0 = t.y;
