@@ -38,7 +38,7 @@ function gameobj(x, y) {
     this.step_y = 0;
     this.prev = null;
     this.next = null;
-    this.img;
+    this.img = null;
     this.move = function() {
         this.x += this.step_x;
         this.y += this.step_y;
@@ -49,11 +49,12 @@ function gameobj(x, y) {
             if (this.next!=null) {
                 this.next.prev = this.prev;
             }
-            this = null;
         }
     }
     this.render = function(ctx_game) {
-        ctx_game.drawImage(this.img, this.x, this.y);
+        if (this.img != null) {
+            ctx_game.drawImage(this.img, this.x, this.y);
+        }
         if (this.next != null) {
             this.next.render(ctx_game);
         }
