@@ -39,15 +39,15 @@ function game_init() {
     
     missile_ends[0] = new gameobj(0,0), missile_ends[1] = new gameobj(0,0);
     missile_ends[0].next = missile_ends[1];
-    missile_ends[1].previous = missile_ends[0];
+    missile_ends[1].prev = missile_ends[0];
     
     coin_ends[0] = new gameobj(0,0), coin_ends[1] = new gameobj(0,0);
     coin_ends[0].next = coin_ends[1];
-    coin_ends[1].previous = coin_ends[0];
+    coin_ends[1].prev = coin_ends[0];
     
     coin_bullet_ends[0] = new gameobj(0,0), coin_bullet_ends[1] = new gameobj(0,0);
     coin_bullet_ends[0].next = coin_bullet_ends[1];
-    coin_bullet_ends[1].previous = coin_bullet_ends[0];
+    coin_bullet_ends[1].prev = coin_bullet_ends[0];
     
 }
 
