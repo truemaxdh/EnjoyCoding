@@ -190,16 +190,8 @@ function push_to_chain(obj, ends) {
 }
 
 function remove_from_chain(obj, ends) {
-    if (obj.prev == null) {
-        ends[0] = obj.next;
-    } else {
-        obj.prev.next = obj.next;
-    }
-    if (obj.next == null) {
-        ends[1] = obj.prev;
-    } else {
-        obj.next.prev = obj.prev;
-    }
+    obj.prev.next = obj.next;
+    obj.next.prev = obj.prev;
 }
 
 function collision_obj_grp(obj, ends) {
