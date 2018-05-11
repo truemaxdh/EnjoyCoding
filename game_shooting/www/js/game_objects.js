@@ -71,7 +71,7 @@ function objJet(x, y) {
 function objMissile(x, y) {
     gameobj.call(this, x + 20, y);
     this.img = img_missile;
-    this.step_y = -25;
+    this.step_y = -20;
 }
 
 var type_coinNum = [10, 50, 100];
@@ -87,8 +87,8 @@ var type_durability = [1, 2, 3];
 function objCoinGray(x, y, type) {
     var rnd_x = Math.floor(Math.random() * 720);
     gameobj.call(this, rnd_x, 0);
-    this.step_x = (x - rnd_x) / 60;
-    this.step_y = y / 60;
+    this.step_x = (x - rnd_x) / 120;
+    this.step_y = y / 120;
     this.coin_num = type_coinNum[type];
     this.durability = type_durability[type];
     //this.img.src = 'img/coin_gray_' + this.coin_num + '.png';
@@ -98,7 +98,7 @@ function objCoinGray(x, y, type) {
 function objCoinBullet(x, y) {
     var rnd_x = Math.floor(Math.random() * 720);
     gameobj.call(this, rnd_x, 0);
-    this.step_y = 40;
+    this.step_y = 20;
     this.step_x = (x - rnd_x) * this.step_y / y;
     this.img = img_coin_bullet;
 }
