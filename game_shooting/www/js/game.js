@@ -1,5 +1,6 @@
 // concerning game frame
-var objInterval;
+// var objInterval;
+var pause = true;
 var o_game_over;
 var gameover_flag;
 
@@ -42,18 +43,24 @@ function game_init() {
 }
 
 function newGame() {
-    clearInterval(objInterval);
+    // clearInterval(objInterval);
+    pause = true;
     game_init();
-    
-    objInterval = setInterval(tick, 50);
+    pause = false;
+    // objInterval = setInterval(tick, 50);
+    requestAnimationFrame(tick);
 }
 
 function togglePause() {
-    if (objInterval > 0) {
+    /*if (objInterval > 0) {
         clearInterval(objInterval);
         objInterval = -1;
     } else {
         objInterval = setInterval(tick, 50);
+    }*/
+    pause = !pause;
+    if (!pause) {
+      requestAnimationFrame(tick);
     }
 }
 
@@ -63,7 +70,8 @@ function gameOver() {
         o_game_over = new objGameOver();
         o_jet.game_over();
     } else if (o_game_over.count_down-- == 0) {
-        clearInterval(objInterval);
+        // clearInterval(objInterval);
+        pause = true;
         if (isApp) {
             window.game.submitScore(leaderboardId, score);
             window.game.onSubmitScoreSucceeded = function() {
@@ -82,6 +90,9 @@ function gameOver() {
 }
 
 function tick() {
+    if (!pause) {
+      requestAnimationFrame(tick);
+    }
     upcoming_obj();
     render();
     if (gameover_flag) {
