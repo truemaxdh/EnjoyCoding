@@ -60,8 +60,12 @@ function render() {
     ctx_game.font = '35px Sniglet-ExtraBold';
     ctx_game.fillText('Score : ' + score, 20, 50);
     ctx_game.fillText('Stage : ' + stage, 270,50);
-    ctx_game.fillText(missile_ends[0] , 20, 100);
-    ctx_game.fillText(missile_ends[1] , 20, 150);
+    var m = missile_ends[0];
+    var t = 100;
+    while(m != null) {
+        ctx_game.fillText(m.x + ',' + m.y , 20, t);
+        m = m.next;
+    }
     //ctx_game.fillText('%[1] : ' + tick_cnt % stage_design[stage][1], 20,80);
     
     ctx_game.drawImage(img_pause, 0, 0, 40, 40, 480, 20, 40, 40)
