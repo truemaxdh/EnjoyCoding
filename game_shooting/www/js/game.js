@@ -134,12 +134,12 @@ function upcoming_obj() {
 
     if ((tick_cnt % stage_design[stage][2]) == 0) {
         var o_coin = new objCoinGray(o_jet.x, o_jet.y, stage_design[stage][1]);
-        push_to_chain(o_coin, coin_ends);  
+        //push_to_chain(o_coin, coin_ends);  
     }
 
     if ((tick_cnt % stage_design[stage][3]) == 0) {
         var o_coin_bullet = new objCoinBullet(o_jet.x, o_jet.y);
-        push_to_chain(o_coin_bullet, coin_bullet_ends);  
+        //push_to_chain(o_coin_bullet, coin_bullet_ends);  
     }
 }
 
