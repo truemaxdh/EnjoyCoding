@@ -41,8 +41,14 @@ function game_init() {
     missile_ends[0].next = missile_ends[1];
     missile_ends[1].previous = missile_ends[0];
     
-    coin_ends[0] = null, coin_ends[1] = null;
-    coin_bullet_ends[0] = null, coin_bullet_ends[1] = null;
+    coin_ends[0] = new gameobj(), coin_ends[1] = new gameobj();
+    coin_ends[0].next = coin_ends[1];
+    coin_ends[1].previous = coin_ends[0];
+    
+    coin_bullet_ends[0] = new gameobj(), coin_bullet_ends[1] = new gameobj();
+    coin_bullet_ends[0].next = coin_bullet_ends[1];
+    coin_bullet_ends[1].previous = coin_bullet_ends[0];
+    
 }
 
 function newGame() {
@@ -177,14 +183,10 @@ function collision_check() {
 }
 
 function push_to_chain(obj, ends) {
-    if (ends[0]==null) {
-        ends[0] = obj;
-        ends[1] = obj;
-    } else {
-        obj.prev = ends[1];
-        ends[1].next = obj;
-        ends[1] = obj;
-    } 
+    ends[1].prev.next = obj;
+    obj.prev = ends[1].prev;
+    obj.next = ends[1];
+    ends[1].prev = obj;
 }
 
 function remove_from_chain(obj, ends) {
