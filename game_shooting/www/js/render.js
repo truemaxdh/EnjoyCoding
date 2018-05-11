@@ -65,6 +65,7 @@ function render() {
     while(m != null) {
         ctx_game.fillText(m.x + ',' + m.y , 20, t);
         m = m.next;
+        t += 50;
     }
     //ctx_game.fillText('%[1] : ' + tick_cnt % stage_design[stage][1], 20,80);
     
