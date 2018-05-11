@@ -60,7 +60,7 @@ function render() {
     ctx_game.font = '35px Sniglet-ExtraBold';
     ctx_game.fillText('Score : ' + score, 20, 50);
     ctx_game.fillText('Stage : ' + stage, 270,50);
-    ctx_game.fillText(user_pressing, 20, 100);
+    //ctx_game.fillText(user_pressing, 20, 100);
     //ctx_game.fillText('%[1] : ' + tick_cnt % stage_design[stage][1], 20,80);
     
     ctx_game.drawImage(img_pause, 0, 0, 40, 40, 480, 20, 40, 40)
