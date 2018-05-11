@@ -49,6 +49,7 @@ function gameobj(x, y) {
             if (this.next!=null) {
                 this.next.prev = this.prev;
             }
+            this = null;
         }
     }
     this.render = function(ctx_game) {
