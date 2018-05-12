@@ -1,5 +1,5 @@
 // concerning game frame
-var frame_interval;
+var animation_interval;
 var last_animation_time;
 var pause = true;
 var o_game_over;
@@ -101,7 +101,7 @@ function gameOver() {
 }
 
 function tick(cur_time) {
-    frame_interval = cur_time - (last_animation_time==0 ? cur_time : last_animation_time);
+    animation_interval = cur_time - (last_animation_time==0 ? cur_time : last_animation_time);
     upcoming_obj();
     render();
     if (gameover_flag) {
