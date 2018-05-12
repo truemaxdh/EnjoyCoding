@@ -1,5 +1,6 @@
 // concerning game frame
-// var objInterval;
+var frame_interval;
+var last_animation_time;
 var pause = true;
 var o_game_over;
 var gameover_flag;
@@ -49,6 +50,7 @@ function game_init() {
     coin_bullet_ends[0].next = coin_bullet_ends[1];
     coin_bullet_ends[1].prev = coin_bullet_ends[0];
     
+    last_animation_time = 0;
 }
 
 function newGame() {
@@ -98,10 +100,8 @@ function gameOver() {
     o_game_over.render(ctx_game);
 }
 
-function tick() {
-    if (!pause) {
-      requestAnimationFrame(tick);
-    }
+function tick(cur_time) {
+    frame_interval = cur_time - (last_animation_time==0 ? cur_time : last_animation_time);
     upcoming_obj();
     render();
     if (gameover_flag) {
@@ -109,7 +109,11 @@ function tick() {
     } else {
         proc_user_input();
         collision_check();
-    }    
+    }
+    
+    if (!pause) {
+      requestAnimationFrame(tick);
+    }
 }
 
 function proc_user_input() {
