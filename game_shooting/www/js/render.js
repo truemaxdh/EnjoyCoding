@@ -60,6 +60,7 @@ function render() {
     ctx_game.font = '35px Sniglet-ExtraBold';
     ctx_game.fillText('Score : ' + score, 20, 50);
     ctx_game.fillText('Stage : ' + stage, 270,50);
+    ctx_game.fillText('Interval : ' + animation_interval, 20,100);
     /*var m = missile_ends[0];
     var t = 100;
     while(m != null) {
