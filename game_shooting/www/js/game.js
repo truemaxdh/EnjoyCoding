@@ -102,6 +102,8 @@ function gameOver() {
 
 function tick(cur_time) {
     animation_interval = cur_time - (last_animation_time==0 ? cur_time : last_animation_time);
+    last_animation_time = cur_time;
+    
     upcoming_obj();
     render();
     if (gameover_flag) {
