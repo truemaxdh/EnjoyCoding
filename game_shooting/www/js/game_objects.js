@@ -137,8 +137,8 @@ function objStageClear(stage) {
         grd.addColorStop(1, '#004CB3');
         ctx_game.fillStyle = grd;
         ctx_game.font = '50px Sniglet-ExtraBold';
-        ctx_game.fillText('Stage ' + stage + ' Cleared!!!', c_x - 130, c_y - 25);
-        
+        ctx_game.fillText('Stage ' + stage, c_x - 200, c_y - 15);
+        ctx_game.fillText(' Cleared!!!', c_x - 130, c_y + 15);
         this.count_down -= animation_interval;
         if (this.count_down <= 0) {
             effect_flag = false;
