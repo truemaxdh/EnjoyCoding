@@ -28,9 +28,14 @@ var stage_design = [
     [530000, 2, 1000, 1000], [590000, 2, 500, 500]
 ];
 //var stage_design = [[200, 35, 100], [400, 30, 80], [600, 25, 60], [800, 20, 40], [1000, 15, 20], [1200, 10, 10]];
-var upcoming_interval_cnt;
+//var upcoming_interval_cnt;
+
+// concerning extra effect
+var effect_flag;
+
 function game_init() {
     gameover_flag = false;
+    effect_flag = false;
     score = 0;
     missile_interval_cnt = 0;
     millisec_played = 0;
@@ -110,6 +115,8 @@ function tick(cur_time) {
     render();
     if (gameover_flag) {
         gameOver();
+    } else if (effect_flag) {
+        // 
     } else {
         proc_user_input();
         collision_check();
@@ -147,6 +154,13 @@ function upcoming_obj() {
     // get stage
     if (stage < (stage_design.length - 1) && millisec_played > stage_design[stage][0]) {
         stage++;
+        effect_flag = true;
+        coin_ends[0].next = coin_ends[1];
+        coin_ends[1].prev = coin_ends[0];
+        coin_bullet_ends[0].next = coin_bullet_ends[1];
+        coin_bullet_ends[1].prev = coin_bullet_ends[0];
+        var o_stageClear = new objStageClear(stage);
+        push_to_chain(o_stageClear, coin_ends);  
     }
 
     if ((parseInt(millisec_played) % stage_design[stage][2]) == 0) {
