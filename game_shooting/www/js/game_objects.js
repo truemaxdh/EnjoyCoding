@@ -80,7 +80,7 @@ var type_coinNum = [10, 50, 100];
 function objCoin(x, y, type) {
     gameobj.call(this, x, y);
     this.step_x = 0;
-    this.step_y = 450;
+    this.step_y = 200 + 30 * stage;
     this.coin_num = type_coinNum[type];
     this.img = img_coin_golds[type];
 }
@@ -100,7 +100,7 @@ function objCoinGray(x, y, type) {
 function objCoinBullet(x, y) {
     var rnd_x = Math.floor(Math.random() * 720);
     gameobj.call(this, rnd_x, 0);
-    this.step_y = 900;
+    this.step_y = 400 + 50 * stage;
     this.step_x = (x - rnd_x) * this.step_y / y;
     this.img = img_coin_bullet;
 }
@@ -122,3 +122,21 @@ function objGameOver() {
         ctx_game.fillText('GameOver', c_x - 130, c_y - 25);
     }
 }
+
+function objStageClear() {
+    this.count_down = 50;
+    this.render = function(ctx_game) {
+        var c_x = ctx_game.canvas.width / 2;
+        var c_y = ctx_game.canvas.height / 2;
+        
+        // create radial gradient
+        var grd = ctx_game.createRadialGradient(c_x, c_y, 10, c_x, c_y, 150);
+        // light blue
+        grd.addColorStop(0, 'yellow');
+        // dark blue
+        grd.addColorStop(1, '#004CB3');
+        ctx_game.fillStyle = grd;
+        ctx_game.font = '50px Sniglet-ExtraBold';
+        ctx_game.fillText('Stage Cleared!!!', c_x - 130, c_y - 25);
+    }
+}   
