@@ -124,7 +124,7 @@ function objGameOver() {
 }
 
 function objStageClear() {
-    this.count_down = 50;
+    this.count_down = 3000;
     this.render = function(ctx_game) {
         var c_x = ctx_game.canvas.width / 2;
         var c_y = ctx_game.canvas.height / 2;
@@ -138,5 +138,12 @@ function objStageClear() {
         ctx_game.fillStyle = grd;
         ctx_game.font = '50px Sniglet-ExtraBold';
         ctx_game.fillText('Stage Cleared!!!', c_x - 130, c_y - 25);
+        
+        this.count_down -= animation_interval;
+        if (this.count_down <= 0) {
+            effect_flag = false;
+            coin_ends[0].next = coin_ends[1];
+            coin_ends[1].prev = coin_ends[0];
+        }
     }
 }   
