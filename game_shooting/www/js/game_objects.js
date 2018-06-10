@@ -90,7 +90,7 @@ function objCoinGray(x, y, type) {
     var rnd_x = Math.floor(Math.random() * 720);
     gameobj.call(this, rnd_x, 0);
     this.step_x = (x - rnd_x);
-    this.step_y = y;
+    this.step_y = 200 + 30 * stage;
     this.coin_num = type_coinNum[type];
     this.durability = type_durability[type];
     //this.img.src = 'img/coin_gray_' + this.coin_num + '.png';
