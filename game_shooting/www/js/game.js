@@ -16,6 +16,8 @@ var missile_interval_cnt;
 // concerning coins
 var coin_ends = [null, null];
 var coin_bullet_ends = [null, null]; 
+var coin_interval;
+var coin_bullet_interval;
 
 // concerning stage
 var millisec_played;
@@ -55,6 +57,9 @@ function game_init() {
     coin_bullet_ends[0] = new gameobj(0,0), coin_bullet_ends[1] = new gameobj(0,0);
     coin_bullet_ends[0].next = coin_bullet_ends[1];
     coin_bullet_ends[1].prev = coin_bullet_ends[0];
+    
+    coin_interval = 0;
+    coin_bullet_interval = 0;
     
     last_animation_time = 0;
 }
@@ -163,14 +168,18 @@ function upcoming_obj() {
         push_to_chain(o_stageClear, coin_ends);  
     }
 
-    if ((parseInt(millisec_played) % stage_design[stage][2]) == 0) {
+    coin_interval += animation_interval;
+    if (coin_interval > stage_design[stage][2]) {
         var o_coin = new objCoinGray(o_jet.x, o_jet.y, stage_design[stage][1]);
         push_to_chain(o_coin, coin_ends);  
+        coin_interval = 0;
     }
 
-    if ((parseInt(millisec_played) % stage_design[stage][3]) == 0) {
+    coin_bullet_interval += animation_interval;
+    if (coin_bullet_interval > stage_design[stage][3]) {
         var o_coin_bullet = new objCoinBullet(o_jet.x, o_jet.y);
         push_to_chain(o_coin_bullet, coin_bullet_ends);  
+        coin_bullet_interval = 0;
     }
 }
 
