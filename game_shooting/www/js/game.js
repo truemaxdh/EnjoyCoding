@@ -116,12 +116,12 @@ function tick(cur_time) {
     last_animation_time = cur_time;
     millisec_played += animation_interval;
     
-    upcoming_obj();
+    if (!effect_flag) {
+        upcoming_obj();
+    }
     render();
     if (gameover_flag) {
         gameOver();
-    } else if (effect_flag) {
-        // 
     } else {
         proc_user_input();
         collision_check();
