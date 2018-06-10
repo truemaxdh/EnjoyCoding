@@ -166,20 +166,20 @@ function upcoming_obj() {
         coin_bullet_ends[1].prev = coin_bullet_ends[0];
         var o_stageClear = new objStageClear(stage);
         push_to_chain(o_stageClear, coin_ends);  
-    }
+    } else {
+        coin_interval += animation_interval;
+        if (coin_interval > stage_design[stage][2]) {
+            var o_coin = new objCoinGray(o_jet.x, o_jet.y, stage_design[stage][1]);
+            push_to_chain(o_coin, coin_ends);  
+            coin_interval = 0;
+        }
 
-    coin_interval += animation_interval;
-    if (coin_interval > stage_design[stage][2]) {
-        var o_coin = new objCoinGray(o_jet.x, o_jet.y, stage_design[stage][1]);
-        push_to_chain(o_coin, coin_ends);  
-        coin_interval = 0;
-    }
-
-    coin_bullet_interval += animation_interval;
-    if (coin_bullet_interval > stage_design[stage][3]) {
-        var o_coin_bullet = new objCoinBullet(o_jet.x, o_jet.y);
-        push_to_chain(o_coin_bullet, coin_bullet_ends);  
-        coin_bullet_interval = 0;
+        coin_bullet_interval += animation_interval;
+        if (coin_bullet_interval > stage_design[stage][3]) {
+            var o_coin_bullet = new objCoinBullet(o_jet.x, o_jet.y);
+            push_to_chain(o_coin_bullet, coin_bullet_ends);  
+            coin_bullet_interval = 0;
+        }
     }
 }
 
