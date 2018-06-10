@@ -123,7 +123,7 @@ function objGameOver() {
     }
 }
 
-function objStageClear() {
+function objStageClear(stage) {
     this.count_down = 3000;
     this.render = function(ctx_game) {
         var c_x = ctx_game.canvas.width / 2;
@@ -137,7 +137,7 @@ function objStageClear() {
         grd.addColorStop(1, '#004CB3');
         ctx_game.fillStyle = grd;
         ctx_game.font = '50px Sniglet-ExtraBold';
-        ctx_game.fillText('Stage Cleared!!!', c_x - 130, c_y - 25);
+        ctx_game.fillText('Stage ' + stage + ' Cleared!!!', c_x - 130, c_y - 25);
         
         this.count_down -= animation_interval;
         if (this.count_down <= 0) {
