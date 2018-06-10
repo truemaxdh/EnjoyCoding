@@ -18,13 +18,14 @@ var coin_ends = [null, null];
 var coin_bullet_ends = [null, null]; 
 
 // concerning stage
-var tick_cnt;
+var millisec_played;
 var stage;
+var stage_second = 50;
 // [[tick_cnt, coin_type, coin_interval, bullet_interval],....]
 var stage_design = [
-    [400, 0, 70, 200],  [800, 0, 60, 160],   [1200, 0, 50, 120],   [1600, 0, 40, 80], 
-    [2000, 1, 70, 200], [2400, 1, 60, 160],  [2800, 1, 50, 120],  [3200, 1, 40, 80],
-    [3600, 2, 70, 200], [4000, 2, 60, 160],  [4400, 2, 50, 120],  [4800, 2, 40, 80]
+    [50000, 0, 5000, 5000],  [110000, 0, 4500, 4500],   [170000, 0, 4000, 4000],   [230000, 0, 3500, 3500], 
+    [290000, 1, 3000, 3000], [350000, 1, 2500, 2500],  [410000, 1, 2000, 2000],  [470000, 1, 1500, 1500],
+    [530000, 2, 1000, 1000], [590000, 2, 500, 500]
 ];
 //var stage_design = [[200, 35, 100], [400, 30, 80], [600, 25, 60], [800, 20, 40], [1000, 15, 20], [1200, 10, 10]];
 var upcoming_interval_cnt;
@@ -32,7 +33,7 @@ function game_init() {
     gameover_flag = false;
     score = 0;
     missile_interval_cnt = 0;
-    tick_cnt = 0;
+    millisec_played = 0;
     stage = 0;
     
     o_game_over = null;
@@ -103,6 +104,7 @@ function gameOver() {
 function tick(cur_time) {
     animation_interval = cur_time - (last_animation_time==0 ? cur_time : last_animation_time);
     last_animation_time = cur_time;
+    millisec_played += animation_interval;
     
     upcoming_obj();
     render();
@@ -140,19 +142,19 @@ function proc_user_input() {
 }
 
 function upcoming_obj() {
-    tick_cnt++;
+    //tick_cnt++;
     
     // get stage
-    if (stage < (stage_design.length - 1) && tick_cnt > stage_design[stage][0]) {
+    if (stage < (stage_design.length - 1) && millisec_played > stage_design[stage][0]) {
         stage++;
     }
 
-    if ((tick_cnt % stage_design[stage][2]) == 0) {
+    if ((millisec_played % stage_design[stage][2]) == 0) {
         var o_coin = new objCoinGray(o_jet.x, o_jet.y, stage_design[stage][1]);
         push_to_chain(o_coin, coin_ends);  
     }
 
-    if ((tick_cnt % stage_design[stage][3]) == 0) {
+    if ((millisec_played % stage_design[stage][3]) == 0) {
         var o_coin_bullet = new objCoinBullet(o_jet.x, o_jet.y);
         push_to_chain(o_coin_bullet, coin_bullet_ends);  
     }
