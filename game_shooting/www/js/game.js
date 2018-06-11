@@ -166,7 +166,6 @@ function proc_user_input() {
 function upcoming_obj() {
     // get stage
     if (stage < stage_design.max_stage && millisec_played > (stage_design.stage_tick * stage)) {
-        stage++;
         effect_flag = true;
         coin_ends[0].next = coin_ends[1];
         coin_ends[1].prev = coin_ends[0];
@@ -178,6 +177,7 @@ function upcoming_obj() {
         stage_design.bullet_interval -= 300;
         coin_interval = 0;
         coin_bullet_interval = 0;
+        stage++;
     } else {
         coin_interval += animation_interval;
         if (stage_design.coin_types[stage-1].length > 0 && coin_interval > stage_design.coin_interval) {
