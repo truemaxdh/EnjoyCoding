@@ -181,7 +181,8 @@ function upcoming_obj() {
     } else {
         coin_interval += animation_interval;
         if (stage_design.coin_types[stage-1].length > 0 && coin_interval > stage_design.coin_interval) {
-            var rnd = Math.floor(Math.random() * stage_design.coin_types[stage-1].length);
+            var rnd = parseInt(Math.random() * stage_design.coin_types[stage-1].length);
+            consol.log(stage_design.coin_types[stage-1][rnd]);
             var o_coin = new objCoinGray(o_jet.x, o_jet.y, stage_design.coin_types[stage-1][rnd]);
             push_to_chain(o_coin, coin_ends);  
             coin_interval -= stage_design.coin_interval;
