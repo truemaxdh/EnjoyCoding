@@ -206,7 +206,9 @@ function collision_check() {
             remove_from_chain(o_coin, coin_ends);
             remove_from_chain(o_missile, missile_ends);
             score += o_coin.coin_num;
-            chkAndUnlockAchievement(score);
+            try {
+                chkAndUnlockAchievement(score);
+            } catch(err) {}
         }
         o_missile = o_missile.next;
     }
