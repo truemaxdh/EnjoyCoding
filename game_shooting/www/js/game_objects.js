@@ -87,7 +87,7 @@ function objCoin(x, y, type) {
 
 var type_durability = [1, 2, 3];
 function objCoinGray(x, y, type) {
-    var rnd_x = Math.floor(Math.random() * 720);
+    var rnd_x = Math.floor(Math.random() * 720 * animation_interval / 1000);
     gameobj.call(this, rnd_x, 0);
     this.step_x = (x - rnd_x);
     this.step_y = 200 + 30 * stage;
