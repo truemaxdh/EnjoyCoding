@@ -124,7 +124,9 @@ function tick(cur_time) {
         gameOver();
     } else {
         proc_user_input();
-        collision_check();
+        if (!effect_flag) {
+            collision_check();
+        }
     }
     
     if (!pause) {
@@ -171,14 +173,14 @@ function upcoming_obj() {
         if (coin_interval > stage_design[stage][2]) {
             var o_coin = new objCoinGray(o_jet.x, o_jet.y, stage_design[stage][1]);
             push_to_chain(o_coin, coin_ends);  
-            coin_interval = 0;
+            coin_interval -= stage_design[stage][2];
         }
 
         coin_bullet_interval += animation_interval;
         if (coin_bullet_interval > stage_design[stage][3]) {
             var o_coin_bullet = new objCoinBullet(o_jet.x, o_jet.y);
             push_to_chain(o_coin_bullet, coin_bullet_ends);  
-            coin_bullet_interval = 0;
+            coin_bullet_interval -= stage_design[stage][3];
         }
     }
 }
