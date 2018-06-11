@@ -37,6 +37,8 @@ var stage_design = function() {
     this.coin_types = [[10], [10], [50], [50], [100], [100], [10, 50, 100], [10, 50, 100], [10, 50, 100], [10, 50, 100]];
     this.coinBullets = [0, 1, 0, 1, 0, 1, 1, 1, 1, 1];
 }
+console.log(stage_design.coin_types);
+console.log(stage_design.coin_types[0]);
 
 // concerning extra effect
 var effect_flag;
