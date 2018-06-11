@@ -179,16 +179,16 @@ function upcoming_obj() {
         coin_interval = 0;
         coin_bullet_interval = 0;
     } else {
+        coin_interval += animation_interval;
         if (stage_design.coin_types[stage-1].length > 0 && coin_interval > stage_design.coin_interval) {
-            coin_interval += animation_interval;
             var rnd = Math.floor(Math.random() * stage_design.coin_types[stage-1].length);
             var o_coin = new objCoinGray(o_jet.x, o_jet.y, stage_design.coin_types[stage-1][rnd]);
             push_to_chain(o_coin, coin_ends);  
             coin_interval -= stage_design.coin_interval;
         }
 
+        coin_bullet_interval += animation_interval;
         if (stage_design.coinBullets[stage-1] > 0 && coin_bullet_interval > stage_design.bullet_interval) {
-            coin_bullet_interval += animation_interval;
             var o_coin_bullet = new objCoinBullet(o_jet.x, o_jet.y);
             push_to_chain(o_coin_bullet, coin_bullet_ends);  
             coin_bullet_interval -= stage_design.bullet_interval;
