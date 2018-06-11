@@ -33,7 +33,7 @@ function render_init() {
 function draw_bg_canv() {    
     for (var i = 0; i < 10; i++) {
         var img_sea_rnd = (Math.random() < 0.5) ? img_sea : img_sea2;
-        for (var j = 0; j < 4; j++) {
+        for (var j = 0; j < 3; j++) {
             var img_rnd = (Math.random() < 0.8) ? img_sea_rnd : img_island;
             ctx_bg.drawImage(img_rnd, j * 180, i * 180);
         }
