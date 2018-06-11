@@ -87,10 +87,10 @@ function objCoin(x, y, type) {
 
 var type_durability = [1, 2, 3];
 function objCoinGray(x, y, type) {
-    var rnd_x = Math.floor(Math.random() * 720);
+    var rnd_x = Math.floor(Math.random() * 540);
     gameobj.call(this, rnd_x, 0);
-    this.step_x = (x - rnd_x) * animation_interval / 1000;
-    this.step_y = 200 + 30 * stage;
+    this.step_x = (x - rnd_x);
+    this.step_y = 220 + 30 * stage;
     this.coin_num = type_coinNum[type];
     this.durability = type_durability[type];
     //this.img.src = 'img/coin_gray_' + this.coin_num + '.png';
@@ -100,7 +100,7 @@ function objCoinGray(x, y, type) {
 function objCoinBullet(x, y) {
     var rnd_x = Math.floor(Math.random() * 720);
     gameobj.call(this, rnd_x, 0);
-    this.step_y = 400 + 50 * stage;
+    this.step_y = 200 + 50 * stage;
     this.step_x = (x - rnd_x) * this.step_y / y;
     this.img = img_coin_bullet;
 }
