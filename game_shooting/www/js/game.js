@@ -34,11 +34,11 @@ var stage_design = {
     stage_tick : 50000,
     coin_interval : 4000,
     bullet_interval : 3000,
-    coin_types : [[10], [10], [50], [50], [100], [100], [10, 50, 100], [10, 50, 100], [10, 50, 100], [10, 50, 100]],
+    coin_types : [[1], [1], [2], [2], [3], [3], [1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3]],
     coinBullets : [0, 1, 0, 1, 0, 1, 1, 1, 1, 1]
 }
-console.log(stage_design.coin_types);
-console.log(stage_design.coin_types[0]);
+//console.log(stage_design.coin_types);
+//console.log(stage_design.coin_types[0]);
 
 // concerning extra effect
 var effect_flag;
@@ -182,7 +182,6 @@ function upcoming_obj() {
         coin_interval += animation_interval;
         if (stage_design.coin_types[stage-1].length > 0 && coin_interval > stage_design.coin_interval) {
             var rnd = parseInt(Math.random() * stage_design.coin_types[stage-1].length);
-            consol.log(stage_design.coin_types[stage-1][rnd]);
             var o_coin = new objCoinGray(o_jet.x, o_jet.y, stage_design.coin_types[stage-1][rnd]);
             push_to_chain(o_coin, coin_ends);  
             coin_interval -= stage_design.coin_interval;
