@@ -22,15 +22,21 @@ var coin_bullet_interval;
 // concerning stage
 var millisec_played;
 var stage;
-var stage_second = 50;
+//var stage_second = 50;
 // [[tick_cnt, coin_type, coin_interval, bullet_interval],....]
-var stage_design = [
+/* var stage_design = [
     [50000, 0, 4000, 4000],  [110000, 0, 3600, 3600],   [170000, 0, 3200, 3200],   [230000, 0, 2800, 2800], 
     [290000, 1, 2400, 2400], [350000, 1, 2000, 2000],  [410000, 1, 1600, 1600],  [470000, 1, 1200, 1200],
     [530000, 2, 800, 800], [590000, 2, 400, 400]
-];
-//var stage_design = [[200, 35, 100], [400, 30, 80], [600, 25, 60], [800, 20, 40], [1000, 15, 20], [1200, 10, 10]];
-//var upcoming_interval_cnt;
+];*/
+var stage_design = function() {
+    this.max_stage = 10;
+    this.stage_tick = 50000;
+    this.coin_interval = 4000;
+    this.bullet_interval = 3000;
+    this.coin_types = [[10], [10], [50], [50], [100], [100], [10, 50, 100], [10, 50, 100], [10, 50, 100], [10, 50, 100]];
+    this.coinBullets = [0, 1, 0, 1, 0, 1, 1, 1, 1, 1];
+}
 
 // concerning extra effect
 var effect_flag;
@@ -41,7 +47,7 @@ function game_init() {
     score = 0;
     missile_interval_cnt = 0;
     millisec_played = 0;
-    stage = 0;
+    stage = 1;
     
     o_game_over = null;
     o_jet = new objJet(310, 750);
@@ -156,10 +162,8 @@ function proc_user_input() {
 }
 
 function upcoming_obj() {
-    //tick_cnt++;
-    
     // get stage
-    if (stage < (stage_design.length - 1) && millisec_played > stage_design[stage][0]) {
+    if (stage < stage_design.max_stage && millisec_played > (stage_design.stage_tick * stage)) {
         stage++;
         effect_flag = true;
         coin_ends[0].next = coin_ends[1];
@@ -167,20 +171,25 @@ function upcoming_obj() {
         coin_bullet_ends[0].next = coin_bullet_ends[1];
         coin_bullet_ends[1].prev = coin_bullet_ends[0];
         var o_stageClear = new objStageClear(stage);
-        push_to_chain(o_stageClear, coin_ends);  
+        push_to_chain(o_stageClear, coin_ends);
+        stage_design.coin_interval -= 400;
+        stage_design.bullet_interval -= 300;
+        coin_interval = 0;
+        coin_bullet_interval = 0;
     } else {
-        coin_interval += animation_interval;
-        if (coin_interval > stage_design[stage][2]) {
-            var o_coin = new objCoinGray(o_jet.x, o_jet.y, stage_design[stage][1]);
+        if (stage_design.coin_types[stage-1].length > 0 && coin_interval > stage_design.coin_interval) {
+            coin_interval += animation_interval;
+            var rnd = Math.floor(Math.random() * stage_design.coin_types[stage-1].length);
+            var o_coin = new objCoinGray(o_jet.x, o_jet.y, stage_design.coin_types[stage-1][rnd]);
             push_to_chain(o_coin, coin_ends);  
-            coin_interval -= stage_design[stage][2];
+            coin_interval -= stage_design.coin_interval;
         }
 
-        coin_bullet_interval += animation_interval;
-        if (coin_bullet_interval > stage_design[stage][3]) {
+        if (stage_design.coinBullets[stage-1] > 0 && coin_bullet_interval > stage_design.bullet_interval) {
+            coin_bullet_interval += animation_interval;
             var o_coin_bullet = new objCoinBullet(o_jet.x, o_jet.y);
             push_to_chain(o_coin_bullet, coin_bullet_ends);  
-            coin_bullet_interval -= stage_design[stage][3];
+            coin_bullet_interval -= stage_design.bullet_interval;
         }
     }
 }
