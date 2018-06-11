@@ -29,13 +29,13 @@ var stage;
     [290000, 1, 2400, 2400], [350000, 1, 2000, 2000],  [410000, 1, 1600, 1600],  [470000, 1, 1200, 1200],
     [530000, 2, 800, 800], [590000, 2, 400, 400]
 ];*/
-var stage_design = function() {
-    this.max_stage = 10;
-    this.stage_tick = 50000;
-    this.coin_interval = 4000;
-    this.bullet_interval = 3000;
-    this.coin_types = [[10], [10], [50], [50], [100], [100], [10, 50, 100], [10, 50, 100], [10, 50, 100], [10, 50, 100]];
-    this.coinBullets = [0, 1, 0, 1, 0, 1, 1, 1, 1, 1];
+var stage_design = {
+    max_stage : 10,
+    stage_tick : 50000,
+    coin_interval : 4000,
+    bullet_interval : 3000,
+    coin_types : [[10], [10], [50], [50], [100], [100], [10, 50, 100], [10, 50, 100], [10, 50, 100], [10, 50, 100]],
+    coinBullets : [0, 1, 0, 1, 0, 1, 1, 1, 1, 1]
 }
 console.log(stage_design.coin_types);
 console.log(stage_design.coin_types[0]);
