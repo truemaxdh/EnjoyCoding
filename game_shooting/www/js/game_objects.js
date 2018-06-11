@@ -87,9 +87,9 @@ function objCoin(x, y, type) {
 
 var type_durability = [1, 2, 3];
 function objCoinGray(x, y, type) {
-    var rnd_x = Math.floor(Math.random() * 720 * animation_interval / 1000);
+    var rnd_x = Math.floor(Math.random() * 720);
     gameobj.call(this, rnd_x, 0);
-    this.step_x = (x - rnd_x);
+    this.step_x = (x - rnd_x) * animation_interval / 1000;
     this.step_y = 200 + 30 * stage;
     this.coin_num = type_coinNum[type];
     this.durability = type_durability[type];
@@ -138,7 +138,7 @@ function objStageClear(stage) {
         ctx_game.fillStyle = grd;
         ctx_game.font = '50px Sniglet-ExtraBold';
         ctx_game.fillText('Stage ' + stage, c_x - 200, c_y - 15);
-        ctx_game.fillText(' Cleared!!!', c_x - 130, c_y + 15);
+        ctx_game.fillText(' Cleared!!!', c_x - 180, c_y + 15);
         this.count_down -= animation_interval;
         if (this.count_down <= 0) {
             effect_flag = false;
