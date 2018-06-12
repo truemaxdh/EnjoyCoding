@@ -75,6 +75,6 @@ function render() {
 }
 function render_scroll() {
     ctx_game.drawImage(canv_bg, 0, bg_y, 540, 900, 0, 0, 540, 900);
-    bg_y -= 300 * animation_interval / 1000;
+    bg_y -= 200 * animation_interval / 1000;
     if (bg_y < 0) bg_y += 1800;
 }
