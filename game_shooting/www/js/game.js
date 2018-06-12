@@ -34,7 +34,7 @@ var stage_design = {
     stage_tick : 50000,
     coin_interval : 4000,
     bullet_interval : 3000,
-    coin_types : [[1], [1], [2], [2], [3], [3], [1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3]],
+    coin_types : [[0], [0], [1], [1], [2], [2], [0, 1, 2], [0, 1, 2], [0, 1, 2], [0, 1, 2]],
     coinBullets : [0, 1, 0, 1, 0, 1, 1, 1, 1, 1]
 }
 //console.log(stage_design.coin_types);
