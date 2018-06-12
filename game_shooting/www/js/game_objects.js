@@ -130,15 +130,15 @@ function objStageClear(stage) {
         var c_y = ctx_game.canvas.height / 2;
         
         // create radial gradient
-        var grd = ctx_game.createRadialGradient(c_x, c_y, 10, c_x, c_y, 150);
-        // light blue
-        grd.addColorStop(0, 'yellow');
-        // dark blue
-        grd.addColorStop(1, '#004CB3');
+        // Create gradient
+        var grd=ctx_game.createLinearGradient(0, 0, ctx_game.canvas.width,0);
+        grd.addColorStop("0","magenta");
+        grd.addColorStop("0.5","blue");
+        grd.addColorStop("1.0","red");
+        
         ctx_game.fillStyle = grd;
         ctx_game.font = '50px Sniglet-ExtraBold';
-        ctx_game.fillText('Stage ' + stage, c_x - 200, c_y - 15);
-        ctx_game.fillText(' Cleared!!!', c_x - 180, c_y + 15);
+        ctx_game.fillText('Stage' + stage + ' Clear!', c_x - 200, c_y - 25);
         this.count_down -= animation_interval;
         if (this.count_down <= 0) {
             effect_flag = false;
