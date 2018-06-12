@@ -11,7 +11,7 @@ var score;
 // concerning airplane
 var o_jet;
 var missile_ends = [null, null];
-var missile_interval_cnt;
+var missile_interval;
 
 // concerning coins
 var coin_ends = [null, null];
@@ -32,6 +32,7 @@ var stage;
 var stage_design = {
     max_stage : 10,
     stage_tick : 50000,
+    missile_interval : 200,
     coin_interval : 4000,
     bullet_interval : 3000,
     coin_types : [[0], [0], [1], [1], [2], [2], [0, 1, 2], [0, 1, 2], [0, 1, 2], [0, 1, 2]],
@@ -47,7 +48,7 @@ function game_init() {
     gameover_flag = false;
     effect_flag = false;
     score = 0;
-    missile_interval_cnt = 0;
+    missile_interval = stage_design.missile_interval;
     millisec_played = 0;
     stage = 1;
     
@@ -151,15 +152,15 @@ function proc_user_input() {
 
         o_jet.x += dx;
         o_jet.y += dy;
-
-        if (missile_interval_cnt++==0) {
+        
+        if (missile_interval >= stage_design.missile_interval) {
+            missile_interval -= stage_design.missile_interval;
             var o_missile = new objMissile(o_jet.x, o_jet.y);
             push_to_chain(o_missile, missile_ends);  
-        } else if (missile_interval_cnt >= 10) {
-            missile_interval_cnt = 0;
-        }
+        } 
+        missile_interval += animation_interval;
     } else {
-        missile_interval_cnt = 0;
+        missile_interval = stage_design.missile_interval;
     }
 }
 
