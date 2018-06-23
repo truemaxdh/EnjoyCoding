@@ -31,7 +31,7 @@ var stage;
 ];*/
 var stage_design = {
     max_stage : 10,
-    stage_tick : 50000,
+    stage_tick : 40000,
     missile_interval : 200,
     coin_interval : 4000,
     bullet_interval : 3000,
