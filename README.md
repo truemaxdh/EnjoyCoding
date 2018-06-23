@@ -22,3 +22,8 @@ There are three kinds of coins.
 1. '10': It will be removed if you hit once, with score 10 points.
 2. '50': It will be removed if you hit twice, with score 50 points
 3. '100': It will be removed if you hit three times, with score 100 points
+
+## Bouncing balls on the wall
+A simple CSS animation test
+
+CSS-oriented animation, not Javascript-oriented.
