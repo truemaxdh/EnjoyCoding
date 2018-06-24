@@ -32,7 +32,7 @@ var stage;
 var stage_design = {
     max_stage : 10,
     stage_tick : 40000,
-    missile_interval : 200,
+    missile_interval : 400,
     coin_interval : 4000,
     bullet_interval : 3000,
     coin_types : [[0], [0], [1], [1], [2], [2], [0, 1, 2], [0, 1, 2], [0, 1, 2], [0, 1, 2]],
@@ -123,9 +123,8 @@ function gameOver() {
 function tick(cur_time) {
     animation_interval = cur_time - (last_animation_time==0 ? cur_time : last_animation_time);
     last_animation_time = cur_time;
-    millisec_played += animation_interval;
     
-    if (!effect_flag) {
+    if (!pause && !effect_flag) {
         upcoming_obj();
     }
     render();
@@ -133,13 +132,14 @@ function tick(cur_time) {
         gameOver();
     } else {
         proc_user_input();
-        if (!effect_flag) {
+        if (!pause && !effect_flag) {
             collision_check();
         }
     }
     
     if (!pause) {
-      requestAnimationFrame(tick);
+        millisec_played += animation_interval;
+        requestAnimationFrame(tick);
     }
 }
 
