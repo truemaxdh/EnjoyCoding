@@ -203,7 +203,9 @@ function collision_check() {
     o_missile = missile_ends[0].next;
     while(o_missile.next != null) {
         var o_coin = collision_obj_grp(o_missile, coin_ends);
-        console.log(o_coin.durability);
+        try {
+            console.log(o_coin.durability);
+        } catch(err) {}
         if (o_coin != null && --o_coin.durability <= 0) {
             remove_from_chain(o_coin, coin_ends);
             remove_from_chain(o_missile, missile_ends);
