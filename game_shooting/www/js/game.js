@@ -91,7 +91,8 @@ function togglePause() {
     }*/
     pause = !pause;
     if (!pause) {
-      requestAnimationFrame(tick);
+        last_animation_time = 0;
+        requestAnimationFrame(tick);
     }
 }
 
@@ -124,7 +125,7 @@ function tick(cur_time) {
     animation_interval = cur_time - (last_animation_time==0 ? cur_time : last_animation_time);
     last_animation_time = cur_time;
     
-    if (!pause && !effect_flag) {
+    if (!effect_flag) {
         upcoming_obj();
     }
     render();
@@ -132,13 +133,12 @@ function tick(cur_time) {
         gameOver();
     } else {
         proc_user_input();
-        if (!pause && !effect_flag) {
+        if (!effect_flag) {
             collision_check();
         }
     }
     
     if (!pause) {
-        millisec_played += animation_interval;
         requestAnimationFrame(tick);
     }
 }
