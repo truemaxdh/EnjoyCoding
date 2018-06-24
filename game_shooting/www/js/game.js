@@ -204,13 +204,15 @@ function collision_check() {
     o_missile = missile_ends[0].next;
     while(o_missile.next != null) {
         var o_coin = collision_obj_grp(o_missile, coin_ends);
-        if (o_coin != null && --o_coin.durability <= 0) {
-            remove_from_chain(o_coin, coin_ends);
+        if (o_coin != null) {
             remove_from_chain(o_missile, missile_ends);
-            score += o_coin.coin_num;
-            try {
-                chkAndUnlockAchievement(score);
-            } catch(err) {}
+            if (--o_coin.durability <= 0) {
+                remove_from_chain(o_coin, coin_ends);
+                score += o_coin.coin_num;
+                try {
+                    chkAndUnlockAchievement(score);
+                } catch(err) {}
+            }
         }
         o_missile = o_missile.next;
     }
