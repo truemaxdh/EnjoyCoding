@@ -32,7 +32,7 @@ var stage;
 var stage_design = {
     max_stage : 10,
     stage_tick : 40000,
-    missile_interval : 400,
+    missile_interval : 200,
     coin_interval : 4000,
     bullet_interval : 3000,
     coin_types : [[0], [0], [1], [1], [2], [2], [0, 1, 2], [0, 1, 2], [0, 1, 2], [0, 1, 2]],
@@ -203,9 +203,6 @@ function collision_check() {
     o_missile = missile_ends[0].next;
     while(o_missile.next != null) {
         var o_coin = collision_obj_grp(o_missile, coin_ends);
-        try {
-            console.log(o_coin.durability);
-        } catch(err) {}
         if (o_coin != null && --o_coin.durability <= 0) {
             remove_from_chain(o_coin, coin_ends);
             remove_from_chain(o_missile, missile_ends);
