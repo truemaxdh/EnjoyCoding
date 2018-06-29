@@ -7,11 +7,39 @@
     <meta name="description" content="Coding is fun, App list, Crayon pentix, Tropical Flight" />
     <style>
       img {
-        width : 100px;
+        width : 120px;
+      }
+      .header {
+        width : 100%;
+        height : 50px;
+      }
+      /* Safari 4.0 - 8.0 */
+      @-webkit-keyframes rot {
+        0%   {-webkit-transform: rotate(0deg); /* Safari 3-8 */}
+        25%  {-webkit-transform: rotate(90deg); /* Safari 3-8 */}
+        50%  {-webkit-transform: rotate(180deg); /* Safari 3-8 */}
+        75%  {-webkit-transform: rotate(270deg); /* Safari 3-8 */}
+        100% {-webkit-transform: rotate(0deg); /* Safari 3-8 */}
+      }
+
+      /* Standard syntax */
+      @keyframes rot {
+        0%   {transform: rotate(0deg); /* Safari 3-8 */}
+        25%  {transform: rotate(90deg); /* Safari 3-8 */}
+        50%  {transform: rotate(180deg); /* Safari 3-8 */}
+        75%  {transform: rotate(270deg); /* Safari 3-8 */}
+        100% {transform: rotate(0deg); /* Safari 3-8 */}
+      }
+      .body {
+        width : 100%;
+        height : 100%;
+        animation-name: rot;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
       }
       .obj {
         position: absolute;
-        width: 25%;
+        width: 150px;
         height: 50%;
         left: 50%;
         border: 1px solid black;
@@ -44,25 +72,30 @@
   </head>
 
   <body>
-    <div id="obj1" class="obj">
-      <img src="https://truemaxdh.github.io/CodingIsFun/game_pentix/512x512.png">
-      <br>
-      <h3>Crayon Pentix</h3>
+    <div class="header">
+      <h1>CodingIsFun : Games</h1>
     </div>
-    <div id="obj2" class="obj">
-      <img src="https://truemaxdh.github.io/CodingIsFun/game_shooting/512x512.png">
-      <br>
-      <h3>Sky Miner</h3>
-    </div>
-    <div id="obj3" class="obj">
-      <img src="https://truemaxdh.github.io/CodingIsFun/game_pentix/512x512.png">
-      <br>
-      <h3>JumpingCar</h3>
-    </div>
-    <div id="obj4" class="obj">
-      <img src="https://truemaxdh.github.io/CodingIsFun/game_pentix/512x512.png">
-      <br>
-      <h3>BouncingBalls</h3>
+    <div class="body">
+      <div id="obj1" class="obj">
+        <img src="https://truemaxdh.github.io/CodingIsFun/game_pentix/512x512.png">
+        <br>
+        <h3>Crayon Pentix</h3>
+      </div>
+      <div id="obj2" class="obj">
+        <img src="https://truemaxdh.github.io/CodingIsFun/game_shooting/512x512.png">
+        <br>
+        <h3>Sky Miner</h3>
+      </div>
+      <div id="obj3" class="obj">
+        <img src="https://truemaxdh.github.io/CodingIsFun/game_pentix/512x512.png">
+        <br>
+        <h3>JumpingCar</h3>
+      </div>
+      <div id="obj4" class="obj">
+        <img src="https://truemaxdh.github.io/CodingIsFun/game_pentix/512x512.png">
+        <br>
+        <h3>BouncingBalls</h3>
+      </div>
     </div>
   </body>
 </html>
