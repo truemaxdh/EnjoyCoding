@@ -4,183 +4,71 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     <meta name="description" content="Coding is fun, App list, Crayon pentix, Tropical Flight" />
-
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <link rel="stylesheet" type="text/css" href="stylesheets/card.css">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Global Site Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-81183833-2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-81183833-2');
-    </script>
-	  
-    <!-- Google analytics -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-81183833-2', 'auto');
-      ga('send', 'pageview');
-    </script>
-
-    <title>CodingIsFun by truemaxdh</title>
-    <script>
-      function openPopup(url) {
-        window.open(url, 'popup', 'width=450, height=800');
-      }
-      function openPopupHor(url) {
-        window.open(url, 'popup', 'width=800, height=450');
-      }
-    </script>
-    
-    <!-- simpleGraph.js -->
-    <script src="https://truemaxdh.github.io/simpleGraph.js/simpleGraph.js"></script>
+		<style>
+			.drawbox {
+				position: relative;
+				height: 600px;
+				width: 600px;
+				padding: 10px;
+				border: 1px solid black;
+			}
+			.drawbox img {
+				width : 100px;
+			}
+			.obj {
+				position: absolute;
+    		border: 1px solid black;
+    		-ms-transform-origin: 50% 150%; /* IE 9 */
+    		-webkit-transform-origin: 50% 150%; /* Safari 3-8 */
+    		transform-origin: 50% 10%;
+			}
+			#obj1 {
+				-ms-transform: rotate(0deg); /* IE 9 */
+    		-webkit-transform: rotate(0deg); /* Safari 3-8 */
+    		transform: rotate(0deg);
+			}
+			#obj2 {
+				-ms-transform: rotate(90deg); /* IE 9 */
+    		-webkit-transform: rotate(90deg); /* Safari 3-8 */
+    		transform: rotate(90deg);
+			}			
+			#obj3 {
+				-ms-transform: rotate(180deg); /* IE 9 */
+    		-webkit-transform: rotate(180deg); /* Safari 3-8 */
+    		transform: rotate(180deg);
+			}
+			#obj4 {
+				-ms-transform: rotate(27deg); /* IE 9 */
+    		-webkit-transform: rotate(27deg); /* Safari 3-8 */
+    		transform: rotate(27deg);
+			}
+			
+		</style>
   </head>
 
   <body>
-    <header>
-      <div class="inner">
-        <h1>CodingIsFun</h1>
-        <h2>coding is fun</h2>
-        <a href="https://github.com/truemaxdh" class="button"><small>Follow me on</small> GitHub</a>
-      </div>
-    </header>
-
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h2>App List</h2>
-          <ul>
-            <li>
-              <div class="card">
-                <img src="https://truemaxdh.github.io/CodingIsFun/game_pentix/512x512.png" align="left" class="img">
-                <h3>Crayon Pentix</h3>
-                <hr>
-                <p>Falling blocks game. A block is called Pentomino, consists of 5 tiles.</p>
-                <p class="detail">
-                  Pentomino means 5 tiled block.<br>
-                  Pentix is a falling pentomino game.<br> 
-                  You should manipulate falling pentominoes to make lines without blank.<br>
-                  A completed line without blank is removed and the score is added.
-                  <a href="#" class="cta" onclick="openPopup('https://truemaxdh.github.io/CodingIsFun/game_pentix/www/');">Play</a>
-                  <a href="https://play.google.com/store/apps/details?id=com.pgmaru.SimplePentix" target="_appStore" class="cta">AppStore</a>
-                </p>
-              </div>
-            </li>
-            <li>
-              <div class="card">
-                <img src="https://truemaxdh.github.io/CodingIsFun/game_shooting/512x512.png" align="left" class="img">
-                <h3>Sky Miner</h3>
-                <hr>
-                <p>A flight shooting game with simple rule.</p>
-                <p class="detail">
-                  Adjusted only main points of rules for flight shooting game,<br>
-                  to enjoy simple but fun.<br>
-
-                  Flying on tropical sky,<br>
-                  Avoiding bomb,<br>
-                  Shoot coins and get score.<br>
-                  But not to crash directly to coins.<br>
-
-                  Coins are 3 types. <br>
-                  1. '10' : gives score 10. eliminated by one shoot.<br>
-                  2. '50' : gives score 50. eliminated by two shoot.<br>
-                  3. '100' : gives score 100. eliminated by three shoot.<br>
-                  <a href="#" class="cta" onclick="openPopup('https://truemaxdh.github.io/CodingIsFun/game_shooting/www/');">Play</a>
-                  <a href="https://play.google.com/store/apps/details?id=com.pgmaru.ShootingDream" target="_appStore" class="cta">AppStore</a>
-                </p>
-              </div>
-            </li>
-            <li>
-	      <div class="card">
-		<div class="img">Jumping<br>Car</div>
-		<h3>Jumping Car</h3>
-		<hr>
-		<p>Simple game to avoid obstacles through jumping</p>
-		<p class="detail">CSS-oriented game, not Javascript-oriented. Currently under development.<br>
-		  <br>
-		  <a href="#" class="cta" onclick="openPopupHor('https://truemaxdh.github.io/CodingIsFun/game_hscroll_car/');">Play</a>
-		</p>
-	      </div>
-	    </li>
-	  
-	    <li>
-	      <div class="card">
-		<div class="img">Bouncing balls on the wall</div>
-		<h3>Bouncing balls on the wall</h3>
-		<hr>
-		<p>A simple CSS animation test</p>
-		<p class="detail">CSS-oriented animation, not Javascript-oriented<br>
-		  <br>
-		  <br>
-		  <a href="#" class="cta" 
-		     onclick="window.open('https://truemaxdh.github.io/CodingIsFun/lab_straight-bouncing_balls/', 'popup', 'width=950, height=1000');">View</a>
-		</p>
-	      </div>
-	    </li>
-	  </ul>
-          <h2>Javascript Utility</h2>
-          <ul>
-            <li>
-              <div class="card">
-                <canvas id="graph1" class="img"></canvas>
-                <p id='tblBarGraph'></p>
-                <script>
-                  var gr = new simpleGraph();
-                  var vals = [	55, 21, 3, 1, 1, 1, ];
-                  gr.drawPieGraph("graph1", vals);
-                </script>
-                <h3>SimpleGraph.JS</h3>                
-                <hr>
-                <p>A Javascript Graph Utility</p>
-                <p class="detail">
-                  Line Graph, Pie Graph, etc.<br>
-		  <br>
-		  <br>
-		  <br>
-                  <a href="#" class="cta" onclick="window.open('https://truemaxdh.github.io/simpleGraph.js/');">Demo</a>
-                  <a href="#" class="cta" onclick="window.open('https://github.com/truemaxdh/simpleGraph.js');">GitHub</a>
-                </p>
-              </div>
-            </li>
-          </ul>
-          <h2>About</h2>
-          <p> 
-            The reason I like coding is because coding is fun.<br>
-            This site was created to show the results of enjoying the coding.
-          </p>
-          <h2>Contact</h2>
-          <p>Email : <a href="truemaxdh@gmail.com">truemaxdh@gmail.com</a></p>
-        </section>
-
-        <aside id="sidebar">
-	  <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-    	  <!-- Google Adsense -->
-    	  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    	  <!-- AutoResponse -->
-    	  <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-7307479428475282"
-            data-ad-slot="8718898251"
-            data-ad-format="auto"></ins>
-    	  <script>
-      	  (adsbygoogle = window.adsbygoogle || []).push({});
-    	  </script>
-        </aside>
-      </div>
+		<div class="drawbox">
+			<div id="obj1" class="obj">
+				<img src="https://truemaxdh.github.io/CodingIsFun/game_pentix/512x512.png">
+				<br>
+				<h3>Crayon Pentix</h3>
+			</div>
+			<div id="obj2" class="obj">
+				<img src="https://truemaxdh.github.io/CodingIsFun/game_shooting/512x512.png">
+				<br>
+				<h3>Sky Miner</h3>
+			</div>
+			<div id="obj3" class="obj">
+				<img src="https://truemaxdh.github.io/CodingIsFun/game_pentix/512x512.png">
+				<br>
+				<h3>JumpingCar</h3>
+			</div>
+			<div id="obj4" class="obj">
+				<img src="https://truemaxdh.github.io/CodingIsFun/game_pentix/512x512.png">
+				<br>
+				<h3>BouncingBalls</h3>
+			</div>
     </div>  
   </body>
 </html>
