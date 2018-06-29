@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Coding is fun, App list, Crayon pentix, Tropical Flight" />
     <style>
+      body {
+        padding : 0px;
+      }
       img {
         width : 120px;
       }
       .header {
         width : 100%;
-        height : 50px;
+        height : 10%;
       }
       /* Safari 4.0 - 8.0 */
       @-webkit-keyframes rot {
@@ -19,7 +22,7 @@
         25%  {-webkit-transform: rotate(90deg); /* Safari 3-8 */}
         50%  {-webkit-transform: rotate(180deg); /* Safari 3-8 */}
         75%  {-webkit-transform: rotate(270deg); /* Safari 3-8 */}
-        100% {-webkit-transform: rotate(0deg); /* Safari 3-8 */}
+        100% {-webkit-transform: rotate(360deg); /* Safari 3-8 */}
       }
 
       /* Standard syntax */
@@ -28,12 +31,14 @@
         25%  {transform: rotate(90deg); /* Safari 3-8 */}
         50%  {transform: rotate(180deg); /* Safari 3-8 */}
         75%  {transform: rotate(270deg); /* Safari 3-8 */}
-        100% {transform: rotate(0deg); /* Safari 3-8 */}
+        100% {transform: rotate(360deg); /* Safari 3-8 */}
       }
       .body {
+        position : absolute;
         border: 1px solid black;
         width : 100%;
-        height : 100%;
+        height : 90%;
+        margin-top: 10%;
         -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
         -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
         -webkit-animation-iteration-count: infinite; /* Safari 4.0 - 8.0 */
@@ -42,9 +47,10 @@
         animation-iteration-count: infinite;
       }
       .obj {
-        position: relative;
+        position: fixed;
         width: 150px;
-        height: 50%;
+        height: 40%;
+        top: 10%;
         left: 50%;
         border: 1px solid black;
         -ms-transform-origin: 50% 100%;
