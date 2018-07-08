@@ -1,383 +1,70 @@
-<!DOCTYPE HTML>
-<html>
+﻿<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"><!--html lang="ko" xmlns:fb="http://www.facebook.com/2008/fbml"-->
   <head>
-    <title>Game - Magic Ball</title>
-	<!--meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi" /-->
-	<script type="text/javascript" src="js/StageDesign.js"></script>
-	<script type="text/javascript" src="js/Sound.js"></script>
-	<script type="text/javascript">
-	<!--
-	//window.addEventListener('load', function() {
-	//		setTimeout(scrollTo, 0, 0, 1);
-	//	}, false);
-		var canvas;
-		var body;
-		var w,h;
-		var stage=1;
-		var scale=1;
-		
-		function init() {
-			canvas = document.getElementById('canvas');
-			body=document.getElementById('body');
-			w=canvas.width;
-			h=canvas.height;
-			initGame();
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="Keywords" content="게임,아이디어,기능성 게임,게임스토리,게임개발,좋은게임,Serious Game,Good Game,Game,idea,story"/> 
+	<meta name="Description" content="게임이 자라는 나무입니다."/>
+	<meta name="author" content="최대환"/>
+    <title>Magic Ball</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/StyleCommon.css" />
+    <style type="text/css">
+		button { 
+			font:bold 28pt Courier;
+			border-color:black;
+			color:#009900;
+			background-color:#FFFF00;
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			text-shadow:2px 2px 4px #000;
 		}
-		
-		/*
-			변수 설정
-		*/
-		var divideCnt=0;
-
-		// Main Character
-		var mainChrX;
-		var mainChrY;
-		var mainChrIncX=0
-		var mainChrIncY=0;
-
-		var imageObj = new Image();
-
-		var ballImgs=[];
-		ballImgs[0] = new Image();
-		ballImgs[1] = new Image();
-		ballImgs[2] = new Image();
-
-		ballImgs[0].src="magicBall.png";
-		ballImgs[1].src="blockShape.png";
-		ballImgs[2].src="diamond.png";
-
-		// Power Shield Timer
-		var powerShield = 0;
-
-		// Score
-		var score=0;
-
-		// Remained
-		var remained=3;
-
-		// Timer Handler
-		var timer;
-
-		// 일시정지 사유
-		var stopMode="";
-
-		// 터치 이벤트 버퍼
-		var touches=[];
-
-		// 터치 이벤트 처리중인지 여부
-		var touchProcessing=false;
-
-		var scaledMainChrY;
-		/*
-
-			함수
-
-		*/
-		// Initialize
-		function initGame(){
-			imageObj.src="mainChr_tran.png";
-			if (sessionStorage.carStyle=="1")
-			{
-				imageObj.src="mainChr_tran_purple.png";
-			}
-			else if (sessionStorage.carStyle=="2")
-			{
-				imageObj.src="mainChr_tran_red.png";
-			}
-			imageObj.onload = function() {
-        mainChrX=w/2;
-        mainChrY=h-imageObj.height;
-        scaledMainChrY=scale*mainChrY;
-			}
-			body.addEventListener('keydown', ev_keydown, false);
-			body.addEventListener('keyup', ev_keyup, false);	
-
-			//canvas.addEventListener('touchstart', leftright_touchstart, false);
-			canvas.addEventListener('touchmove', leftright_touchmove, false);
-			//canvas.addEventListener('touchend', leftright_touchend, false);
-
-			var ctx = canvas.getContext('2d');
-
-			initFontNLaserStyle();
-			iStage(stage);
+		.leftMenu {
+			font:bold 14pt Courier;
+			color:#AA5555;
+			text-shadow:1px 1px 3px #000;
 		}
-
-		function initFontNLaserStyle() {
-			var ctx = canvas.getContext('2d');
-
-			// Laser
-			var gradient = ctx.createLinearGradient(0, 0, 400, 400);
-			gradient.addColorStop(0, "rgb(255, 0, 0)");
-			gradient.addColorStop(1, "rgb(255, 255, 0)");
-			ctx.fillStyle = gradient;
-
-			// Font
-			ctx.font = "bold 30px sans-serif";
-
-			// Set power shield to 0
-			powerShield=0;
-		}
-
-		function ev_mousedown(ev) {
-			if (stopMode=="GameOver")
-			{
-				stopMode="";
-				location.href="HighScore.html?user_score="+score;
-			}
-			else if (stopMode=="StageCleared")
-			{
-				stopMode="";
-				stage++;
-				initFontNLaserStyle();
-				iStage(stage);
-			}
-		}
-
-		// Keyboard Event
-		var keyPressed=false;
-		function ev_keydown(event){ // keyboard alerts
-			switch (event.keyCode) {
-				case 37: // <-
-					keyPressed=true;
-					mainChrIncX=-6;
-					break;
-				case 38: // Up
-					keyPressed=true;
-					mainChrIncY=-3;
-					break;
-				case 39: // ->
-					keyPressed=true;
-					mainChrIncX=6;
-					break;
-				case 40: // Down
-					keyPressed=true;
-					mainChrIncY=3;
-					break;
-				case 32: // space
-					missileX=mainChrX+imageObj.width/2;
-					missileY=mainChrY;
-					break;
-			}
-		}
-
-		function ev_keyup(event){ // keyboard alerts
-			switch (event.keyCode) {
-				case 37: // <-
-				case 38: // Up
-				case 39: // ->
-				case 40: // Down
-					//mainChrIncX=0;
-					keyPressed=false;
-					break;
-				case 32: // space
-					if (stopMode!="")
-					{
-						if (stopMode=="GameOver")
-						{
-							stopMode="";
-							sleep(500);
-							location.href="HighScore.html?user_score="+score;
-						}
-						else if (stopMode=="StageCleared")
-						{
-							stopMode="";
-							sleep(500);
-							stage++;
-							initFontNLaserStyle();
-							iStage(stage);
-						}
-						
-					}
-					break;
-			}
-		}
-
-		function leftright_touchmove(ev)
-		{
-			if (touchProcessing)
-			{
-				return;
-			}
-			if (stopMode=="")
-			{
-				ev.preventDefault();
-				touches = ev.touches;
-			} 
-			else
-			{			
-				if (stopMode=="GameOver")
-				{
-					stopMode="";
-					sleep(500);
-					location.href="HighScore.html?user_score="+score;
-				}
-				else if (stopMode=="StageCleared")
-				{
-					stopMode="";
-					sleep(500);
-					stage++;
-					initFontNLaserStyle();
-					iStage(stage);
-				}
-				
-			}
-		}
-
-		// Timer Tick
-		function draw(){
-			if (canvas.getContext){
-				// 터치 이벤트 처리
-				touchProcessing=true;
-				for (var i=0;i < touches.length;i++)
-				{
-
-					var touch = touches[i];
-					if(touch.pageX>(mainChrX*scale)) {
-						mainChrIncX=5;		
-					}
-					else {
-						mainChrIncX=-5;		
-					}
-					if(touch.pageY < scaledMainChrY)
-					{
-						missileX=mainChrX;
-						missileY=mainChrY;
-					}
-				}
-				touches=[];
-				touchProcessing=false;
-
-				var ctx = canvas.getContext('2d');
-
-				//clears canvas
-				ctx.clearRect(0,0,w,h); 
-
-				// Draw Score
-				//var dispScore = document.getElementById('score');
-				//dispScore.value=score;
-				ctx.fillText("Stage: "+stage, 0, 30);
-				ctx.fillText("Remained: "+remained, 260, 30);
-				ctx.fillText("Score: "+score, 520, 30);
-								
-
-				// Draw mainCharacter
-				var k=Math.floor(scroll);
-				if (keyPressed==false) {
-					if (mainChrIncX > 0.1)
-						mainChrIncX-=0.2;
-					else if (mainChrIncX < -0.1)
-						mainChrIncX+=0.2;
-					else
-						mainChrIncX=0;
-					if (mainChrIncY > 0.1)
-						mainChrIncY-=0.2;
-					else if (mainChrIncY < -0.1)
-						mainChrIncY+=0.2;
-					else
-						mainChrIncY=0;
-				}
-				var oldMainChrX=mainChrX;
-				var oldMainChrY=mainChrY;
-				mainChrX += mainChrIncX;
-				mainChrY += mainChrIncY;
-					
-				var xOnMapL=Math.floor(mainChrX/20);
-				var xOnMapH=Math.floor((mainChrX+imageObj.width)/20);
-				var yOnMapL=k-Math.floor(mainChrY/20);
-				var yOnMapH=k-Math.floor((mainChrY+imageObj.height)/20);
-				ctx.fillText("Pos: ("+xOnMapL+","+yOnMapL+"),("+xOnMapH+","+yOnMapH+")",300, 50);
-				if (blLeft[yOnMapL]>=xOnMapL || (blLeft[yOnMapL]+roadWidth)<xOnMapH || blLeft[yOnMapH]>=xOnMapL || (blLeft[yOnMapH]+roadWidth)<xOnMapH)
-				{
-				
-					mainChrX=oldMainChrX;
-					mainChrY=oldMainChrY;
-					xOnMapL=Math.floor(mainChrX/20);
-					xOnMapH=Math.floor((mainChrX+imageObj.width)/20);
-					yOnMapL=k-Math.floor(mainChrY/20);
-					yOnMapH=k-Math.floor((mainChrY+imageObj.height)/20);
-				
-				}
-				ctx.drawImage(imageObj, mainChrX, mainChrY);
-
-				// Draw Road
-				for (var i=k-24;i<=k;i++)
-				{
-					var j=k-i;
-					ctx.drawImage(ballImgs[1], blLeft[i]*20,j*20);
-					ctx.drawImage(ballImgs[1], (blLeft[i]+roadWidth)*20,j*20);
-					if (objPos[i]>0)
-						ctx.drawImage(ballImgs[0], objPos[i]*20,j*20);
-					if (diaPos[i]>0)
-						ctx.drawImage(ballImgs[2], diaPos[i]*20,j*20);
-				}
-				// Check Collision with Main Character				
-				if (yOnMapL>0)
-				{
-					if (objPos[yOnMapL]==xOnMapL || objPos[yOnMapL]==xOnMapH || objPos[yOnMapH]==xOnMapL || objPos[yOnMapH]==xOnMapH)
-					{
-						playSound(2);
-						remained--;
-						if (remained<0)
-						{
-							// GameOver
-							clearInterval(timer);
-							ctx.font = "bold 60px sans-serif";
-							ctx.rotate(-0.40);
-							ctx.fillText("Game Over!!", 110, 380);
-							
-							stopMode="GameOver";
-						}
-						else
-						{
-							mainChrX=w/2;
-							clearInterval(timer);
-							sleep(500);
-							timer=setInterval(draw,20);
-						}
-					}
-					if (diaPos[yOnMapL]==xOnMapL || diaPos[yOnMapL]==xOnMapH || diaPos[yOnMapH]==xOnMapL || diaPos[yOnMapH]==xOnMapH)
-					{
-						playSound(1);	
-						score+=10;
-						diaPos[yOnMapL]=-1;
-						diaPos[yOnMapH]=-1;
-					}
-				}
-				if (k>=1000)
-				{
-					clearInterval(timer);
-					ctx.font = "bold 60px sans-serif";
-					ctx.rotate(-0.35);
-					ctx.fillText("Stage Cleared!!", 90, 380);
-					ctx.rotate(0.35);		
-					stopMode="StageCleared";
-					//canvas.addEventListener('mousedown', ev_mousedown, false);
-				}
-				scroll+=0.15;
-			}
-		}
-
-		function sleep(ms)
-		{
-			var dt = new Date();
-			dt.setTime(dt.getTime() + ms);
-			while (new Date().getTime() < dt.getTime());
-		}
-	-->
-	</script>
+    </style>
   </head>
-  <body id="body">
-	<table width="800" height="520" align="center"><!-- background="intro.png"-->
+  <body background="../images/body.jpg">
+<!--?php
+require './Top.php';
+
+if ($user): ?-->
+	
+<!--?php 
+endif;
+require './Bottom.php';
+?-->
+
+	<table width="800" align="center">
 		<tr>
 			<td align="center">
-				<canvas id="canvas" width="780" height="500"></canvas>
+				<script type="text/javascript">var kauli_yad_count = typeof(kauli_yad_count) == 'undefined' ? 1 : kauli_yad_count + 1;(function(d){ d.write('<span id="kauli_yad_' + kauli_yad_count + '" style="width:728px; height:90px; display:inline-block"><!--24579--><' + '/span>'); var s = d.createElement('script'); var h = d.getElementsByTagName('head')[0]; s.defer = 'defer'; s.async = 'async'; s.src = 'http://js.kau.li/yad.js'; h.insertBefore(s, h.firstChild);})(document);</script>
 			</td>
 		</tr>
 	</table>
-	<script type="text/javascript">
-	<!--
-		init();
-	-->
-    </script>
+	<table width="800" height="520" align="center" background="intro.png">
+		<tr>
+			<td align="center">
+				<h2>Magic Ball</h2>
+				<h5>Some strange balls have appeared to your village.</h5>
+				<h5>Those balls have magic power to create an air of anxiety.</h5>
+				<h5>Some scientist researched and developed laser gun</h5>
+				<h5>which can get rid of the magic balls.</h5>
+				<h5>You should clean all the balls with the gun</h5>
+				<h5>and save your village!</h5>
+				
+				<a href="Menu.html">
+				<!--img src="intro.png"/-->
+				<button>Enter</button>
+				</a> 
+			</td>
+		</tr>
+		<tr valign="bottom">
+			<td align="center">
+				<a href="/index.php" class="leftMenu" target="_blank">Home</a>&nbsp;&nbsp;
+				<a href="/1_3_Contact.html" class="leftMenu" target="_blank">Contact</a>				
+			</td>
+		</tr>
+	</table>
   </body>
 </html>

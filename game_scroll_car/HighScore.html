@@ -1,0 +1,118 @@
+<?php
+include_once('score_manager.php');
+
+$ranking=0+$_GET['ranking'];
+$user_name=$_GET['user_name'];
+$user_score=0+$_GET['user_score'];
+
+if ($ranking > 0)
+{
+	push_scores($ranking,$user_name,$user_score);
+	$user_score=0;
+}
+?>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"><!--html lang="ko" xmlns:fb="http://www.facebook.com/2008/fbml"-->
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="Keywords" content="게임,아이디어,기능성 게임,게임스토리,게임개발,좋은게임,Serious Game,Good Game,Game,idea,story"/> 
+	<meta name="Description" content="게임이 자라는 나무입니다."/>
+	<meta name="author" content="최대환"/>
+    <title>Mysterious Ball</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/StyleCommon.css" />
+    <style type="text/css">
+		.button { 
+			font:bold 25pt Courier;
+			border-color:black;
+			color:#009900;
+			background-color:#FFFF00;
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			text-shadow:2px 2px 4px #000;
+		}
+		.score_text {
+			font:bold 15pt Courier;
+			color:#009900;
+			text-shadow:2px 2px 2px #FFFF00;	
+		}
+    </style>
+	<script type="text/javascript">
+	<!--
+		function submit_score()
+		{
+			location.href=location.href+"&ranking="+document.getElementById('ranking').value+"&user_name="+document.getElementById('user_name').value;
+		}
+	-->
+	</script>
+  </head>
+  <body background="../images/body.jpg">
+<!--?php
+require './Top.php';
+
+if ($user): ?-->
+	
+<!--?php 
+endif;
+require './Bottom.php';
+?-->
+
+<table width="800" align="center">
+<tr><td align="center">
+<script type="text/javascript">var kauli_yad_count = typeof(kauli_yad_count) == 'undefined' ? 1 : kauli_yad_count + 1;(function(d){ d.write('<span id="kauli_yad_' + kauli_yad_count + '" style="width:728px; height:90px; display:inline-block"><!--24579--><' + '/span>'); var s = d.createElement('script'); var h = d.getElementsByTagName('head')[0]; s.defer = 'defer'; s.async = 'async'; s.src = 'http://js.kau.li/yad.js'; h.insertBefore(s, h.firstChild);})(document);</script>
+</td></tr></table>
+<table width="800" height="520" align="center" background="intro.png">
+<tr>
+<td align="center" colspan="4">
+<h3>Magic Ball</h3>
+</td>
+</tr>
+<?php
+$b_ranked=0;
+for ($i=0;$i<count($lines);$i++)
+{
+	list($user_name,$score)=explode("<delimiter/>",$lines[$i]);
+?>
+<tr class="score_text">
+	<td width="30" />
+<?php
+	if ($user_score==0 || $b_ranked==1 || $user_score < $score)
+	{
+?>
+	<td align="left"><?=($i+1).". ".$user_name ?></td>
+	<td align="right"><?=$score?></td>
+<?php
+	}
+	else
+	{
+		for($j=count($lines)-1;$j>$i;$j--)
+		{
+			$lines[$j]=$lines[$j-1];
+		}
+		$b_ranked=1;
+?>
+	<td align="left">
+		<?=($i+1).". " ?><input id="user_name" class="score_text" value="Enter Your name" />
+		<input type="hidden" id="ranking" value="<?=($i+1)?>" />
+		<input type="button" id="submit" class="score_text" value="submit" 
+			onclick="submit_score()" />
+	</td>
+	<td align="right"><?=$user_score?></td>
+<?php
+	}
+?>
+	<td width="35" />
+</tr>
+<?php
+}
+?>
+<tr>
+<td align="center" colspan="4">
+<a href="Menu.html">
+<!--img src="intro.png"/-->
+<button class="button">Menu!!</button>
+</a> 
+</td>
+</tr>
+</table>
+  </body>
+</html>
