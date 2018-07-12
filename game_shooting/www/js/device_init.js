@@ -52,7 +52,7 @@ function onLoad() {
     pageChange('menu');
 }
 
-if (location.href.indexOf('CodingIsFun') < 0 &&
+if (location.href.indexOf('truemaxdh.github.io') < 0 &&
     location.href.indexOf('localhost') < 0) {
     isApp = true;
     document.addEventListener("deviceready", onDeviceReady, false);
