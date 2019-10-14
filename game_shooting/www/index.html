@@ -49,49 +49,48 @@
     </head>
     <body>
         <div id = "intro" class="menu border_round">
-			<div class = "text">
-				<h1>Sky Miner</h1>
-				<h3>Welcome!!<br>Wait for a while!!</h3>
-			</div>
-		</div>
-		<div id = "menu" class="menu border_round">
-			<div class = "text">
-				<h1>Sky Miner</h1>
-				<a href="#" onclick="pageChange('game');">Start</a>
+            <div class = "text">
+                <h1>Sky Miner</h1>
+                <h3>Welcome!!<br>Wait for a while!!</h3>
+            </div>
+        </div>
+        <div id = "menu" class="menu border_round">
+            <div class = "text">
+                <h1>Sky Miner</h1>
+                <a href="#" onclick="pageChange('game');">Start</a>
                 <a href="#" onclick="ShowAchievements();">Show Achievements</a>
-				<a href="#" onclick="ShowHighScores();">Show High Scores</a>
-			</div>
-		</div>
+                <a href="#" onclick="ShowHighScores();">Show High Scores</a>
+            </div>
+        </div>
         <div id = "game">
             <canvas id="bg_canvas" width="540" height="2700"></canvas>
             <canvas id="game_canvas" width="540" height="900"></canvas>
         </div>    
         <!-- The overlay -->
         <div id="user_result" class="overlay">
-
             <!-- Button to close the overlay navigation -->
             <a href="javascript:void(0)" class="closebtn" onclick="CloseUserResult()">&times;</a>
 
             <!-- Overlay content -->
-			<div class="overlay-content">
-				<img id="user_img" />
-				<div class="text">You Scored <div id="user_score"></div></div>
-				<a href="#" onclick="ShowAchievements();">Show Achievements</a>
-				<a href="#" onclick="ShowHighScores();">Show High Scores</a>
-			</div>
-        </div>
-	<div style="position:fixed;width:100%;bottom:-50px;">
-		<!-- Google Adsense -->
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-		<!-- AutoResponse -->
-		<ins class="adsbygoogle"
-		  style="display:block"
-		  data-ad-client="ca-pub-7307479428475282"
-		  data-ad-slot="8718898251"
-		  data-ad-format="auto"></ins>
-		<script>
-		  (adsbygoogle = window.adsbygoogle || []).push({});
-		</script>
+	    <div class="overlay-content">
+		<img id="user_img" />
+		<div class="text">You Scored <div id="user_score"></div></div>
+		<a href="#" onclick="ShowAchievements();">Show Achievements</a>
+		<a href="#" onclick="ShowHighScores();">Show High Scores</a>
+	   </div>
+            <div style="position:fixed;width:100%;bottom:-50px;">
+                <!-- Google Adsense -->
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- AutoResponse -->
+                <ins class="adsbygoogle"
+                  style="display:block"
+                  data-ad-client="ca-pub-7307479428475282"
+                  data-ad-slot="8718898251"
+                  data-ad-format="auto"></ins>
+                <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
 	    </div>
+        </div>
     </body>
 </html>
