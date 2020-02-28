@@ -71,18 +71,15 @@ function addEvt() {
                 
         user_pressing = true;
         do_rotate = true;
-        e.stopPropagation();
         return false;
     }
 
     document.body.ontouchend = function (e) {
         user_pressing = false;
-        e.stopPropagation();
         return false;
     }
 
     document.body.ontouchmove = function(e) {
-        e.stopPropagation();
         if (e.touches[0].clientY < 40) {
             togglePause();
             return true;
