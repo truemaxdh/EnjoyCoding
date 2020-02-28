@@ -34,60 +34,15 @@
       }
            
     </style>
-    <script>
-      window.onload=function() {
-        var gm = document.getElementById("gameBoard");
-        gm.ontouchstart = function(e) {
-          console.log("gm preventDefault");
-          e.preventDefault();
-        }
-        gm.ontouchend = function(e) {
-          console.log("gm preventDefault");
-          e.preventDefault();
-        }
-        gm.ontouchmove = function(e) {
-          console.log("gm preventDefault");
-          e.preventDefault();
-        }
-        
-        var frm = document.getElementById("gmFrame");
-        frm.ontouchstart = function(e) {
-          console.log("frm preventDefault");
-          e.preventDefault();
-        }
-        frm.ontouchend = function(e) {
-          console.log("frm preventDefault");
-          e.preventDefault();
-        }
-        frm.ontouchmove = function(e) {
-          console.log("frm preventDefault");
-          e.preventDefault();
-        }
-        
-        var abc = document.getElementById("abc");
-        abc.ontouchstart = function(e) {
-          console.log("abc preventDefault");
-          e.preventDefault();
-        }
-        abc.ontouchend = function(e) {
-          console.log("abc preventDefault");
-          e.preventDefault();
-        }
-        abc.ontouchmove = function(e) {
-          console.log("abc preventDefault");
-          e.preventDefault();
-        }
-      }
-    </script>
   </head>
   <body>
     <script>var cookieBread = ">Game>Crayon Pentix";</script>
     <script src="https://truemaxdh.github.io/Include/header.js"></script>
     <div>
-      <div id="gameBoard" style="width:450px;height:800px;padding:0px;float:left;margin-right:20px;">
-        <iframe id="gmFrame" style="border:1px solid black;" src="/EnjoyCoding/game_pentix/www/" width="100%" height="100%"></iframe>
+      <div style="width:450px;height:800px;padding:0px;float:left;margin-right:20px;">
+        <iframe style="border:1px solid black;" src="/EnjoyCoding/game_pentix/www/" width="100%" height="100%"></iframe>
       </div>
-      <div id="abc">
+      <div>
         <center><h1 style="color:#333;">Crayon Pentix</h1></center>
         <h2 style="color:#555;">Crayon Pentix is a Block Drop Game</h2>
         <h3 style="color:#777;">
