@@ -177,7 +177,7 @@ function tick() {
 
 function gameOver() {
     //clearInterval(objInterval);
-    document.getElementById( 'bgm' ).play();
+    document.getElementById( 'bgm' ).pause();
     removeEvt();
     render_gameover();
     if (isApp) {
