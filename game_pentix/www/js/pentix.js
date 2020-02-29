@@ -177,6 +177,7 @@ function tick() {
 
 function gameOver() {
     //clearInterval(objInterval);
+    document.getElementById( 'bgm' ).play();
     removeEvt();
     render_gameover();
     if (isApp) {
@@ -361,6 +362,7 @@ function newGame() {
     // objInterval = setInterval( tick, interval );
     document.getElementById( 'score_num' ).innerHTML = score;
     move_wait_cnt = 0;
+    document.getElementById( 'bgm' ).play();
     setTimeout(tick, interval);
     //render_init();
     //clearInterval(render_interval);
@@ -370,7 +372,9 @@ function newGame() {
 function togglePause() {
     paused = !paused;
     if (!paused) {
+        document.getElementById( 'bgm' ).play();
         tick();
+    } else {
+        document.getElementById( 'bgm' ).pause();
     }
-
 }
