@@ -79,6 +79,7 @@ function newGame() {
     game_init();
     pause = false;
     // objInterval = setInterval(tick, 50);
+    document.getElementById( 'bgm' ).play();
     requestAnimationFrame(tick);
 }
 
@@ -91,8 +92,11 @@ function togglePause() {
     }*/
     pause = !pause;
     if (!pause) {
+        document.getElementById( 'bgm' ).play();
         last_animation_time = 0;
         requestAnimationFrame(tick);
+    } else {
+        document.getElementById( 'bgm' ).pause();
     }
 }
 
@@ -103,7 +107,8 @@ function gameOver() {
         o_jet.game_over();
     } else if (o_game_over.count_down-- == 0) {
         // clearInterval(objInterval);
-        pause = true;
+        document.getElementById( 'bgm' ).pause();
+        pause = true;        
         if (isApp) {
             window.game.submitScore(leaderboardId, score);
             window.game.onSubmitScoreSucceeded = function() {
