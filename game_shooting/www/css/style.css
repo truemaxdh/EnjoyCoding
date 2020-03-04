@@ -75,6 +75,11 @@ body {
     /*border:1px solid #d3d3d3;*/
 }
 
+#game_canvas_landscape {
+    width:90vh;
+    height:54vh;
+}
+
 /* The Overlay (background) */
 .overlay {
     /* Height & width depends on how you want to reveal the overlay (see JS below) */    
