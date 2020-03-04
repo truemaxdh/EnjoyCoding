@@ -47,8 +47,8 @@ function onDeviceReady() {
 
 // Do this when run on web
 function onLoad() {
-    render_init();
-    init_user_input();
+    //render_init();
+    //init_user_input();
     pageChange('menu');
 }
 
