@@ -103,22 +103,8 @@ var canvas;
 			//canvas.addEventListener('touchend', leftright_touchend, false);
 
 			var ctx = canvas.getContext('2d');
-
-			//ctx.shadowColor = "rgb(100, 100, 100)";
-			//ctx.shadowOffsetX = 10;
-			//ctx.shadowOffsetY = 10;
-			//ctx.shadowBlur = 10;
-
-			//ctx.fillStyle ="rgba(200,30,10,1)";
-			//ctx.strokeStyle="#000";
-
-			// Draw Missile Button
-			//ctx.beginPath(); 
-			//ctx.arc(w+50,h-50,50,0,Math.PI*2,true);
-			//ctx.fill(); 
-			//ctx.closePath();
-
 			initFontNLaserStyle();
+      document.getElementById( 'bgm' ).play();
 			iStage(stage);
 		}
 
@@ -228,7 +214,7 @@ var canvas;
 						{
 							stopMode="";
 							sleep(500);
-							location.href="HighScore.html?user_score="+score;
+							//location.href="HighScore.html?user_score="+score;
 						}
 						else if (stopMode=="StageCleared")
 						{
@@ -261,7 +247,7 @@ var canvas;
 				{
 					stopMode="";
 					sleep(500);
-					location.href="HighScore.html?user_score="+score;
+					//location.href="HighScore.html?user_score="+score;
 				}
 				else if (stopMode=="StageCleared")
 				{
@@ -275,20 +261,6 @@ var canvas;
 			}
 		}
 
-
-		//function leftright_touchend(ev)
-		//{
-		//	mainChrIncX=0;
-		//}
-
-		//function leftright_touchstart(ev)
-		//{
-		//	if(touch.pageY > (h-80) && touch.pageX > w)
-		//	{
-		//		missileX=mainChrX;
-		//		missileY=mainChrY;
-		//	}
-		//}
 
 		function addBall(ballID)
 		{
@@ -463,22 +435,17 @@ var canvas;
 										if (remained<0)
 										{
 											// GameOver
-											//clearInterval(timer);
+											document.getElementById( 'bgm' ).pause();
 											ctx.font = "bold 60px sans-serif";
 											ctx.rotate(-0.40);
 											ctx.fillText("Game Over!!", 110, 380);
 											
 											stopMode="GameOver";
-											//canvas.addEventListener('mousedown', ev_mousedown, false);
 										}
 										else
 										{
-											//var dispRemained = document.getElementById('remained');
-											//dispRemained.value=remained;
 											mainChrX=0;
-											//clearInterval(timer);
 											sleep(500);
-											//timer=setInterval(draw,20);
 										}
 									}
 									break;
