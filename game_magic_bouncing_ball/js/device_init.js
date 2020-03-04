@@ -16,7 +16,8 @@ function pageChange(newpageID) {
         //showHideBanner(true);
     } else if (newpageID=='game') {
         //showHideBanner(false);
-        newGame();
+        //newGame();
+	init();
     } 
 }
 
