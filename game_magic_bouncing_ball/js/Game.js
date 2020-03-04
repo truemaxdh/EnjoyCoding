@@ -9,7 +9,7 @@ var canvas;
 		var scale=1;
 		
 		function init() {
-			canvas = document.getElementById('game_canvas');
+			canvas = document.getElementById('game_canvas_landscape');
 			body=document.getElementById('body');
 			w=canvas.width;
 			h=canvas.height;
