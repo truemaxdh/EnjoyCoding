@@ -517,4 +517,4 @@ var canvas;
 			while (new Date().getTime() < dt.getTime());
 		}
     
-    window.
+
