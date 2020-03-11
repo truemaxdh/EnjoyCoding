@@ -1,29 +1,21 @@
-# CodingIsFun
+# EnjoyCoding
 OpenSource HTML games, utilities.
 
-## Pentix
-Block Drop Game
-
+## Crayon Pentix
 A block of five tiles is called a pentomino.
+
+Pentix is a game of falling pentomino.
+Crayon Pentix is web and android version of pentix game.
 When you rotate this block and stack it up and fill one row tightly,
 the line disappears and the score goes up.
 It is a game that competes to see who gets rid of more lines.
 
-## SkyMiner
-Simple Flight Shooting Game
+## Tiny Flight
+Tiny Flight is a simple flight shooting game, with only a few rules.
+Avoid bombs.Shoot coins, but not bump into coins.
+That's all.
+Coins are differ with their number in endurance and score.
 
-A simple flying shooting game with basic rules only.
-
-Avoid bombs.
-Shoot coins to earn points.
-However, you should not hit the coin directly.
-
-There are three kinds of coins.
-1. '10': It will be removed if you hit once, with score 10 points.
-2. '50': It will be removed if you hit twice, with score 50 points
-3. '100': It will be removed if you hit three times, with score 100 points
-
-## Bouncing balls on the wall
-A simple CSS animation test
-
-CSS-oriented animation, not Javascript-oriented.
+'10': Removed at hitting once, and 10 points of earning.
+'50': Removed at hitting twice, and 50 points of earning.
+'100': Removed at hitting three times, and 100 points of earning.
