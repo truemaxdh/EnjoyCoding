@@ -1,34 +1,14 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<url>
-<loc>
-https://truemaxdh.github.io/CodingIsFun/game_pentix/www/
-</loc>
-<lastmod>2018-06-27T00:00:00+00:00</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.5</priority>
-</url>
-<url>
-<loc>
-https://truemaxdh.github.io/CodingIsFun/game_shooting/www/
-</loc>
-<lastmod>2018-06-06T00:00:00+00:00</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.5</priority>
-</url>
-<url>
-<loc>
-https://truemaxdh.github.io/CodingIsFun/game_hscroll_car/
-</loc>
-<lastmod>2018-06-06T00:00:00+00:00</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.5</priority>
-</url>
-<url>
-<loc>
-https://truemaxdh.github.io/CodingIsFun/lab_straight-bouncing_balls/
-</loc>
-<lastmod>2018-06-06T00:00:00+00:00</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.5</priority>
-</url>
+  <url>
+    <loc>https://truemaxdh.github.io/CodingIsFun/game_pentix/</loc>
+  </url>
+  <url>
+    <loc>https://truemaxdh.github.io/CodingIsFun/game_pentix/www/</loc>
+  </url>
+  <url>
+    <loc>https://truemaxdh.github.io/CodingIsFun/game_shooting/</loc>
+  </url>
+  <url>
+    <loc>https://truemaxdh.github.io/CodingIsFun/game_shooting/www/</loc>
+  </url>
 </urlset>
