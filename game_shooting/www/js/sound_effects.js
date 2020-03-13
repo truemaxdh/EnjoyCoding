@@ -9,6 +9,8 @@ sounds[2].volume = 1;
 	
 function playSound(soundID)
 {
-  sounds[soundID].currentTime = 0;
-  sounds[soundID].play();
+  try {
+    sounds[soundID].currentTime = 0;
+    sounds[soundID].play();
+  } catch(err) {}
 }
