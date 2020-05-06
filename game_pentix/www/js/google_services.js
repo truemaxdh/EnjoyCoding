@@ -104,11 +104,15 @@ function  CloseUserResult() {
 }
 
 function ShowAchievements() {
-    window.game.showAchievements();
+    try {
+	    Android.showAchievements();
+    } catch(e) {}
 }
 
 function ShowHighScores() {
-    window.game.showLeaderboard(leaderboardId);
+    try {
+        Android.showLeaderboard();
+    } catch(e) {}
 }
 
 // pages
