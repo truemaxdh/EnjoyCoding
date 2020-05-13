@@ -189,6 +189,7 @@ function onDeviceReady() {
     toast("signInToGS failed.");
   }
   render_init();
+  pageChange('menu');
 }
 
 // Do this when run on web
