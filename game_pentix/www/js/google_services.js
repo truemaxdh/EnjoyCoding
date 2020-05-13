@@ -38,6 +38,7 @@ function initAd(){
     Android.adMobInterstitialLoad();
     Android.adMobInterstitialShow();
   } catch(e) {
+    toast("adMobInit failed.");
   } 
 }
 
@@ -91,6 +92,7 @@ function chkAndUnlockAchievement(lineCnt) {
       try {  
         Android.unlockAchievement(achvIds[idx]);
       } catch(e) {
+        toast("unlockAchievement failed.");
       }
     }
 }
@@ -117,13 +119,17 @@ function  CloseUserResult() {
 function ShowAchievements() {
     try {
 	    Android.showAchievements();
-    } catch(e) {}
+    } catch(e) {
+      toast("failed.");
+    }
 }
 
 function ShowHighScores() {
     try {
         Android.showLeaderboard();
-    } catch(e) {}
+    } catch(e) {
+      toast("failed.");
+    }
 }
 
 // pages
@@ -145,6 +151,15 @@ function pageChange(newpageID) {
         addEvt();
         newGame();
     } 
+}
+
+function toast(msg) {
+	try {
+    Android.showToast(msg);
+    isApp = true;
+  } catch(e) {
+    isApp = false;
+  }
 }
 
 // Do this when run as app
@@ -182,14 +197,12 @@ function onLoad() {
 }
 
 var isApp;
-try {
-  Android.showToast("Hello!");
-  isApp = true;
+toast("Hello!");
+if (isApp)
   document.addEventListener("deviceready", onDeviceReady, false);
-} catch(e) {
-  isApp = false;
+else
   addEventListener("load", onLoad);
-}
+
 console.log(isApp);	
 /*if (location.href.indexOf('truemaxdh.github.io') < 0 &&
     location.href.indexOf('localhost') < 0) {
