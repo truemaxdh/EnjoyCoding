@@ -1,7 +1,7 @@
 // admob
 //initialize the goodies 
 function initAd(){
-        if ( window.plugins && window.plugins.AdMob ) {
+        /*if ( window.plugins && window.plugins.AdMob ) {
             var ad_units = {
                 ios : {
                     banner: 'ca-app-pub-xxxxxxxxxxx/xxxxxxxxxxx',		//PUT ADMOB ADCODE HERE 
@@ -32,10 +32,16 @@ function initAd(){
             showHideBanner(true);
         } else {
             //alert( 'admob plugin not ready' ); 
-        }
+        }*/
+  try {
+    Android.adMobInit();
+    Android.adMobInterstitialLoad();
+    Android.adMobInterstitialShow();
+  } catch(e) {
+  } 
 }
 
-//functions to allow you to know when ads are shown, etc. 
+/*functions to allow you to know when ads are shown, etc. 
 function registerAdEvents() {
         document.addEventListener('onReceiveAd', function(){});
         document.addEventListener('onFailedToReceiveAd', function(data){});
@@ -49,7 +55,8 @@ function registerAdEvents() {
             //window.plugins.AdMob.requestInterstitialAd();			//get the next one ready only after the current one is closed 
         });
     }
-
+*/
+/*
 //display the banner 
 function showHideBanner(bShow) {
     if (isApp) {
@@ -61,11 +68,12 @@ function showHideBanner(bShow) {
     }
 }
 
+
 //display the interstitial 
 function showInterstitialFunc(){
     window.plugins.AdMob.showInterstitialAd();
 }
-
+*/
 
 // Google Game Service Ids
 var leaderboardId = "CgkItYKH-eAXEAIQBg";
@@ -80,10 +88,13 @@ var achvLines = [1,3,6,10,15];
 function chkAndUnlockAchievement(lineCnt) {
     var idx = achvLines.indexOf(lineCnt);
     if (idx > -1) {
-        window.game.unlockAchievement(achvIds[idx]);
+      try {  
+        Android.unlockAchievement(achvIds[idx]);
+      } catch(e) {
+      }
     }
 }
-
+/*
 function GetUserImg() {
     window.game.getPlayerImage();
     window.game.onGetPlayerImageSucceeded = function(result) {
@@ -93,7 +104,7 @@ function GetUserImg() {
         
     };	
 }
-
+*/
 function OpenUserResult() {
     document.getElementById("user_result").style.width = "100%";
 }
@@ -147,7 +158,7 @@ function onDeviceReady() {
     ///////////////////////////
     // Google Game Services  //
     ///////////////////////////
-    window.game.setUp();
+    /*window.game.setUp();
     window.game.login();
     render_init();
     window.game.onLoginSucceeded = function(result) {
@@ -156,7 +167,12 @@ function onDeviceReady() {
     };
     window.game.onLoginFailed = function() {
         pageChange('menu');
-    };
+    };*/
+  try {
+    Android.signInToGS();
+  } catch(e) {
+  }
+  render_init();
 }
 
 // Do this when run on web
@@ -169,16 +185,18 @@ var isApp;
 try {
   Android.showToast("Hello!");
   isApp = true;
+  document.addEventListener("deviceready", onDeviceReady, false);
 } catch(e) {
   isApp = false;
+  addEventListener("load", onLoad);
 }
 console.log(isApp);	
-if (location.href.indexOf('truemaxdh.github.io') < 0 &&
+/*if (location.href.indexOf('truemaxdh.github.io') < 0 &&
     location.href.indexOf('localhost') < 0) {
     isApp = true;
     document.addEventListener("deviceready", onDeviceReady, false);
 } else {
     isApp = false;
     addEventListener("load", onLoad);
-}
+}*/
 
