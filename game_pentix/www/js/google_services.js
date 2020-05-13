@@ -164,7 +164,7 @@ function toast(msg) {
 
 // Do this when run as app
 function onDeviceReady() {
-    document.removeEventListener('deviceready', onDeviceReady, false);
+    //document.removeEventListener('deviceready', onDeviceReady, false);
     
     ///////////
     // AdMob //
@@ -200,7 +200,7 @@ function onLoad() {
 var isApp;
 toast("Hello!");
 if (isApp)
-  document.addEventListener("deviceready", onDeviceReady, false);
+  addEventListener("load", onDeviceReady, false);
 else
   addEventListener("load", onLoad);
 
