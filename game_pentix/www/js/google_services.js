@@ -34,7 +34,9 @@ function initAd(){
       //alert( 'admob plugin not ready' ); 
   }*/
   try {
-    Android.adMobInit();
+    // "ca-app-pub-3940256099942544/1033173712" : Test
+    //ca-app-pub-7307479428475282~3962043059 : Real
+    Android.adMobInit("ca-app-pub-7307479428475282~3962043059");
   } catch(e) {
     toast("adMobInit failed.");
   }
