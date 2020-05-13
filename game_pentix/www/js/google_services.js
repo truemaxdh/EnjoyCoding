@@ -35,11 +35,21 @@ function initAd(){
   }*/
   try {
     Android.adMobInit();
-    Android.adMobInterstitialLoad();
-    Android.adMobInterstitialShow();
   } catch(e) {
     toast("adMobInit failed.");
-  } 
+  }
+  
+  try {
+    Android.adMobInterstitialLoad();
+  } catch(e) {
+    toast("adMobInterstitialLoad failed.");
+  }
+  
+  try {
+    Android.adMobInterstitialShow();
+  } catch(e) {
+    toast("adMobInterstitialShow failed.");
+  }
 }
 
 /*functions to allow you to know when ads are shown, etc. 
