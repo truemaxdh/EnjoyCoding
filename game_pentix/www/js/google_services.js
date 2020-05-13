@@ -166,6 +166,13 @@ function onLoad() {
 }
 
 var isApp;
+try {
+	Android.showToast("Hello!");
+  isApp = true;
+} catch(e) {
+  isApp = false;
+}
+	
 if (location.href.indexOf('truemaxdh.github.io') < 0 &&
     location.href.indexOf('localhost') < 0) {
     isApp = true;
