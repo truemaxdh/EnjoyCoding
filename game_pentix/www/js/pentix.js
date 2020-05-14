@@ -181,13 +181,18 @@ function gameOver() {
     removeEvt();
     render_gameover();
     if (isApp) {
-        window.game.submitScore(leaderboardId, score);
-        window.game.onSubmitScoreSucceeded = function() {
-            OpenUserResult();
-        };
-        window.game.onSubmitScoreFailed = function() {
-            OpenUserResult();
-        };
+      try {  
+        Android.submitScore(leaderboardId, score);
+        //window.game.onSubmitScoreSucceeded = function() {
+        //    OpenUserResult();
+        //};
+        //window.game.onSubmitScoreFailed = function() {
+        //    OpenUserResult();
+        //};
+      } catch(e) {
+        Android.toast("submitScoe failed.");
+      }
+      OpenUserResult();
     } else {
         OpenUserResult();
     }
