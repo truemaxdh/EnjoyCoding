@@ -1,4 +1,5 @@
 // admob
+var adStatus = 0;
 //initialize the goodies 
 function initAd(){
   /*if ( window.plugins && window.plugins.AdMob ) {
@@ -37,20 +38,9 @@ function initAd(){
     // "ca-app-pub-3940256099942544/1033173712" : Test
     //ca-app-pub-7307479428475282~3962043059 : Real
     Android.adMobInit("ca-app-pub-7307479428475282~3962043059");
+    adStatus = 1;
   } catch(e) {
     toast("adMobInit failed.");
-  }
-  
-  try {
-    Android.adMobInterstitialLoad();
-  } catch(e) {
-    toast("adMobInterstitialLoad failed.");
-  }
-  
-  try {
-    Android.adMobInterstitialShow();
-  } catch(e) {
-    toast("adMobInterstitialShow failed.");
   }
 }
 
@@ -153,6 +143,21 @@ function pageChange(newpageID) {
       page.style.display = 'block';
     } else {
       page.style.display = 'none';
+    }
+  }
+  
+  if (adStatus==1) {
+    try {
+      Android.adMobInterstitialLoad();
+      adStatus=2;
+    } catch(e) {
+      toast("adMobInterstitialLoad failed.");
+    }
+  } else {
+    try {
+      Android.adMobInterstitialShow();
+    } catch(e) {
+      toast("adMobInterstitialShow failed.");
     }
   }
 
