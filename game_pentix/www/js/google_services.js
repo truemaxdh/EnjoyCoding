@@ -34,14 +34,6 @@ function initAd(){
   } else {
       //alert( 'admob plugin not ready' ); 
   }*/
-  try {
-    // "ca-app-pub-3940256099942544/1033173712" : Test
-    //ca-app-pub-7307479428475282~3962043059 : Real
-    Android.adMobInit("ca-app-pub-7307479428475282~3962043059");
-    adStatus = 1;
-  } catch(e) {
-    toast("adMobInit failed.");
-  }
 }
 
 /*functions to allow you to know when ads are shown, etc. 
@@ -146,7 +138,16 @@ function pageChange(newpageID) {
     }
   }
   
-  if (adStatus==1) {
+	if (adStatus==0) {
+    try {
+      // "ca-app-pub-3940256099942544/1033173712" : Test
+      //ca-app-pub-7307479428475282~3962043059 : Real
+      Android.adMobInit("ca-app-pub-7307479428475282~3962043059");
+      adStatus = 1;
+    } catch(e) {
+      toast("adMobInit failed.");
+    }
+  } else if (adStatus==1) {
     try {
       Android.adMobInterstitialLoad();
       adStatus=2;
