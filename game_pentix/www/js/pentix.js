@@ -190,7 +190,7 @@ function gameOver() {
         //    OpenUserResult();
         //};
       } catch(e) {
-        Android.toast("submitScoe failed.");
+        Android.showToast("submitScoe failed.");
       }
       OpenUserResult();
     } else {
