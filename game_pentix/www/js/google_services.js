@@ -141,8 +141,8 @@ function pageChange(newpageID) {
 	if (adStatus==0) {
     try {
       // "ca-app-pub-3940256099942544/1033173712" : Test
-      //ca-app-pub-7307479428475282~3962043059 : Real
-      Android.adMobInit("ca-app-pub-7307479428475282~3962043059");
+      //ca-app-pub-7307479428475282~7899681601 : Real
+      Android.adMobInit("ca-app-pub-7307479428475282~7899681601");
       adStatus = 1;
     } catch(e) {
       toast("adMobInit failed.");
