@@ -161,9 +161,15 @@ function pageChange(newpageID) {
       toast("adMobInterstitialLoad failed.");
     }
     try {
-      Android.signInToGS();
+      Android.signInSilently();
     } catch(e) {
-      toast("signInToGS failed.");
+      toast("signInSilently failed.");
+    }
+    try {
+      var dispName = Android.getLastSignedInAccount();
+      toast(dispName);
+    } catch(e) {
+      toast("getLastSignedInAccount failed.");
     }
   } else {
     try {
@@ -172,9 +178,9 @@ function pageChange(newpageID) {
       toast("adMobInterstitialShow failed.");
     }
     try {
-      Android.signInSilently();
+      Android.signInToGS();
     } catch(e) {
-      toast("signInSilently failed.");
+      toast("signInToGS failed.");
     }
     try {
       var dispName = Android.getLastSignedInAccount();
