@@ -159,6 +159,7 @@ function pageChange(newpageID) {
       toast("adMobInterstitialLoad failed." + e.message);
     }*/
     try {
+      Android.GoogleSignIn_getClient();
       Android.signInSilently();
     } catch(e) {
       toast("signInSilently failed." + e.message);
