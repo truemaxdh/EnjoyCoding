@@ -142,9 +142,7 @@ function pageChange(newpageID) {
     try {
       // "ca-app-pub-3940256099942544/1033173712" : Test
       //ca-app-pub-7307479428475282/1949829859 : Real
-      Android.adMobInit("ca-app-pub-3940256099942544/1033173712");
-      
-      adStatus = 1;
+      //Android.adMobInit("ca-app-pub-3940256099942544/1033173712"); 
     } catch(e) {
       toast("adMobInit failed.");
     }
@@ -153,10 +151,10 @@ function pageChange(newpageID) {
     } catch(e) {
       toast("GoogleSignIn_getClient failed.");
     }
+    adStatus = 1;
   } else if (adStatus==1) {
     try {
-      Android.adMobInterstitialLoad();
-      adStatus=2;
+      //Android.adMobInterstitialLoad();
     } catch(e) {
       toast("adMobInterstitialLoad failed.");
     }
@@ -171,7 +169,8 @@ function pageChange(newpageID) {
     } catch(e) {
       toast("getLastSignedInAccount failed.");
     }
-  } else {
+    adStatus=2;
+  } else if (adStatus == 2) {
     try {
       Android.adMobInterstitialShow();
     } catch(e) {
@@ -188,6 +187,7 @@ function pageChange(newpageID) {
     } catch(e) {
       toast("getLastSignedInAccount failed.");
     }
+    adStatus = 3;
   }
 
   // if (newpageID=='menu') {
