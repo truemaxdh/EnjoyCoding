@@ -138,12 +138,7 @@ function pageChange(newpageID) {
     }
   }
   
-	if (adStatus==0) {
-    try {
-      Android.signInToGS();
-    } catch(e) {
-      toast("signInToGS failed.");
-    }
+  if (adStatus==0) {
     try {
       // "ca-app-pub-3940256099942544/1033173712" : Test
       //ca-app-pub-7307479428475282/1949829859 : Real
@@ -153,29 +148,39 @@ function pageChange(newpageID) {
     } catch(e) {
       toast("adMobInit failed.");
     }
-  } else if (adStatus==1) {
     try {
-      Android.signInSilently();
+    Android.GoogleSignIn_getClient();
     } catch(e) {
-      toast("signInSilently failed.");
+      toast("GoogleSignIn_getClient failed.");
     }
+  } else if (adStatus==1) {
     try {
       Android.adMobInterstitialLoad();
       adStatus=2;
     } catch(e) {
       toast("adMobInterstitialLoad failed.");
     }
+    try {
+      Android.signInToGS();
+    } catch(e) {
+      toast("signInToGS failed.");
+    }
   } else {
+    try {
+      Android.adMobInterstitialShow();
+    } catch(e) {
+      toast("adMobInterstitialShow failed.");
+    }
+    try {
+      Android.signInSilently();
+    } catch(e) {
+      toast("signInSilently failed.");
+    }
     try {
       var dispName = Android.getLastSignedInAccount();
       toast(dispName);
     } catch(e) {
       toast("getLastSignedInAccount failed.");
-    }
-    try {
-      Android.adMobInterstitialShow();
-    } catch(e) {
-      toast("adMobInterstitialShow failed.");
     }
   }
 
@@ -218,11 +223,6 @@ function onDeviceReady() {
     window.game.onLoginFailed = function() {
         pageChange('menu');
     };*/
-  try {
-    Android.GoogleSignIn_getClient();
-  } catch(e) {
-    toast("GoogleSignIn_getClient failed.");
-  }
   render_init();
   pageChange('menu');
 }
