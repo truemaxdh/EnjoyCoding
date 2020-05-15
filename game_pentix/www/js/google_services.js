@@ -140,14 +140,25 @@ function pageChange(newpageID) {
   
 	if (adStatus==0) {
     try {
+      Android.signInToGS();
+    } catch(e) {
+      toast("signInToGS failed.");
+    }
+    try {
       // "ca-app-pub-3940256099942544/1033173712" : Test
-      //ca-app-pub-7307479428475282~7899681601 : Real
-      Android.adMobInit("ca-app-pub-7307479428475282~7899681601");
+      //ca-app-pub-7307479428475282/1949829859 : Real
+      Android.adMobInit("ca-app-pub-3940256099942544/1033173712");
+      
       adStatus = 1;
     } catch(e) {
       toast("adMobInit failed.");
     }
   } else if (adStatus==1) {
+    try {
+      Android.signInSilently();
+    } catch(e) {
+      toast("signInSilently failed.");
+    }
     try {
       Android.adMobInterstitialLoad();
       adStatus=2;
@@ -155,6 +166,12 @@ function pageChange(newpageID) {
       toast("adMobInterstitialLoad failed.");
     }
   } else {
+    try {
+      var dispName = Android.getLastSignedInAccount();
+      toast(dispName);
+    } catch(e) {
+      toast("getLastSignedInAccount failed.");
+    }
     try {
       Android.adMobInterstitialShow();
     } catch(e) {
@@ -202,9 +219,9 @@ function onDeviceReady() {
         pageChange('menu');
     };*/
   try {
-    Android.signInToGS();
+    Android.GoogleSignIn_getClient();
   } catch(e) {
-    toast("signInToGS failed.");
+    toast("GoogleSignIn_getClient failed.");
   }
   render_init();
   pageChange('menu');
