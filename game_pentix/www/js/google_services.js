@@ -139,55 +139,56 @@ function pageChange(newpageID) {
   }
   
   if (adStatus==0) {
-    try {
+    /*try {
       // "ca-app-pub-3940256099942544/1033173712" : Test
       //ca-app-pub-7307479428475282/1949829859 : Real
-      //Android.adMobInit("ca-app-pub-3940256099942544/1033173712"); 
+      Android.adMobInit("ca-app-pub-7307479428475282/1949829859"); 
     } catch(e) {
-      toast("adMobInit failed.");
-    }
+      toast("adMobInit failed." + e.message);
+    }*/
     try {
-    Android.GoogleSignIn_getClient();
+    	Android.GoogleSignIn_getClient();
     } catch(e) {
-      toast("GoogleSignIn_getClient failed.");
+      toast("GoogleSignIn_getClient failed." + e.message);
     }
     adStatus = 1;
   } else if (adStatus==1) {
-    try {
-      //Android.adMobInterstitialLoad();
+    /*try {
+      Android.adMobInterstitialLoad();
     } catch(e) {
-      toast("adMobInterstitialLoad failed.");
-    }
+      toast("adMobInterstitialLoad failed." + e.message);
+    }*/
     try {
       Android.signInSilently();
     } catch(e) {
-      toast("signInSilently failed.");
+      toast("signInSilently failed." + e.message);
     }
     try {
       var dispName = Android.getLastSignedInAccount();
       toast(dispName);
     } catch(e) {
-      toast("getLastSignedInAccount failed.");
+      toast("getLastSignedInAccount failed." + e.message);
     }
     adStatus=2;
   } else if (adStatus == 2) {
-    try {
+    /*try {
       Android.adMobInterstitialShow();
     } catch(e) {
-      toast("adMobInterstitialShow failed.");
-    }
+      toast("adMobInterstitialShow failed." + e.message);
+    }*/
     try {
       Android.signInToGS();
     } catch(e) {
       toast("signInToGS failed.");
     }
-    try {
+    adStatus = 3;
+  } else {
+	  try {
       var dispName = Android.getLastSignedInAccount();
       toast(dispName);
     } catch(e) {
-      toast("getLastSignedInAccount failed.");
+      toast("getLastSignedInAccount failed." + e.message);
     }
-    adStatus = 3;
   }
 
   // if (newpageID=='menu') {
