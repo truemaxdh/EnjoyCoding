@@ -139,58 +139,28 @@ function pageChange(newpageID) {
   }
   
   if (adStatus==0) {
-    /*try {
-      // "ca-app-pub-3940256099942544/1033173712" : Test
-      //ca-app-pub-7307479428475282/1949829859 : Real
-      Android.adMobInit("ca-app-pub-7307479428475282/1949829859"); 
-    } catch(e) {
-      toast("adMobInit failed." + e.message);
-    }*/
     try {
-    	Android.GoogleSignIn_getClient();
-    } catch(e) {
-      toast("GoogleSignIn_getClient failed." + e.message);
-    }
-    adStatus = 1;
-  } else if (adStatus==1) {
-    /*try {
       Android.adMobInterstitialLoad();
     } catch(e) {
       toast("adMobInterstitialLoad failed." + e.message);
-    }*/
-    try {
-      Android.GoogleSignIn_getClient();
-      Android.signInSilently();
-    } catch(e) {
-      toast("signInSilently failed." + e.message);
     }
-    try {
-      var dispName = Android.getLastSignedInAccount();
-      toast(dispName);
-    } catch(e) {
-      toast("getLastSignedInAccount failed." + e.message);
-    }
-    adStatus=2;
-  } else if (adStatus == 2) {
-    /*try {
-      Android.adMobInterstitialShow();
-    } catch(e) {
-      toast("adMobInterstitialShow failed." + e.message);
-    }*/
     try {
       Android.signInToGS();
     } catch(e) {
       toast("signInToGS failed.");
     }
-    adStatus = 3;
-  } else {
-	  try {
-      var dispName = Android.getLastSignedInAccount();
-      toast(dispName);
+    adStatus = 1;
+  } else if (adStatus==1) {
+    try {
+      Android.adMobInterstitialShow();
     } catch(e) {
-      toast("getLastSignedInAccount failed." + e.message);
-    }
-  }
+      toast("adMobInterstitialShow failed." + e.message);
+    }    
+    adStatus=2;
+  } else if (adStatus == 2) {
+    adStatus = 3;
+  } 
+  
 
   // if (newpageID=='menu') {
   //     //removeEvt();
@@ -208,6 +178,7 @@ function toast(msg) {
   } catch(e) {
     isApp = false;
   }
+  
 }
 
 // Do this when run as app
@@ -231,6 +202,25 @@ function onDeviceReady() {
     window.game.onLoginFailed = function() {
         pageChange('menu');
     };*/
+  try {
+    // "ca-app-pub-3940256099942544/1033173712" : Test
+    //ca-app-pub-7307479428475282/1949829859 : Real
+    Android.adMobInit("ca-app-pub-7307479428475282/1949829859",""); 
+  } catch(e) {
+    toast("adMobInit failed." + e.message);
+  }
+  try {
+    Android.GoogleSignIn_getClient();
+  } catch(e) {
+    toast("GoogleSignIn_getClient failed." + e.message);
+  }
+  
+  /*try {
+    var dispName = Android.getLastSignedInAccount();
+    toast(dispName);
+  } catch(e) {
+    toast("getLastSignedInAccount failed." + e.message);
+  }*/
   render_init();
   pageChange('menu');
 }
@@ -242,8 +232,7 @@ function onLoad() {
 }
 
 var isApp;
-toast("Hello!");
-if (isApp)
+if (!!Android)
   addEventListener("load", onDeviceReady, false);
 else
   addEventListener("load", onLoad);
