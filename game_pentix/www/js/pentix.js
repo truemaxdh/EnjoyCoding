@@ -183,21 +183,13 @@ function gameOver() {
     if (isApp) {
       try {  
         Android.submitScore(leaderboardId, score);
-        //window.game.onSubmitScoreSucceeded = function() {
-        //    OpenUserResult();
-        //};
-        //window.game.onSubmitScoreFailed = function() {
-        //    OpenUserResult();
-        //};
       } catch(e) {
         Android.showToast("submitScoe failed.");
       }
-      OpenUserResult();
-    } else {
-        OpenUserResult();
+      
     }
+    OpenUserResult();    
     document.getElementById('user_score').innerHTML = score;
-
 }
 
 // stop shape at its position and fix it to board
