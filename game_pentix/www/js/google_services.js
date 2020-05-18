@@ -162,7 +162,7 @@ function onLoad() {
 }
 
 var isApp;
-if (Android===undefined)
+if (typeof Android==='undefined')
   addEventListener("load", onLoad);
 else
   addEventListener("load", onDeviceReady, false);  
