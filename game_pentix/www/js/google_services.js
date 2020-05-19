@@ -1,11 +1,11 @@
-// admob
-//var adStatus = 0;
+// AdMob
 var AdMob = {
-	adStatus : 0,
+  adStatus : 0,
   onInitComplete : function() {
     AdMob.adStatus = 1; 
   },
   Interstitial : {
+    clsName : "AdMob.Interstitial",
     onAdLoaded : function() {
       AdMob.adStatus = 2;
       toast("adMob Intertitial Load Complete.");
@@ -107,7 +107,7 @@ function pageChange(newpageID) {
       page.style.display = 'none';
     }
   }
-  
+  toast("" + AdMob.adStatus + "," + AdMob.Interstitial.clsName);
   if (AdMob.adStatus==0) {
     try {
       Android.signInToGS();
