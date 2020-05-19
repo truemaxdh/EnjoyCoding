@@ -96,20 +96,22 @@ function pageChange(newpageID) {
     }
     AdMob.adStatus = 1;
   } else if (AdMob.adStatus==1) {
+     
+    AdMob.adStatus=2;
+  } else if (AdMob.adStatus == 2) {
     try {
       Android.adMobInterstitialLoad();
     } catch(e) {
       toast("adMobInterstitialLoad failed." + e.message);
-    }   
-    AdMob.adStatus=2;
-  } else if (AdMob.adStatus == 2) {
+    }  
+    AdMob.adStatus = 3;
+  } else {
     try {
       Android.adMobInterstitialShow();
     } catch(e) {
       toast("adMobInterstitialShow failed." + e.message);
     }
-    AdMob.adStatus = 3;
-  }  
+  }
 
   if (newpageID=='game') {
     addEvt();
