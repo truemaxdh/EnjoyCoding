@@ -1,11 +1,34 @@
 // admob
 //var adStatus = 0;
 var AdMob = {
-	onInitComplete : function() {
+	adStatus : 0,
+  onInitComplete : function() {
+    AdMob.adStatus = 1;
     toast("adMobInit Complete.Start adMobInitIntertitial");
+    Android.adMobIntertitialSetToUseJSCallback();
     Android.adMobInitIntertitial("ca-app-pub-7307479428475282/1949829859"); 
   },
-  adStatus : 0
+  Interstitial : {
+    onAdLoaded : function() {
+      AdMob.adStatus = 2;
+      toast("adMob Intertitial Load Complete.");
+    },
+    onAdFailedToLoad : function() {
+      toast("adMob Intertitial Load Failed.");
+    },
+    onAdOpened : function() {
+      toast("adMob Intertitial Ad Opened.");
+    },
+    onAdClicked : function() {
+      toast("adMob Intertitial Ad Clicked.");
+    },
+    onAdLeftApplication : function() {
+      toast("adMob Intertitial Ad Left Application.");
+    },
+    onAdClosed : function() {
+      toast("adMob Intertitial Ad Closed.");
+    }
+  }
 }
 /*
 //display the banner 
@@ -94,24 +117,18 @@ function pageChange(newpageID) {
     } catch(e) {
       toast("signInToGS failed.");
     }
-    AdMob.adStatus = 1;
+    //AdMob.adStatus = 1;
   } else if (AdMob.adStatus==1) {
      
-    AdMob.adStatus=2;
+    //AdMob.adStatus=2;
   } else if (AdMob.adStatus == 2) {
-    try {
-      Android.adMobInterstitialLoad();
-    } catch(e) {
-      toast("adMobInterstitialLoad failed." + e.message);
-    }  
-    AdMob.adStatus = 3;
-  } else {
     try {
       Android.adMobInterstitialShow();
     } catch(e) {
       toast("adMobInterstitialShow failed." + e.message);
-    }
-  }
+    }  
+    //AdMob.adStatus = 3;
+  } 
 
   if (newpageID=='game') {
     addEvt();
