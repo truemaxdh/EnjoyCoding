@@ -122,8 +122,8 @@ function pageChange(newpageID) {
       toast("adMobIntertitialSetToUseJSCallback failed.");
     }
     try {
-      //Android.adMobInitIntertitial("ca-app-pub-7307479428475282/1949829859");
-      Android.adMobInitIntertitial("2389822516");     
+      Android.adMobInitIntertitial("ca-app-pub-7307479428475282/1949829859");
+      //Android.adMobInitIntertitial("2389822516");     
     } catch(e) {
       toast("adMobInitIntertitial failed.");
     }
