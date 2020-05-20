@@ -105,6 +105,7 @@ function ShowHighScores() {
 
 // pages
 var pageIDs = ['intro','menu','game'];
+var curPage = pageIDs[0];
 function pageChange(newpageID) {
   for (var i = 0; i < pageIDs.length; i++) {
     var page = document.getElementById(pageIDs[i]);
@@ -127,6 +128,7 @@ function pageChange(newpageID) {
     addEvt();
     newGame();
   } 
+  curPage = newpageID;
 }
 
 function toast(msg) {
