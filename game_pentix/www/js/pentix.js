@@ -373,6 +373,6 @@ function togglePause() {
         tick();
     } else {
         document.getElementById( 'bgm' ).pause();
-        showSubMenu();
+        //showSubMenu();
     }
 }
