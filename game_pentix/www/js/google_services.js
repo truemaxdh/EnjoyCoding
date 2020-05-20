@@ -7,7 +7,7 @@ var AdMob = {
     try {
       // "ca-app-pub-3940256099942544/1033173712" : Test
       //ca-app-pub-7307479428475282/1949829859 : Real
-      Android.adMobInitIntertitial("ca-app-pub-7307479428475282/1949829859");
+      Android.adMobInitIntertitial("ca-app-pub-3940256099942544/1033173712");
     } catch(e) {
       toast("adMobInitIntertitial failed.");
     }
@@ -153,8 +153,8 @@ function onDeviceReady() {
     toast("adMobIntertitialSetToUseJSCallback failed.");
   }
   try {
-    Android.adMobInit("ca-app-pub-7307479428475282~7899681601", "N"); 
-    //Android.adMobInit("ca-app-pub-7307479428475282~7899681601", "Y"); 
+    //Android.adMobInit("ca-app-pub-7307479428475282~7899681601", "N"); 
+    Android.adMobInit("ca-app-pub-3940256099942544~3347511713", "Y"); 
   } catch(e) {
     toast("adMobInit failed." + e.message);
   }
