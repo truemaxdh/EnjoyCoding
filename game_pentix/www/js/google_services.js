@@ -5,8 +5,9 @@ var AdMob = {
     AdMob.adStatus = 1; 
     toast("adMobInit Complete.Start adMobInitIntertitial");
     try {
-      //Android.adMobInitIntertitial("ca-app-pub-7307479428475282/1949829859");
-      Android.adMobInitIntertitial("ca-app-pub-7307479428475282/1949829859");     
+      // "ca-app-pub-3940256099942544/1033173712" : Test
+      //ca-app-pub-7307479428475282/1949829859 : Real
+      Android.adMobInitIntertitial("ca-app-pub-7307479428475282/1949829859");
     } catch(e) {
       toast("adMobInitIntertitial failed.");
     }
@@ -71,11 +72,11 @@ function chkAndUnlockAchievement(lineCnt) {
 function GetUserImg() {
     window.game.getPlayerImage();
     window.game.onGetPlayerImageSucceeded = function(result) {
-		document.getElementById('user_img').src = result;
+    document.getElementById('user_img').src = result;
     };
     window.game.onGetPlayerImageFailed = function() {
         
-    };	
+    };  
 }
 */
 function OpenUserResult() {
@@ -132,7 +133,7 @@ function pageChange(newpageID) {
 }
 
 function toast(msg) {
-	try {
+  try {
     Android.showToast(msg);
     isApp = true;
   } catch(e) {
@@ -152,14 +153,13 @@ function onDeviceReady() {
     toast("adMobIntertitialSetToUseJSCallback failed.");
   }
   try {
-    // "ca-app-pub-3940256099942544/1033173712" : Test
-    //ca-app-pub-7307479428475282/1949829859 : Real
-    Android.adMobInit(ca-app-pub-7307479428475282~7899681601, "N"); 
+    Android.adMobInit("ca-app-pub-7307479428475282~7899681601", "N"); 
+    //Android.adMobInit("ca-app-pub-7307479428475282~7899681601", "Y"); 
   } catch(e) {
     toast("adMobInit failed." + e.message);
   }
 
-  
+
   ///////////////////////////
   // Google Game Services  //
   ///////////////////////////
@@ -195,4 +195,4 @@ if (typeof Android==='undefined')
 else
   addEventListener("load", onDeviceReady, false);  
 
-console.log(isApp);	
+console.log(isApp);  
