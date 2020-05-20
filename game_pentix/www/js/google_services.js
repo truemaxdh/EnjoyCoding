@@ -188,6 +188,10 @@ function onLoad() {
     pageChange('menu');
 }
 
+function showSubMenu() {
+  document.getElementById("Submenu").style.width = "100%";
+}
+
 var isApp;
 if (typeof Android==='undefined')
   addEventListener("load", onLoad);
