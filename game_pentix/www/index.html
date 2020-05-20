@@ -88,6 +88,17 @@
         <a href="#" onclick="ShowAchievements();">Show Achievements</a>
         <a href="#" onclick="ShowHighScores();">Show High Scores</a>
       </div>
-    </div>  
+    </div>
+    
+    <!-- Submenu -->
+    <div id="Submenu" class="overlay">
+      
+      <!-- Overlay content -->
+      <div class="overlay-content">
+        <a href="#" onclick="pageChange('menu');">Exit Current Game</a>
+        <a href="#" onclick="Android.exitApp('', 0);">Exit App</a>
+        <a href="#" onclick="document.getElementById('Submenu').style.width = '0%;">Resume</a>
+      </div>
+    </div>
   </body>
 </html>
