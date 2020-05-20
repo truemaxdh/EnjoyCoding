@@ -3,6 +3,13 @@ var AdMob = {
   adStatus : 0,
   onInitComplete : function() {
     AdMob.adStatus = 1; 
+    toast("adMobInit Complete.Start adMobInitIntertitial");
+    try {
+      //Android.adMobInitIntertitial("ca-app-pub-7307479428475282/1949829859");
+      Android.adMobInitIntertitial("2389822516");     
+    } catch(e) {
+      toast("adMobInitIntertitial failed.");
+    }
   },
   Interstitial : {
     clsName : "AdMob.Interstitial",
@@ -107,23 +114,8 @@ function pageChange(newpageID) {
       page.style.display = 'none';
     }
   }
-  toast("" + AdMob.adStatus + "," + AdMob.Interstitial.clsName);
-  if (AdMob.adStatus==0) {
-    try {
-      Android.signInToGS();
-    } catch(e) {
-      toast("signInToGS failed.");
-    }
-  } else if (AdMob.adStatus==1) {
-    toast("adMobInit Complete.Start adMobInitIntertitial");
-    
-    try {
-      Android.adMobInitIntertitial("ca-app-pub-7307479428475282/1949829859");
-      //Android.adMobInitIntertitial("2389822516");     
-    } catch(e) {
-      toast("adMobInitIntertitial failed.");
-    }
-  } else if (AdMob.adStatus == 2) {
+
+  if (newpageID=='menu' && AdMob.adStatus == 2) {
     try {
       Android.adMobInterstitialShow();
     } catch(e) {
@@ -181,6 +173,11 @@ function onDeviceReady() {
   } catch(e) {
     toast("getLastSignedInAccount failed." + e.message);
   }*/
+  try {
+    Android.signInToGS();
+  } catch(e) {
+    toast("signInToGS failed.");
+  }
   render_init();
   pageChange('menu');
 }
