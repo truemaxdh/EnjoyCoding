@@ -31,7 +31,7 @@ function addEvt() {
     var scale_f = canvas.width / canvas.clientWidth;
     document.body.onmousedown = function (e) {
         if (e.clientY < 40) {
-            togglePause();
+            showSubMenu();
             return true;
         }
         user_x = e.clientX  * scale_f;
