@@ -116,11 +116,7 @@ function pageChange(newpageID) {
     }
   } else if (AdMob.adStatus==1) {
     toast("adMobInit Complete.Start adMobInitIntertitial");
-    try {
-      Android.adMobIntertitialSetToUseJSCallback();
-    } catch(e) {
-      toast("adMobIntertitialSetToUseJSCallback failed.");
-    }
+    
     try {
       Android.adMobInitIntertitial("ca-app-pub-7307479428475282/1949829859");
       //Android.adMobInitIntertitial("2389822516");     
@@ -156,6 +152,11 @@ function onDeviceReady() {
   ///////////
   // AdMob //
   ///////////
+  try {
+    Android.adMobIntertitialSetToUseJSCallback();
+  } catch(e) {
+    toast("adMobIntertitialSetToUseJSCallback failed.");
+  }
   try {
     // "ca-app-pub-3940256099942544/1033173712" : Test
     //ca-app-pub-7307479428475282/1949829859 : Real
