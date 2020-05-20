@@ -2,7 +2,7 @@ var COLS = 15, ROWS = 20;
 var BLOCK_WH = 5;
 var board = [];
 var score;
-//var lose;
+
 var interval = 50;
 var objInterval;
 var move_wait_limit = 15;
@@ -349,24 +349,18 @@ function valid( offsetX, offsetY, newCurrent ) {
 }
 
 function newGame() {
-    //clearInterval(objInterval);
     init();
     score = 0;
     cleardLines = 0;
     newShape();
-    //lose = false;
-    //interval = 50;
-    // objInterval = setInterval( tick, interval );
+
     document.getElementById( 'score_num' ).innerHTML = score;
     move_wait_cnt = 0;
     document.getElementById( 'bgm' ).play();
     setTimeout(tick, interval);
-    //render_init();
-    //clearInterval(render_interval);
-    //render_interval = setInterval( render, 100 );
 }
 
-function togglePause() {
+/*function togglePause() {
     paused = !paused;
     if (!paused) {
         document.getElementById( 'bgm' ).play();
@@ -375,4 +369,22 @@ function togglePause() {
         document.getElementById( 'bgm' ).pause();
         //showSubMenu();
     }
+}*/
+
+function showSubMenu() {
+  if (curPage == pageIDs[2]) {
+    paused = true;
+    document.getElementById( 'bgm' ).pause();
+  }
+  document.getElementById("Submenu").style.width = "100%";
 }
+
+function hideSubMenu() {
+  document.getElementById("Submenu").style.width = "0%";
+  if (curPage == pageIDs[2]) {
+    paused = false;
+    document.getElementById( 'bgm' ).play();
+    tick();
+  }
+}
+
