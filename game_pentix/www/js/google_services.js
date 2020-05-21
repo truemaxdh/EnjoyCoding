@@ -11,11 +11,11 @@ var AdMob = {
     } catch(e) {
       toast("adMobInitIntertitial failed.");
     }
-    try {
+    /*try {
       Android.adMobIntertitialSetToUseJSCallback();
     } catch(e) {
       toast("adMobIntertitialSetToUseJSCallback failed.");
-    }
+    }*/
     try {
       Android.adMobInterstitialLoad();
     } catch(e) {
