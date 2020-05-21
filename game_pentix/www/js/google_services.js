@@ -146,9 +146,8 @@ function pageChange(newpageID) {
 function toast(msg) {
   try {
     Android.showToast(msg);
-    isApp = true;
   } catch(e) {
-    isApp = false;
+    console.log(msg);    
   }
   
 }
@@ -196,9 +195,11 @@ function onLoad() {
 }
 
 var isApp;
-if (typeof Android==='undefined')
+if (typeof Android==='undefined') {
+  isApp = false;
   addEventListener("load", onLoad);
-else
+} else {
+  isApp = true;
   addEventListener("load", onDeviceReady, false);  
-
+}
 console.log(isApp);  
