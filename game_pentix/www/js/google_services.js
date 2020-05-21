@@ -3,7 +3,7 @@ var AdMob = {
   adStatus : 0,
   onInitComplete : function() {
     AdMob.adStatus = 1; 
-    toast("adMobInit Complete.Start adMobInitIntertitial");
+    //toast("adMobInit Complete.Start adMobInitIntertitial");
     try {
       // "ca-app-pub-3940256099942544/1033173712" : Test
       //ca-app-pub-7307479428475282/1949829859 : Real
@@ -15,6 +15,11 @@ var AdMob = {
       Android.adMobIntertitialSetToUseJSCallback();
     } catch(e) {
       toast("adMobIntertitialSetToUseJSCallback failed.");
+    }
+    try {
+      Android.adMobInterstitialLoad();
+    } catch(e) {
+      toast("adMobInterstitialLoad failed.");
     }
   },
   Interstitial : {
