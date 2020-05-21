@@ -127,7 +127,7 @@ function pageChange(newpageID) {
     }
   }
 
-  if (newpageID=='menu' && AdMob.adStatus == 2) {
+  if (newpageID=='menu' && AdMob.adStatus > 0) {
     try {
       Android.adMobInterstitialShow();
     } catch(e) {
