@@ -51,7 +51,7 @@ function addEvt() {
 
     document.body.onmousemove = function(e) {
         if (e.clientY < 40) {
-            togglePause();
+            showSubMenu();
             return true;
         }
         user_x = e.clientX * scale_f;
@@ -115,3 +115,31 @@ function removeEvt() {
     document.body.ontouchmove = function(e) {
     }
 }
+
+function showSubMenu() {
+  if (curPage == pageIDs[2]) {
+    paused = true;
+    document.getElementById( 'bgm' ).pause();
+  }
+  document.getElementById("Submenu").style.width = "100%";
+}
+
+function hideSubMenu() {
+  document.getElementById("Submenu").style.width = "0%";
+  if (curPage == pageIDs[2]) {
+    paused = false;
+    document.getElementById( 'bgm' ).play();
+    tick();
+  }
+}
+
+/*function togglePause() {
+    paused = !paused;
+    if (!paused) {
+        document.getElementById( 'bgm' ).play();
+        tick();
+    } else {
+        document.getElementById( 'bgm' ).pause();
+        //showSubMenu();
+    }
+}*/
