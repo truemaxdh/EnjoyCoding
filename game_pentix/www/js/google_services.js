@@ -11,6 +11,11 @@ var AdMob = {
     } catch(e) {
       toast("adMobInitIntertitial failed.");
     }
+    try {
+      Android.adMobIntertitialSetToUseJSCallback();
+    } catch(e) {
+      toast("adMobIntertitialSetToUseJSCallback failed.");
+    }
   },
   Interstitial : {
     clsName : "AdMob.Interstitial",
@@ -147,11 +152,6 @@ function onDeviceReady() {
   ///////////
   // AdMob //
   ///////////
-  try {
-    Android.adMobIntertitialSetToUseJSCallback();
-  } catch(e) {
-    toast("adMobIntertitialSetToUseJSCallback failed.");
-  }
   try {
     //Android.adMobInit("ca-app-pub-7307479428475282~7899681601", "N"); 
     Android.adMobInit("ca-app-pub-3940256099942544~3347511713", "Y"); 
