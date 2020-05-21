@@ -61,7 +61,7 @@ function addEvt() {
 
     document.body.ontouchstart = function (e) {
         if (e.touches[0].clientY < 40) {
-            togglePause();
+            showSubMenu();
             return true;
         }
         user_x = e.touches[0].clientX * scale_f;
@@ -81,7 +81,7 @@ function addEvt() {
 
     document.body.ontouchmove = function(e) {
         if (e.touches[0].clientY < 40) {
-            togglePause();
+            showSubMenu();
             return true;
         }
         user_x = e.touches[0].clientX * scale_f;
