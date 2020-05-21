@@ -117,18 +117,20 @@ function removeEvt() {
 }
 
 function showSubMenu() {
-  if (curPage == pageIDs[2]) {
+  if (curPage == 'game') {
     paused = true;
     document.getElementById( 'bgm' ).pause();
+    removeEvt();
   }
   document.getElementById("Submenu").style.width = "100%";
 }
 
 function hideSubMenu() {
   document.getElementById("Submenu").style.width = "0%";
-  if (curPage == pageIDs[2]) {
+  if (curPage == 'game') {
     paused = false;
     document.getElementById( 'bgm' ).play();
+    addEvt();
     tick();
   }
 }
