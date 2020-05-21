@@ -127,6 +127,7 @@ function pageChange(newpageID) {
     }
   }
 
+  AdMob.Interstitial.onAdOpened();
   if (newpageID=='menu' && AdMob.adStatus == 2) {
     try {
       Android.adMobInterstitialShow();
