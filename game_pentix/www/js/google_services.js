@@ -127,13 +127,13 @@ function pageChange(newpageID) {
     }
   }
 
-  if (newpageID=='menu' && AdMob.adStatus > 0) {
+  /*if (newpageID=='menu' && AdMob.adStatus > 0) {
     try {
       Android.adMobInterstitialShow();
     } catch(e) {
       toast("adMobInterstitialShow failed." + e.message);
     }  
-  } 
+  }*/ 
 
   if (newpageID=='game') {
     addEvt();
