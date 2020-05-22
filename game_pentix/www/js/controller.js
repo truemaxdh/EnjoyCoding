@@ -127,8 +127,8 @@ function showSubMenu() {
 
 function hideSubMenu() {
   document.getElementById("Submenu").style.width = "0%";
+  paused = false;
   if (curPage == 'game') {
-    paused = false;
     document.getElementById( 'bgm' ).play();
     addEvt();
     tick();
