@@ -11,7 +11,7 @@ var AdMob = {
     } catch(e) {
       toast("adMobInitIntertitial failed.");
     }
-    try {
+    /*try {
       Android.adMobIntertitialSetToUseJSCallback();
     } catch(e) {
       toast("adMobIntertitialSetToUseJSCallback failed.");
@@ -20,7 +20,7 @@ var AdMob = {
       Android.adMobInterstitialLoad();
     } catch(e) {
       toast("adMobInterstitialLoad failed.");
-    }
+    }*/
   },
   Interstitial : {
     clsName : "AdMob.Interstitial",
