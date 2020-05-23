@@ -11,16 +11,11 @@ var AdMob = {
     } catch(e) {
       toast("adMobInitInterstitial failed.");
     }
-    try {
+    /*try {
       Android.adMobIntertitialSetToUseJSCallback();
     } catch(e) {
       toast("adMobInterstitialSetToUseJSCallback failed.");
-    }
-    try {
-      Android.adMobInterstitialLoad();
-    } catch(e) {
-      toast("adMobInterstitialLoad failed.");
-    }
+    }*/
   },
   Interstitial : {
     clsName : "AdMob.Interstitial",
@@ -127,9 +122,19 @@ function pageChange(newpageID) {
     }
   }
 
+  if (AdMob.adStatus == 1) {
+    try {
+      Android.adMobInterstitialLoad();
+      AdMob.adStatus = 2; 
+    } catch(e) {
+      toast("adMobInterstitialLoad failed.");
+    }
+  }
+  
   if (newpageID=='menu' && AdMob.adStatus > 0) {
     try {
       Android.adMobInterstitialShow();
+      AdMob.adStatus = 1; 
     } catch(e) {
       toast("adMobInterstitialShow failed." + e.message);
     }  
