@@ -7,20 +7,20 @@ var AdMob = {
     try {
       // "ca-app-pub-3940256099942544/1033173712" : Test
       //ca-app-pub-7307479428475282/1949829859 : Real
-      Android.adMobInitIntertitial("ca-app-pub-3940256099942544/1033173712");
+      Android.adMobInitInterstitial("ca-app-pub-3940256099942544/1033173712");
     } catch(e) {
-      toast("adMobInitIntertitial failed.");
+      toast("adMobInitInterstitial failed.");
     }
-    /*try {
+    try {
       Android.adMobIntertitialSetToUseJSCallback();
     } catch(e) {
-      toast("adMobIntertitialSetToUseJSCallback failed.");
+      toast("adMobInterstitialSetToUseJSCallback failed.");
     }
     try {
       Android.adMobInterstitialLoad();
     } catch(e) {
       toast("adMobInterstitialLoad failed.");
-    }*/
+    }
   },
   Interstitial : {
     clsName : "AdMob.Interstitial",
@@ -127,13 +127,13 @@ function pageChange(newpageID) {
     }
   }
 
-  /*if (newpageID=='menu' && AdMob.adStatus > 0) {
+  if (newpageID=='menu' && AdMob.adStatus > 0) {
     try {
       Android.adMobInterstitialShow();
     } catch(e) {
       toast("adMobInterstitialShow failed." + e.message);
     }  
-  }*/ 
+  } 
 
   if (newpageID=='game') {
     addEvt();
@@ -158,7 +158,7 @@ function onDeviceReady() {
   ///////////
   try {
     //Android.adMobInit("ca-app-pub-7307479428475282~7899681601", "N"); 
-    Android.adMobInit("ca-app-pub-3940256099942544~3347511713", "Y"); 
+    Android.adMobInit("Y"); 
   } catch(e) {
     toast("adMobInit failed." + e.message);
   }
