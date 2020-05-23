@@ -5,9 +5,9 @@ var AdMob = {
     AdMob.adStatus = 1; 
     //toast("adMobInit Complete.Start adMobInitIntertitial");
     try {
-      // "ca-app-pub-3940256099942544/1033173712" : Test
-      //ca-app-pub-7307479428475282/1949829859 : Real
-      Android.adMobInitInterstitial("ca-app-pub-3940256099942544/1033173712");
+      // ca-app-pub-3940256099942544/1033173712 : Test
+      // ca-app-pub-7307479428475282/1949829859 : Real
+      Android.adMobInitInterstitial("ca-app-pub-7307479428475282/1949829859");
     } catch(e) {
       toast("adMobInitInterstitial failed.");
     }
