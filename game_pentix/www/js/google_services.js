@@ -3,10 +3,7 @@ var AdMob = {
   adStatus : 0,
   onInitComplete : function() {
     AdMob.adStatus = 1; 
-    //toast("adMobInit Complete.Start adMobInitIntertitial");
     try {
-      // ca-app-pub-3940256099942544/1033173712 : Test
-      // ca-app-pub-7307479428475282/1949829859 : Real
       Android.adMobInitInterstitial("ca-app-pub-7307479428475282/1949829859");
     } catch(e) {
       toast("adMobInitInterstitial failed.");
@@ -131,16 +128,35 @@ function pageChange(newpageID) {
     }
   }
   
-  if (newpageID=='menu' && AdMob.adStatus > 0) {
+  if (newpageID=='menu') {
+    if (AdMob.adStatus > 0) {
+      try {
+        Android.adMobInterstitialShow();
+        AdMob.adStatus = 1; 
+      } catch(e) {
+        toast("adMobInterstitialShow failed." + e.message);
+      }
+    }
+    
     try {
-      Android.adMobInterstitialShow();
-      AdMob.adStatus = 1; 
+      var dispName = Android.getLastSignedInAccount();
+      if (!!dispName && dispName != '') 
+        toast("welcome, " + dispName);
+      else {
+        try {
+          Android.signInToGS();
+        } catch(e) {
+          toast("signInToGS failed.");
+        }
+      }
+        
     } catch(e) {
-      toast("adMobInterstitialShow failed." + e.message);
-    }  
+      toast("getLastSignedInAccount failed." + e.message);
+    }
   } 
 
   if (newpageID=='game') {
+    
     addEvt();
     newGame();
   } 
@@ -162,7 +178,6 @@ function onDeviceReady() {
   // AdMob //
   ///////////
   try {
-    //Android.adMobInit("ca-app-pub-7307479428475282~7899681601", "N"); 
     Android.adMobInit("Y"); 
   } catch(e) {
     toast("adMobInit failed." + e.message);
@@ -177,17 +192,7 @@ function onDeviceReady() {
   } catch(e) {
     toast("GoogleSignIn_getClient failed." + e.message);
   }
-  /*try {
-    var dispName = Android.getLastSignedInAccount();
-    toast(dispName);
-  } catch(e) {
-    toast("getLastSignedInAccount failed." + e.message);
-  }*/
-  try {
-    Android.signInToGS();
-  } catch(e) {
-    toast("signInToGS failed.");
-  }
+  
   render_init();
   pageChange('menu');
 }
