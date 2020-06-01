@@ -58,6 +58,12 @@ h1 {
     text-shadow: 1px 1px 2px #000;
 }
 
+.smallText {
+    right:0px;
+    font-size:13px;
+    text-decoration: underline;
+}
+
 /* game */
 #score_board { 
     /*color: #d54d7b; */
@@ -86,21 +92,6 @@ h1 {
     /*background-image: URL("../img/bg.png");*/
 }
 
-/*#controller {
-    user-select: none;
-    -ms-user-select: none; 
-    -moz-user-select: -moz-none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-}
-
-.button {
-    width:50px;
-    height:50px;
-    line-height:50px;
-    display: inline-block;
-    text-align: center;
-}*/
 
 /* The Overlay (background) */
 .overlay {
