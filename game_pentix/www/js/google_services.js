@@ -100,7 +100,7 @@ function ShowAchievements() {
 
 function ShowHighScores() {
   try {
-      Android.showLeaderboard();
+      Android.showLeaderboard(leaderboardId);
   } catch(e) {
     toast("failed.");
   }
