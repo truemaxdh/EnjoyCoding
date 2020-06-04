@@ -72,6 +72,11 @@ h1 {
     text-shadow: 1px 1px 2px #000;
 }
 
+.topContent {
+    position:fixed;
+    top : 0px;
+}
+
 /* game */
 #score_board { 
     /*color: #d54d7b; */
