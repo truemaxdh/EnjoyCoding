@@ -60,8 +60,8 @@ var achvIds = ["CgkItYKH-eAXEAIQAQ",
 
 var achvLines = [1,3,6,10,15];
 var glGameSvc = {
-  loginStatus : false;
-}
+  loginStatus : false
+};
 
 function chkAndUnlockAchievement(lineCnt) {
   var idx = achvLines.indexOf(lineCnt);
