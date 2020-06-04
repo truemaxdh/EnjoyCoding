@@ -177,12 +177,12 @@ function setGamerProfile(isConnected , dispName) {
   var elLogOut = document.getElementById("logOut");
   var cont = "";
   if (isConnected == "connected") {
-    elCont.innerHTML = "<span style='font-size:15px;'>Hello, " + dispName + "</span>";
+    elCont.innerHTML = "<center style='font-size:23px;'>Hello, " + dispName + "</center>";
     elLogIn.style.display = "none";
     //elLogOut.style.display = "block";
     glGameSvc.loginStatus = true;
   } else {
-    elCont.innerHTML = "Sign in with Google to share your scores and achievements with your friends.";
+    elCont.innerHTML = "<center style='font-size:15px;'>Sign in with Google to share your scores and achievements with your friends.</center>";
     elLogIn.style.display = "block";
     //elLogOut.style.display = "none";
     glGameSvc.loginStatus = false;
