@@ -57,13 +57,16 @@ function showHideBanner(bShow) {
 
 // Google Game Service Ids
 var leaderboardId = "CgkItYKH-eAXEAIQBg";
-var achvIds = ["CgkItYKH-eAXEAIQAQ",
-               "CgkItYKH-eAXEAIQAg",
-               "CgkItYKH-eAXEAIQAw",
-               "CgkItYKH-eAXEAIQBA",
-               "CgkItYKH-eAXEAIQBQ"];
+var achvIds = [
+  "CgkItYKH-eAXEAIQAQ",
+  "CgkItYKH-eAXEAIQAg",
+  "CgkItYKH-eAXEAIQAw",
+  "CgkItYKH-eAXEAIQBA",
+  "CgkItYKH-eAXEAIQBQ",
+  "CgkItYKH-eAXEAIQCA"
+];
 
-var achvLines = [1,3,6,10,15];
+var achvLines = [1,3,6,10,15,20];
 var glGameSvc = {
   loginStatus : false
 };
