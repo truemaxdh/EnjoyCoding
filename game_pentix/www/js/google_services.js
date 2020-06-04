@@ -142,17 +142,13 @@ function pageChange(newpageID) {
     }
     
     try {
-      var dispName = Android.getLastSignedInAccount();
-      if (!!dispName && dispName != '') 
-        toast("welcome, " + dispName);
-      else {
+      if (!glGameSvc.loginStatus) {
         try {
           Android.signInToGS();
         } catch(e) {
           toast("signInToGS failed.");
         }
       }
-        
     } catch(e) {
       toast("getLastSignedInAccount failed." + e.message);
     }
@@ -183,12 +179,12 @@ function setGamerProfile(isConnected , dispName) {
   if (isConnected == "connected") {
     elCont.innerHTML = "Hello, " + dispName;
     elLogIn.style.display = "none";
-    elLogOut.style.display = "block";
+    //elLogOut.style.display = "block";
     glGameSvc.loginStatus = true;
   } else {
     elCont.innerHTML = "Sign in with Google to share your scores and achievements with your friends.";
     elLogIn.style.display = "block";
-    elLogOut.style.display = "none";
+    //elLogOut.style.display = "none";
     glGameSvc.loginStatus = false;
   }
 }
@@ -208,12 +204,10 @@ function onDeviceReady() {
   ///////////////////////////
   // Google Game Services  //
   ///////////////////////////
-  if (!glGameSvc.loginStatus) {
-    try {
-      Android.GoogleSignIn_getClient();
-    } catch(e) {
-      toast("GoogleSignIn_getClient failed." + e.message);
-    }
+  try {
+    Android.GoogleSignIn_getClient();
+  } catch(e) {
+    toast("GoogleSignIn_getClient failed." + e.message);
   }
   
   render_init();
