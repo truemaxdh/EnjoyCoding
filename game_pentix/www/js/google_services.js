@@ -59,6 +59,9 @@ var achvIds = ["CgkItYKH-eAXEAIQAQ",
                "CgkItYKH-eAXEAIQBQ"];
 
 var achvLines = [1,3,6,10,15];
+var glGameSvc = {
+  loginStatus : false;
+}
 
 function chkAndUnlockAchievement(lineCnt) {
   var idx = achvLines.indexOf(lineCnt);
@@ -181,10 +184,12 @@ function setGamerProfile(isConnected , dispName) {
     elCont.innerHTML = "Hello, " + dispName;
     elLogIn.style.display = "none";
     elLogOut.style.display = "block";
+    glGameSvc.loginStatus = true;
   } else {
     elCont.innerHTML = "Sign in with Google to share your scores and achievements with your friends.";
     elLogIn.style.display = "block";
     elLogOut.style.display = "none";
+    glGameSvc.loginStatus = false;
   }
 }
 
@@ -203,10 +208,12 @@ function onDeviceReady() {
   ///////////////////////////
   // Google Game Services  //
   ///////////////////////////
-  try {
-    Android.GoogleSignIn_getClient();
-  } catch(e) {
-    toast("GoogleSignIn_getClient failed." + e.message);
+  if (!glGameSvc.loginStatus) {
+    try {
+      Android.GoogleSignIn_getClient();
+    } catch(e) {
+      toast("GoogleSignIn_getClient failed." + e.message);
+    }
   }
   
   render_init();
