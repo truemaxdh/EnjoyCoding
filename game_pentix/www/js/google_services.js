@@ -172,6 +172,22 @@ function toast(msg) {
   
 }
 
+function setGamerProfile(isConnected , dispName) {
+  var elCont = document.getElementById("signInStat");
+  var elLogIn = document.getElementById("logIn");
+  var elLogOut = document.getElementById("logOut");
+  var cont = "";
+  if (isConnected == "connected") {
+    elCont.innerHTML = "Hello, " + dispName;
+    elLogIn.style.display = "none";
+    elLogOut.style.display = "block";
+  } else {
+    elCont.innerHTML = "Sign in with Google to share your scores and achievements with your friends.";
+    elLogIn.style.display = "block";
+    elLogOut.style.display = "none";
+  }
+}
+
 // Do this when run as app
 function onDeviceReady() {
   ///////////
