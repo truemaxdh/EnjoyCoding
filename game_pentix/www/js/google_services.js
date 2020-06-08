@@ -8,11 +8,11 @@ var AdMob = {
     } catch(e) {
       toast("adMobInitInterstitial failed.");
     }
-    /*try {
+    try {
       Android.adMobInitBanner("ca-app-pub-7307479428475282/6870451218"); 
     } catch(e) {
       toast("adMobInitBanner failed.");
-    }*/ 
+    } 
     /*try {
       Android.adMobIntertitialSetToUseJSCallback();
     } catch(e) {
