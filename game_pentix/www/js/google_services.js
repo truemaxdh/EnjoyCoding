@@ -9,7 +9,7 @@ var AdMob = {
       toast("adMobInitInterstitial failed.");
     }
     /*try {
-      Android.adMobInitBanner("ca-app-pub-7307479428475282/6870451218"); 
+      Android.adMobInitBanner(); 
     } catch(e) {
       toast("adMobInitBanner failed.");
     }*/ 
