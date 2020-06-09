@@ -46,6 +46,8 @@ function pageChange(newpageID) {
   if (newpageID=='game') {
     newGame();
   } 
+
+  curPage = newpageID;
 }
 
 function toast(msg) {
