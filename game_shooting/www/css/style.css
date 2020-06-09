@@ -33,7 +33,7 @@ h3 {
 .menu {
     width:98vw;
     height:94vh;
-    background-image: url('../img/logo.png');
+    background-image: url('../img/menu_bg.png');
     background-repeat : no-repeat;
     background-position : center center;
 }
