@@ -26,7 +26,7 @@
     <div id = "intro" class="menu border_round">
     </div>
     <div id = "menu" class="menu border_round">
-    <div class = "topContent">
+      <div class = "topContent">
         <center>
           <div id="signInStat">
             <br><p style='font-size:23px;'>Hello...</p>
@@ -53,12 +53,23 @@
       <a href="javascript:void(0)" class="closebtn" onclick="CloseUserResult()">&times;</a>
 
       <!-- Overlay content -->
-    <div class="overlay-content">
-    <img id="user_img" />
-    <div class="text">You Scored <div id="user_score"></div></div>
-    <a href="#" onclick="ShowAchievements();">Show Achievements</a>
-    <a href="#" onclick="ShowHighScores();">Show High Scores</a>
+      <div class="overlay-content">
+        <img id="user_img" />
+        <div class="text">You Scored <div id="user_score"></div></div>
+        <a href="#" onclick="ShowAchievements();">Show Achievements</a>
+        <a href="#" onclick="ShowHighScores();">Show High Scores</a>
+      </div>
     </div>
+    
+    <!-- Submenu -->
+    <div id="Submenu" class="overlay">
+      
+      <!-- Overlay content -->
+      <div class="overlay-content">
+        <a href="#" onclick="pageChange('menu');hideSubMenu();">Exit Current Game</a>
+        <a href="#" onclick="Android.exitApp();">Exit App</a>
+        <a href="#" onclick="hideSubMenu();">Resume</a>
+      </div>
     </div>
   </body>
 </html>
