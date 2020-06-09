@@ -60,6 +60,21 @@ h3 {
     color: #2d5bb5;
 }
 
+.smallText {
+    
+}
+
+.smallText a {
+    font-size:17px;
+    color: #000;
+    text-shadow: 1px 1px 2px #b25;
+}
+
+.smallText a:hover, .smallText a:focus {
+    color: #d54d7b;
+    text-shadow: 1px 1px 2px #000;
+}
+
 .topContent {
     position:fixed;
     top : 0px;
