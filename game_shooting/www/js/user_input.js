@@ -11,8 +11,8 @@ function init_user_input() {
         user_x_ori = user_x;
         user_y_ori = user_y;
         
-        if (user_y_ori <= 60) {
-            togglePause();
+        if (user_y_ori <= 60 && user_x_ori > 400) {
+            showSubMenu();
         }
         
         user_pressing = true;
@@ -36,8 +36,8 @@ function init_user_input() {
         user_x_ori = user_x;
         user_y_ori = user_y;
         
-        if (user_y <= 60) {
-            togglePause();
+        if (user_y_ori <= 60 && user_x_ori > 400) {
+            showSubMenu();
         }
         
         user_pressing = true;
