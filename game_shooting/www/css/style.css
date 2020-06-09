@@ -16,7 +16,7 @@
 /* menu */
 h1 { 
     /* color: #4d7bd5; */
-    color: #777; 
+    color: #333; 
     font-family: "Sniglet-ExtraBold"; 
     font-size: 55px;/*10vw;*/  
     text-align: center; 
@@ -48,7 +48,7 @@ h3 {
 
 .text a { 
     /* color: #4d7bd5; */
-    color: #777; 
+    color: #333; 
     font-size: 25px; 
     text-align: center; 
     text-shadow: 1px 1px 2px #082b34;
