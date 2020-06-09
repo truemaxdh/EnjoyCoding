@@ -83,23 +83,6 @@ function newGame() {
     requestAnimationFrame(tick);
 }
 
-function togglePause() {
-    /*if (objInterval > 0) {
-        clearInterval(objInterval);
-        objInterval = -1;
-    } else {
-        objInterval = setInterval(tick, 50);
-    }*/
-    pause = !pause;
-    if (!pause) {
-        document.getElementById( 'bgm' ).play();
-        last_animation_time = 0;
-        requestAnimationFrame(tick);
-    } else {
-        document.getElementById( 'bgm' ).pause();
-    }
-}
-
 function gameOver() {
     if (o_game_over == null) {
         gameover_flag = true;
