@@ -55,3 +55,22 @@ function init_user_input() {
         return false;
     }
 }
+
+function showSubMenu() {
+  if (curPage == 'game') {
+    paused = true;
+    document.getElementById( 'bgm' ).pause();
+    removeEvt();
+  }
+  document.getElementById("Submenu").style.width = "100%";
+}
+
+function hideSubMenu() {
+  document.getElementById("Submenu").style.width = "0%";
+  paused = false;
+  if (curPage == 'game') {
+    document.getElementById( 'bgm' ).play();
+    addEvt();
+    tick();
+  }
+}
