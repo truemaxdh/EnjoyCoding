@@ -60,7 +60,6 @@ function showSubMenu() {
   if (curPage == 'game') {
     paused = true;
     document.getElementById( 'bgm' ).pause();
-    removeEvt();
   }
   document.getElementById("Submenu").style.width = "100%";
 }
@@ -70,7 +69,6 @@ function hideSubMenu() {
   paused = false;
   if (curPage == 'game') {
     document.getElementById( 'bgm' ).play();
-    addEvt();
     tick();
   }
 }
