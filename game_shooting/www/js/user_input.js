@@ -74,3 +74,14 @@ function hideSubMenu() {
     tick();
   }
 }
+
+/*function togglePause() {
+    pause = !pause;
+    if (!pause) {
+        document.getElementById( 'bgm' ).play();
+        last_animation_time = 0;
+        requestAnimationFrame(tick);
+    } else {
+        document.getElementById( 'bgm' ).pause();
+    }
+}*/
