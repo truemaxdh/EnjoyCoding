@@ -93,18 +93,15 @@ function gameOver() {
         document.getElementById( 'bgm' ).pause();
         pause = true;        
         if (isApp) {
-            window.game.submitScore(leaderboardId, score);
-            window.game.onSubmitScoreSucceeded = function() {
-                OpenUserResult();
-            };
-            window.game.onSubmitScoreFailed = function() {
-                OpenUserResult();
-            };
-        } else {
-            OpenUserResult();
+          try {  
+            Android.submitScore(leaderboardId, score);
+          } catch(e) {
+            Android.showToast("submitScoe failed.");
+          }
+
         }
+        OpenUserResult();
         document.getElementById('user_score').innerHTML = score;
-//        return;
     }
     o_game_over.render(ctx_game);
 }
