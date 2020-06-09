@@ -1,91 +1,64 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <meta name="description" content="a simple flight shooting game, with only a few rules.Avoid bombs.Shoot coins, but not bump into coins.Coins are differ with their number in endurance and score." />
-        <script type="application/ld+json">
-          {"description":"a simple flight shooting game, with only a few rules.Avoid bombs.Shoot coins, but not bump into coins.Coins are differ with their number in endurance and score.","author":{"@type":"Person","name":"truemaxdh"},"@type":"Game","url":"https://truemaxdh.github.io/EnjoyCoding/game_shooting/www/","headline":"Sky Miner - free Shooting game","dateModified":"2018-07-12T00:00:00+00:00","datePublished":"2018-07-12T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://truemaxdh.github.io/EnjoyCoding/game_shooting/www/"},"@context":"http://schema.org"}
-        </script>
-	<!--<link rel="stylesheet" type="text/css" href="css/index.css">-->
-        <title>Tiny Flight</title>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script type="text/javascript" src="cordova.js"></script>
-        <script src="js/sound_effects.js"></script>
-        <script src="js/game_objects.js"></script>
-        <script src="js/render.js"></script>
-        <script src="js/user_input.js"></script>
-        <script src="js/game.js"></script>
-        <script src="js/google_api_js.js"></script>
-        <script src="js/device_init.js"></script>
-	<style>
-	  body {
-            /* Disables pull-to-refresh but allows overscroll glow effects. */
-            overscroll-behavior-y: contain;
-          }
-	</style>
-    </head>
-    <body>
-        <div id = "intro" class="menu border_round">
-            <div class = "text">
-                <h1>Tiny Flight</h1>
-                <h3>Welcome!!<br>Wait for a while!!</h3>
-            </div>
-        </div>
-        <div id = "menu" class="menu border_round">
-            <div class = "text">
-                <h1>Tiny Flight</h1>
-                <a href="#" onclick="pageChange('game');">Start</a>
-                <a href="#" onclick="ShowAchievements();">Show Achievements</a>
-                <a href="#" onclick="ShowHighScores();">Show High Scores</a>
-            </div>
-        </div>
-        <div id = "game">
-		        <audio id="bgm" src="sound/FirstFlight.mp3" preload="auto" loop></audio>
-            <canvas id="bg_canvas" width="540" height="2700"></canvas>
-            <canvas id="game_canvas" width="540" height="900"></canvas>
-        </div>    
-        <!-- The overlay -->
-        <div id="user_result" class="overlay">
-            <!-- Button to close the overlay navigation -->
-            <a href="javascript:void(0)" class="closebtn" onclick="CloseUserResult()">&times;</a>
+  <head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="description" content="a simple flight shooting game, with only a few rules.Avoid bombs.Shoot coins, but not bump into coins.Coins are differ with their number in endurance and score." />
+    
+    <title>Doodle Flight</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/sound_effects.js"></script>
+    <script src="js/game_objects.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/user_input.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/google_api_js.js"></script>
+    <script src="js/device_init.js"></script>
+  <style>
+   body {
+      /* Disables pull-to-refresh but allows overscroll glow effects. */
+      overscroll-behavior-y: contain;
+     }
+  </style>
+  </head>
+  <body>
+    <div id = "intro" class="menu border_round">
+    </div>
+    <div id = "menu" class="menu border_round">
+    <div class = "topContent">
+        <center>
+          <div id="signInStat">
+            <br><p style='font-size:23px;'>Hello...</p>
+          </div><br>
+          <img id="logIn" src="img/btn_google_signin_dark_normal_web.png" style="display:none;" onclick="Android.signInToGS();">
+          <button id="logOut" style="display:none;">로그아웃</button>
+        </center>
+      </div>    
+      <div class = "text">
+        <h1>Tiny Flight</h1>
+        <a href="#" onclick="pageChange('game');">Start</a>
+        <a href="#" onclick="ShowAchievements();">Show Achievements</a>
+        <a href="#" onclick="ShowHighScores();">Show High Scores</a>
+      </div>
+    </div>
+    <div id = "game">
+      <audio id="bgm" src="sound/FirstFlight.mp3" preload="auto" loop></audio>
+      <canvas id="bg_canvas" width="540" height="2700"></canvas>
+      <canvas id="game_canvas" width="540" height="900"></canvas>
+    </div>  
+    <!-- The overlay -->
+    <div id="user_result" class="overlay">
+      <!-- Button to close the overlay navigation -->
+      <a href="javascript:void(0)" class="closebtn" onclick="CloseUserResult()">&times;</a>
 
-            <!-- Overlay content -->
-	    <div class="overlay-content">
-		<img id="user_img" />
-		<div class="text">You Scored <div id="user_score"></div></div>
-		<a href="#" onclick="ShowAchievements();">Show Achievements</a>
-		<a href="#" onclick="ShowHighScores();">Show High Scores</a>
-	   </div>
-        </div>
-    </body>
+      <!-- Overlay content -->
+    <div class="overlay-content">
+    <img id="user_img" />
+    <div class="text">You Scored <div id="user_score"></div></div>
+    <a href="#" onclick="ShowAchievements();">Show Achievements</a>
+    <a href="#" onclick="ShowHighScores();">Show High Scores</a>
+    </div>
+    </div>
+  </body>
 </html>
