@@ -4,7 +4,7 @@ var AdMob = {
   onInitComplete : function() {
     AdMob.adStatus = 1; 
     try {
-      Android.adMobInitInterstitial("ca-app-pub-3940256099942544/1033173712");
+      Android.adMobInitInterstitial("ca-app-pub-7307479428475282/1960854989");
     } catch(e) {
       toast("adMobInitInterstitial failed.");
     }
