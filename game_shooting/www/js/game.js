@@ -1,9 +1,17 @@
 // concerning game frame
+var frame = {
+    animation_interval : 0,
+    last_animation_time : 0,
+    pause : true,
+    gameover_flag : false
+}
+/*
 var animation_interval;
 var last_animation_time;
 var pause = true;
 var o_game_over;
 var gameover_flag;
+*/
 
 // concerning score
 var score;
@@ -47,9 +55,10 @@ var stage_design;/* = {
 var effect_flag;
 
 function game_init() {
-    gameover_flag = false;
+    frame.gameover_flag = false;
     effect_flag = false;
     score = 0;
+    stage_design = new _stage_def();
     missile_interval = stage_design.missile_interval;
     millisec_played = 0;
     stage = 1;
@@ -72,16 +81,16 @@ function game_init() {
     coin_interval = 0;
     coin_bullet_interval = 0;
     
-    last_animation_time = 0;
+    frame.last_animation_time = 0;
     
-    stage_design = new _stage_def();
+    
 }
 
 function newGame() {
     // clearInterval(objInterval);
-    pause = true;
+    frame.pause = true;
     game_init();
-    pause = false;
+    frame.pause = false;
     // objInterval = setInterval(tick, 50);
     document.getElementById( 'bgm' ).play();
     requestAnimationFrame(tick);
@@ -89,13 +98,13 @@ function newGame() {
 
 function gameOver() {
     if (o_game_over == null) {
-        gameover_flag = true;
+        frame.gameover_flag = true;
         o_game_over = new objGameOver();
         o_jet.game_over();
     } else if (o_game_over.count_down-- == 0) {
         // clearInterval(objInterval);
         document.getElementById( 'bgm' ).pause();
-        pause = true;        
+        frame.pause = true;        
         if (isApp) {
           try {  
             Android.submitScore(leaderboardId, score);
@@ -111,15 +120,15 @@ function gameOver() {
 }
 
 function tick(cur_time) {
-    animation_interval = cur_time - (last_animation_time==0 ? cur_time : last_animation_time);
-    last_animation_time = cur_time;
-    millisec_played += animation_interval;
+    frame.animation_interval = cur_time - (frame.last_animation_time==0 ? cur_time : frame.last_animation_time);
+    frame.last_animation_time = cur_time;
+    millisec_played += frame.animation_interval;
     
     if (!effect_flag) {
         upcoming_obj();
     }
     render();
-    if (gameover_flag) {
+    if (frame.gameover_flag) {
         gameOver();
     } else {
         proc_user_input();
@@ -128,7 +137,7 @@ function tick(cur_time) {
         }
     }
     
-    if (!pause) {
+    if (!frame.pause) {
         requestAnimationFrame(tick);
     }
 }
@@ -148,7 +157,7 @@ function proc_user_input() {
             var o_missile = new objMissile(o_jet.x, o_jet.y);
             push_to_chain(o_missile, missile_ends);  
         } 
-        missile_interval += animation_interval;
+        missile_interval += frame.animation_interval;
     } else {
         missile_interval = stage_design.missile_interval;
     }
@@ -170,7 +179,7 @@ function upcoming_obj() {
         coin_bullet_interval = 0;
         stage++;
     } else {
-        coin_interval += animation_interval;
+        coin_interval += frame.animation_interval;
         if (stage_design.coin_types[stage-1].length > 0 && coin_interval > stage_design.coin_interval) {
             var rnd = parseInt(Math.random() * stage_design.coin_types[stage-1].length);
             var o_coin = new objCoinGray(o_jet.x, o_jet.y, stage_design.coin_types[stage-1][rnd]);
@@ -178,7 +187,7 @@ function upcoming_obj() {
             coin_interval -= stage_design.coin_interval;
         }
 
-        coin_bullet_interval += animation_interval;
+        coin_bullet_interval += frame.animation_interval;
         if (stage_design.coinBullets[stage-1] > 0 && coin_bullet_interval > stage_design.bullet_interval) {
             var o_coin_bullet = new objCoinBullet(o_jet.x, o_jet.y);
             push_to_chain(o_coin_bullet, coin_bullet_ends);  
@@ -211,14 +220,14 @@ function collision_check() {
     var o_coin = collision_obj_grp(o_jet, coin_ends);
     if (o_coin != null) {
         remove_from_chain(o_coin, coin_ends);
-        gameover_flag = true;
+        frame.gameover_flag = true;
     }
 
     // check collision of coin bullet and airplane
     var o_coin_bullet = collision_obj_grp(o_jet, coin_bullet_ends);
     if (o_coin_bullet != null) {
         remove_from_chain(o_coin_bullet, coin_bullet_ends);
-        gameover_flag = true;
+        frame.gameover_flag = true;
     }
 }
 
