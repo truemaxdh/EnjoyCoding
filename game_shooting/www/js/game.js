@@ -107,7 +107,7 @@ function gameOver() {
         frame.pause = true;        
         if (isApp) {
           try {  
-            Android.submitScore(leaderboardId, score);
+            Android.submitScore(glGameSvc.leaderboardId, score);
           } catch(e) {
             Android.showToast("submitScoe failed.");
           }
