@@ -73,7 +73,7 @@ function chkAndUnlockAchievement(score) {
     
     if ( glGameSvc.achvScores[i] < score) {
       try {  
-        Android.unlockAchievement(glGameSvc.achvIds[idx]);
+        Android.unlockAchievement(glGameSvc.achvIds[i]);
       } catch(e) {
         toast("unlockAchievement failed.");
       }
