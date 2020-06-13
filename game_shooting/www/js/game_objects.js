@@ -40,8 +40,8 @@ function gameobj(x, y) {
     this.next = null;
     this.img = null;
     this.move = function() {
-        this.x += this.step_x * animation_interval / 1000;
-        this.y += this.step_y * animation_interval / 1000;
+        this.x += this.step_x * frame.animation_interval / 1000;
+        this.y += this.step_y * frame.animation_interval / 1000;
         if (this.x < 0 || this.y < 0 || this.x > 720 || this.y > 900) {
             if (this.prev!=null) {
                 this.prev.next = this.next;
@@ -139,7 +139,7 @@ function objStageClear(stage) {
         ctx_game.fillStyle = grd;
         ctx_game.font = '50px Sniglet-ExtraBold';
         ctx_game.fillText('Stage' + stage + ' Clear!', c_x - 200, c_y - 25);
-        this.count_down -= animation_interval;
+        this.count_down -= frame.animation_interval;
         if (this.count_down <= 0) {
             effect_flag = false;
             coin_ends[0].next = coin_ends[1];
