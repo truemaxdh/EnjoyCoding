@@ -65,7 +65,7 @@ var glGameSvc = {
     "CgkIwPzgz_EBEAIQBA",
     "CgkIwPzgz_EBEAIQBQ"
   ],
-  achvScores = [500, 2000, 5000, 10000, 20000]
+  achvScores : [500, 2000, 5000, 10000, 20000]
 };
 
 function chkAndUnlockAchievement(score) {
