@@ -42,20 +42,8 @@ var AdMob = {
     }
   }
 }
-/*
-//display the banner 
-function showHideBanner(bShow) {
-  if (isApp) {
-    if (bShow) {
-      window.plugins.AdMob.createBannerView();
-    } else {
-      window.plugins.AdMob.destroyBannerView();
-    } 
-  }
-}
-*/
 
-// Google Game Service Ids
+/*// Google Game Service Ids
 var leaderboardId = "CgkIwPzgz_EBEAIQBg";
 var achvIds = [
   "CgkIwPzgz_EBEAIQAQ",
@@ -65,12 +53,35 @@ var achvIds = [
   "CgkIwPzgz_EBEAIQBQ"
 ];
 
-var achvScores = [500, 2000, 5000, 10000, 20000];
+var achvScores = [500, 2000, 5000, 10000, 20000];*/
 var glGameSvc = {
-  loginStatus : false
+  loginStatus : false,
+
+  // Google Game Service Ids
+  leaderboardId : "CgkIwPzgz_EBEAIQBg",
+  achvIds : [
+    "CgkIwPzgz_EBEAIQAQ",
+    "CgkIwPzgz_EBEAIQAg",
+    "CgkIwPzgz_EBEAIQAw",
+    "CgkIwPzgz_EBEAIQBA",
+    "CgkIwPzgz_EBEAIQBQ"
+  ],
+  achvScores = [500, 2000, 5000, 10000, 20000]
 };
+
 function chkAndUnlockAchievement(score) {
-  var idx = achvScores.indexOf(score);
+  for (var i = achvScores.length - 1; i >= 0; i--) {
+    
+    if ( achvScores[i] < score) {
+      try {  
+        Android.unlockAchievement(achvIds[idx]);
+      } catch(e) {
+        toast("unlockAchievement failed.");
+      }
+      break;	
+    }
+  }
+  /* var idx = achvScores.indexOf(score);
   if (idx > -1) {
     try {  
       Android.unlockAchievement(achvIds[idx]);
@@ -78,6 +89,7 @@ function chkAndUnlockAchievement(score) {
       toast("unlockAchievement failed.");
     }
   }
+  */
 }
 /*
 function GetUserImg() {
