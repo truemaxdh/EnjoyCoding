@@ -52,7 +52,6 @@ var achvIds = [
   "CgkIwPzgz_EBEAIQBA",
   "CgkIwPzgz_EBEAIQBQ"
 ];
-
 var achvScores = [500, 2000, 5000, 10000, 20000];*/
 var glGameSvc = {
   loginStatus : false,
@@ -70,11 +69,11 @@ var glGameSvc = {
 };
 
 function chkAndUnlockAchievement(score) {
-  for (var i = achvScores.length - 1; i >= 0; i--) {
+  for (var i = glGameSvc.achvScores.length - 1; i >= 0; i--) {
     
-    if ( achvScores[i] < score) {
+    if ( glGameSvc.achvScores[i] < score) {
       try {  
-        Android.unlockAchievement(achvIds[idx]);
+        Android.unlockAchievement(glGameSvc.achvIds[idx]);
       } catch(e) {
         toast("unlockAchievement failed.");
       }
@@ -121,7 +120,7 @@ function ShowAchievements() {
 
 function ShowHighScores() {
   try {
-    Android.showLeaderboard(leaderboardId);
+    Android.showLeaderboard(glGameSvc.leaderboardId);
   } catch(e) {
     toast("failed.");
   }
