@@ -22,14 +22,18 @@ var coin_bullet_interval;
 // concerning stage
 var millisec_played;
 var stage;
-//var stage_second = 50;
-// [[tick_cnt, coin_type, coin_interval, bullet_interval],....]
-/* var stage_design = [
-    [50000, 0, 4000, 4000],  [110000, 0, 3600, 3600],   [170000, 0, 3200, 3200],   [230000, 0, 2800, 2800], 
-    [290000, 1, 2400, 2400], [350000, 1, 2000, 2000],  [410000, 1, 1600, 1600],  [470000, 1, 1200, 1200],
-    [530000, 2, 800, 800], [590000, 2, 400, 400]
-];*/
-var stage_design = {
+
+function _stage_def() {
+    this.max_stage = 10;
+    this.stage_tick = 40000;
+    this.missile_interval = 200;
+    this.coin_interval = 4000;
+    this.bullet_interval = 3000;
+    this.coin_types = [[0], [0], [1], [1], [2], [2], [0, 1, 2], [0, 1, 2], [0, 1, 2], [0, 1, 2]];
+    this.coinBullets = [0, 1, 0, 1, 0, 1, 1, 1, 1, 1];
+}
+
+var stage_design;/* = {
     max_stage : 10,
     stage_tick : 40000,
     missile_interval : 200,
@@ -37,9 +41,7 @@ var stage_design = {
     bullet_interval : 3000,
     coin_types : [[0], [0], [1], [1], [2], [2], [0, 1, 2], [0, 1, 2], [0, 1, 2], [0, 1, 2]],
     coinBullets : [0, 1, 0, 1, 0, 1, 1, 1, 1, 1]
-}
-//console.log(stage_design.coin_types);
-//console.log(stage_design.coin_types[0]);
+}*/
 
 // concerning extra effect
 var effect_flag;
@@ -71,6 +73,8 @@ function game_init() {
     coin_bullet_interval = 0;
     
     last_animation_time = 0;
+    
+    stage_design = new _stage_def();
 }
 
 function newGame() {
