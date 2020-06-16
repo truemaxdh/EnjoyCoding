@@ -99,8 +99,8 @@ function pageChange(newpageID) {
       }
     } catch(e) {
       toast("getLastSignedInAccount failed." + e.message);
-    }
-  }*/ 
+    }*/
+  }
 
   if (newpageID=='game') {
     addEvt();
