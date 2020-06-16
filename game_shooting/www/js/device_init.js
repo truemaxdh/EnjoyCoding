@@ -65,7 +65,7 @@ function setGamerProfile(isConnected , dispName) {
   var elLogOut = document.getElementById("logOut");
   var cont = "";
   if (isConnected == "connected") {
-    elCont.innerHTML = "<br><p style='font-size:25px;'>Hello, " + dispName + "</p>";
+    elCont.innerHTML = "<br><p style='font-size:25px;'>Hi, " + dispName + "</p>";
     elLogIn.style.display = "none";
     elLogOut.style.display = "block";
     glGameSvc.loginStatus = true;
