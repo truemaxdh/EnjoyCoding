@@ -32,6 +32,7 @@ var glGameSvc = {
 };
 
 function chkAndUnlockAchievement(score) {
+  if (!glGameSvc.loginStatus) return;
   for (var i = glGameSvc.achvScores.length - 1; i >= 0; i--) {
     
     if ( glGameSvc.achvScores[i] < score) {
@@ -55,6 +56,7 @@ function  CloseUserResult() {
 }
 
 function ShowAchievements() {
+  if (!glGameSvc.loginStatus) return;
   try {
     Android.showAchievements();
   } catch(e) {
@@ -63,6 +65,7 @@ function ShowAchievements() {
 }
 
 function ShowHighScores() {
+  if (!glGameSvc.loginStatus) return;
   try {
     Android.showLeaderboard(glGameSvc.leaderboardId);
   } catch(e) {
