@@ -8,11 +8,6 @@ var AdMob = {
     } catch(e) {
       toast("adMobInitInterstitial failed.");
     }
-    try {
-      Android.adMobInitBanner(); 
-    } catch(e) {
-      toast("adMobInitBanner failed.");
-    }
   }
 }
 
