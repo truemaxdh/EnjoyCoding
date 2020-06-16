@@ -105,7 +105,7 @@ function gameOver() {
         // clearInterval(objInterval);
         document.getElementById( 'bgm' ).pause();
         frame.pause = true;        
-        if (isApp) {
+        if (isApp && glGameSvc.loginStatus) {
           try {  
             Android.submitScore(glGameSvc.leaderboardId, score);
           } catch(e) {
