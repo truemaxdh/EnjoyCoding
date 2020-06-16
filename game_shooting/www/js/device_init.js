@@ -82,7 +82,7 @@ function onDeviceReady() {
   ///////////
   // AdMob //
   ///////////
-  AdMob.onInitComplete();
+  AdMob.adStatus = 1;
   
   render_init();
   init_user_input();
