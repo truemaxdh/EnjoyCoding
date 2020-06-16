@@ -82,21 +82,11 @@ function onDeviceReady() {
   ///////////
   // AdMob //
   ///////////
-  try {
-    Android.adMobInit("Y"); 
-  } catch(e) {
-    toast("adMobInit failed." + e.message);
-  }
+  AdMob.onInitComplete();
 
   ///////////////////////////
   // Google Game Services  //
   ///////////////////////////
-  try {
-    Android.GoogleSignIn_getClient();
-  } catch(e) {
-    toast("GoogleSignIn_getClient failed." + e.message);
-  }
-  
   render_init();
   init_user_input();
   pageChange('menu');
