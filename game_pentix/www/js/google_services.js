@@ -1,59 +1,7 @@
 // AdMob
 var AdMob = {
-  adStatus : 0,
-  onInitComplete : function() {
-    AdMob.adStatus = 1; 
-    try {
-      Android.adMobInitInterstitial("ca-app-pub-7307479428475282/1949829859");
-    } catch(e) {
-      toast("adMobInitInterstitial failed.");
-    }
-    try {
-      Android.adMobInitBanner(); 
-    } catch(e) {
-      toast("adMobInitBanner failed.");
-    }
-    /*try {
-      Android.adMobIntertitialSetToUseJSCallback();
-    } catch(e) {
-      toast("adMobInterstitialSetToUseJSCallback failed.");
-    }*/
-  },
-  Interstitial : {
-    clsName : "AdMob.Interstitial",
-    onAdLoaded : function() {
-      AdMob.adStatus = 2;
-      toast("adMob Intertitial Load Complete.");
-    },
-    onAdFailedToLoad : function() {
-      toast("adMob Intertitial Load Failed.");
-    },
-    onAdOpened : function() {
-      toast("adMob Intertitial Ad Opened.");
-    },
-    onAdClicked : function() {
-      toast("adMob Intertitial Ad Clicked.");
-    },
-    onAdLeftApplication : function() {
-      toast("adMob Intertitial Ad Left Application.");
-    },
-    onAdClosed : function() {
-      toast("adMob Intertitial Ad Closed.");
-    }
-  }
+  adStatus : 0
 }
-/*
-//display the banner 
-function showHideBanner(bShow) {
-  if (isApp) {
-    if (bShow) {
-      window.plugins.AdMob.createBannerView();
-    } else {
-      window.plugins.AdMob.destroyBannerView();
-    } 
-  }
-}
-*/
 
 // Google Game Service Ids
 var leaderboardId = "CgkItYKH-eAXEAIQBg";
@@ -81,17 +29,7 @@ function chkAndUnlockAchievement(lineCnt) {
     }
   }
 }
-/*
-function GetUserImg() {
-    window.game.getPlayerImage();
-    window.game.onGetPlayerImageSucceeded = function(result) {
-    document.getElementById('user_img').src = result;
-    };
-    window.game.onGetPlayerImageFailed = function() {
-        
-    };  
-}
-*/
+
 function OpenUserResult() {
   document.getElementById("user_result").style.width = "100%";
 }
@@ -102,6 +40,7 @@ function  CloseUserResult() {
 }
 
 function ShowAchievements() {
+  if (!glGameSvc.loginStatus) return;
   try {
     Android.showAchievements();
   } catch(e) {
@@ -110,6 +49,7 @@ function ShowAchievements() {
 }
 
 function ShowHighScores() {
+  if (!glGameSvc.loginStatus) return;
   try {
       Android.showLeaderboard(leaderboardId);
   } catch(e) {
@@ -149,7 +89,7 @@ function pageChange(newpageID) {
       }
     }
     
-    try {
+    /*try {
       if (!glGameSvc.loginStatus) {
         try {
           Android.signInToGS();
@@ -160,13 +100,13 @@ function pageChange(newpageID) {
     } catch(e) {
       toast("getLastSignedInAccount failed." + e.message);
     }
-  } 
+  }*/ 
 
   if (newpageID=='game') {
-    
     addEvt();
     newGame();
-  } 
+  }
+   
   curPage = newpageID;
 }
 
@@ -187,12 +127,12 @@ function setGamerProfile(isConnected , dispName) {
   if (isConnected == "connected") {
     elCont.innerHTML = "<br><p style='font-size:25px;'>Hello, " + dispName + "</p>";
     elLogIn.style.display = "none";
-    //elLogOut.style.display = "block";
+    elLogOut.style.display = "block";
     glGameSvc.loginStatus = true;
   } else {
     elCont.innerHTML = "<span style='font-size:15px;'>Sign in with Google to share your scores and achievements with your friends.</span>";
     elLogIn.style.display = "block";
-    //elLogOut.style.display = "none";
+    elLogOut.style.display = "none";
     glGameSvc.loginStatus = false;
   }
 }
@@ -202,21 +142,7 @@ function onDeviceReady() {
   ///////////
   // AdMob //
   ///////////
-  try {
-    Android.adMobInit("Y"); 
-  } catch(e) {
-    toast("adMobInit failed." + e.message);
-  }
-
-
-  ///////////////////////////
-  // Google Game Services  //
-  ///////////////////////////
-  try {
-    Android.GoogleSignIn_getClient();
-  } catch(e) {
-    toast("GoogleSignIn_getClient failed." + e.message);
-  }
+  AdMob.adStatus = 1;
   
   render_init();
   pageChange('menu');
