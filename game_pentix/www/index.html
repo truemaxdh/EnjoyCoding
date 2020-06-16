@@ -39,10 +39,11 @@
       <div class = "topContent">
         <center>
           <div id="signInStat">
-            <br><p style='font-size:23px;'>Hello...</p>
-          </div><br>
-          <img id="logIn" src="img/btn_google_signin_dark_normal_web.png" style="display:none;" onclick="Android.signInToGS();">
-          <button id="logOut" style="display:none;">로그아웃</button>
+            <span style='font-size:15px;'>Sign in with Google to share your scores and achievements with your friends.</span>
+          </div>
+          <button id="logOut" style="display:none;" onclick="Android.signOutFromGS();">SignOut</button>
+          <br>
+          <img id="logIn" src="img/btn_google_signin_dark_normal_web.png" onclick="Android.signInToGS();">
         </center>
       </div>
       <div class = "text">
