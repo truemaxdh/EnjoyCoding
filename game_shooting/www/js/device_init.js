@@ -83,10 +83,7 @@ function onDeviceReady() {
   // AdMob //
   ///////////
   AdMob.onInitComplete();
-
-  ///////////////////////////
-  // Google Game Services  //
-  ///////////////////////////
+  
   render_init();
   init_user_input();
   pageChange('menu');
