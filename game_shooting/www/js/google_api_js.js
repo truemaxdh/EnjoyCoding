@@ -1,14 +1,6 @@
 // AdMob
 var AdMob = {
-  adStatus : 0,
-  onInitComplete : function() {
-    AdMob.adStatus = 1; 
-    try {
-      Android.adMobInitInterstitial("ca-app-pub-7307479428475282/1960854989");
-    } catch(e) {
-      toast("adMobInitInterstitial failed.");
-    }
-  }
+  adStatus : 0  
 }
 
 var glGameSvc = {
