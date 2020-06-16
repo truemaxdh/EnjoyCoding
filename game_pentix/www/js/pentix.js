@@ -180,7 +180,7 @@ function gameOver() {
     document.getElementById( 'bgm' ).pause();
     removeEvt();
     render_gameover();
-    if (isApp) {
+    if (isApp && glGameSvc.loginStatus) {
       try {  
         Android.submitScore(leaderboardId, score);
       } catch(e) {
