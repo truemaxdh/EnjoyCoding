@@ -19,7 +19,7 @@
         document.getElementById('StageMap').style.width='0%';
         pageChange('game');
         stage = _stage;
-        millisec_played = stage_design.stage_tick * stage;
+        millisec_played = stage_design.stage_tick * (stage - 1) + 1;
       }
       
       function openStageMap() {
