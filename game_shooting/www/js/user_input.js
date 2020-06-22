@@ -69,7 +69,7 @@ function hideSubMenu() {
   frame.pause = false;
   if (curPage == 'game') {
     document.getElementById( 'bgm' ).play();
-    last_animation_time = 0;
+    frame.last_animation_time = 0;
     requestAnimationFrame(tick);
   }
 }
