@@ -176,3 +176,11 @@ body {
     color:#f00;
     display:inline;
 }
+
+button {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    font-size : 15px;
+    border: 2px solid white;
+}
