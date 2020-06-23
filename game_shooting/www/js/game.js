@@ -87,8 +87,7 @@ function game_init() {
     coin_bullet_interval = 0;
     
     frame.last_animation_time = 0;
-    
-    
+    millisec_played = stage_design.stage_tick * (stage - 1) + 1;    
 }
 
 function newGame() {
