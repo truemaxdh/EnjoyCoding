@@ -37,6 +37,8 @@ function _stage_def() {
     this.missile_interval = 200;
     this.coin_interval = 4000;
     this.bullet_interval = 3000;
+    this.stg1_coin_interval = 4000;
+    this.stg1_bullet_interval = 3000;
     this.coin_types = [[0], [0], [1], [1], [2], [2], [0, 1, 2], [0, 1, 2], [0, 1, 2], [0, 1, 2]];
     this.coinBullets = [0, 1, 0, 1, 0, 1, 1, 1, 1, 1];
 }
@@ -54,15 +56,18 @@ var stage_design;/* = {
 // concerning extra effect
 var effect_flag;
 
-function game_init() {
+function game_init(_stage) {
     frame.gameover_flag = false;
     effect_flag = false;
     score = 0;
     stage_design = new _stage_def();
     missile_interval = stage_design.missile_interval;
     millisec_played = 0;
-    stage = 1;
+    stage = _stage;
     
+    stage_design.coin_interval -= 400 * (_stage - 1);
+    stage_design.bullet_interval -= 300 * (_stage - 1);
+            
     o_game_over = null;
     o_jet = new objJet(310, 750);
     
