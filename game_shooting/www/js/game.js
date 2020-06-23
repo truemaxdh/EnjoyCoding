@@ -56,17 +56,17 @@ var stage_design;/* = {
 // concerning extra effect
 var effect_flag;
 
-function game_init(_stage) {
+function game_init() {
     frame.gameover_flag = false;
     effect_flag = false;
     score = 0;
     stage_design = new _stage_def();
     missile_interval = stage_design.missile_interval;
     millisec_played = 0;
-    stage = _stage;
+    //stage = _stage;
     
-    stage_design.coin_interval -= 400 * (_stage - 1);
-    stage_design.bullet_interval -= 300 * (_stage - 1);
+    stage_design.coin_interval -= 400 * (stage - 1);
+    stage_design.bullet_interval -= 300 * (stage - 1);
             
     o_game_over = null;
     o_jet = new objJet(310, 750);
@@ -91,10 +91,10 @@ function game_init(_stage) {
     
 }
 
-function newGame(_stage) {
+function newGame() {
     // clearInterval(objInterval);
     frame.pause = true;
-    game_init(_stage);
+    game_init();
     frame.pause = false;
     // objInterval = setInterval(tick, 50);
     document.getElementById( 'bgm' ).play();
