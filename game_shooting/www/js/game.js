@@ -91,10 +91,10 @@ function game_init(_stage) {
     
 }
 
-function newGame() {
+function newGame(_stage) {
     // clearInterval(objInterval);
     frame.pause = true;
-    game_init();
+    game_init(_stage);
     frame.pause = false;
     // objInterval = setInterval(tick, 50);
     document.getElementById( 'bgm' ).play();
