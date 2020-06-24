@@ -36,7 +36,10 @@ function OpenUserResult() {
 
 function  CloseUserResult() {
   document.getElementById("user_result").style.width = "0%";
-  pageChange('menu');
+  setTimeOut(function() {
+    pageChange('menu');
+    document.location.href = "index.html";
+  }, 500);
 }
 
 function ShowAchievements() {
