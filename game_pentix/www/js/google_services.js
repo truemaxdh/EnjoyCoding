@@ -36,7 +36,7 @@ function OpenUserResult() {
 
 function  CloseUserResult() {
   document.getElementById("user_result").style.width = "0%";
-  setTimeOut(function() {
+  setTimeout(function() {
     pageChange('menu');
     document.location.href = "index.html";
   }, 500);
