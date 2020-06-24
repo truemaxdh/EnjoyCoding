@@ -153,7 +153,7 @@ function onDeviceReady() {
   ///////////
   AdMob.adStatus = 1;
   
-  Android.reqGamerProfile();
+  //Android.reqGamerProfile();
   
   render_init();
   init_user_input();
