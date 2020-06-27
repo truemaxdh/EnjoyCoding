@@ -28,14 +28,15 @@ function addEvt() {
         return false;
     }
 
-    var scale_f = canvas.width / canvas.clientWidth;
+    var scale_fx = canv_game.width / canv_game.clientWidth;
+    var scale_fy = canv_game.height / canv_game.clientHeight;
     document.body.onmousedown = function (e) {
         if (e.clientY < 40) {
             showSubMenu();
             return true;
         }
-        user_x = e.clientX  * scale_f;
-        user_y = e.clientY * scale_f;
+        user_x = e.clientX  * scale_fx;
+        user_y = e.clientY * scale_fy;
         user_x_ori = user_x;
         user_y_ori = user_y;
         
@@ -54,8 +55,8 @@ function addEvt() {
             showSubMenu();
             return true;
         }
-        user_x = e.clientX * scale_f;
-        user_y = e.clientY * scale_f;
+        user_x = e.clientX * scale_fx;
+        user_y = e.clientY * scale_fy;
         return false;
     }
 
@@ -64,8 +65,8 @@ function addEvt() {
             showSubMenu();
             return true;
         }
-        user_x = e.touches[0].clientX * scale_f;
-        user_y = e.touches[0].clientY * scale_f;
+        user_x = e.touches[0].clientX * scale_fx;
+        user_y = e.touches[0].clientY * scale_fy;
         user_x_ori = user_x;
         user_y_ori = user_y;
                 
@@ -84,8 +85,8 @@ function addEvt() {
             showSubMenu();
             return true;
         }
-        user_x = e.touches[0].clientX * scale_f;
-        user_y = e.touches[0].clientY * scale_f;
+        user_x = e.touches[0].clientX * scale_fx;
+        user_y = e.touches[0].clientY * scale_fy;
         return false;
     }
 }
@@ -134,14 +135,3 @@ function hideSubMenu() {
     tick();
   }
 }
-
-/*function togglePause() {
-    paused = !paused;
-    if (!paused) {
-        document.getElementById( 'bgm' ).play();
-        tick();
-    } else {
-        document.getElementById( 'bgm' ).pause();
-        //showSubMenu();
-    }
-}*/
