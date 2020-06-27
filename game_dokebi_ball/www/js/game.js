@@ -3,7 +3,7 @@ var frame = {
   animation_interval : 0,
   last_animation_time : 0,
   pause : true,
-  gameover_flag : false;
+  gameover_flag : false,
   effect_flag : false
 }
 
