@@ -12,7 +12,7 @@ function init_user_input() {
     user_x_ori = user_x;
     user_y_ori = user_y;
     
-    if (user_y_ori <= 60 && user_x_ori > 400) {
+    if (user_y_ori <= 60 && user_x_ori > 580) {
       showSubMenu();
     }
     
@@ -37,7 +37,7 @@ function init_user_input() {
     user_x_ori = user_x;
     user_y_ori = user_y;
     
-    if (user_y_ori <= 60 && user_x_ori > 400) {
+    if (user_y_ori <= 60 && user_x_ori > 580) {
       showSubMenu();
     }
     
