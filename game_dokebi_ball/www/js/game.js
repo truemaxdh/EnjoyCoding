@@ -129,7 +129,7 @@ function upcoming_obj() {
     effect_flag = true;
     balls_ends[0].next = balls_ends[1];
     balls_ends[1].prev = balls_ends[0];
-    var o_stageClear = new objStageClear(stage);
+    var o_stageClear = new objStageClear(gamePlay.stage);
     push_to_chain(o_stageClear, coin_ends);
     currentStageDef.next_ball_interval -= 400;
     gamePlay.ball_interval = 0;
