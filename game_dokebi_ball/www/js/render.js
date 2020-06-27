@@ -3,9 +3,23 @@ var img_pause = new Image();
 var canv_game;
 var ctx_game;
 
+
+var imgs = [img_pause];
+var URLs = ['img/pause.png'];
+
 function render_init() {
   canv_game = document.getElementById('game_canvas');
   ctx_game = canv_game.getContext('2d');    
+  
+  var imagesOK = 0; 
+    for (var i=0; i<imgs.length; i++) {
+        imgs[i].onload = function(){ 
+            if (++imagesOK>=imgs.length ) {
+                //draw_bg_canv();
+            }
+        };
+        imgs[i].src = URLs[i];
+    }
 }
 
 function render() {
