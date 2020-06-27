@@ -57,26 +57,28 @@ function newGame() {
 }
 
 function tick(cur_time) {
-    frame.animation_interval = cur_time - (frame.last_animation_time==0 ? cur_time : frame.last_animation_time);
-    frame.last_animation_time = cur_time;
-    gamePlay.millisec_played += frame.animation_interval;
-    
-    if (!frame.effect_flag) {
-        upcoming_obj();
+  frame.animation_interval = cur_time - (frame.last_animation_time==0 ? cur_time : frame.last_animation_time);
+  frame.last_animation_time = cur_time;
+  gamePlay.millisec_played += frame.animation_interval;
+
+  balls_ends[0].move();
+  if (!frame.effect_flag) {
+    upcoming_obj();
+  }
+  render();
+
+  if (frame.gameover_flag) {
+    gameOver();
+  } else {
+    proc_user_input();
+    if (!effect_flag) {
+      collision_check();
     }
-    render();
-    if (frame.gameover_flag) {
-        gameOver();
-    } else {
-        proc_user_input();
-        if (!effect_flag) {
-          collision_check();
-        }
-    }
-    
-    if (!frame.pause) {
-        requestAnimationFrame(tick);
-    }
+  }
+
+  if (!frame.pause) {
+    requestAnimationFrame(tick);
+  }
 }
 
 function gameOver() {
