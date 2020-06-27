@@ -48,17 +48,17 @@ function ballObj(x, y, size) {
         this.x += this.step_x * frame.animation_interval / 1000;
         if (this.x > 720) {
             this.x = 720 * 2 - this.x;
-            step_x *= -1;
+            this.step_x *= -1;
         } else if (this.x < 0) {
             this.x = 0 - this.x;
-            step_x * = -1;
+            this.step_x * = -1;
         }
         var elapsed_sec = frame.animation_interval / 1000;
         this.y += this.step_y * elapsed_sec + this.accel * elapsed_sec * elapsed_sec / 2;
         this.step_y += this.accel * elapsed_sec;
         if (this.y > 540) {
             this.y = 540 * 2 - this.y;
-            step_y *= -1;
+            this.step_y *= -1;
         }
         if (this.next != null) {
             this.next.move(ctx_game);
