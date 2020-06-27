@@ -42,9 +42,9 @@ function newGame() {
             
     gamePlay.o_game_over = null;
     
-    ball_ends[0] = new gameobj(0,0), ball_ends[1] = new gameobj(0,0);
-    ball_ends[0].next = ball_ends[1];
-    ball_ends[1].prev = ball_ends[0];
+    balls_ends[0] = new gameobj(0,0), balls_ends[1] = new gameobj(0,0);
+    balls_ends[0].next = balls_ends[1];
+    balls_ends[1].prev = balls_ends[0];
     
     gamePlay.ball_interval = 0;
     gamePlay.millisec_played = currentStageDef.stage_tick * (gamePlay.stage - 1) + 1;    
@@ -139,7 +139,7 @@ function upcoming_obj() {
     if (gamePlay.ball_interval > currentStageDef.next_ball_interval) {
         var rnd = parseInt(Math.random() * currentStageDef.ball_sizes[stage-1].length);
         var o_ball = new objBall(360, 0,  currentStageDef.ball_sizes[stage-1]);
-        push_to_chain(o_ball, ball_ends);  
+        push_to_chain(o_ball, balls_ends);  
         gamePlay.ball_interval -= currentStageDef.next_ball_interval;
     }
   }
@@ -149,11 +149,11 @@ function collision_check() {
   if (user_pressing) {
     // check collision of clicked(touched) position and balls
     var o_chk = new gameobj(user_x, user_y);
-    var o_ball = collision_obj_grp(o_chk, ball_ends);;
+    var o_ball = collision_obj_grp(o_chk, balls_ends);;
     while(o_ball.next != null) {
       if (o_ball != null) {
         //playSound(--o_coin.durability);
-        remove_from_chain(o_ball, ball_ends);
+        remove_from_chain(o_ball, balls_ends);
         score += 10;
         try {
             chkAndUnlockAchievement(score);
