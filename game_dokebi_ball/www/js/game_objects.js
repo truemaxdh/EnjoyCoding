@@ -86,6 +86,7 @@ function objBall(x, y, size) {
 }
 
 function objGameOver() {
+    gameobj.call(this, 0, 0);
     this.count_down = 100;
     this.render = function(ctx_game) {
         var c_x = ctx_game.canvas.width / 2;
@@ -104,6 +105,7 @@ function objGameOver() {
 }
 
 function objStageClear(stage) {
+    gameobj.call(this, 0, 0);
     this.count_down = 3000;
     this.render = function(ctx_game) {
         var c_x = ctx_game.canvas.width / 2;
