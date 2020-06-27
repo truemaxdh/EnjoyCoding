@@ -44,7 +44,7 @@ function objBall(x, y, size) {
     this.step_y = 60;
     this.accel = 360;
     this.gco = (Math.random() < 0.5) ? 'source-over':'lighter';
-    this.rgb = "rgb(" + (Math.random() * 256) + "," + (Math.random() * 256) + "," + (Math.random() * 256) + ")";
+    this.rgb = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
     this.move = function() {
         this.x += this.step_x * frame.animation_interval / 1000;
         if (this.x > 720) {
