@@ -9,13 +9,8 @@ function gameobj(x, y) {
     this.move = function() {
         this.x += this.step_x * frame.animation_interval / 1000;
         this.y += this.step_y * frame.animation_interval / 1000;
-        if (this.x < 0 || this.y < 0 || this.x > 720 || this.y > 900) {
-            if (this.prev!=null) {
-                this.prev.next = this.next;
-            }
-            if (this.next!=null) {
-                this.next.prev = this.prev;
-            }
+        if (this.next != null) {
+            this.next.move(ctx_game);
         }
     };
     this.render = function(ctx_game) {
@@ -25,44 +20,48 @@ function gameobj(x, y) {
         if (this.next != null) {
             this.next.render(ctx_game);
         }
-        //this.move();
     };
 }
 
 
-function ballObj(x, y) {
-    gameobj.call(this, x + 20, y);
-    this.img = img_missile;
-    this.step_y = -900;
-}
-
-var type_coinNum = [10, 50, 100];
-function objCoin(x, y, type) {
+function ballObj(x, y, size) {
     gameobj.call(this, x, y);
-    this.step_x = 0;
-    this.step_y = 200 + 30 * stage;
-    this.coin_num = type_coinNum[type];
-    this.img = img_coin_golds[type];
-}
-
-var type_durability = [1, 2, 3];
-function objCoinGray(x, y, type) {
-    var rnd_x = Math.floor(Math.random() * 540);
-    gameobj.call(this, rnd_x, 0);
-    this.step_x = (x - rnd_x);
-    this.step_y = 220 + 30 * stage;
-    this.coin_num = type_coinNum[type];
-    this.durability = type_durability[type];
-    //this.img.src = 'img/coin_gray_' + this.coin_num + '.png';
-    this.img = img_coin_grays[type];
-}
-
-function objCoinBullet(x, y) {
-    var rnd_x = Math.floor(Math.random() * 720);
-    gameobj.call(this, rnd_x, 0);
-    this.step_y = 200 + 50 * stage;
-    this.step_x = (x - rnd_x) * this.step_y / y;
-    this.img = img_coin_bullet;
+    this.size = size;
+    this.step_x = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 720) + 1);
+    this.step_y = 0;
+    this.accel = 10;
+    this.gco = (Math.random() < 0.5) ? 'source-over':'lighter';
+    this.rgb = "rgb(" + (Math.random() * 256) + "," + (Math.random() * 256) + "," + (Math.random() * 256) + ")";
+    this.move = function() {
+        this.x += this.step_x * frame.animation_interval / 1000;
+        if (this.x > 720) {
+            this.x = 720 * 2 - this.x;
+            step_x *= -1;
+        } else (this.x < 0) {
+            this.x = 0 - this.x;
+            step_x * = -1;
+        }
+        var elapsed_sec = frame.animation_interval / 1000;
+        this.y += this.step_y * elapsed_sec + this.accel * elapsed_sec * elapsed_sec / 2;
+        this.step_y += this.accel * elapsed_sec;
+        if (this.y > 540) {
+            this.y = 540 * 2 - this.y;
+            step_y *= -1;
+        }
+        if (this.next != null) {
+            this.next.move(ctx_game);
+        }
+    };
+    this.render = function(ctx_game) {
+        ctx_game.globalCompositeOperation = this.gco;
+        ctx_game.beginPath();
+        ctx_game.fillStyle = this.rgb;
+        ctx_game.arc(this.x, this.y, this.size * 15, 0, 2 * Math.PI);
+        ctx_game.fill();
+        if (this.next != null) {
+            this.next.render(ctx_game);
+        }
+    };
 }
 
 function objGameOver() {
