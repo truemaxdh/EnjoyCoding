@@ -35,5 +35,10 @@ function render() {
   ctx_game.fillText('Score : ' + gamePlay.score, 20, 50);
   ctx_game.fillText('Stage : ' + gamePlay.stage, 270,50);
     
-  ctx_game.drawImage(img_pause, 0, 0, 40, 40, 480, 20, 40, 40)
+  ctx_game.drawImage(img_pause, 0, 0, 40, 40, 480, 20, 40, 40);
+  
+  if (user_pressing) {
+    ctx_game.fillStyle = "rgb(127,127,127)";
+    ctx_game.fillRect(user_x - 10, user_y - 10, 20, 20);
+  }
 }
