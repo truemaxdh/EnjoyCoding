@@ -89,15 +89,9 @@ body {
     margin : 0px;
 }
 
-#bg_canvas {
-    width:18vh;
-    height:90vh;
-    display:none;
-}
-
 #game_canvas {
-    width:54vh;
-    height:90vh;
+    width:90vh;
+    height:54vh;
     /*border:1px solid #d3d3d3;*/
 }
 
