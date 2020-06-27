@@ -70,7 +70,7 @@ function tick(cur_time) {
     } else {
         proc_user_input();
         if (!effect_flag) {
-            collision_check();
+          collision_check();
         }
     }
     
@@ -141,4 +141,48 @@ function upcoming_obj() {
         gamePlay.ball_interval -= currentStageDef.next_ball_interval;
     }
   }
+}
+
+function collision_check() {
+  if (user_pressing) {
+    // check collision of clicked(touched) position and balls
+    var o_chk = new gameobj(user_x, user_y);
+    var o_ball = collision_obj_grp(o_chk, ball_ends);;
+    while(o_ball.next != null) {
+      if (o_ball != null) {
+        //playSound(--o_coin.durability);
+        remove_from_chain(o_ball, ball_ends);
+        score += 10;
+        try {
+            chkAndUnlockAchievement(score);
+        } catch(err) {}
+      }
+    }
+  }
+}
+
+function push_to_chain(obj, ends) {
+  ends[1].prev.next = obj;
+  obj.prev = ends[1].prev;
+  obj.next = ends[1];
+  ends[1].prev = obj;
+}
+
+function remove_from_chain(obj, ends) {
+  obj.prev.next = obj.next;
+  obj.next.prev = obj.prev;
+}
+
+function collision_obj_grp(obj, ends) {
+  var ret = null;
+  var t = ends[0].next;
+  while(t.next != null) {
+    if (t.collision_chk(obj.x, obj.y, 0, 0)) {
+      ret = t;
+      break;
+    }
+    t = t.next;            
+  }
+
+  return ret;
 }
