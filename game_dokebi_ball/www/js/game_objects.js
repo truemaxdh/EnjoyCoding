@@ -51,7 +51,7 @@ function ballObj(x, y, size) {
             this.step_x *= -1;
         } else if (this.x < 0) {
             this.x = 0 - this.x;
-            this.step_x * = -1;
+            this.step_x *= -1;
         }
         var elapsed_sec = frame.animation_interval / 1000;
         this.y += this.step_y * elapsed_sec + this.accel * elapsed_sec * elapsed_sec / 2;
