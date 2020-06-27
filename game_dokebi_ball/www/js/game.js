@@ -125,7 +125,7 @@ function proc_user_input() {
 }
 
 function upcoming_obj() {
-  if (stage < currentStageDef.max_stage && millisec_played > (currentStageDef.stage_tick * stage)) {
+  if (gamePlay.stage < currentStageDef.max_stage && gamePlay.millisec_played > (currentStageDef.stage_tick * gamePlay.stage)) {
     effect_flag = true;
     balls_ends[0].next = balls_ends[1];
     balls_ends[1].prev = balls_ends[0];
