@@ -13,7 +13,7 @@ var gamePlay = {
   ball_interval : 0,
   millisec_played : 0,
   stage : 0,
-  o_game_over : null;
+  o_game_over : null
 }
 
 // concerning balls
