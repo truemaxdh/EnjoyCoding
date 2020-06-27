@@ -36,7 +36,7 @@ function gameobj(x, y) {
 }
 
 
-function ballObj(x, y, size) {
+function objBall(x, y, size) {
     gameobj.call(this, x, y);
     this.size = size;
     this.step_x = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 720) + 1);
