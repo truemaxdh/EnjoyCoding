@@ -152,6 +152,10 @@ function collision_check() {
     if (o_catched_ball != null) {
       //playSound(--o_coin.durability);
       remove_from_chain(o_catched_ball, balls_ends);
+      if (--o_catched_ball.size > 0) {
+        push_to_chain(new objBall(o_catched_ball.x, o_catched_ball.y, o_catched_ball.size));
+        push_to_chain(new objBall(o_catched_ball.x, o_catched_ball.y, o_catched_ball.size));
+      }
       gamePlay.score += 10;
       try {
           chkAndUnlockAchievement(gamePlay.score);
