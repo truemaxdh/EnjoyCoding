@@ -21,6 +21,15 @@ function gameobj(x, y) {
             this.next.render(ctx_game);
         }
     };
+    this.collision_chk = function(x, y) {
+        var ret = false;
+        var dx = x - this.x;
+        var dy = y - this.y;
+        var d2 = dx * dx + dy * dy;
+        var r2 = this.r * this.r;
+        if (d2 <= r2) ret = true;
+        return ret;
+    }
 }
 
 
@@ -29,6 +38,7 @@ function ballObj(x, y, size) {
     this.size = size;
     this.step_x = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 720) + 1);
     this.step_y = 0;
+    this.width = 
     this.accel = 10;
     this.gco = (Math.random() < 0.5) ? 'source-over':'lighter';
     this.rgb = "rgb(" + (Math.random() * 256) + "," + (Math.random() * 256) + "," + (Math.random() * 256) + ")";
