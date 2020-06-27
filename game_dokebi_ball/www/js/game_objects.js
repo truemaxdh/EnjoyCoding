@@ -41,7 +41,7 @@ function objBall(x, y, size) {
     this.size = size;
     this.r = size * 15;
     this.step_x = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 360) + 1);
-    this.step_y = 60;
+    this.step_y = 0;
     this.accel = 360;
     this.gco = (Math.random() < 0.5) ? 'source-over':'lighter';
     this.rgb = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
