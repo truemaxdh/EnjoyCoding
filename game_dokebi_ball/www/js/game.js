@@ -36,10 +36,10 @@ function newGame() {
     gamePlay.score = 0;
     currentStageDef = new _stage_def();
     gamePlay.millisec_played = 0;
-    //gamePlay.stage = _stage;
-    
+
     currentStageDef.next_ball_interval -= 400 * (gamePlay.stage - 1);
-            
+    gamePlay.ball_interval = currentStageDef.next_ball_interval;
+  
     gamePlay.o_game_over = null;
     
     balls_ends[0] = new gameobj(0,0), balls_ends[1] = new gameobj(0,0);
@@ -132,7 +132,7 @@ function upcoming_obj() {
     var o_stageClear = new objStageClear(gamePlay.stage);
     push_to_chain(o_stageClear, coin_ends);
     currentStageDef.next_ball_interval -= 400;
-    gamePlay.ball_interval = 0;
+    gamePlay.ball_interval = currentStageDef.next_ball_interval;
     gamePlay.stage++;
   } else {
     gamePlay.ball_interval += frame.animation_interval;
@@ -148,16 +148,14 @@ function collision_check() {
   if (user_pressing) {
     // check collision of clicked(touched) position and balls
     var o_chk = new gameobj(user_x, user_y);
-    var o_ball = collision_obj_grp(o_chk, balls_ends);;
-    while(o_ball.next != null) {
-      if (o_ball != null) {
-        //playSound(--o_coin.durability);
-        remove_from_chain(o_ball, balls_ends);
-        score += 10;
-        try {
-            chkAndUnlockAchievement(score);
-        } catch(err) {}
-      }
+    var o_catched_ball = collision_obj_grp(o_chk, balls_ends);;
+    if (o_catched_ball != null) {
+      //playSound(--o_coin.durability);
+      remove_from_chain(o_catched_ball, balls_ends);
+      score += 10;
+      try {
+          chkAndUnlockAchievement(score);
+      } catch(err) {}
     }
   }
 }
