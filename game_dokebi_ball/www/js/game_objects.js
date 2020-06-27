@@ -1,6 +1,8 @@
 function gameobj(x, y) {
     this.x = x;
     this.y = y;
+    this.width = 0;
+    this.height = 0;
     this.step_x = 0;
     this.step_y = 0;
     this.prev = null;
@@ -21,13 +23,14 @@ function gameobj(x, y) {
             this.next.render(ctx_game);
         }
     };
-    this.collision_chk = function(x, y) {
+    this.collision_chk = function(x0, y0, x1, y1) {
         var ret = false;
-        var dx = x - this.x;
-        var dy = y - this.y;
-        var d2 = dx * dx + dy * dy;
-        var r2 = this.r * this.r;
-        if (d2 <= r2) ret = true;
+        var this_x1 = this.x + this.width;
+        var this_y1 = this.y + this.height;
+        
+        if (this.x < x1 && this_x1 > x0 && this.y < y1 && this_y1 > y0) {
+            ret = true;
+        }
         return ret;
     }
 }
@@ -38,7 +41,6 @@ function ballObj(x, y, size) {
     this.size = size;
     this.step_x = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 720) + 1);
     this.step_y = 0;
-    this.width = 
     this.accel = 10;
     this.gco = (Math.random() < 0.5) ? 'source-over':'lighter';
     this.rgb = "rgb(" + (Math.random() * 256) + "," + (Math.random() * 256) + "," + (Math.random() * 256) + ")";
@@ -71,6 +73,15 @@ function ballObj(x, y, size) {
         if (this.next != null) {
             this.next.render(ctx_game);
         }
+    };
+    this.collision_chk = function(x0, y0, x1, y1) {
+        var ret = false;
+        var dx = x0 - this.x;
+        var dy = y0 - this.y;
+        var d2 = dx * dx + dy * dy;
+        var r2 = this.r * this.r;
+        if (d2 <= r2) ret = true;
+        return ret;
     };
 }
 
