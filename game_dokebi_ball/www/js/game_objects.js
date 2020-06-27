@@ -124,7 +124,7 @@ function objStageClear(stage) {
         ctx_game.fillText('Stage' + stage + ' Clear!', c_x - 200, c_y - 25);
         this.count_down -= frame.animation_interval;
         if (this.count_down <= 0) {
-            effect_flag = false;
+            frame.effect_flag = false;
             balls_ends[0].next = balls_ends[1];
             balls_ends[1].prev = balls_ends[0];
         }
