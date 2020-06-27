@@ -152,7 +152,7 @@ function collision_check() {
     if (o_catched_ball != null) {
       //playSound(--o_coin.durability);
       remove_from_chain(o_catched_ball, balls_ends);
-      score += 10;
+      gamePlay.score += 10;
       try {
           chkAndUnlockAchievement(score);
       } catch(err) {}
@@ -176,7 +176,6 @@ function collision_obj_grp(obj, ends) {
   var ret = null;
   var t = ends[0].next;
   while(t.next != null) {
-    console.log(obj.x + "," + obj.y + "," + t.x + "," + t.y);
     if (t.collision_chk(obj.x, obj.y, 0, 0)) {
       ret = t;
       break;
