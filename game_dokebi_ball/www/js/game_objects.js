@@ -49,7 +49,7 @@ function ballObj(x, y, size) {
         if (this.x > 720) {
             this.x = 720 * 2 - this.x;
             step_x *= -1;
-        } else (this.x < 0) {
+        } else if (this.x < 0) {
             this.x = 0 - this.x;
             step_x * = -1;
         }
