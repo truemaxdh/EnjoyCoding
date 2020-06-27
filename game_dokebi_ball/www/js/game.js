@@ -21,7 +21,7 @@ var balls_ends = [null, null];
 
 function _stage_def() {
   this.max_stage = 10;
-  this.stage_tick = 40000;
+  this.stage_tick = 60000;
   this.next_ball_interval = 10000;
   this.ball_sizes = [2, 2, 3, 3, 4, 4, 5, 5, 6, 6];
 }
@@ -38,7 +38,7 @@ function newGame() {
     gamePlay.millisec_played = 0;
 
     currentStageDef.next_ball_interval -= 400 * (gamePlay.stage - 1);
-    gamePlay.ball_interval = currentStageDef.next_ball_interval;
+    
   
     gamePlay.o_game_over = null;
     
@@ -46,7 +46,7 @@ function newGame() {
     balls_ends[0].next = balls_ends[1];
     balls_ends[1].prev = balls_ends[0];
     
-    gamePlay.ball_interval = 0;
+    gamePlay.ball_interval = currentStageDef.next_ball_interval;
     gamePlay.millisec_played = currentStageDef.stage_tick * (gamePlay.stage - 1) + 1;    
     
     frame.last_animation_time = 0;
@@ -130,7 +130,7 @@ function upcoming_obj() {
     balls_ends[0].next = balls_ends[1];
     balls_ends[1].prev = balls_ends[0];
     var o_stageClear = new objStageClear(gamePlay.stage);
-    push_to_chain(o_stageClear, coin_ends);
+    push_to_chain(o_stageClear, balls_ends);
     currentStageDef.next_ball_interval -= 400;
     gamePlay.ball_interval = currentStageDef.next_ball_interval;
     gamePlay.stage++;
