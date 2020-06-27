@@ -154,7 +154,7 @@ function collision_check() {
       remove_from_chain(o_catched_ball, balls_ends);
       gamePlay.score += 10;
       try {
-          chkAndUnlockAchievement(score);
+          chkAndUnlockAchievement(gamePlay.score);
       } catch(err) {}
     }
   }
