@@ -22,7 +22,7 @@ var balls_ends = [null, null];
 function _stage_def() {
   this.max_stage = 10;
   this.stage_tick = 60000;
-  this.next_ball_interval = 10000;
+  this.next_ball_interval = 5000;
   this.ball_sizes = [2, 2, 3, 3, 4, 4, 5, 5, 6, 6];
 }
 
