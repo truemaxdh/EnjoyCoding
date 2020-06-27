@@ -71,7 +71,7 @@ function tick(cur_time) {
     gameOver();
   } else {
     proc_user_input();
-    if (!effect_flag) {
+    if (!frame.effect_flag) {
       collision_check();
     }
   }
