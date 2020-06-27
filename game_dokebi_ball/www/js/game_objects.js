@@ -39,6 +39,7 @@ function gameobj(x, y) {
 function objBall(x, y, size) {
     gameobj.call(this, x, y);
     this.size = size;
+    this.r = size * 15;
     this.step_x = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 720) + 1);
     this.step_y = 0;
     this.accel = 300;
@@ -68,7 +69,7 @@ function objBall(x, y, size) {
         ctx_game.globalCompositeOperation = this.gco;
         ctx_game.beginPath();
         ctx_game.fillStyle = this.rgb;
-        ctx_game.arc(this.x, this.y, this.size * 15, 0, 2 * Math.PI);
+        ctx_game.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
         ctx_game.fill();
         if (this.next != null) {
             this.next.render(ctx_game);
