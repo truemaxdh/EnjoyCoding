@@ -176,6 +176,7 @@ function collision_obj_grp(obj, ends) {
   var ret = null;
   var t = ends[0].next;
   while(t.next != null) {
+    console.log(obj.x + "," + obj.y + "," + t.x + "," + t.y);
     if (t.collision_chk(obj.x, obj.y, 0, 0)) {
       ret = t;
       break;
