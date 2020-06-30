@@ -3,9 +3,9 @@ var BLOCK_WH = 5;
 var board = [];
 var score;
 
-var interval = 50;
+var lastTick;;
 var objInterval;
-var move_wait_limit = 15;
+var move_wait_limit = 1000;
 var move_wait_cnt;
 var current; // current moving shape
 var currentX, currentY; // position of current shape
@@ -143,7 +143,7 @@ function init() {
 }
 
 // keep the element moving down, creating new shapes and clearing lines
-function tick() {
+function tick(curTick) {
     if (!keyPressed) {
         procTouchEvent();
     }
@@ -152,8 +152,12 @@ function tick() {
     render_board();
     render_current();
     render_boarder();
-    if (++move_wait_cnt == move_wait_limit) {
-        move_wait_cnt = 0;
+    var diffTick = curTick - lastTick;
+    if (diffTick < 1000)
+        move_wait_cnt += diffTick;
+    lastTick = curTick; 
+    if (move_wait_cnt > move_wait_limit) {
+        move_wait_cnt -= move_wait_limit;
             
         if ( !valid( 0, 1 ) ) {
             if (currentY < 0) {
@@ -171,7 +175,7 @@ function tick() {
     }
 
     if (!paused) {
-        setTimeout(tick, interval);
+        requestAnimationFrame(tick, interval);
     }    
 }
 
