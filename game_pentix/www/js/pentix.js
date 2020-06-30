@@ -175,7 +175,7 @@ function tick(curTick) {
     }
 
     if (!paused) {
-        requestAnimationFrame(tick, interval);
+        requestAnimationFrame(tick);
     }    
 }
 
