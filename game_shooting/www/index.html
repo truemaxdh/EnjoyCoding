@@ -118,17 +118,21 @@
     <div id="StageMap" class="overlay">
       <!-- Button to close the overlay navigation -->
       <a href="javascript:void(0)" class="closebtn" onclick="document.getElementById('StageMap').style.width='0%';">&times;</a>
-        <br><br>
-        <button onclick="goToStage(1);">Stage<br>1</button>
-        <button onclick="goToStage(2);">Stage<br>2</button><br>
-        <button onclick="goToStage(3);">Stage<br>3</button>
-        <button onclick="goToStage(4);">Stage<br>4</button><br>
-        <button onclick="goToStage(5);">Stage<br>5</button>
-        <button onclick="goToStage(6);">Stage<br>6</button><br>
-        <button onclick="goToStage(7);">Stage<br>7</button>
-        <button onclick="goToStage(8);">Stage<br>8</button><br>
-        <button onclick="goToStage(9);">Stage<br>9</button>
-        <button onclick="goToStage(10);">Stage<br>10</button>
+      
+      <!-- Overlay content -->
+      <div class="overlay-content">
+        Select a stage to start<br>
+        <button class="round" onclick="goToStage(1);">1</button>
+        <button class="round" onclick="goToStage(2);">2</button>
+        <button class="round" onclick="goToStage(3);">3</button><br>
+        <button class="round" onclick="goToStage(4);">4</button>
+        <button class="round" onclick="goToStage(5);">5</button>
+        <button class="round" onclick="goToStage(6);">6</button><br>
+        <button class="round" onclick="goToStage(7);">7</button>
+        <button class="round" onclick="goToStage(8);">8</button>
+        <button class="round" onclick="goToStage(9);">9</button><br>
+        <button class="round" onclick="goToStage(10);">10</button>
+      </div>        
     </div>    
   </body>
 </html>
