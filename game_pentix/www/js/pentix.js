@@ -255,7 +255,7 @@ function clearLines(y, combo) {
         }
     } else {
         newShape();
-        setTimeout(tick, interval);
+        requestAnimationFrame(tick);
     }
 }
 
