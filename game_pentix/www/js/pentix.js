@@ -361,5 +361,5 @@ function newGame() {
     document.getElementById( 'score_num' ).innerHTML = score;
     move_wait_cnt = 0;
     document.getElementById( 'bgm' ).play();
-    setTimeout(tick, interval);
+    requestAnimationFrame(tick);
 }
