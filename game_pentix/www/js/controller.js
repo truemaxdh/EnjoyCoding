@@ -28,8 +28,8 @@ function addEvt() {
         return false;
     }
 
-    var scale_fx = canv_game.width / canv_game.clientWidth;
-    var scale_fy = canv_game.height / canv_game.clientHeight;
+    var scale_fx = canvas.width / canvas.clientWidth;
+    var scale_fy = canvas.height / canvas.clientHeight;
     document.body.onmousedown = function (e) {
         if (e.clientY < 40) {
             showSubMenu();
