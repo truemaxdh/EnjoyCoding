@@ -147,6 +147,8 @@ function onDeviceReady() {
   ///////////
   AdMob.adStatus = 1;
   
+  Android.reqGamerProfile();
+  
   render_init();
   pageChange('menu');
 }
