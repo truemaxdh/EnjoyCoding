@@ -128,10 +128,10 @@ function setGamerProfile(isConnected , dispName) {
   var elLogOut = document.getElementById("logOut");
   var cont = "";
   if (isConnected == "connected") {
+    glGameSvc.loginStatus = true;
     elCont.innerHTML = "<br><p style='font-size:25px;'>Hello, " + dispName + "</p>";
     elLogIn.style.display = "none";
     elLogOut.style.display = "block";
-    glGameSvc.loginStatus = true;
   } else {
     elCont.innerHTML = "<span style='font-size:15px;'>Sign in with Google to share your scores and achievements with your friends.</span>";
     elLogIn.style.display = "block";
@@ -147,7 +147,9 @@ function onDeviceReady() {
   ///////////
   AdMob.adStatus = 1;
   
-  Android.reqGamerProfile();
+  if (!glGameSvc.loginStatus) {
+    Android.reqGamerProfile();
+  }
   
   render_init();
   pageChange('menu');
