@@ -40,8 +40,10 @@ specialEffects.fireworks = function(el) {
   cnv_bg.style.width = el.style.width;
   cnv_bg.style.height = el.style.height;
   cnv_bg.id = "cnv_bg";
-  cnv_bg.width = cnv_bg.style.width.replace("px","");
-  cnv_bg.height = cnv_bg.style.height.replace("px","");
+  
+  var positionInfo = el.getBoundingClientRect();
+  cnv_bg.width = positionInfo.width
+  cnv_bg.height = positionInfo.height;
   el.appendChild(cnv_bg);
 
   var ctx_bg = cnv_bg.getContext("2d");
@@ -72,7 +74,6 @@ specialEffects.fireworks = function(el) {
 };
   
 specialEffects.fireworks.drawFrm = function() {
-  console.log("start");
   var obj = specialEffects.fireworks;
   var ctx_bg = obj.ctx_bg;
 
@@ -99,6 +100,5 @@ specialEffects.fireworks.drawFrm = function() {
     obj.listChain.end.prev = newFire;
   }
 
-  console.log("end");
   requestAnimationFrame(specialEffects.fireworks.drawFrm);
 }
