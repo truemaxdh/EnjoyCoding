@@ -68,10 +68,11 @@ specialEffects.fireworks = function(el) {
   this.fireworks.speed = Math.random() * w / 20 + 1;
   */
   this.fireworks.drawFrm();
-  //console.log(this);
+  console.log(this);
 };
   
 specialEffects.fireworks.drawFrm = function() {
+  console.log("start");
   var obj = specialEffects.fireworks;
   var ctx_bg = obj.ctx_bg;
 
@@ -98,5 +99,6 @@ specialEffects.fireworks.drawFrm = function() {
     obj.listChain.end.prev = newFire;
   }
 
+  console.log("end");
   requestAnimationFrame(specialEffects.fireworks.drawFrm);
 }
