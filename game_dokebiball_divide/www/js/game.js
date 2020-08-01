@@ -125,14 +125,14 @@ function proc_user_input() {
         o_jet.x += dx;
         o_jet.y += dy;
         
-        if (missile_interval >= stage_design.missile_interval) {
-            missile_interval -= stage_design.missile_interval;
+        if (missile_interval >= currentStageDef.missile_interval) {
+            missile_interval -= currentStageDef.missile_interval;
             var o_missile = new objMissile(o_jet.x, o_jet.y);
             push_to_chain(o_missile, missile_ends);  
         } 
         missile_interval += frame.animation_interval;
     } else {
-        missile_interval = stage_design.missile_interval;
+        missile_interval = currentStageDef.missile_interval;
     }
 }
 
