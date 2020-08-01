@@ -116,6 +116,7 @@ function gameOver() {
 }
 
 function proc_user_input() {
+    console.log(user_pressing);
     if (user_pressing) {
         var dx = user_x - user_x_ori;
         var dy = user_y - user_y_ori;
