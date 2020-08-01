@@ -249,17 +249,17 @@ function remove_from_chain(obj, ends) {
 
 function collision_obj_grp(obj, ends) {
     var ret = null;
-    var o_x0 = obj.x;
-    var o_x1 = o_x0 + obj.img.width;
-    var o_y0 = obj.y;
-    var o_y1 = o_y0 + obj.img.height;
+    var o_x0 = obj.x + obj.margin_x;
+    var o_x1 = (o_x0 - obj.margin_x) + (obj.img.width - obj.margin_x);
+    var o_y0 = obj.y + obj.margin_y;
+    var o_y1 = (o_y0 - obj.margin_y) + (obj.img.height - obj.margin_y);
     
     var t = ends[0].next;
     while(t.next != null) {
-        var t_x0 = t.x;
-        var t_x1 = t_x0 + t.img.width;
-        var t_y0 = t.y;
-        var t_y1 = t_y0 + t.img.height;
+        var t_x0 = t.x + t.margin_x;
+        var t_x1 = (t_x0 - t.margin_x) + (t.img.width - t.margin_x);
+        var t_y0 = t.y + t.margin_y;
+        var t_y1 = (t_y0 - t.margin_y) + (t.img.height - t.margin_y);
         if (o_x0 < t_x1 && o_x1 > t_x0 && o_y0 < t_y1 && o_y1 > t_y0) {
             ret = t;
             break;
