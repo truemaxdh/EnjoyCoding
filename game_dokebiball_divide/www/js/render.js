@@ -26,7 +26,7 @@ function render() {
     // afterimage
     ctx_game.globalCompositeOperation = 'source-over';
     ctx_game.fillStyle = "rgba(0, 0, 0, 0.1)";
-    ctx_game.fillRect(0, 0, 720, 540);
+    ctx_game.fillRect(0, 0, 540, 720);
 
     balls_ends[0].render(ctx_game);
     missile_ends[0].render(ctx_game);
