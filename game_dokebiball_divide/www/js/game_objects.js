@@ -1,21 +1,12 @@
 var img_airplane = new Image();
 var img_airplane_x = new Image();
 var img_missile = new Image();
-var img_coin_golds = [new Image(), new Image(), new Image()];
-var img_coin_grays = [new Image(), new Image(), new Image()];
-var img_coin_bullet = new Image();
 
 var img_gameObjs = [
-    img_airplane, img_airplane_x, img_missile, 
-    img_coin_golds[0], img_coin_golds[1], img_coin_golds[2],
-    img_coin_grays[0], img_coin_grays[1], img_coin_grays[2],
-    img_coin_bullet
+    img_airplane, img_airplane_x, img_missile
 ];
 var URL_gameObjs = [
-    'img/airplane.png', 'img/airplane_x.png', 'img/missile.png',
-    'img/coin_gold_10.png', 'img/coin_gold_50.png', 'img/coin_gold_100.png',
-    'img/coin_gold_10.png', 'img/coin_gold_50.png', 'img/coin_gold_100.png',
-    'img/coin_bullet.png'
+    'img/airplane.png', 'img/airplane_x.png', 'img/missile.png'
 ];
 
 for (var i=0; i<img_gameObjs.length; i++) {
