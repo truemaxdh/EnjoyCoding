@@ -8,7 +8,7 @@ var imgs = [img_pause];
 var URLs = ['img/pause.png'];
 
 function render_init() {
-  canv_game = document.getElementById('game_canvas_landscape');
+  canv_game = document.getElementById('game_canvas');
   ctx_game = canv_game.getContext('2d');    
   
   var imagesOK = 0; 
