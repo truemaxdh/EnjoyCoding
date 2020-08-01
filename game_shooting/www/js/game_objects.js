@@ -34,6 +34,8 @@ var URL_gameObjs = [
 function gameobj(x, y) {
     this.x = x;
     this.y = y;
+    this.margin_x = 0;
+    this.margin_y = 0;
     this.step_x = 0;
     this.step_y = 0;
     this.prev = null;
@@ -65,6 +67,8 @@ function gameobj(x, y) {
 function objJet(x, y) {
     gameobj.call(this, x, y);
     this.img = img_airplane;
+    this.margin_x = 5;
+    this.margin_y = 5;
     this.game_over = function() {
         this.img = img_airplane_x;
     }
