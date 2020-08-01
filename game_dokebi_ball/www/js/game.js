@@ -38,8 +38,7 @@ function newGame() {
     gamePlay.millisec_played = 0;
 
     currentStageDef.next_ball_interval -= 400 * (gamePlay.stage - 1);
-    
-  
+      
     gamePlay.o_game_over = null;
     
     balls_ends[0] = new gameobj(0,0), balls_ends[1] = new gameobj(0,0);

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="description" content="a simple flight shooting game, with only a few rules.Avoid bombs.Shoot coins, but not bump into coins.Coins are differ with their number in endurance and score." />
+    
+    <title>Plane vs Coins</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/sound_effects.js"></script>
+    <script src="js/game_objects.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/user_input.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/google_api_js.js"></script>
+    <script>
+      function goToStage(_stage) {
+        document.getElementById('StageMap').style.width='0%';
+        stage = _stage;
+        pageChange('game');
+      }
+      
+      function openStageMap() {
+        document.getElementById('StageMap').style.width='100%';
+      }
+    </script>
+  <style>
+   body {
+      /* Disables pull-to-refresh but allows overscroll glow effects. */
+      overscroll-behavior-y: contain;
+     }
+  </style>
+  </head>
+  <body>
+    <div id = "intro" class="menu border_round">
+    </div>
+    <div id = "menu" class="menu border_round">
+      <div class = "topContent">
+        <center>
+          <div id="signInStat">
+            <span style='font-size:15px;'>Sign in with Google to share your scores and achievements with your friends.</span>
+          </div>
+          <button id="logOut" style="display:none;" onclick="Android.signOutFromGS();">SignOut</button>
+          <br>
+          <img id="logIn" src="img/btn_google_signin_dark_normal_web.png" onclick="Android.signInToGS();">
+          
+        </center>
+      </div>    
+      <div class = "text">
+        <h1>Plane vs<br>Coins</h1>
+        <!--<a href="#" onclick="pageChange('game');">Start</a>-->
+        <a href="#" onclick="openStageMap();">Start</a>
+        <a href="#" onclick="ShowAchievements();">Show Achievements</a>
+        <a href="#" onclick="ShowHighScores();">Show High Scores</a>
+        <br>
+        <div class = "smallText">
+          <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.width='100%';"><b>How to play</b></a>
+          <!--<a href="javascript:void(0)" onclick="Android.loadAchievements();">loadAchievements</a>-->
+          <!--a href="javascript:void(0)" onclick="toast(Android.getLastSignedInAccount());">LastSignedInAccount</a-->
+        </div>
+      </div>
+    </div>
+    <div id = "game">
+      <audio id="bgm" src="sound/FirstFlight.mp3" preload="auto" loop></audio>
+      <canvas id="bg_canvas" width="540" height="2700"></canvas>
+      <canvas id="game_canvas" width="540" height="900"></canvas>
+    </div>
+    
+    <!-- The overlay -->
+    <div id="user_result" class="overlay">
+      <!-- Button to close the overlay navigation -->
+      <a href="javascript:void(0)" class="closebtn" onclick="CloseUserResult()">&times;</a>
+
+      <!-- Overlay content -->
+      <div class="overlay-content">
+        <img id="user_img" />
+        <div class="text">You Scored <div id="user_score"></div></div>
+        <a href="#" onclick="ShowAchievements();">Show Achievements</a>
+        <a href="#" onclick="ShowHighScores();">Show High Scores</a>
+      </div>
+    </div>
+    
+    <!-- Submenu -->
+    <div id="Submenu" class="overlay">
+      
+      <!-- Overlay content -->
+      <div class="overlay-content">
+        <a href="#" onclick="pageChange('menu');hideSubMenu();">Exit Current Game</a>
+        <a href="#" onclick="Android.exitApp();">Exit App</a>
+        <a href="#" onclick="hideSubMenu();">Resume</a>
+      </div>
+    </div>
+    
+    <!-- How to play -->
+    <div id="howtoplay" class="overlay" style="background-color:white;">
+      <br>
+      <center><h1 style="color:#333;">Doodle<br>Flight</h1></center>
+      <h2 style="color:#555;">A simple flight shooting game</h2>
+      <p style="color:#777;font-weight:bold;">
+        &nbsp;Doodle Flight is a simple flight shooting game, with only a few rules.<br>
+        &nbsp;Avoid bombs.Shoot coins, but not bump into coins.<br>
+        &nbsp;That's all.<br>
+        &nbsp;Coins are differ with their number in endurance and score.<br>
+        &nbsp;1. '10': Removed at hitting once, and 10 points of earning.<br>
+        &nbsp;2. '50': Removed at hitting twice, and 50 points of earning.<br>
+        &nbsp;3. '100': Removed at hitting three times, and 100 points of earning.<br>
+        <br><br>
+        Drag plane to control.<br>
+        Missile is fired automately.<br>
+        <br>
+        <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.width='0%';">Back</a>
+        <br>
+      </p>
+    </div> 
+    
+    <!-- Stage Map -->
+    <div id="StageMap" class="overlay">
+      <!-- Button to close the overlay navigation -->
+      <a href="javascript:void(0)" class="closebtn" onclick="document.getElementById('StageMap').style.width='0%';">&times;</a>
+      
+      <!-- Overlay content -->
+      <div class="overlay-content">
+        <div class="text">Select a stage to start</div><br>
+        <button class="round" onclick="goToStage(1);">1</button>
+        <button class="round" onclick="goToStage(2);">2</button>
+        <button class="round" onclick="goToStage(3);">3</button><br>
+        <button class="round" onclick="goToStage(4);">4</button>
+        <button class="round" onclick="goToStage(5);">5</button>
+        <button class="round" onclick="goToStage(6);">6</button><br>
+        <button class="round" onclick="goToStage(7);">7</button>
+        <button class="round" onclick="goToStage(8);">8</button>
+        <button class="round" onclick="goToStage(9);">9</button><br>
+        <button class="round" onclick="goToStage(10);">10</button>
+      </div>        
+    </div>    
+  </body>
+</html>
