@@ -26,6 +26,15 @@
           document.getElementById( 'bgm' ).pause();
         }
       }
+
+      function showSubMenu() {
+        document.getElementById("settings").style.width = "100%";
+      }
+
+      function hideSubMenu() {
+        document.getElementById("settings").style.width = "0%";
+      }
+
       window.onload = function() {
         demo_fireworks();
         setTimeout(function() {
@@ -36,18 +45,21 @@
 
   </head>
   <body>  
-    <div id="board" style="width:100%; height:100%;"></div>
+    <div id="board" style="width:100%; height:100%;" ondblclick="showSubMenu();"></div>
     <audio id="bgm" src="sound/LightOfNight.mp3" preload="auto" loop></audio>
     <!-- The overlay -->
     <div id="settings" class="overlay">
 
       <!-- Button to close the overlay navigation -->
-      <a href="javascript:void(0)" class="closebtn" onclick="CloseUserResult()">&times;</a>
+      <a href="javascript:void(0)" class="closebtn" onclick="hideSubMenu();">&times;</a>
 
       <!-- Overlay content -->
       <div class="overlay-content">
         <div class="text">Settings</div>
         <a href="#" id="bgmOnOff" onclick="BgmOnOff();">Back Music: Off</a>
+        <a href="#" onclick="Android.exitApp();">Exit App</a>
+        <a href="#" onclick="hideSubMenu();">Resume</a>
+        <font color="white">Double-click on the screen to see this menu again.</font>
       </div>
     </div>
   </body>
