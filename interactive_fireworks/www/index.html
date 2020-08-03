@@ -27,6 +27,11 @@
         }
       }
 
+      function ExitApp() {
+        document.getElementById( 'bgm' ).pause();
+        Android.exitApp();
+      }
+
       function showSubMenu() {
         document.getElementById("settings").style.width = "100%";
       }
@@ -57,7 +62,7 @@
       <div class="overlay-content">
         <div class="text">Settings</div>
         <a href="#" id="bgmOnOff" onclick="BgmOnOff();">Back Music: Off</a>
-        <a href="#" onclick="Android.exitApp();">Exit App</a>
+        <a href="#" onclick="ExitApp();">Exit App</a>
         <a href="#" onclick="hideSubMenu();">Resume</a>
         <font color="white">Double-click on the screen to see this menu again.</font>
       </div>
