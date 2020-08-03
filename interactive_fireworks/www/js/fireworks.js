@@ -70,7 +70,7 @@ specialEffects.fireworks = function(el) {
   this.fireworks.speed = Math.random() * w / 20 + 1;
   */
   this.fireworks.drawFrm();
-  console.log(this);
+  //console.log(this);
 };
   
 specialEffects.fireworks.drawFrm = function() {
