@@ -7,8 +7,15 @@ for (var i = 0; i < 6; i++) {
 	
 function playSound(soundID)
 {
-  try {
-    sounds[soundID].currentTime = 0;
-    sounds[soundID].play();
-  } catch(err) {}
+  if (soundSettings.sound == "on") {
+    try {
+      sounds[soundID].currentTime = 0;
+      sounds[soundID].play();
+    } catch(err) {}
+  }
+}
+
+var soundSettings = {
+  bgm : 'off',
+  sound : 'off'
 }
