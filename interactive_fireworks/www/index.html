@@ -20,9 +20,13 @@
         var el = document.getElementById("bgmOnOff");
         if (el.innerHTML == "Back Music: Off") {
           el.innerHTML = "Back Music: On";
+          soundSettings.sound = "on";
+          soundSettings.bgm = "on";
           document.getElementById( 'bgm' ).play();
         } else {
           el.innerHTML = "Back Music: Off";
+          soundSettings.sound = "off";
+          soundSettings.bgm = "off";
           document.getElementById( 'bgm' ).pause();
         }
       }
