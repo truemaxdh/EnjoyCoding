@@ -107,4 +107,8 @@ specialEffects.fireworks.addNewFire = function(cx, cy) {
   newFire.prev = tmpObj;
   newFire.next = obj.listChain.end;
   obj.listChain.end.prev = newFire;
+  
+  if (soundSettings.sound == "on") {
+    playSound(Math.random() * sounds.length);
+  }
 }
