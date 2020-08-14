@@ -45,12 +45,14 @@
         document.getElementById("settings").style.left = "-100%";
       }
       
-      function clickedToAdd(evt) {
-        console.log(evt);
-        specialEffects.fireworks.addNewFire(evt.clientX, evt.clientY);
-      }
-
       window.onload = function() {
+        var el = document.getElementById("board");
+        el.onmouseup = function(evt) {
+          specialEffects.fireworks.addNewFire(evt.clientX, evt.clientY);
+        };
+        el.ontouchstart = function(evt) {
+          specialEffects.fireworks.addNewFire(evt.touches[0].clientX, evt.touches[0].clientX);
+        };
         demo_fireworks();
         setTimeout(function() {
           document.getElementById("settings").style.left = "-100%";
@@ -60,7 +62,7 @@
 
   </head>
   <body>  
-    <div id="board" style="width:100%; height:100%;" ondblclick="showSubMenu();" onclick="clickedToAdd(evt);"></div>
+    <div id="board" style="width:100%; height:100%;" ondblclick="showSubMenu();"></div>
     <audio id="bgm" src="sound/LightOfNight.mp3" preload="auto" loop></audio>
     <!-- The overlay -->
     <div id="settings" class="overlay">
