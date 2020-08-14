@@ -109,6 +109,6 @@ specialEffects.fireworks.addNewFire = function(cx, cy) {
   obj.listChain.end.prev = newFire;
   
   if (soundSettings.sound == "on") {
-    playSound(Math.random() * sounds.length);
+    playSound(Math.floor(Math.random() * sounds.length));
   }
 }
