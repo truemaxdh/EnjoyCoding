@@ -8,8 +8,9 @@ function objBase() {
   this.draw = function(ctx_bg) {};  
 }
 
-function objFire(cx, cy) {
+function objFire(cx, cy, w, h) {
   objBase.call();
+  b = (typeof b !== 'undefined') ?  b : 1
   this.cx = cx;
   this.cy = cy;
   this.r = Math.random() * 15 + 5;
@@ -100,7 +101,7 @@ specialEffects.fireworks.drawFrm = function() {
 
 specialEffects.fireworks.addNewFire = function(cx, cy) {
   var obj = specialEffects.fireworks;
-  var newFire = new objFire(cx, cy);
+  var newFire = new objFire(cx, cy, obj.w, obj.h);
   var tmpObj = obj.listChain.end.prev;
   tmpObj.next = newFire;
   newFire.prev = tmpObj;
