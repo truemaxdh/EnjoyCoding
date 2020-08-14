@@ -8,10 +8,10 @@ function objBase() {
   this.draw = function(ctx_bg) {};  
 }
 
-function objFire(w, h) {
+function objFire(cx, cy) {
   objBase.call();
-  this.cx = Math.random() * w;
-  this.cy = Math.random() * h;
+  this.cx = cx;
+  this.cy = cy;
   this.r = Math.random() * 15 + 5;
   this.rgb = "rgb(" + (Math.random() * 256) + "," + (Math.random() * 256) + "," + (Math.random() * 256) + ")";
   this.speed = Math.random() * w / 150 + 1;
@@ -92,13 +92,18 @@ specialEffects.fireworks.drawFrm = function() {
   }
 
   if (Math.floor(Math.random() * 40) == 0) {
-    var newFire = new objFire(obj.w, obj.h);
-    var tmpObj = obj.listChain.end.prev;
-    tmpObj.next = newFire;
-    newFire.prev = tmpObj;
-    newFire.next = obj.listChain.end;
-    obj.listChain.end.prev = newFire;
+    obj.addNewFire(Math.random() * obj.w, Math.random() * obj.h);
   }
 
   requestAnimationFrame(specialEffects.fireworks.drawFrm);
+}
+
+specialEffects.fireworks.addNewFire = function(cx, cy) {
+  var obj = specialEffects.fireworks;
+  var newFire = new objFire(cx, cy);
+  var tmpObj = obj.listChain.end.prev;
+  tmpObj.next = newFire;
+  newFire.prev = tmpObj;
+  newFire.next = obj.listChain.end;
+  obj.listChain.end.prev = newFire;
 }
