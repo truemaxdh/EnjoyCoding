@@ -7,11 +7,14 @@ for (var i = 0; i < 6; i++) {
 	
 function playSound(soundID)
 {
+  console.log(soundSettings.sound);
   if (soundSettings.sound == "on") {
     try {
       sounds[soundID].currentTime = 0;
       sounds[soundID].play();
-    } catch(err) {}
+    } catch(err) {
+      console.log(err);
+    }
   }
 }
 
