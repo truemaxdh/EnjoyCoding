@@ -35,6 +35,8 @@
 
       function ExitApp() {
         document.getElementById( 'bgm' ).pause();
+        soundSettings.sound = "off";
+        soundSettings.bgm = "off";
         Android.exitApp();
       }
 
