@@ -29,8 +29,8 @@ function render_board() {
             } else {
                 ctx.beginPath();
                 ctx.lineWidth = "1";
-                ctx.strokeStyle = "gray";
-                ctx.setLineDash([4, 2]);
+                ctx.strokeStyle = "#aaa";
+                ctx.setLineDash([5, 5]);
                 ctx.rect(BLOCK_W * x, BLOCK_H * y, BLOCK_W - 1 , BLOCK_H - 1);
                 ctx.stroke();
             }
