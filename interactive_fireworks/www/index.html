@@ -19,13 +19,13 @@
       
       function BgmOnOff() {
         var el = document.getElementById("bgmOnOff");
-        if (el.innerHTML == "Sound & BackMusic: Off") {
-          el.innerHTML = "Sound & BackMusic: On";
+        if (el.innerHTML == "Sound \& BackMusic: Off") {
+          el.innerHTML = "Sound \& BackMusic: On";
           soundSettings.sound = "on";
           soundSettings.bgm = "on";
           document.getElementById( 'bgm' ).play();
         } else {
-          el.innerHTML = "Sound & BackMusic: Off";
+          el.innerHTML = "Sound \& BackMusic: Off";
           soundSettings.sound = "off";
           soundSettings.bgm = "off";
           document.getElementById( 'bgm' ).pause();
