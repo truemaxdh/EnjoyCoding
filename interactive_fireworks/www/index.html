@@ -39,6 +39,9 @@
 
       function showSubMenu() {
         document.getElementById("settings").style.left = "0";
+        setTimeout(function() {
+          hideSubMenu();
+        }, 3000);  
       }
 
       function hideSubMenu() {
@@ -50,13 +53,11 @@
         el.onmouseup = function(evt) {
           specialEffects.fireworks.addNewFire(evt.clientX, evt.clientY);
         };
-        el.ontouchstart = function(evt) {
+        /*el.ontouchstart = function(evt) {
           specialEffects.fireworks.addNewFire(evt.touches[0].clientX, evt.touches[0].clientX);
-        };
+        };*/
         demo_fireworks();
-        setTimeout(function() {
-          document.getElementById("settings").style.left = "-100%";
-        }, 3000);     
+        showSubMenu();
       }
     </script>
 
