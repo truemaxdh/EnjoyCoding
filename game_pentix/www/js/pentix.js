@@ -134,6 +134,7 @@ function newShape() {
     currentY = -1;
     
     game_hist.push({"current" : current.slice(), "board" : board.slice(), "score" : score, "currentX" : currentX, "currentY" : currentY});
+    console.log(game_hist);
 }
 
 function undo() {
@@ -145,6 +146,7 @@ function undo() {
         currentX = last_snapshot.currentX;
         currentY = last_snapshot.currentY;
     }
+    console.log(game_hist);
 }
 
 // clears the board
