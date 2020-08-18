@@ -133,17 +133,23 @@ function newShape() {
     currentX = 5;
     currentY = -1;
     
-    history.push({"current" : current.slice(), "board" : board.slice(), "score" : score, "currentX" : currentX, "currentY" : currentY});
+    //history.push({"current" : current.slice(), "board" : board.slice(), "score" : score, "currentX" : currentX, "currentY" : currentY});
+    history.push([current.slice(), board.slice(), score, currentX, currentY]);
 }
 
 function undo() {
     if (history.length > 0) {
         var last_snapshot = history.pop();
-        current = last_snapshot.current;
+        /*current = last_snapshot.current;
         board = last_snapshot.board;
         score = last_snapshot.score;
         currentX = last_snapshot.currentX;
-        currentY = last_snapshot.currentY;
+        currentY = last_snapshot.currentY;*/
+        current = last_snapshot[0];
+        board = last_snapshot[1];
+        score = last_snapshot[2];
+        currentX = last_snapshot[3];
+        currentY = last_snapshot[4];
     }
 }
 
