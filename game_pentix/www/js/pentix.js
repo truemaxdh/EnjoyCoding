@@ -108,6 +108,8 @@ var shapes = [
       0, 0, 1 ]
 ];
 
+var history = [];
+
 // creates a new 5x5 shape in global variable 'current'
 // 5x5 so as to cover the size when the shape is rotated
 function newShape() {
@@ -130,6 +132,19 @@ function newShape() {
     // position where the shape will evolve
     currentX = 5;
     currentY = -1;
+    
+    history.push({current : current.slice(), board : board.slice(), score : score, currentX : currentX, currentY : currentY});
+}
+
+function undo() {
+    if (history.length > 0) {
+        var last_snapshot = history.pop();
+        current = last_snapshot.current;
+        board = last_snapshot.board;
+        score = last_snapshot.score;
+        currentX = last_snapshot.currentX;
+        currentY = last_snapshot.currentY;
+    }
 }
 
 // clears the board
@@ -140,6 +155,7 @@ function init() {
             board[ y ][ x ] = 0;
         }
     }
+    history = [];
 }
 
 // keep the element moving down, creating new shapes and clearing lines
