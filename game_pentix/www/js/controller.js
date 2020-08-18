@@ -31,7 +31,7 @@ function addEvt() {
     var scale_fx = canvas.width / canvas.clientWidth;
     var scale_fy = canvas.height / canvas.clientHeight;
     document.body.onmousedown = function (e) {
-        if (e.clientY < 40) {
+        if (e.clientY < 40 && e.clientX > 400) {
             showSubMenu();
             return true;
         }
@@ -51,7 +51,7 @@ function addEvt() {
     }
 
     document.body.onmousemove = function(e) {
-        if (e.clientY < 40) {
+        if (e.clientY < 40 && e.clientX > 400) {
             showSubMenu();
             return true;
         }
@@ -61,7 +61,7 @@ function addEvt() {
     }
 
     document.body.ontouchstart = function (e) {
-        if (e.touches[0].clientY < 40) {
+        if (e.touches[0].clientY < 40 && e.touches[0].clientX > 400) {
             showSubMenu();
             return true;
         }
@@ -81,7 +81,7 @@ function addEvt() {
     }
 
     document.body.ontouchmove = function(e) {
-        if (e.touches[0].clientY < 40) {
+        if (e.touches[0].clientY < 40 && e.touches[0].clientX > 400) {
             showSubMenu();
             return true;
         }
