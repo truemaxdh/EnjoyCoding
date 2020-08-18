@@ -257,7 +257,7 @@ function clearLines(y, combo) {
                 chkAndUnlockAchievement(cleardLines);
             }            
             score += ++combo * 10; 
-            document.getElementById( 'score_num' ).innerHTML = score;
+            //document.getElementById( 'score_num' ).innerHTML = score;
             document.getElementById( 'clearsound' ).play();
             for ( var yy = y; yy > 0; --yy ) {
                 for ( var x = 0; x < COLS; ++x ) {
