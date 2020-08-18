@@ -258,7 +258,7 @@ function clearLines(y, combo) {
             }            
             score += ++combo * 10; 
             //document.getElementById( 'score_num' ).innerHTML = score;
-            document.getElementById( 'clearsound' ).play();
+            //document.getElementById( 'clearsound' ).play();
             for ( var yy = y; yy > 0; --yy ) {
                 for ( var x = 0; x < COLS; ++x ) {
                     board[ yy ][ x ] = board[ yy - 1 ][ x ];
