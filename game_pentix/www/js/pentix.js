@@ -133,7 +133,7 @@ function newShape() {
     currentX = 5;
     currentY = -1;
     
-    history.push({current : current.slice(), board : board.slice(), score : score, currentX : currentX, currentY : currentY});
+    history.push({"current" : current.slice(), "board" : board.slice(), "score" : score, "currentX" : currentX, "currentY" : currentY});
 }
 
 function undo() {
