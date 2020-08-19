@@ -54,6 +54,11 @@ function render_boarder() {
     // ctx.font = '35px Sniglet-Regular';
     // ctx.fillText('Usery : ' + user_y + ',UserX : ' + Math.floor(user_x), 20, 50);
 }
+
+function render_score() {
+    document.getElementById( 'score_num' ).innerHTML = score;
+}
+
 function render_gameover() {
     var c_x = ctx.canvas.width / 2;
     var c_y = ctx.canvas.height / 2;
