@@ -11,6 +11,8 @@ var current; // current moving shape
 var currentX, currentY; // position of current shape
 var cleardLines;
 var paused = false;
+var undo_flg = false;
+
 // var shapes = [
 //     [ 0, 0, 0, 0,
 //       1, 1, 1, 1 ],
@@ -167,6 +169,12 @@ function tick(curTick) {
     }
     procKeyEvent();
     keyPressed = false;
+    
+    if (undo_flg) {
+        undo();
+        undo_flg = false;
+    }
+    
     render_board();
     render_current();
     render_boarder();
@@ -256,9 +264,11 @@ function clearLines(y, combo) {
             if (isApp) {
                 chkAndUnlockAchievement(cleardLines);
             }            
-            score += ++combo * 10; 
-            //document.getElementById( 'score_num' ).innerHTML = score;
+            score += ++combo * 10;
+            render_score();
+            
             //document.getElementById( 'clearsound' ).play();
+            
             for ( var yy = y; yy > 0; --yy ) {
                 for ( var x = 0; x < COLS; ++x ) {
                     board[ yy ][ x ] = board[ yy - 1 ][ x ];
