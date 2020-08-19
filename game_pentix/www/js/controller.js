@@ -31,8 +31,12 @@ function addEvt() {
     var scale_fx = canvas.width / canvas.clientWidth;
     var scale_fy = canvas.height / canvas.clientHeight;
     document.body.onmousedown = function (e) {
-        if (e.clientY < 40 && e.clientX > 400) {
-            showSubMenu();
+        if (e.clientY < 40) {
+            if (e.clientX > (canvas.clientWidth - 60)) {
+                showSubMenu();
+            } else if (e.clientX < 60) {
+                undo_flg = true;
+            }
             return true;
         }
         user_x = e.clientX  * scale_fx;
@@ -51,8 +55,12 @@ function addEvt() {
     }
 
     document.body.onmousemove = function(e) {
-        if (e.clientY < 40 && e.clientX > 400) {
-            showSubMenu();
+        if (e.clientY < 40) {
+            if (e.clientX > (canvas.clientWidth - 60)) {
+                showSubMenu();
+            } else if (e.clientX < 60) {
+                undo_flg = true;
+            }
             return true;
         }
         user_x = e.clientX * scale_fx;
@@ -62,10 +70,14 @@ function addEvt() {
 
     document.body.ontouchstart = function (e) {
         if (e.touches[0].clientY < 40) {
-            Android.showToast(e.touches[0].clientX);
-            showSubMenu();
+            if (e.touches[0].clientX > (canvas.clientWidth - 60)) {
+                showSubMenu();
+            } else if (e.touches[0].clientX < 60) {
+                undo_flg = true;
+            }
             return true;
         }
+        
         user_x = e.touches[0].clientX * scale_fx;
         user_y = e.touches[0].clientY * scale_fy;
         user_x_ori = user_x;
@@ -83,10 +95,14 @@ function addEvt() {
 
     document.body.ontouchmove = function(e) {
         if (e.touches[0].clientY < 40) {
-            Android.showToast(e.touches[0].clientX);
-            showSubMenu();
+            if (e.touches[0].clientX > (canvas.clientWidth - 60)) {
+                showSubMenu();
+            } else if (e.touches[0].clientX < 60) {
+                undo_flg = true;
+            }
             return true;
         }
+        
         user_x = e.touches[0].clientX * scale_fx;
         user_y = e.touches[0].clientY * scale_fy;
         return false;
