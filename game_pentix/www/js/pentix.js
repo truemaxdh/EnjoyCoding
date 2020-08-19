@@ -272,7 +272,7 @@ function clearLines(y, combo) {
             score += ++combo * 10;
             render_score();
             
-            //document.getElementById( 'clearsound' ).play();
+            document.getElementById( 'clearsound' ).play();
             
             for ( var yy = y; yy > 0; --yy ) {
                 for ( var x = 0; x < COLS; ++x ) {
