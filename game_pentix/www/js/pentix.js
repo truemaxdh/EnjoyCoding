@@ -135,7 +135,11 @@ function newShape() {
     currentX = 5;
     currentY = -1;
     
-    game_hist.push({"current" : current.slice(), "board" : board.slice(), "score" : score, "currentX" : currentX, "currentY" : currentY});
+    var copy_board = [];
+    for (var i = 0; i < board.length; i++) {
+        copy_board.push(board[i].slice());
+    }
+    game_hist.push({"current" : current.slice(), "board" : copy_board, "score" : score, "currentX" : currentX, "currentY" : currentY});
     console.log(game_hist);
 }
 
@@ -147,6 +151,7 @@ function undo() {
         score = last_snapshot.score;
         currentX = last_snapshot.currentX;
         currentY = last_snapshot.currentY;
+        render_score();
     }
     console.log(game_hist);
 }
