@@ -53,7 +53,6 @@ function render_boarder() {
     // ctx.fillStyle = '#ffa500';
     // ctx.font = '35px Sniglet-Regular';
     // ctx.fillText('Usery : ' + user_y + ',UserX : ' + Math.floor(user_x), 20, 50);
-    document.getElementById( 'score_num' ).innerHTML = score;
 }
 function render_gameover() {
     var c_x = ctx.canvas.width / 2;
