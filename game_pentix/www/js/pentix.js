@@ -144,16 +144,17 @@ function newShape() {
 }
 
 function undo() {
-    if (game_hist.length > 0) {
-        var last_snapshot = game_hist.pop();
-        current = last_snapshot.current;
-        board = last_snapshot.board;
-        score = last_snapshot.score;
-        currentX = last_snapshot.currentX;
-        currentY = last_snapshot.currentY;
-        render_score();
-    }
-    console.log(game_hist);
+    if (currentX == 5 && currentY == -1 && game_hist.length > 1) {
+        game_hist.pop();
+    } 
+    
+    var last_snapshot = game_hist[game_hist.length - 1];
+    current = last_snapshot.current;
+    board = last_snapshot.board;
+    score = last_snapshot.score;
+    currentX = last_snapshot.currentX;
+    currentY = last_snapshot.currentY;
+    render_score();
 }
 
 // clears the board
