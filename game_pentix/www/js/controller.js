@@ -62,7 +62,7 @@ function addEvt() {
 
     document.body.ontouchstart = function (e) {
         if (e.touches[0].clientY < 40) {
-            Android.toast(e.touches[0].clientX);
+            Android.showToast(e.touches[0].clientX);
             showSubMenu();
             return true;
         }
@@ -83,7 +83,7 @@ function addEvt() {
 
     document.body.ontouchmove = function(e) {
         if (e.touches[0].clientY < 40) {
-            Android.toast(e.touches[0].clientX);
+            Android.showToast(e.touches[0].clientX);
             showSubMenu();
             return true;
         }
