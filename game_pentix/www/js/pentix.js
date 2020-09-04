@@ -296,6 +296,7 @@ function clearLines(y, combo) {
 
 var rotBlTmr = 0;
 function procKeyEvent() {
+    console.log('procKeyEvent enter');
     switch ( keyCode ) {
         case 'left':
             if ( valid( -1 ) ) {
@@ -322,10 +323,11 @@ function procKeyEvent() {
             }
             break;
     }
-
+console.log('procKeyEvent');
     render_board();
     render_current();
     render_boarder();
+    console.log('procKeyEvent out');
 }
 
 function procTouchEvent() {
