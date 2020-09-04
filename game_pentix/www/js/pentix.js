@@ -331,17 +331,18 @@ function procKeyEvent() {
 function procTouchEvent() {
     keyCode = '';
     if (user_pressing) {
-        if (Math.abs(dx) > (BLOCK_W / 2) || Math.abs(dy) > (BLOCK_H / 2)) {
-            do_rotate = false;
-        }
-
         for (var i = 0; i < 2; i++) {
             if (i > 0)
                 procKeyEvent();
             
             var dx = user_x - user_x_ori;
             var dy = user_y - user_y_ori;
+
+            if (Math.abs(dx) < (BLOCK_W / 2) && Math.abs(dy) < (BLOCK_H / 2)) {
+                break;
+            }
             
+            do_rotate = false;
             keyCode = '';
             if (dy > BLOCK_H) {
                 keyCode = 'down';
@@ -357,6 +358,8 @@ function procTouchEvent() {
                 user_y_ori = user_y;
             } else 
                 break;
+            
+            
         }
     } else {
         if (do_rotate) {
