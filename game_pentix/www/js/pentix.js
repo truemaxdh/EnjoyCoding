@@ -335,6 +335,7 @@ function procTouchEvent() {
             if (i > 0)
                 procKeyEvent();
             
+            keyCode = '';
             var dx = user_x - user_x_ori;
             var dy = user_y - user_y_ori;
 
@@ -343,7 +344,7 @@ function procTouchEvent() {
             }
             
             do_rotate = false;
-            keyCode = '';
+            
             if (dy > BLOCK_H) {
                 keyCode = 'down';
                 user_y_ori = user_y_ori + BLOCK_H;
