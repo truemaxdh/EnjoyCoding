@@ -345,15 +345,15 @@ function procTouchEvent() {
             
             do_rotate = false;
             
-            if (dy > BLOCK_H) {
+            if (dy >= BLOCK_H) {
                 keyCode = 'down';
                 user_y_ori = user_y_ori + BLOCK_H;
                 user_x_ori = user_x;
-            } else if (dx > BLOCK_W) {
+            } else if (dx >= BLOCK_W) {
                 keyCode = 'right';
                 user_x_ori = user_x_ori + BLOCK_W;
                 user_y_ori = user_y;
-            } else if (dx < - BLOCK_W) {
+            } else if (dx <= - BLOCK_W) {
                 keyCode = 'left';
                 user_x_ori = user_x_ori - BLOCK_W;
                 user_y_ori = user_y;
