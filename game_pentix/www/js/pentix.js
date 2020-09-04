@@ -171,10 +171,13 @@ function init() {
 
 // keep the element moving down, creating new shapes and clearing lines
 function tick(curTick) {
+    console.log('tick enter');
     if (undo_flg) {
+        console.log('tick1');
         undo();
         undo_flg = false;
     } else {
+        console.log('tick2');
         if (!keyPressed) {
             procTouchEvent();
         } else {
@@ -183,12 +186,14 @@ function tick(curTick) {
             //render_current();
             //render_boarder();
         }
+        console.log('tick3');
         keyPressed = false;
 
         var diffTick = curTick - lastTick;
         if (diffTick < 1000)
             move_wait_cnt += diffTick;
         lastTick = curTick; 
+        console.log('tick4');
         if (move_wait_cnt > move_wait_limit) {
             move_wait_cnt -= move_wait_limit;
 
@@ -206,10 +211,14 @@ function tick(curTick) {
                 ++currentY;
             }
         }
+        console.log('tick5');
     }
     if (!paused) {
+        console.log('tick6');
         requestAnimationFrame(tick);
-    }    
+        console.log('tick7');
+    }
+    console.log('tick out');
 }
 
 function gameOver() {
