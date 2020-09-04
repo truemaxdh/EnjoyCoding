@@ -140,7 +140,7 @@ function newShape() {
         copy_board.push(board[i].slice());
     }
     game_hist.push({"current" : current.slice(), "board" : copy_board, "score" : score, "currentX" : currentX, "currentY" : currentY});
-    console.log(game_hist);
+    //console.log(game_hist);
 }
 
 function undo() {
