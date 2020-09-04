@@ -173,9 +173,11 @@ function init() {
 function tick(curTick) {
     if (!keyPressed) {
         procTouchEvent();
+    } else {
+        procKeyEvent();
     }
-    procKeyEvent();
     keyPressed = false;
+    
     
     if (undo_flg) {
         undo();
@@ -327,25 +329,28 @@ function procKeyEvent() {
 function procTouchEvent() {
     keyCode = '';
     if (user_pressing) {
-        var dx = user_x - user_x_ori;
-        var dy = user_y - user_y_ori;
-        if (Math.abs(dx) < (BLOCK_W / 2) && Math.abs(dy) < (BLOCK_H / 2)) {
-            return;
-        }
+        while(true) {
+            var dx = user_x - user_x_ori;
+            var dy = user_y - user_y_ori;
+            /*if (Math.abs(dx) < (BLOCK_W / 2) && Math.abs(dy) < (BLOCK_H / 2)) {
+                return;
+            }*/
 
-        do_rotate = false;
-        if (dy > BLOCK_H) {
-            keyCode = 'down';
-            user_y_ori = user_y_ori + BLOCK_H;
-            user_x_ori = user_x;
-        } else if (dx > BLOCK_W) {
-            keyCode = 'right';
-            user_x_ori = user_x_ori + BLOCK_W;
-            user_y_ori = user_y;
-        } else if (dx < - BLOCK_W) {
-            keyCode = 'left';
-            user_x_ori = user_x_ori - BLOCK_W;
-            user_y_ori = user_y;
+            do_rotate = false;
+            if (dy > BLOCK_H) {
+                keyCode = 'down';
+                user_y_ori = user_y_ori + BLOCK_H;
+                user_x_ori = user_x;
+            } else if (dx > BLOCK_W) {
+                keyCode = 'right';
+                user_x_ori = user_x_ori + BLOCK_W;
+                user_y_ori = user_y;
+            } else if (dx < - BLOCK_W) {
+                keyCode = 'left';
+                user_x_ori = user_x_ori - BLOCK_W;
+                user_y_ori = user_y;
+            } else 
+                break;
         }
     } else {
         if (do_rotate) {
