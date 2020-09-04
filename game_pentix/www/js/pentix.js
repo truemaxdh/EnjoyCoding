@@ -171,44 +171,42 @@ function init() {
 
 // keep the element moving down, creating new shapes and clearing lines
 function tick(curTick) {
-    if (!keyPressed) {
-        procTouchEvent();
-    } else {
-        procKeyEvent();
-    }
-    keyPressed = false;
-    
-    
     if (undo_flg) {
         undo();
         undo_flg = false;
-    }
-    
-    render_board();
-    render_current();
-    render_boarder();
-    var diffTick = curTick - lastTick;
-    if (diffTick < 1000)
-        move_wait_cnt += diffTick;
-    lastTick = curTick; 
-    if (move_wait_cnt > move_wait_limit) {
-        move_wait_cnt -= move_wait_limit;
-            
-        if ( !valid( 0, 1 ) ) {
-            if (currentY < 0) {
-                gameOver();
-            } else {
-                freeze();
-                clearLines(ROWS, 0);
-            }
-            return false;
+    } else {
+        if (!keyPressed) {
+            procTouchEvent();
+        } else {
+            procKeyEvent();
+            //render_board();
+            //render_current();
+            //render_boarder();
         }
-        // if the element settled
-        else {
-            ++currentY;
-        }
-    }
+        keyPressed = false;
 
+        var diffTick = curTick - lastTick;
+        if (diffTick < 1000)
+            move_wait_cnt += diffTick;
+        lastTick = curTick; 
+        if (move_wait_cnt > move_wait_limit) {
+            move_wait_cnt -= move_wait_limit;
+
+            if ( !valid( 0, 1 ) ) {
+                if (currentY < 0) {
+                    gameOver();
+                } else {
+                    freeze();
+                    clearLines(ROWS, 0);
+                }
+                return false;
+            }
+            // if the element settled
+            else {
+                ++currentY;
+            }
+        }
+    }
     if (!paused) {
         requestAnimationFrame(tick);
     }    
@@ -324,6 +322,10 @@ function procKeyEvent() {
             }
             break;
     }
+
+    render_board();
+    render_current();
+    render_boarder();
 }
 
 function procTouchEvent() {
