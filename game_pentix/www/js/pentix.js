@@ -336,7 +336,7 @@ function procTouchEvent() {
                 return;
             }*/
 
-            do_rotate = false;
+            keyCode = '';
             if (dy > BLOCK_H) {
                 keyCode = 'down';
                 user_y_ori = user_y_ori + BLOCK_H;
@@ -351,6 +351,9 @@ function procTouchEvent() {
                 user_y_ori = user_y;
             } else 
                 break;
+            
+            do_rotate = false;
+            procKeyEvent();
         }
     } else {
         if (do_rotate) {
