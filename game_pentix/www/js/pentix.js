@@ -180,9 +180,9 @@ function tick(curTick) {
         } 
             
         procKeyEvent();
-        //render_board();
-        //render_current();
-        //render_boarder();
+        render_board();
+        render_current();
+        render_boarder();
         
         keyPressed = false;
 
@@ -323,27 +323,27 @@ function procKeyEvent() {
             }
             break;
     }
-    render_board();
-    render_current();
-    render_boarder();
+    //render_board();
+    //render_current();
+    //render_boarder();
 }
 
 function procTouchEvent() {
     keyCode = '';
     if (user_pressing) {
-        for (var i = 0; i < 3; i++) {
-            if (i > 0)
-                procKeyEvent();
-            
-            keyCode = '';
+        for (var i = 0; i < 10; i++) {
             var dx = user_x - user_x_ori;
             var dy = user_y - user_y_ori;
 
             if (Math.abs(dx) < (BLOCK_W / 2) && Math.abs(dy) < (BLOCK_H / 2)) {
-                //break;
                 return;
+                //break;                
             }
+
+            if (i > 0)
+                procKeyEvent();
             
+            keyCode = '';            
             do_rotate = false;
             
             if (dy > (BLOCK_H - 1)) {
@@ -358,10 +358,9 @@ function procTouchEvent() {
                 keyCode = 'left';
                 user_x_ori = user_x_ori - BLOCK_W;
                 user_y_ori = user_y;
-            } else 
-                break;
-            
-            
+            } else
+                return;
+                //break;            
         }
     } else {
         if (do_rotate) {
