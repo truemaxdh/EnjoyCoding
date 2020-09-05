@@ -331,7 +331,7 @@ function procKeyEvent() {
 function procTouchEvent() {
     keyCode = '';
     if (user_pressing) {
-        for (var i = 0; i < 2; i++) {
+        for (var i = 0; i < 3; i++) {
             if (i > 0)
                 procKeyEvent();
             
