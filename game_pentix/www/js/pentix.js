@@ -340,7 +340,8 @@ function procTouchEvent() {
             var dy = user_y - user_y_ori;
 
             if (Math.abs(dx) < (BLOCK_W / 2) && Math.abs(dy) < (BLOCK_H / 2)) {
-                break;
+                //break;
+                return;
             }
             
             do_rotate = false;
