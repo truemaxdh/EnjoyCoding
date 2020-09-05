@@ -331,9 +331,9 @@ function procKeyEvent() {
 function procTouchEvent() {
     keyCode = '';
     if (user_pressing) {
-        for (var i = 0; i < 2; i++) {
-            if (i > 0)
-                procKeyEvent();
+        //for (var i = 0; i < 2; i++) {
+        //    if (i > 0)
+        //        procKeyEvent();
             
             keyCode = '';
             var dx = user_x - user_x_ori;
@@ -345,23 +345,23 @@ function procTouchEvent() {
             
             do_rotate = false;
             
-            if (dy >= BLOCK_H) {
+            if (dy > (BLOCK_H - 1)) {
                 keyCode = 'down';
                 user_y_ori = user_y_ori + BLOCK_H;
                 user_x_ori = user_x;
-            } else if (dx >= BLOCK_W) {
+            } else if (dx > (BLOCK_W - 1)) {
                 keyCode = 'right';
                 user_x_ori = user_x_ori + BLOCK_W;
                 user_y_ori = user_y;
-            } else if (dx <= - BLOCK_W) {
+            } else if (dx < -(BLOCK_W - 1)) {
                 keyCode = 'left';
                 user_x_ori = user_x_ori - BLOCK_W;
                 user_y_ori = user_y;
-            } else 
-                break;
+            }// else 
+             //   break;
             
             
-        }
+        //}
     } else {
         if (do_rotate) {
             rotBlTmr = 0;
