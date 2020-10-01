@@ -14,9 +14,20 @@ var URLs = ['img/sea.png', 'img/sea2.png', 'img/island.png', 'img/pause.png'];
 
 function render_init() {
     canv_bg = document.getElementById('bg_canvas');
+    canv_game = document.getElementById('game_canvas');
+    
+    var scr_w = screen.width;
+    var scr_h = screen.height;
+    if ((scr_h * 0.54) > scr_w) {
+        canv_game.style.width = "100vw";    
+        canv_game.style.height = "167vw";
+        canv_bg.style.width = "33vw";    
+        canv_bg.style.height = "167vw";
+    }
+    
+    
     ctx_bg = canv_bg.getContext('2d');
 
-    canv_game = document.getElementById('game_canvas');
     ctx_game = canv_game.getContext('2d');
 
     var imagesOK = 0; 
