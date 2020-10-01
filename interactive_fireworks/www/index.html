@@ -20,16 +20,26 @@
       function BgmOnOff() {
         var el = document.getElementById("bgmOnOff");
         //console.log(el.innerHTML);
-        if (el.innerHTML == "Sound &amp; BackMusic: Off") {
-          el.innerHTML = "Sound &amp; BackMusic: On";
-          soundSettings.sound = "on";
+        if (el.innerHTML == "Background Music: Off") {
+          el.innerHTML = "Background Music: On";
           soundSettings.bgm = "on";
           document.getElementById( 'bgm' ).play();
         } else {
-          el.innerHTML = "Sound &amp; BackMusic: Off";
-          soundSettings.sound = "off";
+          el.innerHTML = "Background Music: Off";
           soundSettings.bgm = "off";
           document.getElementById( 'bgm' ).pause();
+        }
+      }
+      
+      function soundEffectOnOff() {
+        var el = document.getElementById("soundEffectOnOff");
+        //console.log(el.innerHTML);
+        if (el.innerHTML == "Sound Effect: Off") {
+          el.innerHTML = "Sound Effect: On";
+          soundSettings.sound = "on";
+        } else {
+          el.innerHTML = "Sound Effect: Off";
+          soundSettings.sound = "off";
         }
       }
 
@@ -77,7 +87,8 @@
       <!-- Overlay content -->
       <div class="overlay-content">
         <div class="text">Settings</div>
-        <a href="#" id="bgmOnOff" onclick="BgmOnOff();">Sound & BackMusic: Off</a>
+        <a href="#" id="bgmOnOff" onclick="BgmOnOff();">Background Music: Off</a>
+        <a href="#" id="soundEffectOnOff" onclick="soundEffectOnOff();">Sound Effect: Off</a>
         <a href="#" onclick="ExitApp();">Exit App</a>
         <a href="#" onclick="hideSubMenu();">Resume</a>
         <font color="white">Double-click on the screen to see this menu again.</font>
