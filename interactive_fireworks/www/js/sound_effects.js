@@ -1,8 +1,11 @@
 // Sound Play
 var sounds = []; // sounds
-for (var i = 0; i < 4; i++) {
-  sounds[i] = new Audio('sound/fire' + i + '.mp3');
-  sounds[i].volume = 0.3;
+var cnt = 0;
+for (var i = 0; i < 5; i++) {
+  for (var j = 0; j < 4; j++) {
+    sounds[cnt] = new Audio('sound/fire' + j + '.mp3');
+    sounds[cnt++].volume = 0.3;
+  }
 }
 	
 function playSound(soundID)
