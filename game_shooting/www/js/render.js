@@ -16,8 +16,8 @@ function render_init() {
     canv_bg = document.getElementById('bg_canvas');
     canv_game = document.getElementById('game_canvas');
     
-    var scr_w = screen.width;
-    var scr_h = screen.height;
+    var scr_w = window.innerWidth;
+    var scr_h = window.innerHeight;
     console.log(scr_w + "," + scr_h);
     if ((scr_h * 0.54) > scr_w) {
         canv_game.style.width = "100vw";    
