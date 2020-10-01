@@ -18,18 +18,15 @@ function render_init() {
     
     var scr_w = window.innerWidth;
     var scr_h = window.innerHeight;
-    console.log(scr_w + "," + scr_h);
+    
     if ((scr_h * 0.54) > scr_w) {
         canv_game.style.width = "100vw";    
         canv_game.style.height = "167vw";
         canv_bg.style.width = "33vw";    
         canv_bg.style.height = "167vw";
-        console.log("changed." + scr_w + "," + scr_h);
     }
-    
-    
+        
     ctx_bg = canv_bg.getContext('2d');
-
     ctx_game = canv_game.getContext('2d');
 
     var imagesOK = 0; 
