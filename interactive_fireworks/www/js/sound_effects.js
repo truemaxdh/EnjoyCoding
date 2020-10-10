@@ -22,7 +22,7 @@ function playSound(soundID)
 
 // BGM Play
 var curBgmId = 0;
-var bgms = [new Audio('sound/LightOfNight.mp3'), new Audio('sound/recollection.mp3')]; // BGMs
+var bgms = [new Audio('sound/recollection.mp3'), new Audio('sound/LightOfNight.mp3')]; // BGMs
 for (var i = 0; i < bgms.length; i++) {
   bgms[i].onended = function() {
     if (++curBgmId >= bgms.length)
