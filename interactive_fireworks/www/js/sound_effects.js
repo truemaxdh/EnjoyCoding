@@ -22,7 +22,18 @@ function playSound(soundID)
 
 // BGM Play
 var curBgmId = 0;
-var bgms = [new Audio('sound/recollection.mp3'), new Audio('sound/LightOfNight.mp3')]; // BGMs
+var bgms = [new Audio('sound/recollection.mp3'), 
+            new Audio('sound/LightOfNight.mp3'), 
+            new Audio('sound/LongLastingMemories.mp3')]; // BGMs
+
+// Shuffle
+for (var i = 0; i < bgms.length; i++) {
+  var rnd0 = parseInt(Math.random() * bgms.length);
+  var rnd2 = parseInt(Math.random() * bgms.length);
+  [bgms[rnd0], bgms[rnd1]] = [bgms[rnd1], bgms[rnd0]];
+}
+
+// Continuous playback
 for (var i = 0; i < bgms.length; i++) {
   bgms[i].onended = function() {
     if (++curBgmId >= bgms.length)
