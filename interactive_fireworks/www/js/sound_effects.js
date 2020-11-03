@@ -29,7 +29,7 @@ var bgms = [new Audio('sound/recollection.mp3'),
 // Shuffle
 for (var i = 0; i < bgms.length; i++) {
   var rnd0 = parseInt(Math.random() * bgms.length);
-  var rnd2 = parseInt(Math.random() * bgms.length);
+  var rnd1 = parseInt(Math.random() * bgms.length);
   [bgms[rnd0], bgms[rnd1]] = [bgms[rnd1], bgms[rnd0]];
 }
 
