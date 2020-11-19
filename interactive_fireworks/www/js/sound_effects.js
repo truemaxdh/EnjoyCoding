@@ -24,7 +24,8 @@ function playSound(soundID)
 var curBgmId = 0;
 var bgms = [new Audio('sound/recollection.mp3'), 
             new Audio('sound/LightOfNight.mp3'), 
-            new Audio('sound/LongLastingMemories.mp3')]; // BGMs
+            new Audio('sound/LongLastingMemories.mp3'),
+            new Audio('sound/MemoriesAFewYearsAgo.mp3')]; // BGMs
 
 // Shuffle
 for (var i = 0; i < bgms.length; i++) {
