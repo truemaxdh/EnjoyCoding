@@ -40,27 +40,27 @@ for (var i = 0; i < bgmPaths.length; i++) {
   [bgmPaths[rnd0], bgmPaths[rnd1]] = [bgmPaths[rnd1], bgmPaths[rnd0]];
 }
 
-var bgms = [];
+/*var bgms = [];
 for (var i = 0; i < bgmPaths.length; i++) {
   var audio = new Audio();
   audio.src = bgmPaths[i];
   audio.preload = "auto";
   bgms.push(audio);
-}
-
+}*/
+var bgms = new Audio(bgmPaths[curBgmId]);
 
 // Continuous playback
 //for (var i = 0; i < bgms.length; i++) {
   //bgms[i].onended = function() {
   bgms[0].onended = function() {
     try {
-      if (++curBgmId >= bgms.length)
+      if (++curBgmId >= bgmPaths.length)
         curBgmId = 0;
       /*toast("" + bgms[curBgmId].readyState);
       bgms[curBgmId].currentTime = 0;
       bgms[curBgmId].play();*/
-      bgms[0].src = bgmPaths[curBgmId];
-      bgms[0].oncanplaythrough = function() {
+      bgms.src = bgmPaths[curBgmId];
+      bgms.oncanplaythrough = function() {
         playBGM();    
       }
     } catch(e) {
@@ -72,7 +72,7 @@ for (var i = 0; i < bgmPaths.length; i++) {
 function playBGM() {
   try {
     //bgms[curBgmId].play();
-    bgms[0].play();
+    bgms.play();
   } catch(e) {
     toast(e.message);    
   }
@@ -80,7 +80,7 @@ function playBGM() {
 
 function pauseBGM() {
   //bgms[curBgmId].pause();
-  bgms[0].pause();
+  bgms.pause();
 }
 
 // Sound Setting
