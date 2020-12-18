@@ -53,7 +53,7 @@ for (var i = 0; i < bgms.length; i++) {
     try {
       if (++curBgmId >= bgms.length)
         curBgmId = 0;
-      toast("" + curBgmId);
+      //toast("" + curBgmId);
       bgms[curBgmId].currentTime = 0;
       bgms[curBgmId].play();
     } catch(e) {
