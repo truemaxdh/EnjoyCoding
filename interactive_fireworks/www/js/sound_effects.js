@@ -48,23 +48,29 @@ for (var i = 0; i < bgms.length; i++) {
 }
 
 // Continuous playback
-for (var i = 0; i < bgms.length; i++) {
-  bgms[i].onended = function() {
+//for (var i = 0; i < bgms.length; i++) {
+  //bgms[i].onended = function() {
+  bgms[0].onended = function() {
     try {
       if (++curBgmId >= bgms.length)
         curBgmId = 0;
-      toast("" + bgms[curBgmId].readyState);
+      /*toast("" + bgms[curBgmId].readyState);
       bgms[curBgmId].currentTime = 0;
-      bgms[curBgmId].play();
+      bgms[curBgmId].play();*/
+      bgms[0].src = bgmPaths[curBgmId];
+      bgms[0].oncanplaythrough = function() {
+        playBGM();    
+      }
     } catch(e) {
       toast(e.message);    
     }
   }
-}
+//}
 
 function playBGM() {
   try {
-    bgms[curBgmId].play();
+    //bgms[curBgmId].play();
+    bgms[0].play();
   } catch(e) {
     toast(e.message);    
   }
