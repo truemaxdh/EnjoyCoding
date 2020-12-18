@@ -46,7 +46,11 @@ for (var i = 0; i < bgms.length; i++) {
 }
 
 function playBGM() {
-  bgms[curBgmId].play();
+  try {
+    bgms[curBgmId].play();
+  } catch(e) {
+    toast(e.message);    
+  }
 }
 
 function pauseBGM() {
