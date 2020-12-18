@@ -72,7 +72,6 @@ for (var i = 0; i < bgmPaths.length; i++) {
 function playBGM() {
   try {
     //bgms[curBgmId].play();
-    bgms[0].currentTime = 0;
     bgms[0].play();
   } catch(e) {
     toast(e.message);    
