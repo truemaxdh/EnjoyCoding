@@ -35,8 +35,8 @@ var bgmPaths = [
 
 // Shuffle
 for (var i = 0; i < bgmPaths.length; i++) {
-  var rnd0 = parseInt(Math.random() * bgms.length);
-  var rnd1 = parseInt(Math.random() * bgms.length);
+  var rnd0 = parseInt(Math.random() * bgmPaths.length);
+  var rnd1 = parseInt(Math.random() * bgmPaths.length);
   [bgmPaths[rnd0], bgmPaths[rnd1]] = [bgmPaths[rnd1], bgmPaths[rnd0]];
 }
 
