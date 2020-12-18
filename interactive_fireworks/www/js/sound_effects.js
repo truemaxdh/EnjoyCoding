@@ -34,7 +34,7 @@ var bgmPaths = [
   'sound/MemoriesAFewYearsAgo.mp3']; // BGM Paths
 
 // Shuffle
-for (var i = 0; i < bgms.length; i++) {
+for (var i = 0; i < bgmPaths.length; i++) {
   var rnd0 = parseInt(Math.random() * bgms.length);
   var rnd1 = parseInt(Math.random() * bgms.length);
   [bgmPaths[rnd0], bgmPaths[rnd1]] = [bgmPaths[rnd1], bgmPaths[rnd0]];
