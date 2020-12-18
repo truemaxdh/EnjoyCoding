@@ -32,6 +32,14 @@ var bgmPaths = [
   'sound/LightOfNight.mp3', 
   'sound/LongLastingMemories.mp3',
   'sound/MemoriesAFewYearsAgo.mp3']; // BGM Paths
+
+// Shuffle
+for (var i = 0; i < bgms.length; i++) {
+  var rnd0 = parseInt(Math.random() * bgms.length);
+  var rnd1 = parseInt(Math.random() * bgms.length);
+  [bgmPaths[rnd0], bgmPaths[rnd1]] = [bgmPaths[rnd1], bgmPaths[rnd0]];
+}
+
 var bgms = [];
 for (var i = 0; i < bgmPaths.length; i++) {
   var audio = new Audio();
@@ -40,12 +48,6 @@ for (var i = 0; i < bgmPaths.length; i++) {
   bgms.push(audio);
 }
 
-// Shuffle
-for (var i = 0; i < bgms.length; i++) {
-  var rnd0 = parseInt(Math.random() * bgms.length);
-  var rnd1 = parseInt(Math.random() * bgms.length);
-  [bgms[rnd0], bgms[rnd1]] = [bgms[rnd1], bgms[rnd0]];
-}
 
 // Continuous playback
 //for (var i = 0; i < bgms.length; i++) {
@@ -70,7 +72,7 @@ for (var i = 0; i < bgms.length; i++) {
 function playBGM() {
   try {
     //bgms[curBgmId].play();
-    bgms[0].currentTime = 70;
+    bgms[0].currentTime = 0;
     bgms[0].play();
   } catch(e) {
     toast(e.message);    
