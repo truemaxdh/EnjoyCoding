@@ -3,8 +3,13 @@ var sounds = []; // sounds
 var cnt = 0;
 for (var i = 0; i < 5; i++) {
   for (var j = 0; j < 4; j++) {
-    sounds[cnt] = new Audio('sound/fire' + j + '.mp3');
-    sounds[cnt++].volume = 0.3;
+    //sounds[cnt] = new Audio('sound/fire' + j + '.mp3');
+    //sounds[cnt++].volume = 0.3;
+    var audio = new Audio();
+    audio.src = 'sound/fire' + j + '.mp3';
+    audio.preload = "auto";
+    audio.volume = 0.3;
+    sounds.push(audio);
   }
 }
   
@@ -22,10 +27,18 @@ function playSound(soundID)
 
 // BGM Play
 var curBgmId = 0;
-var bgms = [new Audio('sound/recollection.mp3'), 
-            new Audio('sound/LightOfNight.mp3'), 
-            new Audio('sound/LongLastingMemories.mp3'),
-            new Audio('sound/MemoriesAFewYearsAgo.mp3')]; // BGMs
+var bgmPaths = [
+  'sound/recollection.mp3', 
+  'sound/LightOfNight.mp3', 
+  'sound/LongLastingMemories.mp3',
+  'sound/MemoriesAFewYearsAgo.mp3']; // BGM Paths
+var bgms = [];
+for (var i = 0; i < bgmPaths.length; i++) {
+  var audio = new Audio();
+  audio.src = bgmPaths[i];
+  audio.preload = "auto";
+  bgms.push(audio);
+}
 
 // Shuffle
 for (var i = 0; i < bgms.length; i++) {
