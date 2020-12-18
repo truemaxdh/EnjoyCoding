@@ -37,11 +37,15 @@ for (var i = 0; i < bgms.length; i++) {
 // Continuous playback
 for (var i = 0; i < bgms.length; i++) {
   bgms[i].onended = function() {
-    if (++curBgmId >= bgms.length)
-      curBgmId = 0;
-    toast("" + curBgmId);
-    bgms[curBgmId].currentTime = 0;
-    bgms[curBgmId].play();
+    try {
+      if (++curBgmId >= bgms.length)
+        curBgmId = 0;
+      toast("" + curBgmId);
+      bgms[curBgmId].currentTime = 0;
+      bgms[curBgmId].play();
+    } catch(e) {
+      toast(e.message);    
+    }
   }
 }
 
