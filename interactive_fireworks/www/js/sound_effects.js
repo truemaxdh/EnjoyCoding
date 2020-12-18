@@ -70,6 +70,7 @@ for (var i = 0; i < bgms.length; i++) {
 function playBGM() {
   try {
     //bgms[curBgmId].play();
+    bgms[0].currentTime = 70;
     bgms[0].play();
   } catch(e) {
     toast(e.message);    
