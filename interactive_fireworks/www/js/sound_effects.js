@@ -52,7 +52,7 @@ var bgms = new Audio(bgmPaths[curBgmId]);
 // Continuous playback
 //for (var i = 0; i < bgms.length; i++) {
   //bgms[i].onended = function() {
-  bgms[0].onended = function() {
+  bgms.onended = function() {
     try {
       if (++curBgmId >= bgmPaths.length)
         curBgmId = 0;
