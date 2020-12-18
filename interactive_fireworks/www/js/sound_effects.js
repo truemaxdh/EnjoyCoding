@@ -80,7 +80,8 @@ function playBGM() {
 }
 
 function pauseBGM() {
-  bgms[curBgmId].pause();
+  //bgms[curBgmId].pause();
+  bgms[0].pause();
 }
 
 // Sound Setting
