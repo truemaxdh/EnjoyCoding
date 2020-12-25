@@ -28,7 +28,7 @@ function _stage_def() {
     this.max_stage = 10;
     this.stage_tick = 50000;
     this.missile_interval = 200;
-    this.met_interval = 3200;
+    this.met_interval = 3000;
     this.stg1_met_interval = 4000;
     this.met_types = [[30], [30, 60], [60], [30, 60, 90], [60, 90], [90], [30, 60, 90, 120], [60, 90, 120], [90, 120], [120]];
 }
