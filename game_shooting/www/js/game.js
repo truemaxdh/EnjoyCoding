@@ -106,7 +106,7 @@ function gameOver() {
         o_jet.game_over();
     } else if (o_game_over.count_down-- == 0) {
         // clearInterval(objInterval);
-        document.getElementById( 'bgm' ).pause();
+        pauseBGM();
         frame.pause = true;        
         if (isApp && glGameSvc.loginStatus) {
           try {  
