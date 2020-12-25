@@ -80,9 +80,11 @@ function objMissile(x, y) {
 
 function objMet(x, y, size) {
     gameobj.call(this, x, y);
+    this.width = size;
+    this.height = size;
     this.size = size;
-    this.step_x = Math.random() * 20 - 10;
-    this.step_y = Math.random() * 10 + 1;
+    this.step_x = Math.random() * 13 - 6;
+    this.step_y = Math.random() * 7 + 1;
     this.rgbStroke = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
     this.rgbFill = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
     this.move = function() {
