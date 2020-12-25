@@ -109,7 +109,7 @@ function objMet(x, y, size) {
     this.step_y = Math.random() * 7 + 1;
     this.rgbStroke = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
     this.rgbFill = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
-    this.rndItem = Math.floor(Math.random() * 2);
+    this.bonusItem = Math.floor(Math.random() * 2);
     this.move = function() {
         this.x += this.step_x;
         if (this.x > 540) {
