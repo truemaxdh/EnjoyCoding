@@ -51,7 +51,7 @@ function game_init() {
     
     missile_0 = new gameobj(0,0);
     missile_0.next = new gameobj(0,0);
-    missile_0.next.prev = missile0;
+    missile_0.next.prev = missile_0;
     
     met_0 = new gameobj(0,0);
     met_0.next = new gameobj(0,0);
