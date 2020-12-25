@@ -215,7 +215,7 @@ function tick(curTick) {
 
 function gameOver() {
     //clearInterval(objInterval);
-    document.getElementById( 'bgm' ).pause();
+    pauseBGM();
     removeEvt();
     render_gameover();
     if (isApp && glGameSvc.loginStatus) {
@@ -275,7 +275,7 @@ function clearLines(y, combo) {
             score += ++combo * 10;
             render_score();
             
-            document.getElementById( 'clearsound' ).play();
+            playSound();
             
             for ( var yy = y; yy > 0; --yy ) {
                 for ( var x = 0; x < COLS; ++x ) {
@@ -410,6 +410,6 @@ function newGame() {
 
     document.getElementById( 'score_num' ).innerHTML = score;
     move_wait_cnt = 0;
-    document.getElementById( 'bgm' ).play();
+    playBGM();
     requestAnimationFrame(tick);
 }
