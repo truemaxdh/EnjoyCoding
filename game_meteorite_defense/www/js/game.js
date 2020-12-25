@@ -161,6 +161,23 @@ function upcoming_obj() {
     }
 }
 
+function hitMet(o_met) {
+    playSound(0);
+    remove_from_chain(o_met);
+    score += 20;
+    o_met.size -= 30;
+    if (o_met.bonusItem > 0) {
+        push_to_chain(new objItemProtection(o_met.x, o_met.y), item_0);
+    }
+    if (o_met.size > 0) {
+        push_to_chain(new objMet(o_met.x, o_met.y, o_met.size), met_0);
+        push_to_chain(new objMet(o_met.x, o_met.y, o_met.size), met_0);
+    }            
+    try {
+        chkAndUnlockAchievement(score);
+    } catch(err) {}
+}
+
 function collision_check() {
     // check collision of missiles and coins
     var o_missile;
@@ -169,21 +186,8 @@ function collision_check() {
         o_missile = o_missile.next;
         var o_met = collision_obj_grp(o_missile, met_0);
         if (o_met != null) {
-            playSound(0);
             remove_from_chain(o_missile);
-            remove_from_chain(o_met);
-            score += 20;
-            o_met.size -= 30;
-            if (o_met.bonusItem > 0) {
-                push_to_chain(new objItemProtection(o_met.x, o_met.y), item_0);
-            }
-            if (o_met.size > 0) {
-                push_to_chain(new objMet(o_met.x, o_met.y, o_met.size), met_0);
-                push_to_chain(new objMet(o_met.x, o_met.y, o_met.size), met_0);
-            }            
-            try {
-                chkAndUnlockAchievement(score);
-            } catch(err) {}
+            hitMet(o_met);
         }
     }
 
@@ -195,9 +199,11 @@ function collision_check() {
     }
     
     // check collision of mets and airplane
-    if (o_jet.protection == 0) {
-        var o_met = collision_obj_grp(o_jet, met_0);
-        if (o_met != null) {
+    var o_met = collision_obj_grp(o_jet, met_0);
+    if (o_met != null) {
+        if (o_jet.protection > 0) {
+            hitMet(o_met);
+        } else {
             remove_from_chain(o_met);
             frame.gameover_flag = true;
         }
