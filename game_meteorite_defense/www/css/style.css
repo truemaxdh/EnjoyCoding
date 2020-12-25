@@ -16,7 +16,7 @@
 /* menu */
 h1 { 
     /* color: #4d7bd5; */
-    color: #333; 
+    color: #555; 
     font-family: "Sniglet-ExtraBold"; 
     font-size: 55px;/*10vw;*/  
     text-align: center; 
@@ -80,7 +80,7 @@ h3 {
     top : 0px;
     width:100%;
     font-family: "Sniglet-Regular";
-    background-color : #aaa;
+    color : #555;
 }
 
 /* game */
