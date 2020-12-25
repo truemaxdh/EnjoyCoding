@@ -4,7 +4,8 @@ function gameobj(x, y) {
     this.width = 0;
     this.height = 0;
     this.margin_x = 0;
-    this.margin_y = 0;
+    this.margin_yt = 0;
+    this.margin_yb = 0;
     this.step_x = 0;    // per 33ms
     this.step_y = 0;    // per 33ms
     this.prev = null;
@@ -25,8 +26,9 @@ function objJet(x, y) {
     gameobj.call(this, x, y);
     this.width = 100;
     this.height = 100;
-    this.margin_x = 5;
-    this.margin_y = 5;
+    this.margin_x = 30;
+    this.margin_yt = 5;
+    this.margin_yb = 30;
     this.render = function(ctx_game) {
         ctx_game.beginPath();
         ctx_game.fillStyle = "brown";
