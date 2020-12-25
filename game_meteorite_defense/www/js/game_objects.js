@@ -67,18 +67,18 @@ function objJet(x, y) {
 }
 
 function objMissile(x, y) {
-    gameobj.call(this, x + 20, y);
-    this.width = 5;
-    this.height = 100;
+    gameobj.call(this, x + 47, y);
+    this.width = 6;
+    this.height = 50;
     this.render = function(ctx_game) {
         ctx_game.beginPath();
         ctx_game.strokeStyle = "orange";
         ctx_game.moveTo(this.x, this.y);
-        ctx_game.lineTo(this.x, this.y + 100);
-        ctx_game.lineWidth = 5;
+        ctx_game.lineTo(this.x, this.y + this.height);
+        ctx_game.lineWidth = this.width;
         ctx_game.stroke();
     }
-    this.step_y = -20;
+    this.step_y = -15;
 }
 
 function objMet(x, y, size) {
