@@ -44,12 +44,14 @@ function objJet(x, y) {
     this.render = function(ctx_game) {
         ctx_game.beginPath();
         ctx_game.fillStyle = "brown";
-        ctx_game.fillRect(this.x + 10, this.y + 55, 80, 20);
+        ctx_game.fillRect(this.x + 10, this.y + 50, 80, 20);
         ctx_game.fillStyle = "orange";
         ctx_game.fillRect(this.x + 30, this.y + 20, 40, 50);
         ctx_game.fillStyle = "salmon";
         ctx_game.arc(this.x + 50, this.y + 20, 20, 0, 2 * Math.PI);
         ctx_game.fill();
+        
+        ctx_game.beginPath();
         ctx_game.strokeStyle = "white";
         ctx_game.moveTo(this.x + 30, this.y + 70);
         ctx_game.lineTo(this.x + 30, this.y + 85);
