@@ -146,7 +146,6 @@ function upcoming_obj() {
         frame.effect_flag = true;
         var o_stageClear = new objStageClear(stage);
         push_to_chain(o_stageClear, met_0);
-        o_stageClear.next = null;
         stage_design.met_interval -= 400;
         met_interval = 0;
         stage++;
