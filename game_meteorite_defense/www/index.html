@@ -6,7 +6,7 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <meta name="description" content="a simple flight shooting game, with only a few rules.Avoid bombs.Shoot coins, but not bump into coins.Coins are differ with their number in endurance and score." />
     
-    <title>Meteorite Defense</title>
+    <title>Meterorite Defense</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="js/sound_effects.js"></script>
     <script src="js/game_objects.js"></script>
@@ -16,13 +16,37 @@
     <script src="js/google_api_js.js"></script>
     <script>
       function goToStage(_stage) {
-        document.getElementById('StageMap').style.width='0%';
+        document.getElementById('StageMap').style.left='-100%';
         stage = _stage;
         pageChange('game');
       }
       
       function openStageMap() {
-        document.getElementById('StageMap').style.width='100%';
+        document.getElementById('StageMap').style.left='0';
+      }
+      
+      function BgmOnOff() {
+        var el = document.getElementById("bgmOnOff");
+        //console.log(el.innerHTML);
+        if (el.innerHTML == "Background Music: Off") {
+          el.innerHTML = "Background Music: On";
+          soundSettings.bgm = "on";
+        } else {
+          el.innerHTML = "Background Music: Off";
+          soundSettings.bgm = "off";
+        }
+      }
+      
+      function soundEffectOnOff() {
+        var el = document.getElementById("soundEffectOnOff");
+        //console.log(el.innerHTML);
+        if (el.innerHTML == "Sound Effect: Off") {
+          el.innerHTML = "Sound Effect: On";
+          soundSettings.sound = "on";
+        } else {
+          el.innerHTML = "Sound Effect: Off";
+          soundSettings.sound = "off";
+        }
       }
     </script>
   <style>
@@ -55,7 +79,7 @@
         <a href="#" onclick="ShowHighScores();">Show High Scores</a>
         <br>
         <div class = "smallText">
-          <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.width='100%';"><b>How to play</b></a>
+          <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.left='0';"><b>How to play</b></a>
           <!--<a href="javascript:void(0)" onclick="Android.loadAchievements();">loadAchievements</a>-->
           <!--a href="javascript:void(0)" onclick="toast(Android.getLastSignedInAccount());">LastSignedInAccount</a-->
         </div>
@@ -86,6 +110,8 @@
       
       <!-- Overlay content -->
       <div class="overlay-content">
+        <a href="#" id="bgmOnOff" onclick="BgmOnOff();">Background Music: On</a>
+        <a href="#" id="soundEffectOnOff" onclick="soundEffectOnOff();">Sound Effect: On</a>
         <a href="#" onclick="pageChange('menu');hideSubMenu();">Exit Current Game</a>
         <a href="#" onclick="Android.exitApp();">Exit App</a>
         <a href="#" onclick="hideSubMenu();">Resume</a>
@@ -109,7 +135,7 @@
         Drag plane to control.<br>
         Missile is fired automately.<br>
         <br>
-        <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.width='0%';">Back</a>
+        <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.left='-100%';">Back</a>
         <br>
       </p>
     </div> 
@@ -117,7 +143,7 @@
     <!-- Stage Map -->
     <div id="StageMap" class="overlay">
       <!-- Button to close the overlay navigation -->
-      <a href="javascript:void(0)" class="closebtn" onclick="document.getElementById('StageMap').style.width='0%';">&times;</a>
+      <a href="javascript:void(0)" class="closebtn" onclick="document.getElementById('StageMap').style.left='-100%';">&times;</a>
       
       <!-- Overlay content -->
       <div class="overlay-content">
