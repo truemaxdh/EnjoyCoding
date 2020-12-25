@@ -13,7 +13,7 @@ function render() {
     ctx_game.fillStyle = "black";
     ctx_game.fillRect(0, 0, 540, 900);
 
-    balls_ends[0].render(ctx_game);
+    //balls_ends[0].render(ctx_game);
     missile_ends[0].render(ctx_game);
     o_jet.render(ctx_game);
 
