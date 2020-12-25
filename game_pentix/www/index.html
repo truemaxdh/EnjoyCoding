@@ -20,11 +20,36 @@
     </script>
         
     <!-- Game link-->
+    <script src="js/sound_effects.js"></script>
     <script src='js/pentix.js'></script>
     <script src='js/controller.js'></script>
     <script src='js/render.js'></script>
     <script src="js/google_services.js"></script>
-     
+    <script>
+      function BgmOnOff() {
+        var el = document.getElementById("bgmOnOff");
+        //console.log(el.innerHTML);
+        if (el.innerHTML == "Background Music: Off") {
+          el.innerHTML = "Background Music: On";
+          soundSettings.bgm = "on";
+        } else {
+          el.innerHTML = "Background Music: Off";
+          soundSettings.bgm = "off";
+        }
+      }
+      
+      function soundEffectOnOff() {
+        var el = document.getElementById("soundEffectOnOff");
+        //console.log(el.innerHTML);
+        if (el.innerHTML == "Sound Effect: Off") {
+          el.innerHTML = "Sound Effect: On";
+          soundSettings.sound = "on";
+        } else {
+          el.innerHTML = "Sound Effect: Off";
+          soundSettings.sound = "off";
+        }
+      }
+    </script>
     <style>
       body {
         /* Disables pull-to-refresh but allows overscroll glow effects. */
@@ -88,6 +113,8 @@
       
       <!-- Overlay content -->
       <div class="overlay-content">
+        <a href="#" id="bgmOnOff" onclick="BgmOnOff();">Background Music: On</a>
+        <a href="#" id="soundEffectOnOff" onclick="soundEffectOnOff();">Sound Effect: On</a>
         <a href="#" onclick="pageChange('menu');hideSubMenu();">Exit Current Game</a>
         <a href="#" onclick="Android.exitApp();">Exit App</a>
         <a href="#" onclick="hideSubMenu();">Resume</a>
@@ -109,7 +136,7 @@
         <br><br>
         swipe tiles on mobile.<br>
         <br>
-        <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.width='0%';">Back</a>
+        <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.left='-100%';">Back</a>
       </p>
     </div>
   </body>
