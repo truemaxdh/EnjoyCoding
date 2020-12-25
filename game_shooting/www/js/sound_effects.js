@@ -10,8 +10,10 @@ sounds[2].volume = 0.4;
 function playSound(soundID)
 {
   try {
-    sounds[soundID].currentTime = 0;
-    sounds[soundID].play();
+    if (soundSettings.sound == 'on') {
+      sounds[soundID].currentTime = 0;
+      sounds[soundID].play();
+    }
   } catch(err) {}
 }
 
