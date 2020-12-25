@@ -191,10 +191,13 @@ function collision_check() {
 function push_to_chain(obj, obj0) {
     obj.next = obj0.next;
     obj0.next = obj;
+    obj.prev = obj0;
+    obj.next.pev = obj;
 }
 
 function remove_from_chain(obj) {
-    obj.prev.next = obj.next;
+    obj.next.prev = obj.prev;
+    obj.prev.next = obj.next;    
 }
 
 function collision_obj_grp(obj, target0) {
