@@ -13,25 +13,11 @@ function gameobj(x, y) {
     this.move = function() {
         this.x += this.step_x;
         this.y += this.step_y;
-        if (this.next != null) {
-            this.next.move(ctx_game);
-        }
     }
     this.render = function(ctx_game) {
         if (this.img != null) {
             ctx_game.drawImage(this.img, this.x, this.y);
         }
-    }
-    this.collision_chk = function(x0, y0, x1, y1) {
-        var ret = false;
-        var this_x0 = this.x + this.margin_x;
-        var this_x1 = this.x + this.width - this.margin_x;
-        var this_y0 = this.y + this.margin_y;
-        var this_y1 = this.y + this.height - this.margin_y;
-        if (this_x0 < x1 && this_x1 > x0 && this_y0 < y1 && this_y1 > y0) {
-            ret = true;
-        }
-        return ret;
     }
 }
 
@@ -95,8 +81,41 @@ function objMissile(x, y) {
     this.step_y = -20;
 }
 
-function objBall(x, y, size) {
-    
+function objMet(x, y, size) {
+    gameobj.call(this, x, y);
+    this.size = size;
+    this.step_x = Math.random() * 20 - 10;
+    this.step_y = Math.random() * 10 + 1;
+    this.rgb = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
+    this.move = function() {
+        this.x += this.step_x;
+        if (this.x > 720) {
+            this.x = 720 * 2 - this.x;
+            this.step_x *= -1;
+        } else if (this.x < 0) {
+            this.x = 0 - this.x;
+            this.step_x *= -1;
+        }
+        this.y += this.step_y;
+        if (this.y > 900) {
+            this.y = 0;
+        }
+    };
+    this.render = function(ctx_game) {
+        ctx_game.beginPath();
+        ctx_game.strokeStyle = this.rgb;
+        ctx_game.moveTo(this.x + this.size / 3, this.y);
+        ctx_game.lineTo(this.x, this.y + this.size / 3);
+        ctx_game.lineTo(this.x, this.y + 2 * this.size / 3);
+        ctx_game.lineTo(this.x + this.size / 3, this.y + this.size);
+        ctx_game.lineTo(this.x + 2 * this.size / 3, this.y + this.size);
+        ctx_game.lineTo(this.x + this.size, this.y + 2 * this.size / 3);
+        ctx_game.lineTo(this.x + this.size, this.y + this.size / 3);
+        ctx_game.lineTo(this.x + 2 * this.size / 3, this.y);
+        ctx_game.closePath();
+        ctx_game.lineWidth = 3;
+        ctx_game.stroke();
+    };
 }
 
 function objGameOver() {
