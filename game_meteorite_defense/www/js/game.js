@@ -3,7 +3,9 @@ var frame = {
     animation_interval : 0,
     last_animation_time : 0,
     pause : true,
-    gameover_flag : false
+    gameover_flag : false,
+    // concerning extra effect
+    effect_flag : false
 }
 
 // concerning score
@@ -33,8 +35,6 @@ function _stage_def() {
 
 var stage_design;
 
-// concerning extra effect
-var effect_flag;
 
 function newStage() {
     missile_0 = new gameobj(0,0);
@@ -45,8 +45,6 @@ function newStage() {
     met_0.next = new gameobj(0,0);
     met_0.next.prev = met_0;
     
-    o_game_over = null;
-
     stage_design = new _stage_def();
     missile_interval = stage_design.missile_interval;
     stage_design.met_interval -= 400 * (stage - 1);
@@ -54,16 +52,18 @@ function newStage() {
     
     frame.last_animation_time = 0;
     millisec_played = stage_design.stage_tick * (stage - 1) + 1;    
+    frame.effect_flag = false;
+    
 }
 
 function newGame() {
     // clearInterval(objInterval);
     frame.pause = true;
     frame.gameover_flag = false;
-    effect_flag = false;
     score = 0;
     
     o_jet = new objJet(310, 750);
+    o_game_over = null;
     
     newStage();
     frame.pause = false;
@@ -101,7 +101,7 @@ function tick(cur_time) {
         frame.last_animation_time = cur_time;
         millisec_played += frame.animation_interval;
 
-        if (!effect_flag) {
+        if (!frame.effect_flag) {
             upcoming_obj();
         }
         render();
@@ -109,7 +109,7 @@ function tick(cur_time) {
             gameOver();
         } else {
             proc_user_input();
-            if (!effect_flag) {
+            if (!frame.effect_flag) {
                 collision_check();
             }
         }
@@ -143,9 +143,10 @@ function proc_user_input() {
 function upcoming_obj() {
     // get stage
     if (stage < stage_design.max_stage && millisec_played > (stage_design.stage_tick * stage)) {
-        effect_flag = true;
+        frame.effect_flag = true;
         var o_stageClear = new objStageClear(stage);
         push_to_chain(o_stageClear, met_0);
+        o_stageClear.next = null;
         stage_design.met_interval -= 400;
         met_interval = 0;
         stage++;
