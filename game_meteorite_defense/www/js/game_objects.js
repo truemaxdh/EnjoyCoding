@@ -143,6 +143,24 @@ function objMet(x, y, size) {
     };
 }
 
+function objItemProtection(x, y) {
+    gameobj.call(this, x, y);
+    this.width = 30;
+    this.height = 30;
+    this.step_y = 1;
+    this.render = function(ctx_game) {
+        ctx_game.beginPath();
+        ctx_game.strokeStyle = "#cacaca";
+        ctx_game.arc(this.x + 15, this.y + 15, 15, 0, 2 * Math.PI);
+        ctx_game.lineWidth = 3;
+        ctx_game.stroke();
+        
+        ctx_game.fillStyle = "#cacaca";
+        ctx_game.font = '30px Sniglet-ExtraBold';
+        ctx_game.fillText('P', c_x, c_y);
+    };
+}
+
 function objGameOver() {
     this.count_down = 100;
     this.render = function(ctx_game) {
