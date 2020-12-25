@@ -120,9 +120,9 @@ function objMet(x, y, size) {
         ctx_game.lineTo(this.x + this.size, this.y + this.size / 3);
         ctx_game.lineTo(this.x + 2 * this.size / 3, this.y);
         ctx_game.closePath();
-        ctx_game.lineWidth = 3;
-        ctx_game.stroke();
+        ctx_game.lineWidth = 4;
         ctx_game.fill();
+        ctx_game.stroke();
     };
 }
 
