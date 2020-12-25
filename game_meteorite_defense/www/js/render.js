@@ -22,7 +22,5 @@ function render() {
     ctx_game.fillText('Score : ' + gamePlay.score, 20, 50);
     ctx_game.fillText('Stage : ' + gamePlay.stage, 270,50);
     ctx_game.fillText('Menu : ', 450,50);
-    ctx_game.drawImage(img_pause, 0, 0, 40, 40, 480, 20, 40, 40);
-    
 }
 
