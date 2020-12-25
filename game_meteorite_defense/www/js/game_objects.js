@@ -14,6 +14,8 @@ function gameobj(x, y) {
     this.move = function() {
         this.x += this.step_x;
         this.y += this.step_y;
+        if (this.y > 900 || this.y < -this.height)
+            remove_from_chain(this);
     }
     this.render = function(ctx_game) {
         if (this.img != null) {
@@ -29,6 +31,7 @@ function objJet(x, y) {
     this.margin_x = 30;
     this.margin_yt = 5;
     this.margin_yb = 30;
+    this.protection = 0;
     this.render = function(ctx_game) {
         ctx_game.beginPath();
         ctx_game.fillStyle = "brown";
@@ -59,6 +62,17 @@ function objJet(x, y) {
         ctx_game.lineTo(this.x + 70, this.y + 85);
         ctx_game.lineWidth = 4;
         ctx_game.stroke();
+        
+        if (this.protection > 0) {
+            ctx_game.beginPath();
+            ctx_game.fillStyle = "rgba(255,255,255,0.3)";
+            ctx_game.strokeStyle = "white";
+            ctx_game.lineWidth = 2;
+            ctx_game.arc(this.x + 50, this.y + 50, 25, 0, 2 * Math.PI);
+            ctx_game.fill();
+            ctx_game.stroke();
+            this.protection--;
+        }
     }
     this.game_over = function() {
         this.render = function(ctx_game) {
@@ -95,6 +109,7 @@ function objMet(x, y, size) {
     this.step_y = Math.random() * 7 + 1;
     this.rgbStroke = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
     this.rgbFill = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
+    this.rndItem = Math.floor(Math.random() * 2);
     this.move = function() {
         this.x += this.step_x;
         if (this.x > 540) {
