@@ -65,10 +65,10 @@ function objJet(x, y) {
         
         if (this.protection > 0) {
             ctx_game.beginPath();
-            ctx_game.fillStyle = "rgba(255,255,255,0.3)";
+            ctx_game.fillStyle = "rgba(255,255,255,0.5)";
             ctx_game.strokeStyle = "white";
             ctx_game.lineWidth = 2;
-            ctx_game.arc(this.x + 50, this.y + 50, 25, 0, 2 * Math.PI);
+            ctx_game.arc(this.x + 50, this.y + 50, 50, 0, 2 * Math.PI);
             ctx_game.fill();
             ctx_game.stroke();
             this.protection--;
@@ -157,7 +157,7 @@ function objItemProtection(x, y) {
         
         ctx_game.fillStyle = "#cacaca";
         ctx_game.font = '30px Sniglet-ExtraBold';
-        ctx_game.fillText('P', this.x, this.y + this.height);
+        ctx_game.fillText('P', this.x + 3, this.y + 27);
     };
 }
 
