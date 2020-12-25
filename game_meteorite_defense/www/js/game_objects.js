@@ -86,7 +86,8 @@ function objMet(x, y, size) {
     this.size = size;
     this.step_x = Math.random() * 20 - 10;
     this.step_y = Math.random() * 10 + 1;
-    this.rgb = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
+    this.rgbStroke = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
+    this.rgbFill = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
     this.move = function() {
         this.x += this.step_x;
         if (this.x > 720) {
@@ -103,7 +104,8 @@ function objMet(x, y, size) {
     };
     this.render = function(ctx_game) {
         ctx_game.beginPath();
-        ctx_game.strokeStyle = this.rgb;
+        ctx_game.strokeStyle = this.rgbStroke;
+        ctx_game.fillStyle = this.rgbFill;
         ctx_game.moveTo(this.x + this.size / 3, this.y);
         ctx_game.lineTo(this.x, this.y + this.size / 3);
         ctx_game.lineTo(this.x, this.y + 2 * this.size / 3);
@@ -115,6 +117,7 @@ function objMet(x, y, size) {
         ctx_game.closePath();
         ctx_game.lineWidth = 3;
         ctx_game.stroke();
+        ctx_game.fill();
     };
 }
 
