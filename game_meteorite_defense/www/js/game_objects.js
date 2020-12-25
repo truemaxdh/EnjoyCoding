@@ -119,7 +119,21 @@ function objMet(x, y, size) {
 }
 
 function objGameOver() {
-    
+    this.count_down = 100;
+    this.render = function(ctx_game) {
+        var c_x = ctx_game.canvas.width / 2;
+        var c_y = ctx_game.canvas.height / 2;
+        
+        // create radial gradient
+        var grd = ctx_game.createRadialGradient(c_x, c_y, 10, c_x, c_y, 150);
+        // light blue
+        grd.addColorStop(0, 'yellow');
+        // dark blue
+        grd.addColorStop(1, '#004CB3');
+        ctx_game.fillStyle = grd;
+        ctx_game.font = '50px Sniglet-ExtraBold';
+        ctx_game.fillText('GameOver', c_x - 130, c_y - 25);
+    }
 }
 
 function objStageClear(stage) {
