@@ -26,6 +26,7 @@ function render() {
 
   var o_met = met_0;
   var o_missile = missile_0;
+  var o_item = item_0;
   
   while(o_met.next != null) {
     o_met = o_met.next;
@@ -37,6 +38,12 @@ function render() {
     o_missile = o_missile.next;
     o_missile.render(ctx_game);
     o_missile.move();
+  }
+  
+  while(o_item.next != null) {
+    o_item = o_item.next;
+    o_item.render(ctx_game);
+    o_item.move();
   }
   
   o_jet.render(ctx_game);
