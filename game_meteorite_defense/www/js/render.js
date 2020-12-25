@@ -3,8 +3,8 @@ var ctx_game;
 
 
 function render_init() {
+  canv_bg = document.getElementById('bg_canvas');
   canv_game = document.getElementById('game_canvas');
-  ctx_game = canv_game.getContext('2d');    
   
   var scr_w = window.innerWidth;
   var scr_h = window.innerHeight;
