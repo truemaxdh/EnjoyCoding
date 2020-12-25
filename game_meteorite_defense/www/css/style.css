@@ -32,9 +32,9 @@ h3 {
 }
 
 .menu {
-    width:98vw;
-    height:94vh;
-    background-image: url('../img/menu_bg.png');
+    width : 98vw;
+    height : 94vh;
+    background : black;
     background-repeat : no-repeat;
     background-position : center center;
 }
