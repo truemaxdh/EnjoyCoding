@@ -145,7 +145,6 @@ function upcoming_obj() {
     // get stage
     if (stage < stage_design.max_stage && millisec_played > (stage_design.stage_tick * stage)) {
         effect_flag = true;
-        met_0.next = null;
         var o_stageClear = new objStageClear(stage);
         push_to_chain(o_stageClear, met_0);
         stage_design.met_interval -= 400;
