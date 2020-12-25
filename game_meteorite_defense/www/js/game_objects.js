@@ -33,7 +33,12 @@ function objJet(x, y) {
         ctx_game.fillRect(this.x + 10, this.y + 50, 80, 20);
         ctx_game.fillStyle = "orange";
         ctx_game.fillRect(this.x + 30, this.y + 20, 40, 50);
-        ctx_game.fillStyle = "salmon";
+        ctx_game.fill();
+        
+        ctx_game.beginPath();
+        ctx_game.fillStyle = "crimson";
+        ctx_game.strokeStyle = "orange";
+        ctx_game.lineWidth = 3;
         ctx_game.arc(this.x + 50, this.y + 20, 20, 0, 2 * Math.PI);
         ctx_game.fill();
         
@@ -49,7 +54,7 @@ function objJet(x, y) {
         ctx_game.lineTo(this.x + 60, this.y + 95);
         ctx_game.moveTo(this.x + 70, this.y + 70);
         ctx_game.lineTo(this.x + 70, this.y + 85);
-        ctx_game.lineWidth = 2;
+        ctx_game.lineWidth = 3;
         ctx_game.stroke();
     }
     this.game_over = function() {
