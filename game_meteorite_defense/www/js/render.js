@@ -45,6 +45,7 @@ function render() {
   ctx_game.font = '30px Sniglet-ExtraBold';
   ctx_game.fillText('Score : ' + score, 20, 50);
   ctx_game.fillText('Stage : ' + stage, 250,50);
+  ctx_game.font = '34px Sniglet-ExtraBold';
   ctx_game.fillText('▒', 480,50);
 }
 
