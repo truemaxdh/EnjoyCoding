@@ -138,7 +138,7 @@ function removeEvt() {
 function showSubMenu() {
   if (curPage == 'game') {
     paused = true;
-    document.getElementById( 'bgm' ).pause();
+    useBGM();
     removeEvt();
   }
   document.getElementById("Submenu").style.width = "100%";
@@ -148,7 +148,7 @@ function hideSubMenu() {
   document.getElementById("Submenu").style.width = "0%";
   paused = false;
   if (curPage == 'game') {
-    document.getElementById( 'bgm' ).play();
+    playBGM();
     addEvt();
     tick();
   }
