@@ -165,7 +165,7 @@ function collision_check() {
         o_missile = o_missile.next;
         var o_met = collision_obj_grp(o_missile, met_0);
         if (o_met != null) {
-            playSound(1);
+            playSound(0);
             remove_from_chain(o_missile);
             remove_from_chain(o_met);
             score += 20;
