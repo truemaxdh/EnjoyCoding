@@ -138,14 +138,14 @@ function removeEvt() {
 function showSubMenu() {
   if (curPage == 'game') {
     paused = true;
-    useBGM();
+    pauseBGM();
     removeEvt();
   }
-  document.getElementById("Submenu").style.width = "100%";
+  document.getElementById("Submenu").style.left = "0";;
 }
 
 function hideSubMenu() {
-  document.getElementById("Submenu").style.width = "0%";
+  document.getElementById("Submenu").style.left = "-100%";;
   paused = false;
   if (curPage == 'game') {
     playBGM();
