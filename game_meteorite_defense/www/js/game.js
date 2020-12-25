@@ -24,7 +24,7 @@ var stage;
 
 function _stage_def() {
     this.max_stage = 5;
-    this.stage_tick = 1800;
+    this.stage_tick = 50000;
     this.missile_interval = 200;
     this.met_interval = 4000;
     this.stg1_met_interval = 4000;
@@ -140,10 +140,9 @@ function upcoming_obj() {
     // get stage
     if (stage < stage_design.max_stage && millisec_played > (stage_design.stage_tick * stage)) {
         effect_flag = true;
-        met_0[0].next = met_0[1];
-        met_0[1].prev = met_0[0];
+        met_0.next = null;
         var o_stageClear = new objStageClear(stage);
-        push_to_chain(o_stageClear, coin_ends);
+        push_to_chain(o_stageClear, met_ends);
         stage_design.met_interval -= 400;
         met_interval = 0;
         stage++;
