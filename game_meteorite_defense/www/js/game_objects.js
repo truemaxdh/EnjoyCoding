@@ -75,7 +75,7 @@ function objMissile(x, y) {
         ctx_game.fillStyle = "orange";
         ctx_game.fillRect(this.x, this.y, this.width, this.height);
     }
-    this.step_y = -12;
+    this.step_y = -13;
 }
 
 function objMet(x, y, size) {
