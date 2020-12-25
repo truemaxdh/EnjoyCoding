@@ -50,7 +50,12 @@ function game_init() {
     o_jet = new objJet(310, 750);
     
     missile_0 = new gameobj(0,0);
+    missile_0.next = new gameobj(0,0);
+    missile_0.next.prev = missile0;
+    
     met_0 = new gameobj(0,0);
+    met_0.next = new gameobj(0,0);
+    met_0.next.prev = met_0;
     
     met_interval = 0;
     
