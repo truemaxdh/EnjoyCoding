@@ -37,13 +37,8 @@ var stage_design;
 
 
 function newStage() {
-    missile_0 = new gameobj(0,0);
-    missile_0.next = new gameobj(0,0);
-    missile_0.next.prev = missile_0;
-    
+    missile_0 = new gameobj(0,0);    
     met_0 = new gameobj(0,0);
-    met_0.next = new gameobj(0,0);
-    met_0.next.prev = met_0;
     
     stage_design = new _stage_def();
     missile_interval = stage_design.missile_interval;
@@ -195,12 +190,14 @@ function push_to_chain(obj, obj0) {
     obj.next = obj0.next;
     obj0.next = obj;
     obj.prev = obj0;
-    obj.next.prev = obj;
+    if (obj.next != null)
+        obj.next.prev = obj;
 }
 
 function remove_from_chain(obj) {
-    obj.next.prev = obj.prev;
-    obj.prev.next = obj.next;    
+    obj.prev.next = obj.next;
+    if (obj.next != null)
+        obj.next.prev = obj.prev;    
 }
 
 function collision_obj_grp(obj, target0) {
