@@ -11,14 +11,19 @@ var frame = {
 // concerning score
 var score;
 
-// concerning airplane
+// airplane
 var o_jet;
+
+// missile
 var missile_0;
 var missile_interval;
 
-// concerning meteorites
+// meteorites
 var met_0;
 var met_interval;
+
+// bonus item
+var item_0;
 
 // concerning stage
 var millisec_played;
@@ -39,6 +44,7 @@ var stage_design;
 function newStage() {
     missile_0 = new gameobj(0,0);    
     met_0 = new gameobj(0,0);
+    item_0 = new gameobj(0,0);
     
     stage_design = new _stage_def();
     missile_interval = stage_design.missile_interval;
@@ -168,6 +174,9 @@ function collision_check() {
             remove_from_chain(o_met);
             score += 20;
             o_met.size -= 30;
+            if (o_met.bonusItem > 0) {
+                push_to_chain(new objItemProtection, item_0);
+            }
             if (o_met.size > 0) {
                 push_to_chain(new objMet(o_met.x, o_met.y, o_met.size), met_0);
                 push_to_chain(new objMet(o_met.x, o_met.y, o_met.size), met_0);
@@ -178,11 +187,20 @@ function collision_check() {
         }
     }
 
+    // check collision of bonus item and airplane
+    var o_item = collision_obj_grp(o_jet, item_0);
+    if (o_item != null) {
+        remove_from_chain(o_item);
+        o_jet.protection = 150;
+    }
+    
     // check collision of mets and airplane
-    var o_met = collision_obj_grp(o_jet, met_0);
-    if (o_met != null) {
-        remove_from_chain(o_met);
-        frame.gameover_flag = true;
+    if (o_jet.protection == 0) {
+        var o_met = collision_obj_grp(o_jet, met_0);
+        if (o_met != null) {
+            remove_from_chain(o_met);
+            frame.gameover_flag = true;
+        }
     }
 }
 
