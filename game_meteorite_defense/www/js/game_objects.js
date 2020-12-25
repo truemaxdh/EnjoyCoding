@@ -55,7 +55,7 @@ function objJet(x, y) {
         ctx_game.lineTo(this.x + 60, this.y + 95);
         ctx_game.moveTo(this.x + 70, this.y + 70);
         ctx_game.lineTo(this.x + 70, this.y + 85);
-        ctx_game.lineWidth = 3;
+        ctx_game.lineWidth = 4;
         ctx_game.stroke();
     }
     this.game_over = function() {
@@ -120,7 +120,7 @@ function objMet(x, y, size) {
         ctx_game.lineTo(this.x + this.size, this.y + this.size / 3);
         ctx_game.lineTo(this.x + 2 * this.size / 3, this.y);
         ctx_game.closePath();
-        ctx_game.lineWidth = 4;
+        ctx_game.lineWidth = 3;
         ctx_game.fill();
         ctx_game.stroke();
     };
