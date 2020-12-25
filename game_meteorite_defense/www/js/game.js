@@ -172,7 +172,7 @@ function collision_check() {
             remove_from_chain(o_missile);
             remove_from_chain(o_met);
             score += 20;
-            o_met.size -= 20;
+            o_met.size -= 30;
             if (o_met.size > 0) {
                 push_to_chain(new objMet(o_met.x, o_met.y, o_met.size), met_0);
                 push_to_chain(new objMet(o_met.x, o_met.y, o_met.size), met_0);
