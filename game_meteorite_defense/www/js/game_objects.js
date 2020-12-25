@@ -90,8 +90,8 @@ function objMet(x, y, size) {
     this.rgbFill = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
     this.move = function() {
         this.x += this.step_x;
-        if (this.x > 720) {
-            this.x = 720 * 2 - this.x;
+        if (this.x > 540) {
+            this.x = 540 * 2 - this.x;
             this.step_x *= -1;
         } else if (this.x < 0) {
             this.x = 0 - this.x;
