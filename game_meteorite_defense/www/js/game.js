@@ -197,7 +197,7 @@ function push_to_chain(obj, obj0) {
     obj.next = obj0.next;
     obj0.next = obj;
     obj.prev = obj0;
-    obj.next.pev = obj;
+    obj.next.prev = obj;
 }
 
 function remove_from_chain(obj) {
