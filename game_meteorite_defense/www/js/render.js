@@ -21,19 +21,28 @@ function render_init() {
 }
 
 function render() {
-    // afterimage
-    ctx_game.globalCompositeOperation = 'source-over';
-    ctx_game.fillStyle = "black";
-    ctx_game.fillRect(0, 0, 540, 900);
+  ctx_game.fillStyle = "black";
+  ctx_game.fillRect(0, 0, 540, 900);
 
-    //balls_ends[0].render(ctx_game);
-    missile_ends[0].render(ctx_game);
-    o_jet.render(ctx_game);
+  var o_met = met_0;
+  var o_missile = missile_0;
+  
+  while(o_met.next != null) {
+    o_met = o_met.next;
+    o_met.render(ctx_game);
+  }
+  
+  while(o_missile.next != null) {
+    o_missile = o_missile.next;
+    o_missile.render(ctx_game);
+  }
+  
+  o_jet.render(ctx_game);
 
-    ctx_game.fillStyle = '#ffa500';
-    ctx_game.font = '35px Sniglet-ExtraBold';
-    ctx_game.fillText('Score : ' + score, 20, 50);
-    ctx_game.fillText('Stage : ' + stage, 270,50);
-    ctx_game.fillText('Menu : ', 450,50);
+  ctx_game.fillStyle = '#ffa500';
+  ctx_game.font = '35px Sniglet-ExtraBold';
+  ctx_game.fillText('Score : ' + score, 20, 50);
+  ctx_game.fillText('Stage : ' + stage, 270,50);
+  ctx_game.fillText('Menu : ', 450,50);
 }
 
