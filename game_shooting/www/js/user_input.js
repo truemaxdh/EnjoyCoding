@@ -62,11 +62,11 @@ function showSubMenu() {
     frame.pause = true;
     pauseBGM();
   }
-  document.getElementById("Submenu").style.width = "100%";
+  document.getElementById("Submenu").style.left = "0";
 }
 
 function hideSubMenu() {
-  document.getElementById("Submenu").style.width = "0%";
+  document.getElementById("Submenu").style.left = "-100%";
   frame.pause = false;
   if (curPage == 'game') {
     playBGM();
