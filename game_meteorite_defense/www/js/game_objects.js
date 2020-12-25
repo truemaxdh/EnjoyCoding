@@ -151,9 +151,9 @@ function objStageClear(stage) {
         
         // create radial gradient
         // Create gradient
-        var grd = ctx_game.createRadialGradient(c_x, c_y, 10, c_x, c_y, 150);
-        grd.addColorStop(0, 'yellow');
-        grd.addColorStop(1, '#004CB3');
+        var grd = ctx_game.createRadialGradient(c_x, c_y, 10, c_x, c_y, 200);
+        grd.addColorStop(0, 'orange');
+        grd.addColorStop(1, 'white');
                 
         ctx_game.fillStyle = grd;
         ctx_game.font = '50px Sniglet-ExtraBold';
