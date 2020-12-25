@@ -91,7 +91,8 @@ function gameOver() {
 }
 
 function tick(cur_time) {
-    frame.animation_interval = cur_time - (frame.last_animation_time==0 ? cur_time : frame.last_animation_time);
+    if (frame.last_animation_time==0) frame.last_animation_time = cur_time;
+    frame.animation_interval = cur_time - frame.last_animation_time;
     if (frame.animation_interval > 30) {
         frame.last_animation_time = cur_time;
         millisec_played += frame.animation_interval;
