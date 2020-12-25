@@ -1,4 +1,4 @@
-function playSound(soundID)
+function playSound()
 {
   try {
     if (soundSettings.sound == 'on')
