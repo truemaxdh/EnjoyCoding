@@ -95,8 +95,7 @@ function newGame() {
     frame.pause = true;
     game_init();
     frame.pause = false;
-    // objInterval = setInterval(tick, 50);
-    document.getElementById( 'bgm' ).play();
+    playBGM();
     requestAnimationFrame(tick);
 }
 
