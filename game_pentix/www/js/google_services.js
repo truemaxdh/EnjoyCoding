@@ -31,11 +31,11 @@ function chkAndUnlockAchievement(lineCnt) {
 }
 
 function OpenUserResult() {
-  document.getElementById("user_result").style.width = "100%";
+  document.getElementById("user_result").style.left = "0";
 }
 
 function  CloseUserResult() {
-  document.getElementById("user_result").style.width = "0%";
+  document.getElementById("user_result").style.left = "-100%";
   setTimeout(function() {
     pageChange('menu');
     document.location.href = "index.html";
