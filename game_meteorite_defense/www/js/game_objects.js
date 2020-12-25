@@ -41,6 +41,7 @@ function objJet(x, y) {
         ctx_game.lineWidth = 3;
         ctx_game.arc(this.x + 50, this.y + 20, 20, 0, 2 * Math.PI);
         ctx_game.fill();
+        ctx_game.stroke();
         
         ctx_game.beginPath();
         ctx_game.strokeStyle = "white";
