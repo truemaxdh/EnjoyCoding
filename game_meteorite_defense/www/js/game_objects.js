@@ -157,7 +157,7 @@ function objItemProtection(x, y) {
         
         ctx_game.fillStyle = "#cacaca";
         ctx_game.font = '30px Sniglet-ExtraBold';
-        ctx_game.fillText('P', c_x, c_y);
+        ctx_game.fillText('P', this.x, this.y);
     };
 }
 
