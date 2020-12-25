@@ -25,12 +25,12 @@ var millisec_played;
 var stage;
 
 function _stage_def() {
-    this.max_stage = 5;
+    this.max_stage = 10;
     this.stage_tick = 50000;
     this.missile_interval = 200;
     this.met_interval = 4000;
     this.stg1_met_interval = 4000;
-    this.met_types = [[20], [40], [60], [80], [100]];
+    this.met_types = [[30], [30, 60], [60], [30, 60, 90], [60, 90], [90], [30, 60, 90, 120], [60, 90, 120], [90, 120], [120]];
 }
 
 var stage_design;
