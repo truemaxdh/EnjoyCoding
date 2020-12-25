@@ -175,7 +175,7 @@ function collision_check() {
             score += 20;
             o_met.size -= 30;
             if (o_met.bonusItem > 0) {
-                push_to_chain(new objItemProtection, item_0);
+                push_to_chain(new objItemProtection(o_met.x, o_met.y), item_0);
             }
             if (o_met.size > 0) {
                 push_to_chain(new objMet(o_met.x, o_met.y, o_met.size), met_0);
