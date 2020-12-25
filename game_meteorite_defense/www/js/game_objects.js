@@ -39,7 +39,7 @@ function objJet(x, y) {
         ctx_game.fillStyle = "crimson";
         ctx_game.strokeStyle = "orange";
         ctx_game.lineWidth = 3;
-        ctx_game.arc(this.x + 50, this.y + 20, 17, 0, 2 * Math.PI);
+        ctx_game.arc(this.x + 50, this.y + 20, 18, 0, 2 * Math.PI);
         ctx_game.fill();
         ctx_game.stroke();
         
