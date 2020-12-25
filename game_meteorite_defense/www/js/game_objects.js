@@ -1,18 +1,3 @@
-var img_airplane = new Image();
-var img_airplane_x = new Image();
-var img_missile = new Image();
-
-var img_gameObjs = [
-    img_airplane, img_airplane_x, img_missile
-];
-var URL_gameObjs = [
-    'img/airplane.png', 'img/airplane_x.png', 'img/missile.png'
-];
-
-for (var i=0; i<img_gameObjs.length; i++) {
-    img_gameObjs[i].src = URL_gameObjs[i];
-}    
-
 function gameobj(x, y) {
     this.x = x;
     this.y = y;
@@ -20,14 +5,14 @@ function gameobj(x, y) {
     this.height = 0;
     this.margin_x = 0;
     this.margin_y = 0;
-    this.step_x = 0;
-    this.step_y = 0;
+    this.step_x = 0;    // per 33ms
+    this.step_y = 0;    // per 33ms
     this.prev = null;
     this.next = null;
     this.img = null;
     this.move = function() {
-        this.x += this.step_x * frame.animation_interval / 1000;
-        this.y += this.step_y * frame.animation_interval / 1000;
+        this.x += this.step_x;
+        this.y += this.step_y;
         if (this.next != null) {
             this.next.move(ctx_game);
         }
@@ -35,9 +20,6 @@ function gameobj(x, y) {
     this.render = function(ctx_game) {
         if (this.img != null) {
             ctx_game.drawImage(this.img, this.x, this.y);
-        }
-        if (this.next != null) {
-            this.next.render(ctx_game);
         }
     }
     this.collision_chk = function(x0, y0, x1, y1) {
@@ -55,91 +37,68 @@ function gameobj(x, y) {
 
 function objJet(x, y) {
     gameobj.call(this, x, y);
-    this.img = img_airplane;
-    this.width = this.img.width;
-    this.height = this.img.height;
+    this.width = 100;
+    this.height = 100;
     this.margin_x = 5;
     this.margin_y = 5;
+    this.render = function(ctx_game) {
+        ctx_game.beginPath();
+        ctx_game.fillStyle = "brown";
+        ctx_game.fillRect(this.x + 10, this.y + 55, 80, 20);
+        ctx_game.fillStyle = "beige";
+        ctx_game.fillRect(this.x + 30, this.y + 25, 40, 50);
+        ctx_game.fillStyle = "salmon";
+        ctx_game.arc(this.x + 50, this.y + 25, 25, 0, 2 * Math.PI);
+        ctx_game.fill();
+        ctx_game.strokeStyle = "white";
+        ctx_game.moveTo(this.x + 30, this.y + 75);
+        ctx_game.lineTo(this.x + 30, this.y + 85);
+        ctx_game.moveTo(this.x + 40, this.y + 75);
+        ctx_game.lineTo(this.x + 40, this.y + 95);
+        ctx_game.moveTo(this.x + 50, this.y + 75);
+        ctx_game.lineTo(this.x + 50, this.y + 100);
+        ctx_game.moveTo(this.x + 60, this.y + 75);
+        ctx_game.lineTo(this.x + 60, this.y + 95);
+        ctx_game.moveTo(this.x + 70, this.y + 75);
+        ctx_game.lineTo(this.x + 70, this.y + 85);
+        ctx_game.lineWidth = 2;
+        ctx_game.stroke();
+    }
     this.game_over = function() {
-        this.img = img_airplane_x;
+        this.render = function(ctx_game) {
+            ctx_game.beginPath();
+            ctx_game.strokeStyle = "white";
+            ctx_game.moveTo(this.x, this.y);
+            ctx_game.lineTo(this.x + 100, this.y + 100);
+            ctx_game.moveTo(this.x + 100, this.y);
+            ctx_game.lineTo(this.x, this.y + 100);
+            ctx_game.lineWidth = 5;
+            ctx_game.stroke();
+        }
     }
 }
 
 function objMissile(x, y) {
     gameobj.call(this, x + 20, y);
-    this.img = img_missile;
-    this.width = this.img.width;
-    this.height = this.img.height;
-    this.step_y = -900;
+    this.width = 5;
+    this.height = 100;
+    this.render = function(ctx_game) {
+        ctx_game.beginPath();
+        ctx_game.strokeStyle = "orange";
+        ctx_game.moveTo(this.x, this.y);
+        ctx_game.lineTo(this.x, this.y + 100);
+        ctx_game.lineWidth = 5;
+        ctx_game.stroke();
+    }
+    this.step_y = -20;
 }
 
 function objBall(x, y, size) {
-    gameobj.call(this, x, y);
-    this.size = size;
-    this.r = size * 15;
-    this.step_x = (Math.random() < 0.5 ? -1 : 1) * (Math.floor(Math.random() * 360) + 1);
-    this.step_y = 0;
-    this.accel = 360;
-    this.gco = (Math.random() < 0.5) ? 'source-over':'lighter';
-    this.rgb = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
-    this.move = function() {
-        this.x += this.step_x * frame.animation_interval / 1000;
-        if (this.x > 720) {
-            this.x = 720 * 2 - this.x;
-            this.step_x *= -1;
-        } else if (this.x < 0) {
-            this.x = 0 - this.x;
-            this.step_x *= -1;
-        }
-        var elapsed_sec = frame.animation_interval / 1000;
-        this.y += this.step_y * elapsed_sec + this.accel * elapsed_sec * elapsed_sec / 2;
-        this.step_y += this.accel * elapsed_sec;
-        if (this.y > 540) {
-            this.y = 540 * 2 - this.y;
-            this.step_y *= -1;
-        }
-        if (this.next != null) {
-            this.next.move(ctx_game);
-        }
-    };
-    this.render = function(ctx_game) {
-        ctx_game.globalCompositeOperation = this.gco;
-        ctx_game.beginPath();
-        ctx_game.fillStyle = this.rgb;
-        ctx_game.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-        ctx_game.fill();
-        if (this.next != null) {
-            this.next.render(ctx_game);
-        }
-    };
-    this.collision_chk = function(x0, y0, x1, y1) {
-        var ret = false;
-        var dx = x0 - this.x;
-        var dy = y0 - this.y;
-        var d2 = dx * dx + dy * dy;
-        var r2 = this.r * this.r;
-        if (d2 <= r2) ret = true;
-        return ret;
-    };
+    
 }
 
 function objGameOver() {
-    gameobj.call(this, 0, 0);
-    this.count_down = 100;
-    this.render = function(ctx_game) {
-        var c_x = ctx_game.canvas.width / 2;
-        var c_y = ctx_game.canvas.height / 2;
-        
-        // create radial gradient
-        var grd = ctx_game.createRadialGradient(c_x, c_y, 10, c_x, c_y, 150);
-        // light blue
-        grd.addColorStop(0, 'yellow');
-        // dark blue
-        grd.addColorStop(1, '#004CB3');
-        ctx_game.fillStyle = grd;
-        ctx_game.font = '50px Sniglet-ExtraBold';
-        ctx_game.fillText('GameOver', c_x - 130, c_y - 25);
-    }
+    
 }
 
 function objStageClear(stage) {
