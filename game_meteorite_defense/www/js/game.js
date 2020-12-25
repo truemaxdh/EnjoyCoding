@@ -204,16 +204,16 @@ function collision_obj_grp(obj, target0) {
     var ret = null;
     var o_x0 = obj.x + obj.margin_x;
     var o_x1 = obj.x + obj.width - obj.margin_x;
-    var o_y0 = obj.y + obj.margin_y;
-    var o_y1 = obj.y + obj.height - obj.margin_y;
+    var o_y0 = obj.y + obj.margin_yt;
+    var o_y1 = obj.y + obj.height - obj.margin_yb;
     
     var t = target0;
     while(t.next != null) {
         t = t.next;
         var t_x0 = t.x + t.margin_x;
         var t_x1 = t.x + t.width - t.margin_x;
-        var t_y0 = t.y + t.margin_y;
-        var t_y1 = t.y + t.height - t.margin_y;
+        var t_y0 = t.y + t.margin_yt;
+        var t_y1 = t.y + t.height - t.margin_yb;
         if (o_x0 < t_x1 && o_x1 > t_x0 && o_y0 < t_y1 && o_y1 > t_y0) {
             ret = t;
             break;
