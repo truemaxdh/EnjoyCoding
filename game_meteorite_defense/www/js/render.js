@@ -5,6 +5,19 @@ var ctx_game;
 function render_init() {
   canv_game = document.getElementById('game_canvas');
   ctx_game = canv_game.getContext('2d');    
+  
+  var scr_w = window.innerWidth;
+  var scr_h = window.innerHeight;
+
+  if ((scr_h * 0.54) > scr_w) {
+      canv_game.style.width = "100vw";    
+      canv_game.style.height = "167vw";
+      canv_bg.style.width = "33vw";    
+      canv_bg.style.height = "167vw";
+  }
+
+  ctx_bg = canv_bg.getContext('2d');
+  ctx_game = canv_game.getContext('2d');
 }
 
 function render() {
@@ -19,8 +32,8 @@ function render() {
 
     ctx_game.fillStyle = '#ffa500';
     ctx_game.font = '35px Sniglet-ExtraBold';
-    ctx_game.fillText('Score : ' + gamePlay.score, 20, 50);
-    ctx_game.fillText('Stage : ' + gamePlay.stage, 270,50);
+    ctx_game.fillText('Score : ' + score, 20, 50);
+    ctx_game.fillText('Stage : ' + stage, 270,50);
     ctx_game.fillText('Menu : ', 450,50);
 }
 
