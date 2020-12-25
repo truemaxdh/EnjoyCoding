@@ -30,15 +30,17 @@ function render() {
   while(o_met.next != null) {
     o_met = o_met.next;
     o_met.render(ctx_game);
+    o_met.move();
   }
   
   while(o_missile.next != null) {
     o_missile = o_missile.next;
     o_missile.render(ctx_game);
+    o_missile.move();
   }
   
   o_jet.render(ctx_game);
-
+  
   ctx_game.fillStyle = '#ffa500';
   ctx_game.font = '35px Sniglet-ExtraBold';
   ctx_game.fillText('Score : ' + score, 20, 50);
