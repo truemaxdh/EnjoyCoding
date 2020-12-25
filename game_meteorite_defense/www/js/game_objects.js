@@ -134,9 +134,7 @@ function objGameOver() {
         
         // create radial gradient
         var grd = ctx_game.createRadialGradient(c_x, c_y, 10, c_x, c_y, 150);
-        // light blue
         grd.addColorStop(0, 'yellow');
-        // dark blue
         grd.addColorStop(1, '#004CB3');
         ctx_game.fillStyle = grd;
         ctx_game.font = '50px Sniglet-ExtraBold';
@@ -153,11 +151,10 @@ function objStageClear(stage) {
         
         // create radial gradient
         // Create gradient
-        var grd=ctx_game.createLinearGradient(0, 0, ctx_game.canvas.width,0);
-        grd.addColorStop("0","magenta");
-        grd.addColorStop("0.5","blue");
-        grd.addColorStop("1.0","red");
-        
+        var grd = ctx_game.createRadialGradient(c_x, c_y, 10, c_x, c_y, 150);
+        grd.addColorStop(0, 'yellow');
+        grd.addColorStop(1, '#004CB3');
+                
         ctx_game.fillStyle = grd;
         ctx_game.font = '50px Sniglet-ExtraBold';
         ctx_game.fillText('Stage' + stage + ' Clear!', c_x - 200, c_y - 25);
