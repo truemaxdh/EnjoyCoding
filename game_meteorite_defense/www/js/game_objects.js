@@ -72,13 +72,10 @@ function objMissile(x, y) {
     this.height = 50;
     this.render = function(ctx_game) {
         ctx_game.beginPath();
-        ctx_game.strokeStyle = "orange";
-        ctx_game.moveTo(this.x, this.y);
-        ctx_game.lineTo(this.x, this.y + this.height);
-        ctx_game.lineWidth = this.width;
-        ctx_game.stroke();
+        ctx_game.fillStyle = "orange";
+        ctx_game.fillRect(this.x, this.y, this.width, this.height);
     }
-    this.step_y = -15;
+    this.step_y = -12;
 }
 
 function objMet(x, y, size) {
