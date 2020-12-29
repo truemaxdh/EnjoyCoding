@@ -53,7 +53,7 @@ function newStage() {
     met_0 = new gameobj(0,0);
     item_0 = new gameobj(0,0);
     
-    stage_design = _stage_design[stage];
+    stage_design = _stage_design[stage - 1];
     missile_interval = game_design.missile_interval;
     met_interval = 0;
     
