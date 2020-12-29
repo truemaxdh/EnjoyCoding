@@ -156,7 +156,7 @@ function upcoming_obj() {
         met_interval = 0;
     } else {
         met_interval += frame.animation_interval;
-        if (stage_design.met_types[stage-1].length > 0 && met_interval > stage_design.met_interval) {
+        if (stage_design.met_types.length > 0 && met_interval > stage_design.met_interval) {
             var rnd = parseInt(Math.random() * stage_design.met_types[stage-1].length);
             var o_met = new objMet(o_jet.x, 0, stage_design.met_types[stage-1][rnd]);
             push_to_chain(o_met, met_0);  
