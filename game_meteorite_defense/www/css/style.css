@@ -48,7 +48,7 @@ h3 {
 
 .text a { 
     /* color: #4d7bd5; */
-    color: #aaa; 
+    color: #silver; 
     font-size: 25px; 
     text-align: center; 
     text-shadow: 2px 2px 2px #33a;
@@ -66,7 +66,7 @@ h3 {
 
 .smallText a {
     font-size:17px;
-    color: #aaa;
+    color: silver;
     text-shadow: 1px 1px 2px #a33;
 }
 
