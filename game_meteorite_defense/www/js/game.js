@@ -157,8 +157,7 @@ function upcoming_obj() {
     } else {
         met_interval += frame.animation_interval;
         if (stage_design.met_types.length > 0 && met_interval > stage_design.met_interval) {
-            var rnd = parseInt(Math.random() * stage_design.met_types[stage-1].length);
-            var o_met = new objMet(o_jet.x, 0, stage_design.met_types[stage-1][rnd]);
+            var o_met = new objMet(o_jet.x, 0, stage_design.met_types[parseInt(Math.random() * stage_design.met_types.length)]);
             push_to_chain(o_met, met_0);  
             met_interval -= stage_design.met_interval;
         }
