@@ -150,7 +150,7 @@ function upcoming_obj() {
     // get stage
     if (stage < game_design.max_stage && millisec_played > (game_design.stage_tick * stage)) {
         frame.effect_flag = true;
-        var o_stageClear = new objStageClear(stage);
+        var o_stageClear = new objStageClear();
         push_to_chain(o_stageClear, met_0);
         // stage_design.met_interval -= 400;
         met_interval = 0;
