@@ -178,7 +178,7 @@ function objGameOver() {
     }
 }
 
-function objStageClear(stage) {
+function objStageClear() {
     gameobj.call(this, 0, 0);
     this.count_down = 3000;
     this.render = function(ctx_game) {
