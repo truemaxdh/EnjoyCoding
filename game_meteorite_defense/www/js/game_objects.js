@@ -44,7 +44,7 @@ function objJet(x, y) {
         ctx_game.fillStyle = "crimson";
         ctx_game.strokeStyle = "orange";
         ctx_game.lineWidth = 3;
-        ctx_game.arc(this.x + 50, this.y + 20, 18, 0, Math.PI);
+        ctx_game.arc(this.x + 50, this.y + 20, 18, Math.PI, 0);
         ctx_game.closePath();
         ctx_game.fill();
         ctx_game.stroke();
@@ -110,7 +110,7 @@ function objMet(x, y, size) {
     this.step_y = Math.random() * 7 + 1;
     this.rgbStroke = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
     this.rgbFill = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
-    this.bonusItem = (Math.random() < 0.1) ? 1 : 0;
+    this.bonusItem = (Math.random() < 0.05) ? 1 : 0;
     this.move = function() {
         this.x += this.step_x;
         if (this.x > 540) {
