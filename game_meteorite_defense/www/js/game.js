@@ -37,15 +37,15 @@ var game_design = {
 
 var _stage_design = [
     { stage : 1, met_interval : 1500, met_types : [30] },
-    { stage : 2, met_interval : 2000, met_types : [30, 60] },
-    { stage : 3, met_interval : 2500, met_types : [60] },
-    { stage : 4, met_interval : 2000, met_types : [30, 60, 90] },
-    { stage : 5, met_interval : 2500, met_types : [60, 90] },
-    { stage : 6, met_interval : 3000, met_types : [90] },
-    { stage : 7, met_interval : 2500, met_types : [30, 60, 90, 120] },
-    { stage : 8, met_interval : 3000, met_types : [60, 90, 120] },
-    { stage : 9, met_interval : 3500, met_types : [90, 120] },
-    { stage : 10, met_interval : 4000, met_types : [120] }
+    { stage : 2, met_interval : 1800, met_types : [30, 60] },
+    { stage : 3, met_interval : 2100, met_types : [60] },
+    { stage : 4, met_interval : 1800, met_types : [30, 60, 90] },
+    { stage : 5, met_interval : 2100, met_types : [60, 90] },
+    { stage : 6, met_interval : 2400, met_types : [90] },
+    { stage : 7, met_interval : 2100, met_types : [30, 60, 90, 120] },
+    { stage : 8, met_interval : 2400, met_types : [60, 90, 120] },
+    { stage : 9, met_interval : 2700, met_types : [90, 120] },
+    { stage : 10, met_interval : 2400, met_types : [120] }
 ];
 
 function newStage() {
