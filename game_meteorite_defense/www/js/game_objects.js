@@ -74,9 +74,8 @@ function objJet(x, y) {
             ctx_game.stroke();
             this.protection--;
         }
-    }
-    this.game_over = function() {
-        this.render = function(ctx_game) {
+        
+        if (frame.gameover_flag) {
             ctx_game.beginPath();
             ctx_game.strokeStyle = "white";
             ctx_game.moveTo(this.x, this.y);
