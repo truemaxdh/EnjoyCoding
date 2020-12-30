@@ -198,7 +198,7 @@ function collision_check() {
     var o_item = collision_obj_grp(o_jet, item_0);
     if (o_item != null) {
         remove_from_chain(o_item);
-        o_jet.protection += 200;
+        o_jet.protection += 150;
     }
     
     // check collision of mets and airplane
