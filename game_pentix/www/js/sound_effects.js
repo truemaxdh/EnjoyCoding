@@ -1,8 +1,11 @@
 function playSound()
 {
   try {
-    if (soundSettings.sound == 'on')
-      document.getElementById( 'clearsound' ).play();
+    if (soundSettings.sound == 'on') {
+      var bgm = document.getElementById( 'clearsound' );
+      bgm.currentTime = 0;
+      bgm.play();    
+    }
   } catch(err) {}
 }
 
