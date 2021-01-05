@@ -26,26 +26,32 @@
       }
       
       function BgmOnOff() {
-        var el = document.getElementById("bgmOnOff");
+        var els = document.getElementByClassName("bgmOnOff");
         //console.log(el.innerHTML);
-        if (el.innerHTML == "Background Music: Off") {
-          el.innerHTML = "Background Music: On";
-          soundSettings.bgm = "on";
-        } else {
-          el.innerHTML = "Background Music: Off";
-          soundSettings.bgm = "off";
+        for (var i = 0; i < els.length; i++) {
+          var el = els[i];
+          if (el.innerHTML == "Background Music: Off") {
+            el.innerHTML = "Background Music: On";
+            soundSettings.bgm = "on";
+          } else {
+            el.innerHTML = "Background Music: Off";
+            soundSettings.bgm = "off";
+          }
         }
       }
       
       function soundEffectOnOff() {
-        var el = document.getElementById("soundEffectOnOff");
+        var els = document.getElementByClassName("soundEffectOnOff");
         //console.log(el.innerHTML);
-        if (el.innerHTML == "Sound Effect: Off") {
-          el.innerHTML = "Sound Effect: On";
-          soundSettings.sound = "on";
-        } else {
-          el.innerHTML = "Sound Effect: Off";
-          soundSettings.sound = "off";
+        for (var i = 0; i < els.length; i++) {
+          var el = els[i];
+          if (el.innerHTML == "Sound Effect: Off") {
+            el.innerHTML = "Sound Effect: On";
+            soundSettings.sound = "on";
+          } else {
+            el.innerHTML = "Sound Effect: Off";
+            soundSettings.sound = "off";
+          }
         }
       }
     </script>
@@ -79,6 +85,8 @@
         <a href="#" onclick="ShowHighScores();">Show High Scores</a>
         <br>
         <div class = "smallText">
+          <a href="#" class="bgmOnOff" onclick="BgmOnOff();">Background Music: On</a>
+          <a href="#" class="soundEffectOnOff" onclick="soundEffectOnOff();">Sound Effect: On</a>
           <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.left='0';"><b>How to play</b></a>
         </div>
       </div>
@@ -108,8 +116,8 @@
       
       <!-- Overlay content -->
       <div class="overlay-content">
-        <a href="#" id="bgmOnOff" onclick="BgmOnOff();">Background Music: On</a>
-        <a href="#" id="soundEffectOnOff" onclick="soundEffectOnOff();">Sound Effect: On</a>
+        <a href="#" class="bgmOnOff" onclick="BgmOnOff();">Background Music: On</a>
+        <a href="#" class="soundEffectOnOff" onclick="soundEffectOnOff();">Sound Effect: On</a>
         <a href="#" onclick="pageChange('menu');hideSubMenu();">Exit Current Game</a>
         <a href="#" onclick="Android.exitApp();">Exit App</a>
         <a href="#" onclick="hideSubMenu();">Resume</a>
