@@ -1,18 +1,18 @@
 // Sound Play
-var sounds = []; // sounds
-sounds[0] = new Audio('sound/coin1.mp3');
-sounds[0].volume = 0.4;
-sounds[1] = new Audio('sound/coin2.mp3');
-sounds[1].volume = 0.4;
-sounds[2] = new Audio('sound/coin3.mp3');
-sounds[2].volume = 0.4;
+var sounds = {
+  fire : new Audio('sound/fire.mp3'),
+  hitMeteorite : new Audio('sound/hitMeteorite.mp3'),
+  protection : new Audio('sound/protection.mp3'),
+  volume : 0.4
+}
   
-function playSound(soundID)
+function playSound(sound)
 {
   try {
     if (soundSettings.sound == 'on') {
-      sounds[soundID].currentTime = 0;
-      sounds[soundID].play();
+      sound.currentTime = 0;
+      sound.volume = sounds.volume;
+      sound.play();
     }
   } catch(err) {}
 }
