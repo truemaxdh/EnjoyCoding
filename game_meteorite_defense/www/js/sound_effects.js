@@ -1,17 +1,16 @@
 // Sound Play
 var sounds = {
-  fire : new Audio('sound/fire.mp3'),
-  hitMeteorite : new Audio('sound/hitMeteorite.mp3'),
-  protection : new Audio('sound/protection.mp3'),
-  volume : 0.4
+  fire : {audio : new Audio('sound/fire.mp3'), volume : 0.8},
+  hitMeteorite : {audio : new Audio('sound/hitMeteorite.mp3'), volume : 0.2},
+  protection : {audio : new Audio('sound/protection.mp3'), volume : 0.4}
 }
   
 function playSound(sound)
 {
   try {
     if (soundSettings.sound == 'on') {
-      sound.currentTime = 0;
-      sound.volume = sounds.volume;
+      sound.audio.currentTime = 0;
+      sound.audio.volume = sound.volume;
       sound.play();
     }
   } catch(err) {}
