@@ -1,3 +1,34 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@truemaxdh 
+truemaxdh
+/
+EnjoyCoding
+1
+00
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+EnjoyCoding/game_meteorite_defense/www/js/game.js /
+@truemaxdh
+truemaxdh Update game.js
+Latest commit 3a1e43b 5 hours ago
+ History
+ 1 contributor
+254 lines (222 sloc)  6.9 KB
+  
 // concerning game frame
 var frame = {
     animation_interval : 0,
@@ -155,7 +186,7 @@ function upcoming_obj() {
         frame.effect_flag = true;
         var o_stageClear = new objStageClear();
         push_to_chain(o_stageClear, met_0);
-        // stage_design.met_interval -= 400;
+        playSound(sounds.fire);
         met_interval = 0;
     } else {
         met_interval += frame.animation_interval;
@@ -168,7 +199,7 @@ function upcoming_obj() {
 }
 
 function hitMet(o_met) {
-    playSound(0);
+    playSound(sounds.hitMeteorite);
     remove_from_chain(o_met);
     score += 20;
     o_met.size -= 30;
@@ -201,6 +232,7 @@ function collision_check() {
     var o_item = collision_obj_grp(o_jet, item_0);
     if (o_item != null) {
         remove_from_chain(o_item);
+        playSound(sounds.protection);
         o_jet.protection += 150;
     }
     
@@ -252,3 +284,15 @@ function collision_obj_grp(obj, target0) {
 
     return ret;
 }
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
