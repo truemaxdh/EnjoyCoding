@@ -85,7 +85,7 @@ function gameOver() {
     if (o_game_over == null) {
         frame.gameover_flag = true;
         o_game_over = new objGameOver();
-        Android.vibrate(100);
+        Android.vibrate(300);
     } else if (o_game_over.count_down-- == 0) {
         pauseBGM();
         frame.pause = true;        
