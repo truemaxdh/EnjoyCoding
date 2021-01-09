@@ -30,22 +30,26 @@ var millisec_played;
 var stage;
 
 var game_design = {
-    max_stage : 10,
+    max_stage : 14,
     stage_tick : 50000,
     missile_interval : 200
 }
 
 var _stage_design = [
-    { stage : 1, met_interval : 1500, met_types : [30] },
-    { stage : 2, met_interval : 1800, met_types : [30, 60] },
-    { stage : 3, met_interval : 2100, met_types : [60] },
-    { stage : 4, met_interval : 1800, met_types : [30, 60, 90] },
-    { stage : 5, met_interval : 2100, met_types : [60, 90] },
-    { stage : 6, met_interval : 2400, met_types : [90] },
-    { stage : 7, met_interval : 2100, met_types : [30, 60, 90, 120] },
-    { stage : 8, met_interval : 2400, met_types : [60, 90, 120] },
-    { stage : 9, met_interval : 2700, met_types : [90, 120] },
-    { stage : 10, met_interval : 2400, met_types : [120] }
+    { stage : 1, met_interval : 1500, met_types : [30, 60] },
+    { stage : 2, met_interval : 1700, met_types : [60] },
+    { stage : 3, met_interval : 1500, met_types : [30, 60, 90] },
+    { stage : 4, met_interval : 1700, met_types : [60, 90] },
+    { stage : 5, met_interval : 1900, met_types : [90] },
+    { stage : 6, met_interval : 1500, met_types : [30, 60, 90, 120] },
+    { stage : 7, met_interval : 1700, met_types : [60, 90, 120] },
+    { stage : 8, met_interval : 1900, met_types : [90, 120] },
+    { stage : 9, met_interval : 2100, met_types : [120] },
+    { stage : 10, met_interval : 1500, met_types : [30, 60, 90, 120, 150] },
+    { stage : 11, met_interval : 1700, met_types : [60, 90, 120, 150] },
+    { stage : 12, met_interval : 1900, met_types : [90, 120, 150] },
+    { stage : 13, met_interval : 2100, met_types : [120, 150] },
+    { stage : 14, met_interval : 2300, met_types : [150] },
 ];
 
 function newStage() {
