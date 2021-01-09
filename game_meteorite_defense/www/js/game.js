@@ -87,7 +87,6 @@ function gameOver() {
         o_game_over = new objGameOver();
         Android.vibrate(100);
     } else if (o_game_over.count_down-- == 0) {
-        // clearInterval(objInterval);
         pauseBGM();
         frame.pause = true;        
         if (isApp && glGameSvc.loginStatus) {
