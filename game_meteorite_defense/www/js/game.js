@@ -1,34 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@truemaxdh 
-truemaxdh
-/
-EnjoyCoding
-1
-00
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-EnjoyCoding/game_meteorite_defense/www/js/game.js /
-@truemaxdh
-truemaxdh Update game.js
-Latest commit 3a1e43b 5 hours ago
- History
- 1 contributor
-254 lines (222 sloc)  6.9 KB
-  
 // concerning game frame
 var frame = {
     animation_interval : 0,
@@ -284,15 +253,3 @@ function collision_obj_grp(obj, target0) {
 
     return ret;
 }
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
