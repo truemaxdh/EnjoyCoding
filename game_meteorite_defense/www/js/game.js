@@ -31,7 +31,7 @@ var stage;
 
 var game_design = {
     max_stage : 14,
-    stage_tick : 50000,
+    stage_tick : 60000,
     missile_interval : 200
 }
 
