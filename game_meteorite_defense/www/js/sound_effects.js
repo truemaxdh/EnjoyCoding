@@ -11,7 +11,7 @@ function playSound(sound)
     if (soundSettings.sound == 'on') {
       sound.audio.currentTime = 0;
       sound.audio.volume = sound.volume;
-      sound.play();
+      sound.audio.play();
     }
   } catch(err) {}
 }
