@@ -1,6 +1,6 @@
 // Sound Play
 var sounds = {
-  fire : {audio : new Audio('sound/fire.mp3'), volume : 0.3},
+  fire : {audio : new Audio('sound/fire.mp3'), volume : 0.1},
   hitMeteorite : {audio : new Audio('sound/hitMeteorite.mp3'), volume : 0.2},
   protection : {audio : new Audio('sound/protection.mp3'), volume : 0.4}
 }
