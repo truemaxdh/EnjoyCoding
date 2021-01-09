@@ -141,7 +141,8 @@ function proc_user_input() {
         if (missile_interval >= game_design.missile_interval) {
             missile_interval -= game_design.missile_interval;
             var o_missile = new objMissile(o_jet.x, o_jet.y);
-            push_to_chain(o_missile, missile_0);  
+            push_to_chain(o_missile, missile_0);
+            playSound(sounds.fire);
         } 
         missile_interval += frame.animation_interval;
     } else {
@@ -155,7 +156,6 @@ function upcoming_obj() {
         frame.effect_flag = true;
         var o_stageClear = new objStageClear();
         push_to_chain(o_stageClear, met_0);
-        playSound(sounds.fire);
         met_interval = 0;
     } else {
         met_interval += frame.animation_interval;
