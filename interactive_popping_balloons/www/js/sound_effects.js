@@ -1,17 +1,15 @@
 // Sound Play
 var sounds = []; // sounds
 var cnt = 0;
-for (var i = 0; i < 5; i++) {
+/*for (var i = 0; i < 5; i++) {
   for (var j = 0; j < 4; j++) {
-    //sounds[cnt] = new Audio('sound/fire' + j + '.mp3');
-    //sounds[cnt++].volume = 0.3;
     var audio = new Audio();
     audio.src = 'sound/fire' + j + '.mp3';
     audio.preload = "auto";
     audio.volume = 0.3;
     sounds.push(audio);
   }
-}
+}*/
   
 function playSound(soundID)
 {
