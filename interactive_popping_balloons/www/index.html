@@ -8,14 +8,14 @@
     <title>Interactive Fireworks</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <!--link rel="stylesheet" href="https://truemaxdh.github.io/Style/skin.css"-->
-    <script src="js/poppingbaloons.js"></script>
+    <script src="js/BaloonsGoingUp.js"></script>
     <script src="js/sound_effects.js"></script>
     <script src="js/google_services.js"></script>
     <script>
-      function demo_fireworks() {
+      function demo_balloonsGoingUp() {
         var el = document.getElementById("board");
         el.innerHTML = "";
-        specialEffects.fireworks(el);
+        motionGraphics.balloonsGoingUp(el);
       }
       
       function BgmOnOff() {
@@ -63,14 +63,7 @@
       }
       
       window.onload = function() {
-        var el = document.getElementById("board");
-        el.onmouseup = function(evt) {
-          specialEffects.fireworks.addNewFire(evt.clientX, evt.clientY);
-        };
-        /*el.ontouchstart = function(evt) {
-          specialEffects.fireworks.addNewFire(evt.touches[0].clientX, evt.touches[0].clientX);
-        };*/
-        demo_poppingbaloons();
+        demo_balloonsGoingUp();
         showSubMenu();
       }
     </script>
