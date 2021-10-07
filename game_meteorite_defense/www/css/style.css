@@ -187,7 +187,7 @@ button {
     margin:2px;
 }
 
-button : disabled {
+button:disabled {
     color: #777;
     //background-color: rgba(0, 0, 0, 0.5);
     //font-weight: bold;
