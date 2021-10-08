@@ -24,7 +24,7 @@
       function openStageMap() {
         if (!localStorage.maxClearedStage)
           localStorage.maxClearedStage = 0;
-        let maxStage = localStorage.maxClearedStage + 1;
+        let maxStage = Number(localStorage.maxClearedStage) + 1;
         for(let i = 1; i <= maxStage; i++) {
           document.getElementById('btnL' + i).disabled = false;
         }
