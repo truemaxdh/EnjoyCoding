@@ -128,6 +128,7 @@ function objGameOver() {
 }
 
 function objStageClear(stage) {
+    chkAndUnlockStage(stage);
     this.count_down = 3000;
     this.render = function(ctx_game) {
         var c_x = ctx_game.canvas.width / 2;
