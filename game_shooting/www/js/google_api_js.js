@@ -19,8 +19,8 @@ var glGameSvc = {
 };
 
 function chkAndUnlockStage(stage) {
-  if (Number(localStorage.maxClearedStage) < stage)
-    localStorage.maxClearedStage = stage;
+  if (Number(localStorage.getItem(stageStoreName)) < stage)
+    localStorage.setItem(stageStoreName, stage);
 }
 
 function chkAndUnlockAchievement(score) {
