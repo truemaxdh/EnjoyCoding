@@ -18,6 +18,11 @@ var glGameSvc = {
   achvScores : [500, 2000, 5000, 10000, 20000]
 };
 
+function chkAndUnlockStage(stage) {
+  if (Number(localStorage.maxClearedStage) < stage)
+    localStorage.maxClearedStage = stage;
+}
+
 function chkAndUnlockAchievement(score) {
   if (!glGameSvc.loginStatus) return;
   for (var i = glGameSvc.achvScores.length - 1; i >= 0; i--) {
