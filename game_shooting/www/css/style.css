@@ -186,6 +186,11 @@ button {
     margin:2px;
 }
 
+button:disabled {
+    color: #777;
+    border: 2px solid #777;
+}
+
 .round {
     width : 45px;
     height : 45px;
