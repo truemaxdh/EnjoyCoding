@@ -21,10 +21,11 @@
         pageChange('game');
       }
       
+      const stageStoreName = "pvcMaxClearedStage";
       function openStageMap() {
-        if (!localStorage.maxClearedStage)
-          localStorage.maxClearedStage = 0;
-        let maxStage = Number(localStorage.maxClearedStage) + 1;
+        if (!localStorage.getItem(stageStoreName))
+          localStorage.setItem(stageStoreName, 0);
+        let maxStage = Number(localStorage.getItem(stageStoreName)) + 1;
         for(let i = 1; i <= maxStage; i++) {
           document.getElementById('btnL' + i).disabled = false;
         }
