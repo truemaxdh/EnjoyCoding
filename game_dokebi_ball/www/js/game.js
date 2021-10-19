@@ -1,6 +1,6 @@
 // concerning game frame
 var frame = {
-  animation_interval : 0,
+  animation_interval : 30,
   last_animation_time : 0,
   pause : true,
   gameover_flag : false,
@@ -55,29 +55,29 @@ function newGame() {
     requestAnimationFrame(tick);
 }
 
-function tick(cur_time) {
-  frame.animation_interval = cur_time - (frame.last_animation_time==0 ? cur_time : frame.last_animation_time);
-  frame.last_animation_time = cur_time;
-  gamePlay.millisec_played += frame.animation_interval;
+function tick(timeStamp) {
+  if ((timeStamp - frame.last_animation_time) > frame.animation_interval) {
+    frame.last_animation_time = timeStamp;;
+    gamePlay.millisec_played += frame.animation_interval;
 
-  balls_ends[0].move();
-  if (!frame.effect_flag) {
-    upcoming_obj();
-  }
-  render();
-
-  if (frame.gameover_flag) {
-    gameOver();
-  } else {
-    proc_user_input();
+    balls_ends[0].move();
     if (!frame.effect_flag) {
-      collision_check();
+      upcoming_obj();
     }
-  }
+    render();
 
-  if (!frame.pause) {
-    requestAnimationFrame(tick);
-  }
+    if (frame.gameover_flag) {
+      gameOver();
+    } else {
+      proc_user_input();
+      if (!frame.effect_flag) {
+        collision_check();
+      }
+    }
+
+    if (!frame.pause) {
+      requestAnimationFrame(tick);
+    }
 }
 
 function gameOver() {
