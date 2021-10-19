@@ -75,10 +75,9 @@ function tick(timeStamp) {
         collision_check();
       }
     }
-
-    if (!frame.pause) {
-      requestAnimationFrame(tick);
-    }
+  }
+  if (!frame.pause) {
+    requestAnimationFrame(tick);
   }
 }
 
