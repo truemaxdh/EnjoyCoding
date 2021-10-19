@@ -56,6 +56,7 @@ function newGame() {
 }
 
 function tick(timeStamp) {
+  console.log(timeStamp + "," + frame.last_animation_time + "," + frame.animation_interval);
   if ((timeStamp - frame.last_animation_time) > frame.animation_interval) {
     frame.last_animation_time = timeStamp;;
     gamePlay.millisec_played += frame.animation_interval;
