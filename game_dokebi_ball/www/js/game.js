@@ -78,6 +78,7 @@ function tick(timeStamp) {
     if (!frame.pause) {
       requestAnimationFrame(tick);
     }
+  }
 }
 
 function gameOver() {
