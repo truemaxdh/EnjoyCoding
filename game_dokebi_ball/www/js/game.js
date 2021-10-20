@@ -130,7 +130,7 @@ function upcoming_obj() {
     push_to_chain(o_stageClear, balls_ends);
     currentStageDef.next_ball_interval -= 400;
     gamePlay.ball_interval = currentStageDef.next_ball_interval;
-    gamePlay.stage++;
+    objStage = new _objStage(++gamePlay.stage);
   } else {
     //gamePlay.ball_interval += frame.animation_interval;
     //if (gamePlay.ball_interval > currentStageDef.next_ball_interval) {
