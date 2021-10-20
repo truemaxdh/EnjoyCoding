@@ -135,6 +135,7 @@ function upcoming_obj() {
     //gamePlay.ball_interval += frame.animation_interval;
     //if (gamePlay.ball_interval > currentStageDef.next_ball_interval) {
     if (objStage.totalBallCnt > 0 && (frame.last_animation_time - gamePlay.lastBallTimeStamp) >= objStage.ballInterval) {
+      objStage.totalBallCnt--;
       gamePlay.lastBallTimeStamp = frame.last_animation_time;
       var o_ball = new objBall(360, 60,  objStage.ballSize);
       push_to_chain(o_ball, balls_ends);
