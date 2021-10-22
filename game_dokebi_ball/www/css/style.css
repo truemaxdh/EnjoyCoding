@@ -96,8 +96,8 @@ body {
 }
 
 #game_canvas_landscape {
-    width:90vw;
-    height:54vw;
+    width:100vw;
+    height:75vw;
 }
 
 /* The Overlay (background) */
