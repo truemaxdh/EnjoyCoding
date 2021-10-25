@@ -64,6 +64,8 @@ function newGame() {
 
   frame.pause = false;
   document.getElementById( 'bgm' ).play();
+  
+  push_to_chain(new objBall(360, 60,  objStage.ballSize), balls_ends);
   requestAnimationFrame(tick);
 }
 
@@ -136,8 +138,7 @@ function upcoming_obj() {
     if (objStage.totalBallCnt > 0 && (frame.last_animation_time - gamePlay.lastBallTimeStamp) >= objStage.ballInterval) {
       objStage.totalBallCnt--;
       gamePlay.lastBallTimeStamp = frame.last_animation_time;
-      var o_ball = new objBall(360, 60,  objStage.ballSize);
-      push_to_chain(o_ball, balls_ends);
+      push_to_chain(new objBall(360, 60,  objStage.ballSize), balls_ends);
     }
   }
 }
