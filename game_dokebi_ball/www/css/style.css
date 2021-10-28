@@ -43,7 +43,7 @@ h3 {
     font-family: 'Sniglet-Regular'; 
     position : relative;
     top: 25%;
-    //transform: translateY(-50%);
+    /* transform: translateY(-50%); */
 }
 
 .text a { 
@@ -60,9 +60,9 @@ h3 {
     color: #2d5bb5;
 }
 
-.smallText {
+/* .smallText {
     
-}
+} */
 
 .smallText a {
     font-size:17px;
@@ -89,15 +89,15 @@ body {
     margin : 0px;
 }
 
-#game_canvas {
-    width:54vh;
-    height:90vh;
-    /*border:1px solid #d3d3d3;*/
-}
+/* #game_canvas {
+     width:54vh;
+    height:90vh; 
+    border:1px solid #d3d3d3;
+} */
 
 #game_canvas_landscape {
-    width:100vw;
-    height:75vw;
+    width:720px;
+    height:540px;
 }
 
 /* The Overlay (background) */
