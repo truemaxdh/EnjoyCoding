@@ -8,6 +8,7 @@
     
     <title>Plane vs Coins</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/common.js"></script>
     <script src="js/sound_effects.js"></script>
     <script src="js/game_objects.js"></script>
     <script src="js/render.js"></script>
@@ -17,7 +18,7 @@
     <script>
       function goToStage(_stage) {
         document.getElementById('StageMap').style.width='0%';
-        gamePlay.stage = _stage;
+        gamePlay.stageNum = _stage;
         pageChange('game');
       }
       
