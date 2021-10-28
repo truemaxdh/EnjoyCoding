@@ -43,6 +43,7 @@ function _objStage(stageNum) {
 function newGame() {
   gamePlay.init();
   gameObjects.init();
+  console.log(gameObjects.isBallEmpty());
   document.getElementById( 'bgm' ).play();
   gamePlay.startStage();
 }
@@ -99,18 +100,16 @@ function proc_user_input() {
 }
 
 function upcoming_obj() {
-  if (gamePlay.stage < gamePlay.max_stage && gameObjects.isBallEmpty()) {
+  if (gamePlay.objStage.totalBallCnt > 0 && (gamePlay.last_animation_time - gamePlay.lastBallTimeStamp) >= gamePlay.objStage.ballInterval) {
+    gamePlay.objStage.totalBallCnt--;
+    gamePlay.lastBallTimeStamp = gamePlay.last_animation_time;
+    push_to_chain(new objBall(360, 100, gamePlay.objStage.ballSize), gameObjects.ballEnds);
+  } else if (gamePlay.stageNum < gamePlay.max_stage && gameObjects.isBallEmpty()) {
     gamePlay.effect_flag = true;
     gameObjects.init();
     var o_stageClear = new objStageClear(gamePlay.stage);
     push_to_chain(o_stageClear, gameObjects.ballEnds);
     gamePlay.setStage(gamePlay.stageNum + 1);
-  } else {
-    if (gamePlay.objStage.totalBallCnt > 0 && (gamePlay.last_animation_time - gamePlay.lastBallTimeStamp) >= gamePlay.objStage.ballInterval) {
-      gamePlay.objStage.totalBallCnt--;
-      gamePlay.lastBallTimeStamp = gamePlay.last_animation_time;
-      push_to_chain(new objBall(360, 100, gamePlay.objStage.ballSize), gameObjects.ballEnds);
-    }
   }
 }
 

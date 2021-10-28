@@ -60,13 +60,13 @@ class objTouch extends gameobj {
 
 class objBall extends gameobj {
     constructor(x, y, size) {
-        super(x, y, size * 15, (Math.random() < 0.5 ? -1:1) * getRndInt(0.5, 1.5), 0);
+        super(x, y, size * 15, (Math.random() < 0.5 ? -1:1) * getRndInt(0.5, 2.5), 0);
         this.size = size;
         
         this.accel.v2 = 0.2;
         this.gco = (Math.random() < 0.5) ? 'source-over' : 'lighter';
         this.rgb = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
-        this.invincibleTime = 30;
+        this.invincibleTime = 20;
     }
      
     render() {
@@ -91,7 +91,6 @@ class objBall extends gameobj {
     }
 
     collision_chk(other) {
-        console.log(this.invincibleTime);
         return (this.invincibleTime > 0) ? false : (this.center.calcDist(other.center) < (this.r + other.r));
     }    
 }
@@ -137,12 +136,11 @@ class objStageClear extends gameobj {
 
         gameCanvas.ctx.fillStyle = grd;
         gameCanvas.ctx.font = '50px Sniglet-ExtraBold';
-        gameCanvas.ctx.fillText('Stage' + stage + ' Clear!', c_x - 200, c_y - 25);
+        gameCanvas.ctx.fillText('Stage' + gamePlay.stageNum + ' Clear!', c_x - 200, c_y - 25);
         this.count_down--;
         if (this.count_down <= 0) {
             gamePlay.effect_flag = false;
-            balls_ends[0].next = balls_ends[1];
-            balls_ends[1].prev = balls_ends[0];
+            gameObjects.init();
         }
     }
 }   
