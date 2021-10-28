@@ -1,25 +1,37 @@
-// concerning game frame
-var frame = {
+// concerning game play
+var gamePlay = {
   animation_interval : 30,
   last_animation_time : 0,
   pause : true,
   gameover_flag : false,
-  effect_flag : false
-}
-
-// concerning game play
-var gamePlay = {
+  effect_flag : false,
   score : 0,
-  ball_interval : 0,
   lastBallTimeStamp : 0,
-  millisec_played : 0,
-  stage : 0,
+  stageNum : 0,
+  max_stage : 10,
   o_game_over : null,
-  eliminatedBallCnt : 0
+  eliminatedBallCnt : 0,
+  objStage : null,
+  init : function() {
+    this.pause = true;
+    this.gameover_flag = false;
+    this.effect_flag = false;
+    this.score = 0;
+    this.eliminatedBallCnt = 0;
+    this.o_game_over = null;
+    this.last_animation_time = 0;
+    this.setStage(this.stageNum);
+    this.lastBallTimeStamp = -this.objStage.ballInterval;
+  },
+  setStage : function(stageNum) {
+    this.stageNum = stageNum;
+    this.objStage = new _objStage(stageNum);
+  },
+  startStage : function() {
+    this.pause = false;
+    requestAnimationFrame(tick);
+  }
 }
-
-// concerning balls
-var balls_ends = [null, null];
 
 function _objStage(stageNum) {
   this.totalBallCnt = stageNum;
@@ -27,81 +39,45 @@ function _objStage(stageNum) {
   this.ballSize = 5;
 }
 
-function _stage_def() {
-  this.max_stage = 10;
-  this.stage_tick = 60000;
-  this.next_ball_interval = 5000;
-  this.ball_sizes = [5, 5, 5, 5, 5, 5, 5, 5, 6, 6];
-}
-
-let currentStageDef;
-let objStage;
 
 function newGame() {
-  frame.pause = true;
-  frame.gameover_flag = false;
-  frame.effect_flag = false;
-  gamePlay.score = 0;
-  gamePlay.eliminatedBallCnt = 0;
-  
-  objStage = new _objStage(gamePlay.stage);
-  
-  currentStageDef = new _stage_def();
-  gamePlay.millisec_played = 0;
-
-  currentStageDef.next_ball_interval -= 400 * (gamePlay.stage - 1);
-
-  gamePlay.o_game_over = null;
-
-  balls_ends[0] = new gameobj(0,0), balls_ends[1] = new gameobj(0,0);
-  balls_ends[0].next = balls_ends[1];
-  balls_ends[1].prev = balls_ends[0];
-
-  gamePlay.ball_interval = currentStageDef.next_ball_interval;
-  gamePlay.millisec_played = currentStageDef.stage_tick * (gamePlay.stage - 1) + 1;    
-
-  frame.last_animation_time = 0;
-
-  frame.pause = false;
+  gamePlay.init();
+  gameObjects.init();
   document.getElementById( 'bgm' ).play();
-  
-  push_to_chain(new objBall(360, 60,  objStage.ballSize), balls_ends);
-  requestAnimationFrame(tick);
+  gamePlay.startStage();
 }
 
 function tick(timeStamp) {
-  if ((timeStamp - frame.last_animation_time) > frame.animation_interval) {
-    frame.last_animation_time = timeStamp;;
-    gamePlay.millisec_played += frame.animation_interval;
-
-    balls_ends[0].move();
-    if (!frame.effect_flag) {
+  if ((timeStamp - gamePlay.last_animation_time) > gamePlay.animation_interval) {
+    gamePlay.last_animation_time = timeStamp;;
+    gameObjects.move();
+    if (!gamePlay.effect_flag) {
       upcoming_obj();
     }
-    render();
+    gameCanvas.render();
 
-    if (frame.gameover_flag) {
+    if (gamePlay.gameover_flag) {
       gameOver();
     } else {
       proc_user_input();
-      if (!frame.effect_flag) {
+      if (!gamePlay.effect_flag) {
         collision_check();
       }
     }
   }
-  if (!frame.pause) {
+  if (!gamePlay.pause) {
     requestAnimationFrame(tick);
   }
 }
 
 function gameOver() {
   if (o_game_over == null) {
-    frame.gameover_flag = true;
+    gamePlay.gameover_flag = true;
     o_game_over = new objGameOver();
     o_jet.game_over();
   } else if (o_game_over.count_down-- == 0) {
     document.getElementById( 'bgm' ).pause();
-    frame.pause = true;        
+    gamePlay.pause = true;        
     if (isApp && glGameSvc.loginStatus) {
       try {  
         Android.submitScore(glGameSvc.leaderboardId, score);
@@ -123,22 +99,17 @@ function proc_user_input() {
 }
 
 function upcoming_obj() {
-  //if (gamePlay.stage < currentStageDef.max_stage && gamePlay.millisec_played > (currentStageDef.stage_tick * gamePlay.stage)) {
-  console.log(frame.last_animation_time + "," + gamePlay.lastBallTimeStamp + "," + objStage.ballInterval);
-  if (gamePlay.stage < currentStageDef.max_stage && gamePlay.eliminatedBallCnt >= (16 * gamePlay.stage)) {
-    effect_flag = true;
-    balls_ends[0].next = balls_ends[1];
-    balls_ends[1].prev = balls_ends[0];
+  if (gamePlay.stage < gamePlay.max_stage && gameObjects.isBallEmpty()) {
+    gamePlay.effect_flag = true;
+    gameObjects.init();
     var o_stageClear = new objStageClear(gamePlay.stage);
-    push_to_chain(o_stageClear, balls_ends);
-    currentStageDef.next_ball_interval -= 400;
-    gamePlay.ball_interval = currentStageDef.next_ball_interval;
-    objStage = new _objStage(++gamePlay.stage);
+    push_to_chain(o_stageClear, gameObjects.ballEnds);
+    gamePlay.setStage(gamePlay.stageNum + 1);
   } else {
-    if (objStage.totalBallCnt > 0 && (frame.last_animation_time - gamePlay.lastBallTimeStamp) >= objStage.ballInterval) {
-      objStage.totalBallCnt--;
-      gamePlay.lastBallTimeStamp = frame.last_animation_time;
-      push_to_chain(new objBall(360, 60,  objStage.ballSize), balls_ends);
+    if (gamePlay.objStage.totalBallCnt > 0 && (gamePlay.last_animation_time - gamePlay.lastBallTimeStamp) >= gamePlay.objStage.ballInterval) {
+      gamePlay.objStage.totalBallCnt--;
+      gamePlay.lastBallTimeStamp = gamePlay.last_animation_time;
+      push_to_chain(new objBall(360, 100, gamePlay.objStage.ballSize), gameObjects.ballEnds);
     }
   }
 }
@@ -146,14 +117,13 @@ function upcoming_obj() {
 function collision_check() {
   if (user_pressing) {
     // check collision of clicked(touched) position and balls
-    var o_chk = new gameobj(user_x, user_y);
-    var o_catched_ball = collision_obj_grp(o_chk, balls_ends);;
-    if (o_catched_ball != null) {
-      //playSound(--o_coin.durability);
-      remove_from_chain(o_catched_ball, balls_ends);
-      if (--o_catched_ball.size > 0) {
-        push_to_chain(new objBall(o_catched_ball.x, o_catched_ball.y, o_catched_ball.size), balls_ends);
-        push_to_chain(new objBall(o_catched_ball.x, o_catched_ball.y, o_catched_ball.size), balls_ends);
+    gameObjects.oTouch = new objTouch(user_x, user_y);
+    let oCatched = collision_obj_grp(gameObjects.oTouch, gameObjects.ballEnds);;
+    if (oCatched != null) {
+      remove_from_chain(oCatched);
+      if (--oCatched.size > 0) {
+        push_to_chain(new objBall(oCatched.center.v1, oCatched.center.v2, oCatched.size), gameObjects.ballEnds);
+        push_to_chain(new objBall(oCatched.center.v1, oCatched.center.v2, oCatched.size), gameObjects.ballEnds);
       } else {
         gamePlay.eliminatedBallCnt++;
       }
@@ -172,7 +142,7 @@ function push_to_chain(obj, ends) {
   ends[1].prev = obj;
 }
 
-function remove_from_chain(obj, ends) {
+function remove_from_chain(obj) {
   obj.prev.next = obj.next;
   obj.next.prev = obj.prev;
 }
@@ -181,7 +151,7 @@ function collision_obj_grp(obj, ends) {
   var ret = null;
   var t = ends[0].next;
   while(t.next != null) {
-    if (t.collision_chk(obj.x, obj.y, 0, 0)) {
+    if (t.collision_chk(obj)) {
       ret = t;
       break;
     }

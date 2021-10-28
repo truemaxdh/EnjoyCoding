@@ -155,14 +155,14 @@ function onDeviceReady() {
   
   //Android.reqGamerProfile();
   
-  render_init();
+  gameCanvas.init();
   init_user_input();
   pageChange('menu');
 }
 
 // Do this when run on web
 function onLoad() {
-  render_init();
+  gameCanvas.init();
   init_user_input();
   pageChange('menu');
 }

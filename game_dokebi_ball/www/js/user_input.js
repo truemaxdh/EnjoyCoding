@@ -3,10 +3,10 @@ var user_x, user_y;
 var user_pressing = false;
 
 function init_user_input() {
-  var scale_fx = canv_game.width / canv_game.clientWidth;
-  var scale_fy = canv_game.height / canv_game.clientHeight;
+  var scale_fx = gameCanvas.w / gameCanvas.canvas.clientWidth;
+  var scale_fy = gameCanvas.h / gameCanvas.canvas.clientHeight;
   
-  canv_game.onmousedown = function (e) {
+  gameCanvas.canvas.onmousedown = function (e) {
     user_x = e.layerX  * scale_fx;
     user_y = e.layerY * scale_fy;
     user_x_ori = user_x;
@@ -20,18 +20,18 @@ function init_user_input() {
     return false;
   }
 
-  canv_game.onmouseup = function (e) {
+  gameCanvas.canvas.onmouseup = function (e) {
     user_pressing = false;
     return false;
   }
 
-  canv_game.onmousemove = function(e) {
+  gameCanvas.canvas.onmousemove = function(e) {
     user_x = e.layerX * scale_fx;
     user_y = e.layerY * scale_fy;
     return false;
   }
 
-  canv_game.ontouchstart = function (e) {
+  gameCanvas.canvas.ontouchstart = function (e) {
     user_x = e.touches[0].clientX * scale_fx;
     user_y = e.touches[0].clientY * scale_fy;
     user_x_ori = user_x;
@@ -45,12 +45,12 @@ function init_user_input() {
     return false;
   }
 
-  canv_game.ontouchend = function (e) {
+  gameCanvas.canvas.ontouchend = function (e) {
     user_pressing = false;
     return false;
   }
 
-  canv_game.ontouchmove = function(e) {
+  gameCanvas.canvas.ontouchmove = function(e) {
     user_x = e.touches[0].clientX * scale_fx;
     user_y = e.touches[0].clientY * scale_fy;
     return false;
@@ -59,7 +59,7 @@ function init_user_input() {
 
 function showSubMenu() {
   if (curPage == 'game') {
-    frame.pause = true;
+    gamePlay.pause = true;
     document.getElementById( 'bgm' ).pause();
   }
   document.getElementById("Submenu").style.width = "100%";
@@ -67,10 +67,10 @@ function showSubMenu() {
 
 function hideSubMenu() {
   document.getElementById("Submenu").style.width = "0%";
-  frame.pause = false;
+  gamePlay.pause = false;
   if (curPage == 'game') {
     document.getElementById( 'bgm' ).play();
-    frame.last_animation_time = 0;
+    gamePlay.last_animation_time = 0;
     requestAnimationFrame(tick);
   }
 }

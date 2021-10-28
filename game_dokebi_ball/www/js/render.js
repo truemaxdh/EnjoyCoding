@@ -1,17 +1,38 @@
 var img_pause = new Image();
-
-var canv_game;
-var ctx_game;
-
-
 var imgs = [img_pause];
 var URLs = ['img/pause.png'];
 
-function render_init() {
-  canv_game = document.getElementById('game_canvas_landscape');
-  ctx_game = canv_game.getContext('2d');    
-  
-  var imagesOK = 0; 
+let gameCanvas = {
+  canvas : null,
+  ctx : null,
+  w : 0,
+  h : 0,
+  render : function() {
+    // afterimage
+    this.ctx.globalCompositeOperation = 'source-over';
+    this.ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+    this.ctx.fillRect(0, 0, 720, 540);
+
+    gameObjects.render();
+      
+    this.ctx.fillStyle = '#ffa500';
+    this.ctx.font = '35px Sniglet-ExtraBold';
+    this.ctx.fillText('Score : ' + gamePlay.score, 20, 50);
+    this.ctx.fillText('Stage : ' + gamePlay.stage, 270,50);
+      
+    this.ctx.drawImage(img_pause, 0, 0, 40, 40, 480, 20, 40, 40);
+
+    if (!!gameObjects.oTouch) {
+      gameObjects.oTouch.render();
+      gameObjects.oTouch = null;
+    }
+  },
+  init : function() {
+    this.canvas = document.getElementById('game_canvas_landscape');
+    this.ctx = this.canvas.getContext('2d');    
+    this.w = this.canvas.width;
+    this.h = this.canvas.height;
+    var imagesOK = 0; 
     for (var i=0; i<imgs.length; i++) {
         imgs[i].onload = function(){ 
             if (++imagesOK>=imgs.length ) {
@@ -20,25 +41,7 @@ function render_init() {
         };
         imgs[i].src = URLs[i];
     }
-}
-
-function render() {
-  // afterimage
-  ctx_game.globalCompositeOperation = 'source-over';
-  ctx_game.fillStyle = "rgba(0, 0, 0, 0.5)";
-  ctx_game.fillRect(0, 0, 720, 540);
-
-  balls_ends[0].render(ctx_game);
-    
-  ctx_game.fillStyle = '#ffa500';
-  ctx_game.font = '35px Sniglet-ExtraBold';
-  ctx_game.fillText('Score : ' + gamePlay.score, 20, 50);
-  ctx_game.fillText('Stage : ' + gamePlay.stage, 270,50);
-    
-  ctx_game.drawImage(img_pause, 0, 0, 40, 40, 480, 20, 40, 40);
-  
-  if (user_pressing) {
-    ctx_game.fillStyle = "rgb(127,127,127)";
-    ctx_game.fillRect(user_x - 10, user_y - 10, 20, 20);
   }
 }
+
+
