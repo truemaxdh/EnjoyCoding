@@ -21,10 +21,15 @@ class gameobj {
     hitTheWall() {
         let newCenter = this.center.clone();
         newCenter.add(this.speed);
-        if ((newCenter.v1 - this.r) < 0 || (newCenter.v1 + this.r) > gameCanvas.w)
-            this.speed.v1 *= -1;
-        if ((newCenter.v2 - this.r) < 0 || (newCenter.v2 + this.r) > gameCanvas.h)
-            this.speed.v2 *= -1;
+        if ((newCenter.v1 - this.r) < 0 && this.speed.v1 < 0 || 
+            (newCenter.v1 + this.r) > gameCanvas.w && this.speed.v1 > 0) {
+                this.speed.v1 *= -1;
+            }
+            
+        if ((newCenter.v2 - this.r) < 0 && this.speed.v2 < 0 || 
+            (newCenter.v2 + this.r) > gameCanvas.h && this.speed.v2 > 0) {
+                this.speed.v2 *= -1;
+            }
     }
 
     render() {
@@ -60,7 +65,7 @@ class objTouch extends gameobj {
 
 class objBall extends gameobj {
     constructor(x, y, size) {
-        super(x, y, size * 15, (Math.random() < 0.5 ? -1:1) * getRndInt(0.5, 2.5), 0);
+        super(x, y, size * 15, (Math.random() < 0.5 ? -1:1) * getRndInt(0.5, 3.5), 0);
         this.size = size;
         
         this.accel.v2 = 0.2;
@@ -83,11 +88,15 @@ class objBall extends gameobj {
 
     hitTheWall() {
         let newCenter = this.center.clone();
-        newCenter.add(this.speed);
-        if ((newCenter.v1 - this.r) < 0 || (newCenter.v1 + this.r) > gameCanvas.w)
-            this.speed.v1 *= -1;
-        if ((newCenter.v2 + this.r) > gameCanvas.h)
-            this.speed.v2 *= -1;
+        newCenter.add(this.speed);    
+        if ((newCenter.v1 - this.r) < 0 && this.speed.v1 < 0 || 
+            (newCenter.v1 + this.r) > gameCanvas.w && this.speed.v1 > 0) {
+                this.speed.v1 *= -1;
+            }
+            
+        if ((newCenter.v2 + this.r) > gameCanvas.h && this.speed.v2 > 0) {
+                this.speed.v2 *= -1;
+            }
     }
 
     collision_chk(other) {
@@ -118,9 +127,10 @@ class objGameOver extends gameobj {
 }
 
 class objStageClear extends gameobj {
-    constructor(stage) {
+    constructor(stageNum) {
         super(0, 0);
         this.count_down = 100;
+        this.clearedStage = stageNum
     }
      
     render() {
@@ -136,7 +146,7 @@ class objStageClear extends gameobj {
 
         gameCanvas.ctx.fillStyle = grd;
         gameCanvas.ctx.font = '50px Sniglet-ExtraBold';
-        gameCanvas.ctx.fillText('Stage' + gamePlay.stageNum + ' Clear!', c_x - 200, c_y - 25);
+        gameCanvas.ctx.fillText('Stage' + this.clearedStage + ' Clear!', c_x - 200, c_y - 25);
         this.count_down--;
         if (this.count_down <= 0) {
             gamePlay.effect_flag = false;

@@ -9,14 +9,21 @@ var glGameSvc = {
   // Google Game Service Ids
   leaderboardId : "CgkIwPzgz_EBEAIQBg",
   achvIds : [
-    "CgkIwPzgz_EBEAIQAQ",
-    "CgkIwPzgz_EBEAIQAg",
-    "CgkIwPzgz_EBEAIQAw",
-    "CgkIwPzgz_EBEAIQBA",
-    "CgkIwPzgz_EBEAIQBQ"
+    // "CgkIwPzgz_EBEAIQAQ",
+    // "CgkIwPzgz_EBEAIQAg",
+    // "CgkIwPzgz_EBEAIQAw",
+    // "CgkIwPzgz_EBEAIQBA",
+    // "CgkIwPzgz_EBEAIQBQ"
   ],
-  achvScores : [500, 2000, 5000, 10000, 20000]
+  achvScores : [/*500, 2000, 5000, 10000, 20000*/]
 };
+
+function chkAndUnlockStage(stage) {
+  try {
+    if (Number(localStorage.getItem(stageStoreName)) < stage)
+      localStorage.setItem(stageStoreName, stage);
+  } catch(err) {}
+}
 
 function chkAndUnlockAchievement(score) {
   if (!glGameSvc.loginStatus) return;
@@ -64,7 +71,7 @@ function ShowHighScores() {
 }
 
 // pages
-var pageIDs = ['intro','menu','game'];
+var pageIDs = ['menu','game'];
 var curPage = pageIDs[0];
 function pageChange(newpageID) {
   for (var i = 0; i < pageIDs.length; i++) {
@@ -94,18 +101,6 @@ function pageChange(newpageID) {
         toast("adMobInterstitialShow failed." + e.message);
       }
     }
-    
-    /*try {
-      if (!glGameSvc.loginStatus) {
-        try {
-          Android.signInToGS();
-        } catch(e) {
-          toast("signInToGS failed.");
-        }
-      }
-    } catch(e) {
-      toast("getLastSignedInAccount failed." + e.message);
-    }*/
   } 
   
   if (newpageID=='game') {
@@ -155,15 +150,11 @@ function onDeviceReady() {
   
   //Android.reqGamerProfile();
   
-  gameCanvas.init();
-  init_user_input();
   pageChange('menu');
 }
 
 // Do this when run on web
 function onLoad() {
-  gameCanvas.init();
-  init_user_input();
   pageChange('menu');
 }
 

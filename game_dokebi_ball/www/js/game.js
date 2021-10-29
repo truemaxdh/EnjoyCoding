@@ -41,6 +41,8 @@ function _objStage(stageNum) {
 
 
 function newGame() {
+  gameCanvas.init();
+  init_user_input();
   gamePlay.init();
   gameObjects.init();
   console.log(gameObjects.isBallEmpty());
@@ -105,12 +107,15 @@ function upcoming_obj() {
     gamePlay.lastBallTimeStamp = gamePlay.last_animation_time;
     push_to_chain(new objBall(360, 100, gamePlay.objStage.ballSize), gameObjects.ballEnds);
   } else if (gamePlay.stageNum < gamePlay.max_stage && gameObjects.isBallEmpty()) {
-    gamePlay.effect_flag = true;
-    gameObjects.init();
-    var o_stageClear = new objStageClear(gamePlay.stage);
-    push_to_chain(o_stageClear, gameObjects.ballEnds);
-    gamePlay.setStage(gamePlay.stageNum + 1);
+    stageCleared();
   }
+}
+
+function stageCleared() {
+  chkAndUnlockStage(gamePlay.stageNum);
+  gamePlay.effect_flag = true;
+  push_to_chain(new objStageClear(gamePlay.stageNum), gameObjects.ballEnds);
+  gamePlay.setStage(gamePlay.stageNum + 1);
 }
 
 function collision_check() {
