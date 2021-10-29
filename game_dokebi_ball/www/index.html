@@ -4,9 +4,9 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-    <meta name="description" content="a simple flight shooting game, with only a few rules.Avoid bombs.Shoot coins, but not bump into coins.Coins are differ with their number in endurance and score." />
+    <meta name="description" content="a dividing-ball game." />
     
-    <title>Plane vs Coins</title>
+    <title>split the ball</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="js/common.js"></script>
     <script src="js/sound_effects.js"></script>
@@ -17,14 +17,23 @@
     <script src="js/google_api_js.js"></script>
     <script>
       function goToStage(_stage) {
-        document.getElementById('StageMap').style.width='0%';
         gamePlay.stageNum = _stage;
         pageChange('game');
       }
       
-      function openStageMap() {
-        document.getElementById('StageMap').style.width='100%';
+      const stageStoreName = "splitBallMaxClearedStage";
+      window.onload = function() {
+        let maxStage = 10;
+        try {
+          if (!localStorage.getItem(stageStoreName))
+            localStorage.setItem(stageStoreName, 0);
+          maxStage = Number(localStorage.getItem(stageStoreName)) + 1;
+        } catch(err) {}
+        for(let i = 1; i <= maxStage; i++) {
+          document.getElementById('btnL' + i).disabled = false;
+        }
       }
+
     </script>
   <style>
    body {
@@ -34,27 +43,20 @@
   </style>
   </head>
   <body>
-    <div id = "intro" class="menu border_round">
-    </div>
     <div id = "menu" class="menu border_round">
-      <div class = "topContent">
-        <center>
-          <div id="signInStat">
-            <span style='font-size:15px;'>Sign in with Google to share your scores and achievements with your friends.</span>
-          </div>
-          <button id="logOut" style="display:none;" onclick="Android.signOutFromGS();">SignOut</button>
-          <br>
-          <img id="logIn" src="img/btn_google_signin_dark_normal_web.png" onclick="Android.signInToGS();">
-          
-        </center>
-      </div>    
       <div class = "text">
-        <h1>Dokebi Ball</h1>
-        <!--<a href="#" onclick="pageChange('game');">Start</a>-->
-        <a href="#" onclick="openStageMap();">Start</a>
-        <a href="#" onclick="ShowAchievements();">Show Achievements</a>
-        <a href="#" onclick="ShowHighScores();">Show High Scores</a>
-        <br>
+        <h1>split the ball</h1>
+        <button class="round" onclick="goToStage(1);" id="btnL1">1</button>
+        <button class="round" onclick="goToStage(2);" id="btnL2" disabled>2</button>
+        <button class="round" onclick="goToStage(3);" id="btnL3" disabled>3</button><br>
+        <button class="round" onclick="goToStage(4);" id="btnL4" disabled>4</button>
+        <button class="round" onclick="goToStage(5);" id="btnL5" disabled>5</button>
+        <button class="round" onclick="goToStage(6);" id="btnL6" disabled>6</button><br>
+        <button class="round" onclick="goToStage(7);" id="btnL7" disabled>7</button>
+        <button class="round" onclick="goToStage(8);" id="btnL8" disabled>8</button>
+        <button class="round" onclick="goToStage(9);" id="btnL9" disabled>9</button><br>
+        <button class="round" onclick="goToStage(10);" id="btnL10" disabled>10</button>
+        <br><br>
         <div class = "smallText">
           <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.width='100%';"><b>How to play</b></a>
         </div>
@@ -62,7 +64,19 @@
     </div>
     <div id = "game">
       <audio id="bgm" src="sound/ArirangTroll.mp3" preload="auto" loop></audio>
-      <canvas id="game_canvas_landscape" width="720" height="540"></canvas>
+      <canvas id="game_canvas_landscape"></canvas>
+      
+      <!-- Submenu -->
+      <div id="Submenu" class="overlay">
+        
+        <!-- Overlay content -->
+        <div class="overlay-content">
+          <a href="#" onclick="gameCanvas.toggleFullScreen();hideSubMenu();">Toggle Full Screen</a>
+          <a href="#" onclick="pageChange('menu');hideSubMenu();">Exit Current Play</a>
+          <a href="#" onclick="Android.exitApp();">Exit App</a>
+          <a href="#" onclick="hideSubMenu();">Resume</a>
+        </div>
+      </div>
     </div>
     
     <!-- The overlay -->
@@ -79,25 +93,15 @@
       </div>
     </div>
     
-    <!-- Submenu -->
-    <div id="Submenu" class="overlay">
-      
-      <!-- Overlay content -->
-      <div class="overlay-content">
-        <a href="#" onclick="pageChange('menu');hideSubMenu();">Exit Current Game</a>
-        <a href="#" onclick="Android.exitApp();">Exit App</a>
-        <a href="#" onclick="hideSubMenu();">Resume</a>
-      </div>
-    </div>
-    
     <!-- How to play -->
-    <div id="howtoplay" class="overlay" style="background-color:white;">
+    <div id="howtoplay" class="overlay">
       <br>
-      <center><h1 style="color:#333;">Doodle<br>Flight</h1></center>
-      <h2 style="color:#555;">A simple arcade game</h2>
-      <p style="color:#777;font-weight:bold;">
-        &nbsp;Dokebi Ball is an arcade game.<br>
-        &nbsp;You should divide balls until they become small and disappear.<br>
+      <center><h1>split the ball</h1></center>
+      <h2 style="color:#bbb;">Simple arcade game</h2>
+      <p style="color:#999;font-weight:bold;">
+        &nbsp;'Split the ball' is a simple game.<br>
+        &nbsp;Touch the ball to split it. <br>
+        &nbsp;Divide the ball until it gets smaller and disappears.<br>
         <br>
         <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.width='0%';">Back</a>
         <br>
