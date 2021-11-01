@@ -22,7 +22,7 @@
       }
       
       const stageStoreName = "splitBallMaxClearedStage";
-      window.onload = function() {
+      function refreshStageButton() {
         let maxStage = 10;
         try {
           if (!localStorage.getItem(stageStoreName))
@@ -33,7 +33,6 @@
           document.getElementById('btnL' + i).disabled = false;
         }
       }
-
     </script>
   <style>
    body {
