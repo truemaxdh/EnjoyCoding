@@ -1,10 +1,10 @@
-var user_x_ori, user_y_ori;
-var user_x, user_y;
-var user_pressing = false;
+let user_x_ori, user_y_ori;
+let user_x, user_y;
+let user_pressing = false;
 
 function init_user_input() {
-  var scale_fx = gameCanvas.w / gameCanvas.canvas.clientWidth;
-  var scale_fy = gameCanvas.h / gameCanvas.canvas.clientHeight;
+  let scale_fx = gameCanvas.w / gameCanvas.canvas.clientWidth;
+  let scale_fy = gameCanvas.h / gameCanvas.canvas.clientHeight;
   
   gameCanvas.canvas.onmousedown = function (e) {
     user_x = e.layerX  * scale_fx;
@@ -12,7 +12,7 @@ function init_user_input() {
     user_x_ori = user_x;
     user_y_ori = user_y;
     
-    if (user_y_ori <= 60 && user_x_ori > 580) {
+    if (user_y_ori <= 60 && user_x_ori >= (gameCanvas.w - 60)) {
       showSubMenu();
     }
     
@@ -37,7 +37,7 @@ function init_user_input() {
     user_x_ori = user_x;
     user_y_ori = user_y;
     
-    if (user_y_ori <= 60 && user_x_ori > 580) {
+    if (user_y_ori <= 60 && user_x_ori >= (gameCanvas.w - 60)) {
       showSubMenu();
     }
     

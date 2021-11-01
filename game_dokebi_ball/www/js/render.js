@@ -26,7 +26,13 @@ let gameCanvas = {
     this.canvas.width = this.w;
     this.canvas.height = this.h;
     this.ctx = this.canvas.getContext('2d');
-    
+    if (!this.fullScreen && 
+          (window.innerWidth < this.container.clientWidth ||
+           window.innerHeight < this.container.clientHeight)) {
+            this.container.style.width = window.innerWidth + "px";
+            this.container.style.height = window.innerHeight + "px";
+            this.init();
+    }
   },
   render : function() {
     // afterimage

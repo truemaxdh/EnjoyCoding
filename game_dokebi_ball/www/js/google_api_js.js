@@ -93,6 +93,9 @@ function pageChange(newpageID) {
   }
   
   if (newpageID=='menu') {
+    if (typeof refreshStageButton === "function")
+      refreshStageButton();
+
     if (AdMob.adStatus > 0) {
       try {
         Android.adMobInterstitialShow();
