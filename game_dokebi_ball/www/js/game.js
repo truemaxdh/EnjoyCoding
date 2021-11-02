@@ -126,8 +126,12 @@ function collision_check() {
     if (oCatched != null) {
       remove_from_chain(oCatched);
       if (--oCatched.size > 0) {
-        push_to_chain(new objBall(oCatched.center.v1, oCatched.center.v2, oCatched.size), gameObjects.ballEnds);
-        push_to_chain(new objBall(oCatched.center.v1, oCatched.center.v2, oCatched.size), gameObjects.ballEnds);
+        let new1 = new objBall(oCatched.center.v1, oCatched.center.v2, oCatched.size);
+        let new2 = new objBall(oCatched.center.v1, oCatched.center.v2, oCatched.size);
+        new1.accel = oCatched.accel;
+        new2.accel = oCatched.accel;
+        push_to_chain(new1, gameObjects.ballEnds);
+        push_to_chain(new2, gameObjects.ballEnds);
       } else {
         gamePlay.eliminatedBallCnt++;
       }
