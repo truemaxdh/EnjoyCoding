@@ -63,15 +63,12 @@ class objTouch extends gameobj {
     }    
 }
 
-class objBall extends gameobj {
-    constructor(x, y, size) {
-        super(x, y, size * 15, (Math.random() < 0.5 ? -1:1) * getRndInt(0.5, 3.5), 0);
-        this.size = size;
-        
-        this.accel.v2 = 0.2;
-        this.gco = (Math.random() < 0.5) ? 'source-over' : 'lighter';
-        this.rgb = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
-        this.invincibleTime = 20;
+class objBalloon extends gameobj {
+    constructor(x, y, r, dx, dy) {
+        super(x, y, r, dx, dy);
+        this.style = (Math.random() >= 0.5) ? "fill" : "stroke";
+        //this.bgr = get{r:this.getNewC(-1), g:this.getNewC(-1), b:this.getNewC(-1)};
+        this.bgr = getRndColor(15, 15, 15, 240);
     }
      
     render() {
