@@ -3,16 +3,36 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-    <meta name="description" content="interactive fireworks" />
+    <meta name="description" content="interactive popping ballons" />
     
-    <title>Interactive Fireworks</title>
+    <title>Interactive Popping Ballons</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <!--link rel="stylesheet" href="https://truemaxdh.github.io/Style/skin.css"-->
-    <script src="js/BalloonsGoingUp.js"></script>
+    script src="js/common.js"></script>
     <script src="js/sound_effects.js"></script>
-    <script src="js/google_services.js"></script>
+    <script src="js/game_objects.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/user_input.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/google_api_js.js"></script>
     <script>
-      function demo_balloonsGoingUp() {
+      function goToStage(_stage) {
+        gamePlay.stageNum = _stage;
+        pageChange('game');
+      }
+      
+      const stageStoreName = "interactivePoppingBallonsMaxClearedStage";
+      function refreshStageButton() {
+        let maxStage = 10;
+        try {
+          if (!localStorage.getItem(stageStoreName))
+            localStorage.setItem(stageStoreName, 0);
+          maxStage = Number(localStorage.getItem(stageStoreName)) + 1;
+        } catch(err) {}
+        for(let i = 1; i <= maxStage; i++) {
+          document.getElementById('btnL' + i).disabled = false;
+        }
+      }
+      /*function demo_balloonsGoingUp() {
         var el = document.getElementById("board");
         el.innerHTML = "";
         motionGraphics.balloonsGoingUp(el);
@@ -65,21 +85,61 @@
       window.onload = function() {
         demo_balloonsGoingUp();
         showSubMenu();
-      }
+      }*/
     </script>
-
+    <style>
+     body {
+        /* Disables pull-to-refresh but allows overscroll glow effects. */
+        overscroll-behavior-y: contain;
+       }
+    </style>
   </head>
-  <body>  
-    <div id="board" style="width:100%; height:100%;" ondblclick="showSubMenu();"></div>
+  <body>
+    <div id = "menu" class="menu border_round">
+      <div class = "text">
+        <h1>split the ball</h1>
+        <button class="round" onclick="goToStage(1);" id="btnL1">1</button>
+        <button class="round" onclick="goToStage(2);" id="btnL2" disabled>2</button>
+        <button class="round" onclick="goToStage(3);" id="btnL3" disabled>3</button><br>
+        <button class="round" onclick="goToStage(4);" id="btnL4" disabled>4</button>
+        <button class="round" onclick="goToStage(5);" id="btnL5" disabled>5</button>
+        <button class="round" onclick="goToStage(6);" id="btnL6" disabled>6</button><br>
+        <button class="round" onclick="goToStage(7);" id="btnL7" disabled>7</button>
+        <button class="round" onclick="goToStage(8);" id="btnL8" disabled>8</button>
+        <button class="round" onclick="goToStage(9);" id="btnL9" disabled>9</button><br>
+        <button class="round" onclick="goToStage(10);" id="btnL10" disabled>10</button>
+        <br><br>
+        <div class = "smallText">
+          <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.width='100%';"><b>How to play</b></a>
+        </div>
+      </div>
+    </div>
+    <div id = "game">
+      <audio id="bgm" src="sound/ArirangTroll.mp3" preload="auto" loop></audio>
+      <canvas id="game_canvas_landscape"></canvas>
+      
+      <!-- Submenu -->
+      <div id="Submenu" class="overlay">
+        
+        <!-- Overlay content -->
+        <div class="overlay-content">
+          <a href="#" onclick="gameCanvas.toggleFullScreen();hideSubMenu();">Toggle Full Screen</a>
+          <a href="#" onclick="pageChange('menu');hideSubMenu();">Exit Current Play</a>
+          <a href="#" onclick="Android.exitApp();">Exit App</a>
+          <a href="#" onclick="hideSubMenu();">Resume</a>
+        </div>
+      </div>
+    </div>
+    <!--div id="board" style="width:100%; height:100%;" ondblclick="showSubMenu();"></div>
     <!-- audio id="bgm" src="sound/LightOfNight.mp3" preload="auto" loop></audio -->
     <!-- The overlay -->
-    <div id="settings" class="overlay">
+    <!--div id="settings" class="overlay">
 
       <!-- Button to close the overlay navigation -->
-      <a href="javascript:void(0)" class="closebtn" onclick="hideSubMenu();">&times;</a>
+      <!--a href="javascript:void(0)" class="closebtn" onclick="hideSubMenu();">&times;</a>
 
       <!-- Overlay content -->
-      <div class="overlay-content">
+      <!--div class="overlay-content">
         <div class="text">Settings</div>
         <a href="#" id="bgmOnOff" onclick="BgmOnOff();">Background Music: Off</a>
         <a href="#" id="soundEffectOnOff" onclick="soundEffectOnOff();">Sound Effect: Off</a>
@@ -87,6 +147,6 @@
         <a href="#" onclick="hideSubMenu();">Resume</a>
         <font color="white">Double-click on the screen to see this menu again.</font>
       </div>
-    </div>
+    </div-->
   </body>
 </html>
