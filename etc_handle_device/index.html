@@ -28,7 +28,7 @@
           document.getElementById("beta").innerText = beta,
           document.getElementById("gamma").innerText = gamma,
 
-          box.style.transform = 'rotateX(${-beta}deg) rotateY(${gamma}deg)'
+          box.style.transform = 'rotateX(" + (-beta) + "deg) rotateY(" + gamma + "deg)';
       }
 
       function handleMouseMove(event) {
