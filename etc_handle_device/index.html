@@ -5,13 +5,13 @@
         background-color:#333;
       }
       
-      #box {
+      #testBox {
         background-color:#green;
       }
     </style>
     <script>
-      const box = document.getElementById("testBox");
-
+      let box;
+      
       function handleOrientation(event) {
         const alpha = event.alpha,
               beta = event.beta,
@@ -42,8 +42,11 @@
       function addMouseEvent() {
           window.addEventListener("mousemove", handleMouseMove);
       }
-
-      window.addEventListener("deviceorientation", handleOrientation);
+      
+      window.onload = ()=>{
+        box = document.getElementById("testBox");
+        window.addEventListener("deviceorientation", handleOrientation);
+      }
     </script>
   </head>
   <body>
@@ -53,7 +56,7 @@
     <div id="x">1051</div>
     <div id="y">308</div>
     <div id="center">
-    <div id="box">&nbsp;</div>
+    <div id="testBox">&nbsp;</div>
   </body>
 </html>
         
