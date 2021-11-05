@@ -1,35 +1,50 @@
-onst box = document.getElementById("testBox");
+<html>
+  <head>
+    <script>
+      const box = document.getElementById("testBox");
 
-function handleOrientation(event) {
-    const alpha = event.alpha,
-        beta = event.beta,
-        gamma = event.gamma;
+      function handleOrientation(event) {
+        const alpha = event.alpha,
+              beta = event.beta,
+              gamma = event.gamma;
+        if (!beta) {
+          addMouseEvent()
+        }
+        
+        document.getElementById("alpha").innerText = alpha,
+          document.getElementById("beta").innerText = beta,
+          document.getElementById("gamma").innerText = gamma,
 
-    if (!beta) {
-        addMouseEvent()
-    }
+          box.style.transform = 'rotateX(${-beta}deg) rotateY(${gamma}deg)'
+      }
 
-    document.getElementById("alpha").innerText = alpha,
-    document.getElementById("beta").innerText = beta,
-    document.getElementById("gamma").innerText = gamma,
+      function handleMouseMove(event) {
+          const x = event.clientX,
+              y = event.clientY,
+              w = window.outerWidth / 2,
+              h = window.outerHeight / 2;
 
-    box.style.transform = `rotateX(${-beta}deg) rotateY(${gamma}deg)`
-}
+          document.getElementById("x").innerText = x,
+          document.getElementById("y").innerText = y,
 
-function handleMouseMove(event) {
-    const x = event.clientX,
-        y = event.clientY,
-        w = window.outerWidth / 2,
-        h = window.outerHeight / 2;
+          box.style.transform = 'rotateX(${y - h}deg) rotateY(${x - w}deg)'
+      }
 
-    document.getElementById("x").innerText = x,
-    document.getElementById("y").innerText = y,
+      function addMouseEvent() {
+          window.addEventListener("mousemove", handleMouseMove);
+      }
 
-    box.style.transform = `rotateX(${y - h}deg) rotateY(${x - w}deg)`
-}
-
-function addMouseEvent() {
-    window.addEventListener("mousemove", handleMouseMove);
-}
-
-window.addEventListener("deviceorientation", handleOrientation);
+      window.addEventListener("deviceorientation", handleOrientation);
+    </script>
+  </head>
+  <body>
+    <div id="alpha"></div>
+    <div id="beta"></div>
+    <div id="gamma"></div>
+    <div id="x">1051</div>
+    <div id="y">308</div>
+    <div id="center">
+    <div id="testBox">&nbsp;</div>
+  </body>
+</html>
+        
