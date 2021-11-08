@@ -103,6 +103,12 @@ function tick() {
        car_pos.top < (obs_pos.top + obs_pos.height)) {
     alert("game over");
   }
+  
+  // Jump when car and object are close
+  let canv_pos = document.getElementById("game_canvas").getBoundingClientRect();
+  const minDist = canv_pos.width / 20;
+  const dist = obj_pos.left - car_pos.left;
+  if (dist < minDist && dist > 0) jump();
 }
 </script>
 </head>
