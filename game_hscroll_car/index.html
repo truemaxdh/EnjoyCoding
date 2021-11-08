@@ -186,8 +186,28 @@
         requestAnimationFrame(tick);
         
         // collition check
-        var car_pos = document.getElementById("car").getBoundingClientRect();
-        var obs_pos = document.getElementById("obstacle").getBoundingClientRect();
+        //let car_pos = document.getElementById("car").getBoundingClientRect();
+        //let obs_pos = document.getElementById("obstacle").getBoundingClientRect();
+        //let canv_pos = document.getElementById("game_canvas").getBoundingClientRect();
+        const car = document.getElementById("car");
+        const obs = document.getElementById("obstacle");
+        const canv = document.getElementById("game_canvas");
+        const car_pos = {
+          left: car.offsetLeft,
+          top : car.offsetTop,
+          width: car.offsetWidth,
+          height: car.offsetHeight
+        };
+        const obs_pos = {
+          left: obs.offsetLeft,
+          top : obs.offsetTop,
+          width: obs.offsetWidth,
+          height: obs.offsetHeight
+        };
+        const canv_pos = {
+          width: canv.offsetWidth
+        };
+
         var status = document.getElementById("status");
         status.innerHTML = "<font color='green'>" + car_pos.left + "," + car_pos.top + "</font>";
         status.innerHTML += "<font color='blue'>" + obs_pos.left + "," + obs_pos.top + "</font>";
@@ -199,7 +219,6 @@
         }
         
         // Jump when car and object are close
-        let canv_pos = document.getElementById("game_canvas").getBoundingClientRect();
         const minDist = canv_pos.width / 10;
         const dist = obs_pos.left - (car_pos.left + car_pos.width);
         status.innerHTML += "<font color='orange'>" + minDist + "," + dist + "</font>";
