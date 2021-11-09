@@ -174,7 +174,12 @@
     </style>
     <script>
       function jump() {
-        document.getElementById("car").style.bottom="40%";
+        const car = document.getElementById("car");
+        if (car.style.bottom == "40%") {
+          car.style.bottom = "60%";
+        } else {
+          car.style.bottom = "40%";
+        }
         setTimeout(function() {document.getElementById("car").style.bottom="20%";}, 500);
       }
 
