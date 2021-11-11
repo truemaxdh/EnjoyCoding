@@ -1,4 +1,4 @@
-<html id="html">
+<html>
   <head>
     <meta name="viewport" 
       content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height">
@@ -173,24 +173,34 @@
 
     </style>
     <script>
+      let jumping = false;
       function jump() {
         const car = document.getElementById("car");
         const car_pos = car.getBoundingClientRect();
         const canv_pos = document.getElementById("game_canvas").getBoundingClientRect();
-        const html = document.getElementById("html");
-
-        if (html.style.transform != "") {
+        
+        if (window.matchMedia("(orientation: portrait)").matches) {
           rotateSwap(car_pos);
           rotateSwap(canv_pos);
         }
 
-        if ((car_pos.top + car_pos.height) < (canv_pos.height * 0.7)) {
+        if (jumping) {
           car.style.bottom = "60%";
-          setTimeout(function() {car.style.bottom="40%";}, 500);
-          setTimeout(function() {car.style.bottom="20%";}, 1000);
+          setTimeout(function() {
+            car.style.bottom="40%";
+            jumping = true;
+          }, 500);
+          setTimeout(function() {
+            car.style.bottom="20%";
+            jumping = false;
+          }, 1000);
         } else {
+          jumping = true;
           car.style.bottom = "40%";
-          setTimeout(function() {car.style.bottom="20%";}, 500);
+          setTimeout(function() {
+            car.style.bottom="20%";
+            jumping = false;
+          }, 500);
         }
         
       }
@@ -202,22 +212,21 @@
       function tick() {
         
         // collition check
-        const canv_pos = document.getElementById("game_canvas").getBoundingClientRect();
-        const car_pos = document.getElementById("car").getBoundingClientRect();
-        const obs_pos = document.getElementById("obstacle").getBoundingClientRect();
-        
-        const html = document.getElementById("html");
+        let canv_pos = document.getElementById("game_canvas").getBoundingClientRect();
+        let car_pos = document.getElementById("car").getBoundingClientRect();
+        let obs_pos = document.getElementById("obstacle").getBoundingClientRect();
         const status = document.getElementById("status");
         
-        if (html.style.transform != "") {
-          rotateSwap(car_pos);
-          rotateSwap(obs_pos);
-          rotateSwap(canv_pos);
+        if (window.matchMedia("(orientation: portrait)").matches) {
+          car_pos = rotateSwap(car_pos);
+          obs_pos = rotateSwap(obs_pos);
+          canv_pos = rotateSwap(canv_pos);
         }
         
-        status.innerHTML = "<font color='orange'>" + canv_pos.height + "," + (car_pos.top + car_pos.height) + "</font>";
-        status.innerHTML += "<font color='green'>" + car_pos.left + "," + car_pos.top + "</font>";
-        status.innerHTML += "<font color='blue'>" + obs_pos.left + "," + obs_pos.top + "</font>";
+        // status.innerHTML = window.matchMedia("(orientation: portrait)").matches;
+        // status.innerHTML += "<font color='orange'>" + canv_pos.height + "," + (car_pos.top + car_pos.height) + "</font>";
+        // status.innerHTML += "<font color='green'>" + car_pos.left + "," + car_pos.top + "</font>";
+        // status.innerHTML += "<font color='blue'>" + obs_pos.left + "," + obs_pos.top + "</font>";
         if ((car_pos.left + car_pos.width) > obs_pos.left &&
             car_pos.left < (obs_pos.left + obs_pos.width) && 
             (car_pos.top + car_pos.height) > obs_pos.top &&
@@ -228,9 +237,8 @@
         // Jump when car and object are close
         const minDist = canv_pos.width / 10;
         const dist = obs_pos.left - (car_pos.left + car_pos.width);
-        status.innerHTML += "<font color='orange'>" + minDist + "," + dist + "</font>";
-        if (dist < minDist && dist > 0 && 
-          (car_pos.top + car_pos.height) > (canv_pos.height * 0.8)) {
+        //status.innerHTML = "<font color='orange'>" + minDist + "," + dist + "</font>";
+        if (dist < minDist && dist > 0 && !jumping) {
             jump();
         }           
 
@@ -238,8 +246,13 @@
       }
 
       function rotateSwap(a) {
-        [a.left, a.top] = [a.top, a.left];
-        [a.width, a.height] = [a.height, a.width];
+        const b = {
+          left: a.top,
+          top: a.left,
+          width: a.height,
+          height: a.width
+        };
+        return b;
       }
     </script>
   </head>
