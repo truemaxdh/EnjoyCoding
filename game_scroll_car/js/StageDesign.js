@@ -61,5 +61,5 @@ function iStage(stage) {
 	y[1]=100;
 	incy[1]=5;
 	
-	timer=setInterval(draw,20); 
+	//timer=setInterval(draw,20); 
 }
