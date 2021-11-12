@@ -19,7 +19,7 @@ let gameCanvas = {
   h : 0,
   fullScreen : false,
   init : function() {
-    this.canvas = document.getElementById('game_canvas_landscape');
+    this.canvas = document.getElementById('game_canvas');
     this.container = this.canvas.parentElement;
     this.w = this.container.clientWidth;
     this.h = this.container.clientHeight;
@@ -39,21 +39,16 @@ let gameCanvas = {
     // afterimage
     this.ctx.globalCompositeOperation = 'source-over';
     this.ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
-    this.ctx.fillRect(0, 0, this.w, this.h);
+    //this.ctx.fillRect(0, 0, this.w, this.h);
 
     gameObjects.render();
       
     this.ctx.fillStyle = '#ffa500';
     this.ctx.font = '35px Sniglet-ExtraBold';
-    this.ctx.fillText('Score : ' + gamePlay.score, 20, 50);
-    this.ctx.fillText('Stage : ' + gamePlay.stageNum, 270,50);
+    // this.ctx.fillText('Score : ' + gamePlay.score, 20, 50);
+    // this.ctx.fillText('Stage : ' + gamePlay.stageNum, 270,50);
       
     this.ctx.drawImage(img_pause, 0, 0, 40, 40, this.w - 60, 20, 40, 40);
-
-    if (!!gameObjects.oTouch) {
-      gameObjects.oTouch.render();
-      gameObjects.oTouch = null;
-    }
   },
   toggleFullScreen : function () {
     if (this.fullScreen) {
