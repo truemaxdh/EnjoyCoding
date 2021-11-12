@@ -64,6 +64,8 @@ class objRoad extends gameobj {
     
     move() {
         this.runningLength += this.speed.v2;
+        if (this.runningLength >= this.length)
+            this.runningLength = 0;
     }
 
     render() {
