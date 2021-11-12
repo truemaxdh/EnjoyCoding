@@ -49,9 +49,9 @@ class objRoad extends gameobj {
         this.forestColor = "#2b2";
         this.landColor = "#f0db66";
         this.runningLength = 0;
-        this.vWidth = 90;
-        this.vHeight = 120;
-        this.vRoadWidth = 45;
+        this.vWidth = 60;
+        this.vHeight = 80;
+        this.vRoadWidth = this.vWidth / 2;
         this.length = 1000;
 
         this.lBound=[];
