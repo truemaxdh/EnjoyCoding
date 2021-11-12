@@ -1,7 +1,9 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>Game - Magic Ball</title>
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="description" content="a racing game." />
+    <title>Game - Racer</title>
 	<!--meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi" /-->
 	<script type="text/javascript" src="js/StageDesign.js"></script>
 	<script type="text/javascript" src="js/Sound.js"></script>
@@ -13,14 +15,9 @@
     <!-- <script src="js/game.js"></script> -->
     <!-- <script src="js/google_api_js.js"></script> -->
 	<script type="text/javascript">
-	//window.addEventListener('load', function() {
-	//		setTimeout(scrollTo, 0, 0, 1);
-	//	}, false);
 		var canvas;
 		var body;
 		var w,h;
-		var stage=1;
-		var scale=1;
 		
 		window.onload = ()=>{
 			window.addEventListener("deviceorientation", handleOrientation);
@@ -46,14 +43,6 @@
 		/*
 			변수 설정
 		*/
-		var divideCnt=0;
-
-		// Main Character
-		var mainChrX;
-		var mainChrY;
-		var mainChrIncX=0
-		var mainChrIncY=0;
-
 		var imageObj = new Image();
 
 		var ballImgs=[];
@@ -85,8 +74,6 @@
 
 		// 터치 이벤트 처리중인지 여부
 		var touchProcessing=false;
-
-		var scaledMainChrY;
 		/*
 
 			함수
@@ -103,19 +90,12 @@
 			{
 				imageObj.src="mainChr_tran_red.png";
 			}
-			imageObj.onload = function() {
-				mainChrX=w/2;
-				mainChrY=h-imageObj.height;
-				scaledMainChrY=scale*mainChrY;
-			}
 			body.addEventListener('keydown', ev_keydown, false);
 			body.addEventListener('keyup', ev_keyup, false);	
 
 			canvas.addEventListener('touchmove', leftright_touchmove, false);
 			
 			var ctx = canvas.getContext('2d');
-
-			//iStage(stage);
 
 			gameCanvas.init();
 			gameObjects.init();
@@ -134,8 +114,6 @@
 			else if (stopMode=="StageCleared")
 			{
 				stopMode="";
-				stage++;
-				//iStage(stage);
 			}
 		}
 
@@ -149,7 +127,7 @@
 					break;
 				case 38: // Up
 					keyPressed=true;
-					mainChrIncY=-3;
+
 					break;
 				case 39: // ->
 					keyPressed=true;
@@ -157,11 +135,8 @@
 					break;
 				case 40: // Down
 					keyPressed=true;
-					mainChrIncY=3;
 					break;
 				case 32: // space
-					missileX=mainChrX+imageObj.width/2;
-					missileY=mainChrY;
 					break;
 			}
 		}
@@ -172,7 +147,6 @@
 				case 38: // Up
 				case 39: // ->
 				case 40: // Down
-					//mainChrIncX=0;
 					keyPressed=false;
 					break;
 				case 32: // space
@@ -188,9 +162,6 @@
 						{
 							stopMode="";
 							sleep(500);
-							stage++;
-							initFontNLaserStyle();
-							iStage(stage);
 						}
 						
 					}
@@ -221,9 +192,6 @@
 				{
 					stopMode="";
 					sleep(500);
-					stage++;
-					initFontNLaserStyle();
-					iStage(stage);
 				}
 				
 			}
