@@ -19,10 +19,11 @@ let gameCanvas = {
   h : 0,
   fullScreen : false,
   init : function() {
-    this.canvas = document.getElementById('game_canvas');
+    this.canvas = document.getElementById('game_canvas_landscape');
     this.container = this.canvas.parentElement;
     this.w = this.container.clientWidth;
     this.h = this.container.clientHeight;
+    alert(w + "," + h);
     this.canvas.width = this.w;
     this.canvas.height = this.h;
     this.ctx = this.canvas.getContext('2d');
