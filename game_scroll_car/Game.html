@@ -5,8 +5,14 @@
 	<!--meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi" /-->
 	<script type="text/javascript" src="js/StageDesign.js"></script>
 	<script type="text/javascript" src="js/Sound.js"></script>
+	<script src="js/common.js"></script>
+    <!-- <script src="js/sound_effects.js"></script> -->
+    <script src="js/game_objects.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/user_input.js"></script>
+    <!-- <script src="js/game.js"></script> -->
+    <!-- <script src="js/google_api_js.js"></script> -->
 	<script type="text/javascript">
-	<!--
 	//window.addEventListener('load', function() {
 	//		setTimeout(scrollTo, 0, 0, 1);
 	//	}, false);
@@ -16,8 +22,26 @@
 		var stage=1;
 		var scale=1;
 		
+		window.onload = ()=>{
+			window.addEventListener("deviceorientation", handleOrientation);
+			init();
+		}
+
+		function handleOrientation(event) {
+			let alpha = event.alpha;
+			let beta = event.beta;
+			let gamma = event.gamma;
+			gamma = prune(gamma, -1, 1);
+			gameObjects.car.accel.v1 = gamma;
+        }
+        
+        document.getElementById("alpha").innerText = alpha,
+          document.getElementById("beta").innerText = beta,
+          document.getElementById("gamma").innerText = gamma,
+
+
 		function init() {
-			canvas = document.getElementById('canvas');
+			canvas = document.getElementById('game_canvas');
 			body=document.getElementById('body');
 			w=canvas.width;
 			h=canvas.height;
@@ -85,38 +109,26 @@
 				imageObj.src="mainChr_tran_red.png";
 			}
 			imageObj.onload = function() {
-        mainChrX=w/2;
-        mainChrY=h-imageObj.height;
-        scaledMainChrY=scale*mainChrY;
+				mainChrX=w/2;
+				mainChrY=h-imageObj.height;
+				scaledMainChrY=scale*mainChrY;
 			}
 			body.addEventListener('keydown', ev_keydown, false);
 			body.addEventListener('keyup', ev_keyup, false);	
 
-			//canvas.addEventListener('touchstart', leftright_touchstart, false);
 			canvas.addEventListener('touchmove', leftright_touchmove, false);
-			//canvas.addEventListener('touchend', leftright_touchend, false);
-
+			
 			var ctx = canvas.getContext('2d');
 
-			initFontNLaserStyle();
-			iStage(stage);
+			//iStage(stage);
+
+			gameCanvas.init();
+			gameObjects.init();
+			
+			requestAnimationFrame(draw);
 		}
 
-		function initFontNLaserStyle() {
-			var ctx = canvas.getContext('2d');
-
-			// Laser
-			var gradient = ctx.createLinearGradient(0, 0, 400, 400);
-			gradient.addColorStop(0, "rgb(255, 0, 0)");
-			gradient.addColorStop(1, "rgb(255, 255, 0)");
-			ctx.fillStyle = gradient;
-
-			// Font
-			ctx.font = "bold 30px sans-serif";
-
-			// Set power shield to 0
-			powerShield=0;
-		}
+		
 
 		function ev_mousedown(ev) {
 			if (stopMode=="GameOver")
@@ -128,8 +140,7 @@
 			{
 				stopMode="";
 				stage++;
-				initFontNLaserStyle();
-				iStage(stage);
+				//iStage(stage);
 			}
 		}
 
@@ -139,7 +150,7 @@
 			switch (event.keyCode) {
 				case 37: // <-
 					keyPressed=true;
-					mainChrIncX=-6;
+					gameObjects.car.accel.v1 = -1;
 					break;
 				case 38: // Up
 					keyPressed=true;
@@ -147,7 +158,7 @@
 					break;
 				case 39: // ->
 					keyPressed=true;
-					mainChrIncX=6;
+					gameObjects.car.accel.v1 = 1;
 					break;
 				case 40: // Down
 					keyPressed=true;
@@ -224,137 +235,34 @@
 		}
 
 		// Timer Tick
-		function draw(){
-			if (canvas.getContext){
-				// 터치 이벤트 처리
-				touchProcessing=true;
-				for (var i=0;i < touches.length;i++)
-				{
-
-					var touch = touches[i];
-					if(touch.pageX>(mainChrX*scale)) {
-						mainChrIncX=5;		
-					}
-					else {
-						mainChrIncX=-5;		
-					}
-					if(touch.pageY < scaledMainChrY)
+		let last_animation_time = 0;
+		function draw(timeStamp){
+			if ((timeStamp - last_animation_time) > 30) {
+			    last_animation_time = timeStamp;;
+				if (canvas.getContext){
+					// 터치 이벤트 처리
+					touchProcessing=true;
+					for (var i=0;i < touches.length;i++)
 					{
-						missileX=mainChrX;
-						missileY=mainChrY;
-					}
-				}
-				touches=[];
-				touchProcessing=false;
 
-				var ctx = canvas.getContext('2d');
-
-				//clears canvas
-				ctx.clearRect(0,0,w,h); 
-
-				// Draw Score
-				//var dispScore = document.getElementById('score');
-				//dispScore.value=score;
-				ctx.fillText("Stage: "+stage, 0, 30);
-				ctx.fillText("Remained: "+remained, 260, 30);
-				ctx.fillText("Score: "+score, 520, 30);
-								
-
-				// Draw mainCharacter
-				var k=Math.floor(scroll);
-				if (keyPressed==false) {
-					if (mainChrIncX > 0.1)
-						mainChrIncX-=0.2;
-					else if (mainChrIncX < -0.1)
-						mainChrIncX+=0.2;
-					else
-						mainChrIncX=0;
-					if (mainChrIncY > 0.1)
-						mainChrIncY-=0.2;
-					else if (mainChrIncY < -0.1)
-						mainChrIncY+=0.2;
-					else
-						mainChrIncY=0;
-				}
-				var oldMainChrX=mainChrX;
-				var oldMainChrY=mainChrY;
-				mainChrX += mainChrIncX;
-				mainChrY += mainChrIncY;
-					
-				var xOnMapL=Math.floor(mainChrX/20);
-				var xOnMapH=Math.floor((mainChrX+imageObj.width)/20);
-				var yOnMapL=k-Math.floor(mainChrY/20);
-				var yOnMapH=k-Math.floor((mainChrY+imageObj.height)/20);
-				ctx.fillText("Pos: ("+xOnMapL+","+yOnMapL+"),("+xOnMapH+","+yOnMapH+")",300, 50);
-				if (blLeft[yOnMapL]>=xOnMapL || (blLeft[yOnMapL]+roadWidth)<xOnMapH || blLeft[yOnMapH]>=xOnMapL || (blLeft[yOnMapH]+roadWidth)<xOnMapH)
-				{
-				
-					mainChrX=oldMainChrX;
-					mainChrY=oldMainChrY;
-					xOnMapL=Math.floor(mainChrX/20);
-					xOnMapH=Math.floor((mainChrX+imageObj.width)/20);
-					yOnMapL=k-Math.floor(mainChrY/20);
-					yOnMapH=k-Math.floor((mainChrY+imageObj.height)/20);
-				
-				}
-				ctx.drawImage(imageObj, mainChrX, mainChrY);
-
-				// Draw Road
-				for (var i=k-24;i<=k;i++)
-				{
-					var j=k-i;
-					ctx.drawImage(ballImgs[1], blLeft[i]*20,j*20);
-					ctx.drawImage(ballImgs[1], (blLeft[i]+roadWidth)*20,j*20);
-					if (objPos[i]>0)
-						ctx.drawImage(ballImgs[0], objPos[i]*20,j*20);
-					if (diaPos[i]>0)
-						ctx.drawImage(ballImgs[2], diaPos[i]*20,j*20);
-				}
-				// Check Collision with Main Character				
-				if (yOnMapL>0)
-				{
-					if (objPos[yOnMapL]==xOnMapL || objPos[yOnMapL]==xOnMapH || objPos[yOnMapH]==xOnMapL || objPos[yOnMapH]==xOnMapH)
-					{
-						playSound(2);
-						remained--;
-						if (remained<0)
-						{
-							// GameOver
-							clearInterval(timer);
-							ctx.font = "bold 60px sans-serif";
-							ctx.rotate(-0.40);
-							ctx.fillText("Game Over!!", 110, 380);
-							
-							stopMode="GameOver";
+						var touch = touches[i];
+						if(touch.pageX > (gameCanvas.w / 2)) {
+							gameObjects.car.accel.v1 = 1;
 						}
-						else
-						{
-							mainChrX=w/2;
-							clearInterval(timer);
-							sleep(500);
-							timer=setInterval(draw,20);
+						else {
+							gameObjects.car.accel.v1 = -1;
 						}
+
 					}
-					if (diaPos[yOnMapL]==xOnMapL || diaPos[yOnMapL]==xOnMapH || diaPos[yOnMapH]==xOnMapL || diaPos[yOnMapH]==xOnMapH)
-					{
-						playSound(1);	
-						score+=10;
-						diaPos[yOnMapL]=-1;
-						diaPos[yOnMapH]=-1;
-					}
+					touches=[];
+					touchProcessing=false;
+
+					gameObjects.render();
+					gameObjects.move();
 				}
-				if (k>=1000)
-				{
-					clearInterval(timer);
-					ctx.font = "bold 60px sans-serif";
-					ctx.rotate(-0.35);
-					ctx.fillText("Stage Cleared!!", 90, 380);
-					ctx.rotate(0.35);		
-					stopMode="StageCleared";
-					//canvas.addEventListener('mousedown', ev_mousedown, false);
-				}
-				scroll+=0.15;
 			}
+
+			requestAnimationFrame(draw);
 		}
 
 		function sleep(ms)
@@ -363,21 +271,15 @@
 			dt.setTime(dt.getTime() + ms);
 			while (new Date().getTime() < dt.getTime());
 		}
-	-->
 	</script>
   </head>
   <body id="body">
-	<table width="800" height="520" align="center"><!-- background="intro.png"-->
+	<table width="540" height="720" align="center"><!-- background="intro.png"-->
 		<tr>
 			<td align="center">
-				<canvas id="canvas" width="780" height="500"></canvas>
+				<canvas id="game_canvas" width="540" height="720"></canvas>
 			</td>
 		</tr>
 	</table>
-	<script type="text/javascript">
-	<!--
-		init();
-	-->
-    </script>
   </body>
 </html>
