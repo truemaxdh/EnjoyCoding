@@ -45,7 +45,7 @@ class gameobj {
 
 class objRoad extends gameobj {
     constructor() {
-        super(0, 0, 1000, 0, 1);
+        super(0, 0, 1000, 0, 0);
         this.forestColor = "#2b2";
         this.landColor = "#f0db66";
         this.runningLength = 0;
@@ -73,29 +73,65 @@ class objRoad extends gameobj {
         const stepY = gameCanvas.h / this.vHeight;
         const ctx = gameCanvas.ctx;
         for(let i = 0; i < this.vHeight; i++) {
-            const vIndex = this.length - this.runningLength - this.vHeight + i;
-            const vXBoundary1 = this.lBound[vIndex];
-            const vXBoundary2 = this.lBound[vIndex] + this.vRoadWidth;
+            const vIndex = Math.floor(this.length - this.runningLength - this.vHeight + i);
+            const x1 = this.lBound[vIndex] * stepX;
+            const x2 = x1 + this.vRoadWidth * stepX; 
+
             ctx.fillStyle = this.forestColor;
-            ctx.fillRect(0, i * stepY, vXBoundary1 * stepX, stepY);
-            ctx.fillRect(vXBoundary2 * stepX, i * stepY, gameCanvas.w - vXBoundary2 * stepX, stepY);
+            ctx.fillRect(0, i * stepY, x1, stepY);
+            ctx.fillRect(x2, i * stepY, gameCanvas.w - x2, stepY);
             ctx.fillStyle = this.landColor;
-            ctx.fillRect(vXBoundary1 * stepX, i * stepY, (vXBoundary2 - vXBoundary1) * stepX, stepY);
+            ctx.fillRect(x1, i * stepY, x2 - x1, stepY);
         }
-    }    
+    }
+    
+    collision_chk(other) {
+        const stepX = gameCanvas.w / this.vWidth;
+        const stepY = gameCanvas.h / this.vHeight;
+        const vIndex = Math.floor(
+            this.length - this.runningLength - this.vHeight + other.center.v2 / stepY);
+        const x1 = this.lBound[vIndex] * stepX;
+        const x2 = x1 + this.vRoadWidth * stepX; 
+        const other_l = other.center.v1 - other.r;
+        const other_r = other.center.v1 + other.r;
+        if (other_l < x1) {
+            other.center.v1 = x1 + other.r;
+            other.speed.v2 /= 2;
+        }
+        if (other_r > x2) {
+            other.center.v1 = x2 - other.r;
+            other.speed.v2 /= 2;
+        }
+    }
 }
 
 class objCar extends gameobj {
     constructor() {
-        super(270, 500, 25, 0, 0);
+        super(gameCanvas.w / 2, gameCanvas.h * 0.8, 0, 0, 0);
+        this.accel.v2 = 0.01;
+        this.maxSpeedV2 = 2;
         this.img = new Image();
         this.img.src = "mainChr_tran.png";
+        const _this = this;
+        this.img.onload = function() {
+            _this.halfW = this.width / 2;
+            _this.halfH = this.height / 2;
+            _this.r = Math.max(this.width, this.height) / 2;
+        }
     }
-     
+
+    move() {
+        this.speed.add(this.accel);
+        this.center.v1 += this.speed.v1;
+        if (this.speed.v2 > this.maxSpeedV2) {
+            this.speed.v2 = this.maxSpeedV2;
+        }
+    }
+    
     render() {
         this.accel.v1 *= 0.8;
         this.speed.v1 *= 0.8;
-        gameCanvas.ctx.drawImage(this.img, this.center.v1, this.center.v2);
+        gameCanvas.ctx.drawImage(this.img, this.center.v1 - this.halfW, this.center.v2 - this.halfH);
         if (this.next != null) {
             this.next.render();
         }
@@ -162,6 +198,7 @@ let gameObjects = {
     },
     move : function() {
         this.car.move();
+        this.road.speed.v2 = this.car.speed.v2;
         this.road.move();
     },
     render : function() {

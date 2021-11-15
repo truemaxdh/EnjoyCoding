@@ -23,7 +23,6 @@ let gameCanvas = {
     this.container = this.canvas.parentElement;
     this.w = this.container.clientWidth;
     this.h = this.container.clientHeight;
-    alert(w + "," + h);
     this.canvas.width = this.w;
     this.canvas.height = this.h;
     this.ctx = this.canvas.getContext('2d');
