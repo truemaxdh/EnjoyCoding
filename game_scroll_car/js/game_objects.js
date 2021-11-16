@@ -49,92 +49,162 @@ class objRoad extends gameobj {
         this.forestColor = "#2b2";
         this.landColor = "#f0db66";
         this.runningLength = 0;
-        this.vWidth = 60;
-        this.vHeight = 80;
+        this.vWidth = 45;
+        this.vHeight = 60;
         this.vRoadWidth = this.vWidth / 2;
         this.length = 1000;
 
-        this.lBound=[];
+        this.lBound;
+        this.initBoundaries();
+    }
+    
+    initBoundaries() {
+        this.lBound = [];
         let nextLBound = (this.vWidth - this.vRoadWidth) / 2;
         for(let i = 0; i < this.length; i++) {
             this.lBound.push(nextLBound);
             nextLBound = prune(nextLBound + getRndInt(-1, 3), 1, this.vWidth - this.vRoadWidth - 2);
         }
     }
-    
+
     move() {
         this.runningLength += this.speed.v2;
-        if (this.runningLength >= this.length)
-            this.runningLength = 0;
+        if (this.runningLength >= this.length) {
+            //this.vRoadWidth--;
+            //this.initBoundaries();
+            //this.runningLength = 0;
+            newGame();
+        }
     }
 
     render() {
         const stepX = gameCanvas.w / this.vWidth;
         const stepY = gameCanvas.h / this.vHeight;
         const ctx = gameCanvas.ctx;
-        for(let i = 0; i < this.vHeight; i++) {
+        ctx.fillStyle = this.forestColor;
+        ctx.fillRect(0, 0, gameCanvas.w, gameCanvas.h);
+
+        ctx.fillStyle = this.landColor;
+        for(let i = 0; i < (this.vHeight - 1); i++) {
             const vIndex = Math.floor(this.length - this.runningLength - this.vHeight + i);
             const x1 = this.lBound[vIndex] * stepX;
-            const x2 = x1 + this.vRoadWidth * stepX; 
+            const x2 = x1 + this.vRoadWidth * stepX;
 
-            ctx.fillStyle = this.forestColor;
-            ctx.fillRect(0, i * stepY, x1, stepY);
-            ctx.fillRect(x2, i * stepY, gameCanvas.w - x2, stepY);
-            ctx.fillStyle = this.landColor;
-            ctx.fillRect(x1, i * stepY, x2 - x1, stepY);
+            const vIndex_1 = vIndex + 1;
+            const x1_1 = this.lBound[vIndex_1] * stepX;
+            const x2_1 = x1_1 + this.vRoadWidth * stepX;
+
+            ctx.beginPath();
+            ctx.moveTo(x1, Math.floor(i * stepY));
+            ctx.lineTo(x2, Math.floor(i * stepY));
+            ctx.lineTo(x2_1, Math.floor((i + 1) * stepY));
+            ctx.lineTo(x1_1, Math.floor((i + 1) * stepY));
+            ctx.fill();
         }
     }
     
     collision_chk(other) {
+        let d1, d2;
+        [d1, d2] = this.dists(other);
+        if (other.r > d1) {
+            other.center.v1 += other.r - d1;
+            other.speed.v2 *= -0.15;
+        }
+        if (other.r > d2) {
+            other.center.v1 -= other.r - d2;
+            other.speed.v2 *= -0.15;
+        }
+    }
+
+    dists(other) {
         const stepX = gameCanvas.w / this.vWidth;
-        const stepY = gameCanvas.h / this.vHeight;
-        const vIndex = Math.floor(
-            this.length - this.runningLength - this.vHeight + other.center.v2 / stepY);
+        //const stepY = gameCanvas.h / this.vHeight;
+        // const vIndex = Math.floor(
+        //     this.length - this.runningLength - this.vHeight + other.center.v2 / stepY) - 1;
+        const vIndex = this.length - Math.floor(other.runningLength);
         const x1 = this.lBound[vIndex] * stepX;
         const x2 = x1 + this.vRoadWidth * stepX; 
-        const other_l = other.center.v1 - other.r;
-        const other_r = other.center.v1 + other.r;
-        if (other_l < x1) {
-            other.center.v1 = x1 + other.r;
-            other.speed.v2 /= 2;
-        }
-        if (other_r > x2) {
-            other.center.v1 = x2 - other.r;
-            other.speed.v2 /= 2;
-        }
+        return [other.center.v1 - x1, x2 - other.center.v1];
     }
 }
 
 class objCar extends gameobj {
-    constructor() {
-        super(gameCanvas.w / 2, gameCanvas.h * 0.8, 0, 0, 0);
+    constructor(road) {
+        super(gameCanvas.w / 2, gameCanvas.h * 0.8, 25, 0, 0);
+        this.road = road;
+        this.runningLength = Math.floor(road.vHeight * 0.2);
+        this.maxSpeedV2 = 3.5;
         this.accel.v2 = 0.01;
-        this.maxSpeedV2 = 2;
-        this.img = new Image();
-        this.img.src = "mainChr_tran.png";
-        const _this = this;
-        this.img.onload = function() {
-            _this.halfW = this.width / 2;
-            _this.halfH = this.height / 2;
-            _this.r = Math.max(this.width, this.height) / 2;
-        }
+        this.rotate = 0;
+        this.unitRotate = Math.PI / 6;
+        this.bodyColor = "orange";
+        this.wheelColor = "black";
     }
 
     move() {
         this.speed.add(this.accel);
-        this.center.v1 += this.speed.v1;
         if (this.speed.v2 > this.maxSpeedV2) {
             this.speed.v2 = this.maxSpeedV2;
         }
+
+        if (this.speed.v2 < 0 || this.rotate > 0) {
+            this.rotate += this.unitRotate;
+            if (this.rotate >= 2 * Math.PI) {
+                this.rotate = 0;
+            }
+        }
+        this.center.v1 += this.speed.v1;
+        this.runningLength += this.speed.v2;        
+
+        this.accel.v1 *= 0.8;
+        this.speed.v1 *= 0.8;
     }
     
     render() {
-        this.accel.v1 *= 0.8;
-        this.speed.v1 *= 0.8;
-        gameCanvas.ctx.drawImage(this.img, this.center.v1 - this.halfW, this.center.v2 - this.halfH);
+        const ctx = gameCanvas.ctx;
+        ctx.save();
+        ctx.translate(this.center.v1, this.center.v2);
+        ctx.rotate(this.rotate);    
+        ctx.fillStyle = this.bodyColor;
+        ctx.fillRect(this.r * -0.5, -this.r, this.r, this.r * 2);
+        ctx.fillStyle = this.wheelColor;
+        ctx.fillRect(-this.r, -this.r, this.r * 0.4, this.r * 0.8);
+        ctx.fillRect(-this.r, this.r, this.r * 0.4, this.r * -0.8);
+        ctx.fillRect(this.r, -this.r, this.r * -0.4, this.r * 0.8);
+        ctx.fillRect(this.r, this.r, this.r * -0.4, this.r * -0.8);
+        ctx.restore();
         if (this.next != null) {
             this.next.render();
         }
+    }
+}
+
+class objCarAI extends objCar {
+    constructor(road, car) {
+        super(road);
+        this.car = car;
+        this.maxSpeedV2 = 2;
+        this.bodyColor = "purple";
+        this.wheelColor = "#777";
+    }
+
+    move() {
+        super.move();
+        let d1, d2;
+        [d1, d2] = gameObjects.road.dists(this);
+        const dSum = d1 + d2;
+        if ((d1 / dSum) < 0.4) {
+            this.accel.v1 = 1;
+        } else if ((d2 / dSum) < 0.4) {
+            this.accel.v1 = -1;
+        }
+    }
+
+    render() {
+        const stepY = gameCanvas.h / this.road.vHeight;
+        const dLength = this.car.runningLength - this.runningLength;
+        this.center.v2 = this.car.center.v2 + dLength * stepY;
+        super.render();
     }
 }
 
@@ -166,7 +236,7 @@ class objStageClear extends gameobj {
         this.count_down = 100;
         this.clearedStage = stageNum
     }
-     
+    
     render() {
         var c_x = gameCanvas.ctx.canvas.width / 2;
         var c_y = gameCanvas.ctx.canvas.height / 2;
@@ -190,19 +260,23 @@ class objStageClear extends gameobj {
 }   
 
 let gameObjects = {
-    car: null,
     road: null,
+    car: null,
+    carAI: null,
     init : function() {
-        this.car = new objCar();
         this.road = new objRoad();
+        this.car = new objCar(this.road);
+        this.carAI = new objCarAI(this.road, this.car);
     },
     move : function() {
-        this.car.move();
-        this.road.speed.v2 = this.car.speed.v2;
         this.road.move();
+        this.car.move();
+        this.carAI.move();
+        this.road.speed.v2 = this.car.speed.v2;
     },
     render : function() {
         this.road.render();
         this.car.render();
+        this.carAI.render();
     }
 }

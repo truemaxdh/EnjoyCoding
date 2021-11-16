@@ -45,8 +45,7 @@ function newGame() {
   init_user_input();
   gamePlay.init();
   gameObjects.init();
-  console.log(gameObjects.isBallEmpty());
-  document.getElementById( 'bgm' ).play();
+  //document.getElementById( 'bgm' ).play();
   gamePlay.startStage();
 }
 
@@ -97,18 +96,26 @@ function gameOver() {
 
 function proc_user_input() {
   if (user_pressing) {
+    if (user_x > gameObjects.car.center.v1) {
+      gameObjects.car.accel.v1 = 1;
+    }
+    else if (user_x < gameObjects.car.center.v1) {
+      gameObjects.car.accel.v1 = -1;
+    }
   } else {
   }
 }
 
+function handleOrientation(event) {
+  //let alpha = event.alpha;
+  //let beta = event.beta;
+  let gamma = event.gamma;
+  gamma = prune(gamma, -1, 1);
+  gameObjects.car.accel.v1 = gamma;
+}
+
 function upcoming_obj() {
-  if (gamePlay.objStage.totalBallCnt > 0 && (gamePlay.last_animation_time - gamePlay.lastBallTimeStamp) >= gamePlay.objStage.ballInterval) {
-    gamePlay.objStage.totalBallCnt--;
-    gamePlay.lastBallTimeStamp = gamePlay.last_animation_time;
-    push_to_chain(new objBall(360, 100, gamePlay.objStage.ballSize), gameObjects.ballEnds);
-  } else if (gamePlay.stageNum < gamePlay.max_stage && gameObjects.isBallEmpty()) {
-    stageCleared();
-  }
+  
 }
 
 function stageCleared() {
@@ -119,52 +126,6 @@ function stageCleared() {
 }
 
 function collision_check() {
-  if (user_pressing) {
-    // check collision of clicked(touched) position and balls
-    gameObjects.oTouch = new objTouch(user_x, user_y);
-    let oCatched = collision_obj_grp(gameObjects.oTouch, gameObjects.ballEnds);;
-    if (oCatched != null) {
-      remove_from_chain(oCatched);
-      if (--oCatched.size > 0) {
-        let new1 = new objBall(oCatched.center.v1, oCatched.center.v2, oCatched.size);
-        let new2 = new objBall(oCatched.center.v1, oCatched.center.v2, oCatched.size);
-        new1.speed.v2 = Math.random() * oCatched.speed.v2;
-        new2.speed.v2 = Math.random() * oCatched.speed.v2;
-        push_to_chain(new1, gameObjects.ballEnds);
-        push_to_chain(new2, gameObjects.ballEnds);
-      } else {
-        gamePlay.eliminatedBallCnt++;
-      }
-      gamePlay.score += 10;
-      try {
-        chkAndUnlockAchievement(gamePlay.score);
-      } catch(err) {}
-    }
-  }
-}
-
-function push_to_chain(obj, ends) {
-  ends[1].prev.next = obj;
-  obj.prev = ends[1].prev;
-  obj.next = ends[1];
-  ends[1].prev = obj;
-}
-
-function remove_from_chain(obj) {
-  obj.prev.next = obj.next;
-  obj.next.prev = obj.prev;
-}
-
-function collision_obj_grp(obj, ends) {
-  var ret = null;
-  var t = ends[0].next;
-  while(t.next != null) {
-    if (t.collision_chk(obj)) {
-      ret = t;
-      break;
-    }
-    t = t.next;            
-  }
-
-  return ret;
+  gameObjects.road.collision_chk(gameObjects.car);
+  gameObjects.road.collision_chk(gameObjects.carAI);
 }

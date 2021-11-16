@@ -55,6 +55,8 @@ function init_user_input() {
     user_y = e.touches[0].clientY * scale_fy;
     return false;
   }
+
+  window.addEventListener("deviceorientation", handleOrientation);
 }
 
 function showSubMenu() {
