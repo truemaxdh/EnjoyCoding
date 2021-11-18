@@ -33,79 +33,6 @@
 			gameObjects.car.accel.v1 = gamma;
         }
         
-		// function init() {
-		// 	canvas = document.getElementById('game_canvas');
-		// 	body=document.getElementById('body');
-		// 	w=canvas.width;
-		// 	h=canvas.height;
-		// 	initGame();
-		// }
-		
-		/*
-			변수 설정
-		*/
-		// var imageObj = new Image();
-
-		// var ballImgs=[];
-		// ballImgs[0] = new Image();
-		// ballImgs[1] = new Image();
-		// ballImgs[2] = new Image();
-
-		// ballImgs[0].src="magicBall.png";
-		// ballImgs[1].src="blockShape.png";
-		// ballImgs[2].src="diamond.png";
-
-		// // Power Shield Timer
-		// var powerShield = 0;
-
-		// // Score
-		// var score=0;
-
-		// // Remained
-		// var remained=3;
-
-		// // Timer Handler
-		// var timer;
-
-		// // 일시정지 사유
-		// var stopMode="";
-
-		// // 터치 이벤트 버퍼
-		// var touches=[];
-
-		// // 터치 이벤트 처리중인지 여부
-		// var touchProcessing=false;
-		/*
-
-			함수
-
-		*/
-		// Initialize
-		// function initGame(){
-			// imageObj.src="mainChr_tran.png";
-			// if (sessionStorage.carStyle=="1")
-			// {
-			// 	imageObj.src="mainChr_tran_purple.png";
-			// }
-			// else if (sessionStorage.carStyle=="2")
-			// {
-			// 	imageObj.src="mainChr_tran_red.png";
-			// }
-			// body.addEventListener('keydown', ev_keydown, false);
-			// body.addEventListener('keyup', ev_keyup, false);	
-
-			// canvas.addEventListener('touchmove', leftright_touchmove, false);
-			
-			// var ctx = canvas.getContext('2d');
-
-			// gameCanvas.init();
-			// gameObjects.init();
-			
-			// requestAnimationFrame(draw);
-		// }
-
-		
-
 		function ev_mousedown(ev) {
 			if (stopMode=="GameOver")
 			{
@@ -198,38 +125,7 @@
 			}
 		}
 
-		// Timer Tick
-		// let last_animation_time = 0;
-		// function draw(timeStamp){
-		// 	if ((timeStamp - last_animation_time) > 30) {
-		// 	    last_animation_time = timeStamp;;
-		// 		if (canvas.getContext){
-		// 			// 터치 이벤트 처리
-		// 			touchProcessing=true;
-		// 			for (var i=0;i < touches.length;i++)
-		// 			{
-
-		// 				var touch = touches[i];
-		// 				if(touch.pageX > (gameCanvas.w / 2)) {
-		// 					gameObjects.car.accel.v1 = 1;
-		// 				}
-		// 				else {
-		// 					gameObjects.car.accel.v1 = -1;
-		// 				}
-
-		// 			}
-		// 			touches=[];
-		// 			touchProcessing=false;
-
-		// 			gameObjects.render();
-		// 			gameObjects.move();
-		// 			gameObjects.road.collision_chk(gameObjects.car);
-		// 		}
-		// 	}
-
-		// 	requestAnimationFrame(draw);
-		// }
-
+		
 		function sleep(ms)
 		{
 			var dt = new Date();
