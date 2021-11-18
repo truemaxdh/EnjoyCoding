@@ -6,22 +6,18 @@ var gamePlay = {
   gameover_flag : false,
   effect_flag : false,
   score : 0,
-  lastBallTimeStamp : 0,
   stageNum : 0,
   max_stage : 10,
   o_game_over : null,
-  eliminatedBallCnt : 0,
   objStage : null,
   init : function() {
     this.pause = true;
     this.gameover_flag = false;
     this.effect_flag = false;
     this.score = 0;
-    this.eliminatedBallCnt = 0;
     this.o_game_over = null;
     this.last_animation_time = 0;
     this.setStage(this.stageNum);
-    this.lastBallTimeStamp = -this.objStage.ballInterval;
   },
   setStage : function(stageNum) {
     this.stageNum = stageNum;
@@ -34,9 +30,6 @@ var gamePlay = {
 }
 
 function _objStage(stageNum) {
-  this.totalBallCnt = stageNum;
-  this.ballInterval = 10000;
-  this.ballSize = 5;
 }
 
 

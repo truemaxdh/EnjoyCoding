@@ -51,7 +51,7 @@ class objRoad extends gameobj {
         this.runningLength = 0;
         this.vWidth = 45;
         this.vHeight = 60;
-        this.vRoadWidth = this.vWidth / 2;
+        this.vRoadWidth = this.vWidth * 0.7;
         this.length = 1000;
 
         this.lBound;
@@ -60,10 +60,11 @@ class objRoad extends gameobj {
     
     initBoundaries() {
         this.lBound = [];
-        let nextLBound = (this.vWidth - this.vRoadWidth) / 2;
+        let nextLBound = Math.floor((this.vWidth - this.vRoadWidth) / 2);
         for(let i = 0; i < this.length; i++) {
             this.lBound.push(nextLBound);
-            nextLBound = prune(nextLBound + getRndInt(-1, 3), 1, this.vWidth - this.vRoadWidth - 2);
+            nextLBound = Math.floor(
+                prune(nextLBound + getRndInt(-1, 3), 1, this.vWidth - this.vRoadWidth - 2));
         }
     }
 
