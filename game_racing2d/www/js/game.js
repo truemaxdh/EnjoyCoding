@@ -107,6 +107,7 @@ function upcoming_obj() {
 }
 
 function collision_check() {
+  gameObjects.car.collision_chk(gameObjects.carAI);
   gameObjects.road.collision_chk(gameObjects.car);
   gameObjects.road.collision_chk(gameObjects.carAI);
 }

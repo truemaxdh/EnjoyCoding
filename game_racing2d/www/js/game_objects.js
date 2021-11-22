@@ -172,12 +172,30 @@ class objCar extends gameobj {
             this.next.render();
         }
     }
+
+    collision_chk(other) {
+        // collision check
+        let checked = false;
+        let dist = this.center.calcDist(other.center);
+        let minDist = this.r + other.r;
+        if (dist <= minDist) {
+            let newVelocityX = elasticCollision([this.m, other.m], [this.speed.v1, other.speed.v1]);
+            let newVelocityY = elasticCollision([this.m, other.m], [this.speed.v2, other.speed.v2]);
+            this.speed = new Vector2D(newVelocityX[0], newVelocityY[0]);
+            other.speed = new Vector2D(newVelocityX[1], newVelocityY[1]);
+            checked = true;
+
+            roughlySeparate(this, other, minDist);
+        }
+        return checked;
+    }
 }
 
 class objCarAI extends objCar {
     constructor(road, car, stage) {
         super(road);
         this.car = car;
+        this.center.v1 += this.r * 4;
         this.maxSpeedV2 = 1.5 + stage * 0.2;
         this.bodyColor = "purple";
         this.wheelColor = "#777";
