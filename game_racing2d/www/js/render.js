@@ -39,8 +39,8 @@ let gameCanvas = {
     this.ctx.drawImage(img_pause, 0, 0, 40, 40, this.w - 60, 20, 40, 40);
     this.ctx.fillStyle = '#ffa500';
     this.ctx.font = '28px Sniglet-ExtraBold';
-    this.ctx.fillText('Score : ' + gamePlay.score, 20, 50);
-    this.ctx.fillText('Stage : ' + gamePlay.stageNum, 230,50);
+    //this.ctx.fillText('Score : ' + gamePlay.score, 230, 50);
+    this.ctx.fillText('Stage : ' + gamePlay.stageNum, 20,50);
   },
   toggleFullScreen : function () {
     if (this.fullScreen) {
