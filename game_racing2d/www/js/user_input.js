@@ -62,7 +62,7 @@ function init_user_input() {
 function showSubMenu() {
   if (curPage == 'game') {
     gamePlay.pause = true;
-    document.getElementById( 'bgm' ).pause();
+    pauseBGM();
   }
   document.getElementById("Submenu").style.left = "0";
 }
@@ -71,7 +71,7 @@ function hideSubMenu() {
   document.getElementById("Submenu").style.left = "-100%";
   gamePlay.pause = false;
   if (curPage == 'game') {
-    document.getElementById( 'bgm' ).play();
+    playBGM();
     gamePlay.last_animation_time = 0;
     requestAnimationFrame(tick);
   }
