@@ -40,18 +40,6 @@ function chkAndUnlockAchievement(score) {
   }
 }
 
-function OpenUserResult() {
-  document.getElementById("user_result").style.width = "100%";
-}
-
-function  CloseUserResult() {
-  document.getElementById("user_result").style.width = "0%";
-  setTimeout(function() {
-    pageChange('menu');
-    document.location.href = "index.html";
-  }, 500);
-}
-
 function ShowAchievements() {
   if (!glGameSvc.loginStatus) return;
   try {

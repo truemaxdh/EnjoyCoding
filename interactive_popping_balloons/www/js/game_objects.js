@@ -33,9 +33,6 @@ class gameobj {
     }
 
     render() {
-        if (this.img != null) {
-            gameCanvas.ctx.drawImage(this.img, this.center.v1, this.center.v2);
-        }
         if (this.next != null) {
             this.next.render();
         }
@@ -60,45 +57,55 @@ class objTouch extends gameobj {
         gameCanvas.ctx.moveTo(this.center.v1, this.center.v2 - this.r);
         gameCanvas.ctx.lineTo(this.center.v1, this.center.v2 + this.r);
         gameCanvas.ctx.stroke();
+        super.render();
     }    
 }
 
 class objBalloon extends gameobj {
-    constructor(x, y, r, dx, dy) {
-        super(x, y, r, dx, dy);
+    constructor() {
+        super(getRndInt(0, gameCanvas.w), gameCanvas.h, 
+            Math.min(gameCanvas.w, gameCanvas.h) / 20 * (1 + Math.random()),
+            0,
+            - (Math.random() * gameCanvas.h / 70 + 1));
         this.style = (Math.random() >= 0.5) ? "fill" : "stroke";
         //this.bgr = get{r:this.getNewC(-1), g:this.getNewC(-1), b:this.getNewC(-1)};
-        this.bgr = getRndColor(15, 15, 15, 240);
+        this.bgr = getRndColor(25, 25, 25, 231);
     }
      
     render() {
-        gameCanvas.ctx.globalCompositeOperation = this.gco;
-        gameCanvas.ctx.beginPath();
-        gameCanvas.ctx.fillStyle = this.rgb;
-        gameCanvas.ctx.arc(this.center.v1, this.center.v2, this.r, 0, 2 * Math.PI);
-        gameCanvas.ctx.fill();
-        if (this.invincibleTime > 0) --this.invincibleTime;
-        if (this.next != null) {
-            this.next.render();
+        const ctx = gameCanvas.ctx;
+        ctx.beginPath();
+         
+        ctx.arc(this.center.v1, this.center.v2, this.r, 0, 2 * Math.PI);
+        ctx.moveTo(this.center.v1, this.center.v2 + this.r);
+        ctx.lineTo(this.center.v1 - this.r / 5, this.center.v2 + this.r * 1.2);
+        ctx.lineTo(this.center.v1 + this.r / 5, this.center.v2 + this.r * 1.2);
+        ctx.lineTo(this.center.v1, this.center.v2 + this.r);
+        if (this.style == "fill") {
+            ctx.fillStyle = this.bgr;
+            ctx.fill();
+        } else {
+            ctx.strokeStyle = this.bgr;
+            ctx.stroke();
         }
+        
+        ctx.beginPath();
+        ctx.strokeStyle = this.bgr;
+        ctx.moveTo(this.center.v1, this.center.v2 + this.r * 1.2);
+        ctx.quadraticCurveTo(this.center.v1 + this.r * 0.15, this.center.v2 + this.r * 1.45, this.center.v1, this.center.v2 + this.r * 1.7);
+        ctx.quadraticCurveTo(this.center.v1 - this.r * 0.15, this.center.v2 + this.r * 1.95, this.center.v1, this.center.v2 + this.r * 2.2);
+        ctx.quadraticCurveTo(this.center.v1 + this.r * 0.15, this.center.v2 + this.r * 2.45, this.center.v1, this.center.v2 + this.r * 2.7);
+        ctx.quadraticCurveTo(this.center.v1 - this.r * 0.15, this.center.v2 + this.r * 2.95, this.center.v1, this.center.v2 + this.r * 3.2);
+        ctx.stroke();
+        super.render();
     }
 
     hitTheWall() {
-        let newCenter = this.center.clone();
-        newCenter.add(this.speed);    
-        if ((newCenter.v1 - this.r) < 0 && this.speed.v1 < 0 || 
-            (newCenter.v1 + this.r) > gameCanvas.w && this.speed.v1 > 0) {
-                this.speed.v1 *= -1;
-            }
-            
-        if ((newCenter.v2 + this.r) > gameCanvas.h && this.speed.v2 > 0) {
-                this.speed.v2 *= -1;
-            }
-    }
-
-    collision_chk(other) {
-        return (this.invincibleTime > 0) ? false : (this.center.calcDist(other.center) < (this.r + other.r));
-    }    
+        if (this.center.v2 < -100) {
+            this.center.v2 = gameCanvas.h;
+            this.center.v1 = getRndInt(0, gameCanvas.w);
+        }
+    } 
 }
 
 class objGameOver extends gameobj {
@@ -111,15 +118,24 @@ class objGameOver extends gameobj {
         var c_x = gameCanvas.ctx.canvas.width / 2;
         var c_y = gameCanvas.ctx.canvas.height / 2;
 
-        // create radial gradient
-        var grd = gameCanvas.ctx.createRadialGradient(c_x, c_y, 10, c_x, c_y, 150);
-        // light blue
-        grd.addColorStop(0, 'yellow');
-        // dark blue
-        grd.addColorStop(1, '#004CB3');
-        gameCanvas.ctx.fillStyle = grd;
+        gameCanvas.ctx.fillStyle = "#777";
         gameCanvas.ctx.font = '50px Sniglet-ExtraBold';
         gameCanvas.ctx.fillText('GameOver', c_x - 130, c_y - 25);
+
+        this.count_down--;
+        if (this.count_down <= 0) {
+            document.getElementById( 'bgm' ).pause();
+            gamePlay.pause = true;        
+            if (isApp && glGameSvc.loginStatus) {
+                try {  
+                    Android.submitScore(glGameSvc.leaderboardId, score);
+                } catch(e) {
+                    Android.showToast("submitScoe failed.");
+                }
+            }
+            OpenUserResult();
+            document.getElementById('user_score').innerHTML = score;
+        }
     }
 }
 
@@ -129,19 +145,12 @@ class objStageClear extends gameobj {
         this.count_down = 100;
         this.clearedStage = stageNum
     }
-     
+    
     render() {
         var c_x = gameCanvas.ctx.canvas.width / 2;
         var c_y = gameCanvas.ctx.canvas.height / 2;
 
-        // create radial gradient
-        // Create gradient
-        var grd = gameCanvas.ctx.createLinearGradient(0, 0, gameCanvas.ctx.canvas.width, 0);
-        grd.addColorStop("0", "magenta");
-        grd.addColorStop("0.5", "blue");
-        grd.addColorStop("1.0", "red");
-
-        gameCanvas.ctx.fillStyle = grd;
+        gameCanvas.ctx.fillStyle = "#777";
         gameCanvas.ctx.font = '50px Sniglet-ExtraBold';
         gameCanvas.ctx.fillText('Stage' + this.clearedStage + ' Clear!', c_x - 200, c_y - 25);
         this.count_down--;
@@ -150,22 +159,33 @@ class objStageClear extends gameobj {
             gameObjects.init();
         }
     }
-}   
+}
 
 let gameObjects = {
-    ballEnds : [new gameobj(), new gameobj()],
     oTouch : null,
+    gameOver: null,
+    stageClear: null,
+    mainChainFirst : new gameobj(),
+    mainChainLast : new gameobj(),
     init : function() {
-        this.ballEnds[0].next = this.ballEnds[1];
-        this.ballEnds[1].prev = this.ballEnds[0];
+        this.gameOver = new objGameOver();
+        this.mainChainFirst.next = this.mainChainLast;
+        this.mainChainLast.prev = this.mainChainFirst;
     },
     move : function() {
-        this.ballEnds[0].move();
+        this.mainChainFirst.move();
     },
     render : function() {
-        this.ballEnds[0].render();
+        this.mainChainFirst.render();
     },
-    isBallEmpty : function() {
-        return (this.ballEnds[0].next == this.ballEnds[1]);
-    }
+    push_to_chain : function(obj) {
+        obj.prev = this.mainChainLast.prev;
+        obj.next = this.mainChainLast;
+        this.mainChainLast.prev.next = obj;
+        this.mainChainLast.prev = obj;
+    },
+    remove_from_chain : function(obj) {
+        obj.prev.next = obj.next;
+        obj.next.prev = obj.prev;
+    }      
 }

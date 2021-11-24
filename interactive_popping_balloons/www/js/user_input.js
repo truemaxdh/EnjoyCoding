@@ -55,22 +55,6 @@ function init_user_input() {
     user_y = e.touches[0].clientY * scale_fy;
     return false;
   }
-}
 
-function showSubMenu() {
-  if (curPage == 'game') {
-    gamePlay.pause = true;
-    document.getElementById( 'bgm' ).pause();
-  }
-  document.getElementById("Submenu").style.width = "100%";
-}
-
-function hideSubMenu() {
-  document.getElementById("Submenu").style.width = "0%";
-  gamePlay.pause = false;
-  if (curPage == 'game') {
-    document.getElementById( 'bgm' ).play();
-    gamePlay.last_animation_time = 0;
-    requestAnimationFrame(tick);
-  }
+  window.addEventListener("deviceorientation", handleOrientation);
 }
