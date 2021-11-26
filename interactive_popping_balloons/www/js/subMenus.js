@@ -60,9 +60,11 @@ function openStageMap() {
       localStorage.setItem(stageStoreName, 0);
     maxStage = Number(localStorage.getItem(stageStoreName)) + 1;
   } catch(err) {}
-  for(let i = 1; i <= maxStage; i++) {
-    document.getElementById('btnL' + i).disabled = false;
-  }
+  try {
+    for(let i = 1; i <= maxStage; i++) {
+      document.getElementById('btnL' + i).disabled = false;
+    }
+  } catch(err) {}
   document.getElementById('StageMap').style.left='0';
 }
 
