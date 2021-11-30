@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>CSS Template</title>
+<title>HTML TTS TEST</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <input id="code_html" type="text" value="삼겹살" autocomplete="off" readonly="">
-<input type="button" value="말하기"/>
+<input type="button" value="말하기" onclick="talk('삼겹살');"/>
 <input id="code_direct" type="text" value="족발" autocomplete="off" readonly="">
-<input type="button" value="말하기"/>
+<input type="button" value="말하기" onclick="talk('족발');"/>
 <input id="code_reddit" type="text" value="수육" autocomplete="off" readonly="">
-<input type="button" value="말하기"/>
+<input type="button" value="말하기" onclick="talk('수육');"/>
+<textarea id="txtTotalk"></textarea>
+<input type="button" value="말하기" onclick="talk();"/>
 <script>
 var voices = [];
 function setVoiceList() {
@@ -50,11 +52,15 @@ utterThis.pitch = 1;
 utterThis.rate = 1; //속도
 window.speechSynthesis.speak(utterThis);
 }
-document.addEventListener("click", function(e) {
-var t = e.target;
-var input = t.previousElementSibling;
-speech(input.value);
-});
+// document.addEventListener("click", function(e) {
+// var t = e.target;
+// var input = t.previousElementSibling;
+// speech(input.value);
+// });
+function talk() {
+    const txt = document.getElementById("txtTotalk").value;
+    speech(txt);
+}
 </script>
 </body>
 </html>
