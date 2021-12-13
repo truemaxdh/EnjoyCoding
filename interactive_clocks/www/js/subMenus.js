@@ -2,7 +2,8 @@ let fullScreen = false;
 //let oldWidth = "";
 //let oldHeight = "";
 function toggleFullScreen() {
-  var el = document.getElementById("board");
+  const el = document.getElementById("board");
+  let w, h;
   if (fullScreen) {
     if (document.exitFullscreen) {
       document.exitFullscreen();
@@ -11,12 +12,11 @@ function toggleFullScreen() {
     } else if (document.msExitFullscreen) { /* IE11 */
       document.msExitFullscreen();
     }
-    //el.style.width = oldWidth;
-    //el.style.height = oldHeight;
+    const rect = el.getBoundingClientRect();
+    w = rect.width;
+    h = rect.height;
     fullScreen = false;
   } else {
-    //oldWidth = el.style.width;
-    //oldHeight = el.style.height;
     if (el.requestFullscreen) {
       el.requestFullscreen();
     } else if (el.webkitRequestFullscreen) { /* Safari */
@@ -26,14 +26,18 @@ function toggleFullScreen() {
     }      
     //el.style.width = screen.width + "px";
     //el.style.height = screen.height + "px";
+    w = screen.width;
+    h = screen.height;
     fullScreen = true;
   }
-  const rect = el.getBoundingClientRect();
-  var cnv = interactive.clocks.ctx.canvas;
+  const obj = interactive.clocks;
+  const cnv = obj.ctx.canvas;
+  
+  
   //cnv.style.width = el.style.width;
   //cnv.style.height = el.style.height;
-  cnv.style.width = rect.width + "px";
-  cnv.style.height = rect.height + "px";
+  cnv.style.width = w + "px";
+  cnv.style.height = h + "px";
   cnv.width = cnv.style.width.replace("px","");
   cnv.height = cnv.style.height.replace("px","");
   obj.w = cnv.width;
