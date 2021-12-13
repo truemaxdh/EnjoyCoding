@@ -1,0 +1,98 @@
+<html>
+  <head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="description" content="interactive fireworks" />
+    
+    <title>Interactive Fireworks</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!--link rel="stylesheet" href="https://truemaxdh.github.io/Style/skin.css"-->
+    <script src="js/clocks.js"></script>
+    <script src="js/subMenus.js"></script>
+    <script src="js/sound_effects.js"></script>
+    <script src="js/google_services.js"></script>
+    <script>
+      function demo_clocks() {
+        var el = document.getElementById("board");
+        //el.innerHTML = "";
+        interactive.clocks(el);
+      }
+      
+      function BgmOnOff() {
+        var el = document.getElementById("bgmOnOff");
+        //console.log(el.innerHTML);
+        if (el.innerHTML == "Background Music: Off") {
+          el.innerHTML = "Background Music: On";
+          soundSettings.bgm = "on";
+          playBGM();
+        } else {
+          el.innerHTML = "Background Music: Off";
+          soundSettings.bgm = "off";
+          pauseBGM();
+        }
+      }
+      
+      function soundEffectOnOff() {
+        var el = document.getElementById("soundEffectOnOff");
+        //console.log(el.innerHTML);
+        if (el.innerHTML == "Sound Effect: Off") {
+          el.innerHTML = "Sound Effect: On";
+          soundSettings.sound = "on";
+        } else {
+          el.innerHTML = "Sound Effect: Off";
+          soundSettings.sound = "off";
+        }
+      }
+
+      function ExitApp() {
+        pauseBGM();
+        soundSettings.sound = "off";
+        soundSettings.bgm = "off";
+        Android.exitApp();
+      }
+
+      function showSubMenu() {
+        document.getElementById("settings").style.left = "0";
+        setTimeout(function() {
+          hideSubMenu();
+        }, 3000);  
+      }
+
+      function hideSubMenu() {
+        document.getElementById("settings").style.left = "-100%";
+      }
+      
+      window.onload = function() {
+        var el = document.getElementById("board");
+        
+        demo_clocks();
+        showSubMenu();
+      }
+    </script>
+
+  </head>
+  <body>  
+    <div id="board" style="width:100%; height:100%;" ondblclick="showSubMenu();">
+      <div id="settings" class="overlay">
+
+        <!-- Button to close the overlay navigation -->
+        <a href="javascript:void(0)" class="closebtn" onclick="hideSubMenu();">&times;</a>
+  
+        <!-- Overlay content -->
+        <div class="overlay-content">
+          <div class="text">Settings</div>
+          <a href="#" onclick="toggleFullScreen();">Toggle Full Screen</a>
+          <a href="#" id="bgmOnOff" onclick="BgmOnOff();">Background Music: Off</a>
+          <a href="#" id="soundEffectOnOff" onclick="soundEffectOnOff();">Sound Effect: Off</a>
+          <a href="#" onclick="ExitApp();">Exit App</a>
+          <a href="#" onclick="hideSubMenu();">Resume</a>
+          <font color="white">Double-click on the screen to see this menu again.</font>
+        </div>
+      </div>    
+    </div>
+    <!-- audio id="bgm" src="sound/LightOfNight.mp3" preload="auto" loop></audio -->
+    <!-- The overlay -->
+    
+  </body>
+</html>
