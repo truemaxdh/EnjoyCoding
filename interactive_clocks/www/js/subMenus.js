@@ -42,9 +42,8 @@ function toggleFullScreen() {
   cnv.height = cnv.style.height.replace("px","");
   obj.w = cnv.width;
   obj.h = cnv.height;
-  setTimeout(function(el) {
-    const el = document.getElementById("board");
-    const rect = el.getBoundingClientRect();
+  setTimeout(()=>{
+    const rect = document.getElementById("board").getBoundingClientRect();
     alert(rect.width);
   }, 0.1);
 }
