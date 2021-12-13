@@ -15,15 +15,15 @@ function toggleFullScreen() {
       el.style.height = oldHidth;
       fullScreen = false;
     } else {
+      oldWidth = el.style.width;
+      oldHeight = el.style.height;
       if (el.requestFullscreen) {
         el.requestFullscreen();
       } else if (el.webkitRequestFullscreen) { /* Safari */
         el.webkitRequestFullscreen();
       } else if (el.msRequestFullscreen) { /* IE11 */
         el.msRequestFullscreen();
-      }
-      oldWidth = el.style.width;
-      oldHeight = el.style.height;
+      }      
       el.style.width = screen.width + "px";
       el.style.height = screen.height + "px";
       fullScreen = true;
