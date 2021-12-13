@@ -36,8 +36,12 @@ let gameCanvas = {
   },
   render : function() {
     // afterimage
-    this.ctx.globalCompositeOperation = 'source-over';
-    this.ctx.fillStyle = "rgba(135, 206, 235, 0.5)";
+    //this.ctx.globalCompositeOperation = 'source-over';
+    //this.ctx.fillStyle = "rgba(135, 206, 235, 0.5)";
+    let skyGradient = obj.ctx.createLinearGradient(0, 0, 0, obj.h * 1.2);
+    skyGradient.addColorStop(0, "DeepSkyBlue");
+    skyGradient.addColorStop(1, "AliceBlue");
+    this.ctx.fillStyle = skyGradient;
     this.ctx.fillRect(0, 0, this.w, this.h);
 
     gameObjects.render();
