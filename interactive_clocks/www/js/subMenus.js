@@ -12,7 +12,7 @@ function toggleFullScreen() {
         document.msExitFullscreen();
       }
       el.style.width = oldWidth;
-      el.style.height = oldHidth;
+      el.style.height = oldHeight;
       fullScreen = false;
     } else {
       oldWidth = el.style.width;
