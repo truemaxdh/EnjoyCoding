@@ -43,6 +43,7 @@ function toggleFullScreen() {
   obj.w = cnv.width;
   obj.h = cnv.height;
   setTimeout(function(el) {
+    const el = document.getElementById("board");
     const rect = el.getBoundingClientRect();
     alert(rect.width);
   }, 0.1);
