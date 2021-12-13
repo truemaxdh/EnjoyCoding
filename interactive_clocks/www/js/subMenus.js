@@ -1,4 +1,6 @@
 let fullScreen = false;
+let oldWidth = "";
+let oldHeight = "";
 function toggleFullScreen() {
     var el = document.getElementById("board");
     if (fullScreen) {
@@ -9,8 +11,8 @@ function toggleFullScreen() {
       } else if (document.msExitFullscreen) { /* IE11 */
         document.msExitFullscreen();
       }
-      el.style.width = "800px";
-      el.style.height = "600px";
+      el.style.width = oldWidth;
+      el.style.height = oldHidth;
       fullScreen = false;
     } else {
       if (el.requestFullscreen) {
@@ -20,6 +22,8 @@ function toggleFullScreen() {
       } else if (el.msRequestFullscreen) { /* IE11 */
         el.msRequestFullscreen();
       }
+      oldWidth = el.style.width;
+      oldHeight = el.style.height;
       el.style.width = screen.width + "px";
       el.style.height = screen.height + "px";
       fullScreen = true;
