@@ -1,8 +1,12 @@
 let fullScreen = false;
-//let oldWidth = "";
-//let oldHeight = "";
+let canvasRect = null;
 function toggleFullScreen() {
   const el = document.getElementById("board");
+  const obj = interactive.clocks;
+  const cnv = obj.ctx.canvas;
+  if (canvasRect == null) {
+    canvasRect = cnv.getBoundingClientRect();
+  }
   let w, h;
   if (fullScreen) {
     if (document.exitFullscreen) {
@@ -12,9 +16,8 @@ function toggleFullScreen() {
     } else if (document.msExitFullscreen) { /* IE11 */
       document.msExitFullscreen();
     }
-    const rect = el.getBoundingClientRect();
-    w = rect.width;
-    h = rect.height;
+    w = canvasRect.width;
+    h = canvasRect.height;
     fullScreen = false;
   } else {
     if (el.requestFullscreen) {
@@ -24,26 +27,14 @@ function toggleFullScreen() {
     } else if (el.msRequestFullscreen) { /* IE11 */
       el.msRequestFullscreen();
     }      
-    //el.style.width = screen.width + "px";
-    //el.style.height = screen.height + "px";
     w = screen.width;
     h = screen.height;
     fullScreen = true;
   }
-  const obj = interactive.clocks;
-  const cnv = obj.ctx.canvas;
-  
-  
-  //cnv.style.width = el.style.width;
-  //cnv.style.height = el.style.height;
   cnv.style.width = w + "px";
   cnv.style.height = h + "px";
   cnv.width = cnv.style.width.replace("px","");
   cnv.height = cnv.style.height.replace("px","");
   obj.w = cnv.width;
   obj.h = cnv.height;
-  setTimeout(()=>{
-    const rect = document.getElementById("board").getBoundingClientRect();
-    alert(rect.width);
-  }, 0.1);
 }
