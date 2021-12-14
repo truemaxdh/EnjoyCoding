@@ -5,11 +5,12 @@ const TTS = {
   initialized : false,
   init : ()=>{
     TTS.voices = window.speechSynthesis.getVoices();
+    //console.log(TTS.voices);
     for(let i = 0; i < TTS.voices.length ; i++) {
       if(TTS.voices[i].lang.indexOf(TTS.lang) >= 0 || 
         TTS.voices[i].lang.indexOf(TTS.lang.replace('-', '_')) >= 0) 
       {
-        this.voice = TTS.voices[i];
+        TTS.voice = TTS.voices[i];
       }
     }
   },
