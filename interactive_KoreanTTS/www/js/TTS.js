@@ -6,7 +6,7 @@ const TTS = {
   utterance : null,
   init : ()=>{
     TTS.voices = window.speechSynthesis.getVoices();
-    console.log(TTS.voices);
+    //console.log(TTS.voices);
     for(let i = 0; i < TTS.voices.length ; i++) {
       if(TTS.voices[i].lang.indexOf(TTS.lang) >= 0 || 
         TTS.voices[i].lang.indexOf(TTS.lang.replace('-', '_')) >= 0) 
