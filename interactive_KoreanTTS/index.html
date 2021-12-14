@@ -14,10 +14,12 @@
 <input type="button" value="말하기" onclick="talk('수육');"/>
 <textarea id="txtTotalk"></textarea>
 <input type="button" value="말하기" onclick="talk();"/>
+<a href="./www/index.html">StudyGame</a>
 <script>
 var voices = [];
 function setVoiceList() {
 voices = window.speechSynthesis.getVoices();
+console.log(voices);
 }
 setVoiceList();
 if (window.speechSynthesis.onvoiceschanged !== undefined) {
