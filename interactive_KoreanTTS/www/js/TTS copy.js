@@ -3,10 +3,9 @@ const TTS = {
   voice: null,
   lang: "ko-KR",
   initialized : false,
-  utterance : null,
   init : ()=>{
     TTS.voices = window.speechSynthesis.getVoices();
-    console.log(TTS.voices);
+    //console.log(TTS.voices);
     for(let i = 0; i < TTS.voices.length ; i++) {
       if(TTS.voices[i].lang.indexOf(TTS.lang) >= 0 || 
         TTS.voices[i].lang.indexOf(TTS.lang.replace('-', '_')) >= 0) 
@@ -14,19 +13,6 @@ const TTS = {
         TTS.voice = TTS.voices[i];
       }
     }
-    TTS.utterance = new SpeechSynthesisUtterance();
-    TTS.utterance.onend = function (event) {
-      //console.log('end');
-    };
-    TTS.utterance.onerror = function(event) {
-      //console.log('error', event);
-    };
-
-    TTS.utterance.voice = TTS.voice;
-
-    TTS.utterance.lang = TTS.lang;
-    TTS.utterance.pitch = 1;
-    TTS.utterance.rate = 1; //속도
   },
   speech : (text)=>{
     if(!window.speechSynthesis) {
@@ -40,8 +26,20 @@ const TTS = {
         return;
       }
     }
-    TTS.utterance.text = text;
     
-    window.speechSynthesis.speak(TTS.utterance);
+    let utterThis = new SpeechSynthesisUtterance(text);
+    utterThis.onend = function (event) {
+      //console.log('end');
+    };
+    utterThis.onerror = function(event) {
+      //console.log('error', event);
+    };
+
+    utterThis.voice = TTS.voice;
+
+    utterThis.lang = TTS.lang;
+    utterThis.pitch = 1;
+    utterThis.rate = 1; //속도
+    window.speechSynthesis.speak(utterThis);
   }
 };
