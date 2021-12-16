@@ -1,68 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>HTML TTS TEST</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-<input id="code_html" type="text" value="삼겹살" autocomplete="off" readonly="">
-<input type="button" value="말하기" onclick="talk('삼겹살');"/>
-<input id="code_direct" type="text" value="족발" autocomplete="off" readonly="">
-<input type="button" value="말하기" onclick="talk('족발');"/>
-<input id="code_reddit" type="text" value="수육" autocomplete="off" readonly="">
-<input type="button" value="말하기" onclick="talk('수육');"/>
-<textarea id="txtTotalk"></textarea>
-<input type="button" value="말하기" onclick="talk();"/>
-<a href="./www/index.html">StudyGame</a>
-<script>
-var voices = [];
-function setVoiceList() {
-voices = window.speechSynthesis.getVoices();
-console.log(voices);
-}
-setVoiceList();
-if (window.speechSynthesis.onvoiceschanged !== undefined) {
-window.speechSynthesis.onvoiceschanged = setVoiceList;
-}
-function speech(txt) {
-if(!window.speechSynthesis) {
-alert("음성 재생을 지원하지 않는 브라우저입니다. 크롬, 파이어폭스 등의 최신 브라우저를 이용하세요");
-return;
-}
-var lang = 'ko-KR';
-var utterThis = new SpeechSynthesisUtterance(txt);
-utterThis.onend = function (event) {
-console.log('end');
-};
-utterThis.onerror = function(event) {
-console.log('error', event);
-};
-var voiceFound = false;
-for(var i = 0; i < voices.length ; i++) {
-if(voices[i].lang.indexOf(lang) >= 0 || voices[i].lang.indexOf(lang.replace('-', '_')) >= 0) {
-utterThis.voice = voices[i];
-voiceFound = true;
-}
-}
-if(!voiceFound) {
-alert('voice not found');
-return;
-}
-utterThis.lang = lang;
-utterThis.pitch = 1;
-utterThis.rate = 1; //속도
-window.speechSynthesis.speak(utterThis);
-}
-// document.addEventListener("click", function(e) {
-// var t = e.target;
-// var input = t.previousElementSibling;
-// speech(input.value);
-// });
-function talk() {
-    const txt = document.getElementById("txtTotalk").value;
-    speech(txt);
-}
-</script>
-</body>
+    <head>
+        <title>HTML TTS TEST</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <input id="code_html" type="text" value="삼겹살" autocomplete="off" readonly="">
+        <input type="button" value="말하기" onclick="talk('삼겹살');"/>
+        <input id="code_direct" type="text" value="족발" autocomplete="off" readonly="">
+        <input type="button" value="말하기" onclick="talk('족발');"/>
+        <input id="code_reddit" type="text" value="수육" autocomplete="off" readonly="">
+        <input type="button" value="말하기" onclick="talk('수육');"/>
+        <textarea id="txtTotalk"></textarea>
+        <input type="button" value="말하기" onclick="talk();"/>
+
+        <select id="voices"></select>
+        <a href="./www/index.html">StudyGame</a>
+        <script>
+            var voices = [];
+            function setVoiceList() {
+                const elVoice = document.getElementById("voices");
+                voices = window.speechSynthesis.getVoices();
+                voices.forEach(vo => {
+                    let opt = document.createElement("option");
+                    opt.text = vo.name;
+                    opt.value = vo.name;
+                    elVoice.options.add(opt);
+                });
+                
+                console.log(voices);
+            }
+            setVoiceList();
+            if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                window.speechSynthesis.onvoiceschanged = setVoiceList;
+            }
+            function speech(txt) {
+                if(!window.speechSynthesis) {
+                    alert("음성 재생을 지원하지 않는 브라우저입니다. 크롬, 파이어폭스 등의 최신 브라우저를 이용하세요");
+                    return;
+                }
+                var lang = 'ko-KR';
+                alert(document.getElementById("voices").value);
+                var utterThis = new SpeechSynthesisUtterance(txt);
+                utterThis.onend = function (event) {
+                    console.log('end');
+                };
+
+                utterThis.onerror = function(event) {
+                    console.log('error', event);
+                };
+                
+                var voiceFound = false;
+                for(var i = 0; i < voices.length ; i++) {
+                    if(voices[i].lang.indexOf(lang) >= 0 || voices[i].lang.indexOf(lang.replace('-', '_')) >= 0) {
+                        utterThis.voice = voices[i];
+                        voiceFound = true;
+                    }
+                }
+                if(!voiceFound) {
+                    alert('voice not found');
+                    return;
+                }
+                utterThis.lang = lang;
+                utterThis.pitch = 1;
+                utterThis.rate = 1; //속도
+                window.speechSynthesis.speak(utterThis);
+            }
+            // document.addEventListener("click", function(e) {
+            // var t = e.target;
+            // var input = t.previousElementSibling;
+            // speech(input.value);
+            // });
+            function talk() {
+                const txt = document.getElementById("txtTotalk").value;
+                speech(txt);
+            }
+        </script>
+    </body>
 </html>
