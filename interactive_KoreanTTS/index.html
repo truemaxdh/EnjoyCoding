@@ -30,6 +30,8 @@
         <br>
         Rate :  <input id="rate" type="text" value="1">
         <br>
+        info : <textarea id="info" cols="50"></textarea>
+        <br>
         <a href="./www/index.html">StudyGame</a>
         <script>
             var voices = [];
@@ -78,7 +80,9 @@
                 const voice = voices[document.getElementById("voices").selectedIndex];
                 const pitch = document.getElementById("pitch").value.split(",");
                 const rate = document.getElementById("rate").value.split(",");
-                alert(txt + "," + voice.name + "," + voice.lang + "," + pitch + "," + rate);
+                //alert(txt + "," + voice.name + "," + voice.lang + "," + pitch + "," + rate);
+                document.getElementById("info").value = 
+                    txt + "," + voice.name + "," + voice.lang + "," + pitch + "," + rate;
                 utterThis.voice = voice;
                 utterThis.lang = voice.lang;
                 utterThis.pitch = pitch;
