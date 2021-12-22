@@ -45,10 +45,10 @@ function playSound(soundID)
   if (soundSettings.sound == "on") {
     try {
       voiceLinks.forEach((item, i)=>{
-        if (item == str) {
-          const soundID = i / 2;
-          sounds[soundID].currentTime = 0;
-          sounds[soundID].play();
+        if (item == soundID) {
+          const idx = i / 2;
+          sounds[idx].currentTime = 0;
+          sounds[idx].play();
         }
     });
       
