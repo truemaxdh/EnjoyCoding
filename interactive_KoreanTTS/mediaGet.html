@@ -40,9 +40,13 @@
                 const uri = voiceLinks[i + 1];
                 const name = voiceLinks[i] + ".mp3";
                 //downloadURI(uri, name);
-                fetch(uri, {mode:'no-cors'})
-                .then(response=>response.blob())
+                fetch(uri)
+                .then(response=>{
+                    console.log(response);
+                    return response.blob();
+                })
                 .then(blob=>{
+                    //console.log(blob);
                     let blobUrl = window.URL.createObjectURL(blob);
                     downloadBlob(blobUrl, name);
                 })
@@ -62,46 +66,23 @@
             // the webserver default set name = ''
             link.download = name;
             link.href = uri;
-            link.innerHTML = "local";
+            link.innerHTML = name;
             document.body.appendChild(link);
-            //link.click();
+            link.click();
+
+            let br = document.createElement("br");
+            document.body.appendChild(br);
             //link.remove();
+
+            // let audio = document.createElement("audio");
+            // audio.src = uri;
+            // audio.setAttribute("controls", "");
+            // document.body.appendChild(audio);
+            // document.body.appendChild(br);
         }
     </script>
 </head>
 <body>
-    <audio controls>
-        <source src="blob:https://truemaxdh.github.io/da1d4940-723a-4218-9edb-1197d73c390e" type="audio/mp3">
-        <source src="blob:null/7f6772dd-86b4-42ae-adeb-4fb4a05c9e3c" type="audio/mp3">
-        AAA
-    </audio>
-    <br>
-    <a download="ga.mp3" href="blob:https://truemaxdh.github.io/da1d4940-723a-4218-9edb-1197d73c390e">Go</a><br>
-    <a download="na.mp3" href="blob:https://truemaxdh.github.io/aa7eda66-c666-4760-8b79-ee5bf5255c24">Go</a><br>
-    <a download="da.mp3" href="blob:https://truemaxdh.github.io/0426aee7-35b6-4d6d-85df-1fe29b96f8e8">Go</a><br>
-    <a download="la.mp3" href="blob:https://truemaxdh.github.io/9ed8161e-3f2c-482a-b56b-f51980a564e3">Go</a><br>
-    <a download="ma.mp3" href="blob:https://truemaxdh.github.io/5655fee2-8c92-47ff-853c-8e3dbd4bab04">Go</a><br>
-    <a download="ba.mp3" href="blob:https://truemaxdh.github.io/4c6c4ff3-b9d5-4a1b-b363-b42535e4c4ac">Go</a><br>
-    <a download="sa.mp3" href="blob:https://truemaxdh.github.io/bee64ed6-44c8-481e-853d-2b5d7d58c10c">Go</a><br>
-    <a download="aa.mp3" href="blob:https://truemaxdh.github.io/6744e43e-bcef-47ff-bfe5-14e30ffc021f">Go</a><br>
-    <a download="ja.mp3" href="blob:https://truemaxdh.github.io/569caddb-b437-4cf4-96d2-ed4ae6a4eda4">Go</a><br>
-    <a download="cha.mp3" href="blob:https://truemaxdh.github.io/1fba011e-6b0a-4217-a077-e4a5eaae8628">Go</a><br>
-    <a download="ka.mp3" href="blob:https://truemaxdh.github.io/db94bdb0-c9c5-48e1-964e-8c8a6427fe3c">Go</a><br>
-    <a download="ta.mp3" href="blob:https://truemaxdh.github.io/43f88ec0-9073-4d76-b337-384c8f87a4b3">Go</a><br>
-    <a download="pa.mp3" href="blob:https://truemaxdh.github.io/d8a36cf6-3f4c-42af-8021-3398aa97ce5b">Go</a><br>
-    <a download="ha.mp3" href="blob:https://truemaxdh.github.io/6c394345-239c-463c-be18-61a45c98fb93">Go</a><br>
-
-<a download="ga.mp3" href="blob:null/7f6772dd-86b4-42ae-adeb-4fb4a05c9e3c">local</a><br>
-<a download="na.mp3" href="blob:null/4bf77290-ee8f-4e7e-89b8-1f95d1f13adc">local</a><br>
-<a download="da.mp3" href="blob:null/2ed3c4d5-f055-49f4-9046-f5a7299b1558">local</a><br>
-<a download="la.mp3" href="blob:null/cd78abdd-a56e-48fb-8691-4b5ba6bc11d3">local</a><br>
-<a download="ma.mp3" href="blob:null/e33574d5-2505-4668-8cc0-2f3b7090a091">local</a><br>
-<a download="ba.mp3" href="blob:null/3a4c2116-189a-40ef-a37a-f8363a1723d3">local</a><br>
-<a download="sa.mp3" href="blob:null/b4e4a165-ea17-46cb-9c80-9ca383f3d714">local</a><br>
-<a download="aa.mp3" href="blob:null/056eaa0e-bd4a-4dc8-b767-db6da6fa4021">local</a><br>
-<a download="ja.mp3" href="blob:null/c1fded37-cb66-400e-a66c-539e561f5ab2">local</a><br>
-<a download="cha.mp3" href="blob:null/b625be24-eb68-4519-8b80-b47fcaf2cd13">local</a><br>
-<a download="ka.mp3" href="blob:null/19865c77-ee01-470b-bfbb-5ba5c23854e2">local</a><br>
-<a download="ta.mp3" href="blob:null/c97cf151-4d61-4782-a76c-aa938ef0df8b">local</a><br>
-<a download="pa.mp3" href="blob:null/8c3dbf88-9cc2-4320-8a82-95fc9949e42d">local</a><br>
-<a download="ha.mp3" href="blob:null/3771b2f7-a7ce-4ea6-9d0b-ce24b73675ea">local</a></body></html>
+    <audio src='https://dicmedia.korean.go.kr/multimedia/multimedia_files/convert/20120221/31083/SND000019786.mp3' controls></audio>
+</body>
+</html>
