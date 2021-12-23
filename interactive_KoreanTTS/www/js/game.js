@@ -118,8 +118,8 @@ function collision_check() {
     if (oCatched != null) {
       gameObjects.remove_from_chain(oCatched);
       gamePlay.score += 10;
-      //TTS.speech(oCatched.hanguel);
-      playSound(oCatched.hanguel);
+      TTS.speech(oCatched.hanguel + '아');
+      //playSound(oCatched.hanguel);
       try {
         chkAndUnlockAchievement(gamePlay.score);
       } catch(err) {}
