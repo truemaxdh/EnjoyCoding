@@ -25,7 +25,7 @@ const TTS = {
     TTS.utterance.voice = TTS.voice;
 
     TTS.utterance.lang = TTS.lang;
-    TTS.utterance.pitch = 1;
+    TTS.utterance.pitch = 3;
     TTS.utterance.rate = 1; //속도
   },
   speech : (text)=>{
