@@ -37,7 +37,7 @@
                 '하',
                 'https://dicmedia.korean.go.kr/multimedia/multimedia_files/convert/20160913/20000/18000/338085/SND000347439.mp3'
             ];
-            function speech(str) {
+            function speech_new(str) {
                 voiceLinks.forEach((item, i)=>{
                     if (item == str) {
                         const uri = voiceLinks[i + 1];
@@ -50,21 +50,20 @@
         </script>
     </head>
     <body>
-        <button onclick="speech('가');">가</button>
-        <button onclick="speech('나');">나</button>
-        <button onclick="speech('다');">다</button>
-        <button onclick="speech('라');">라</button>
-        <button onclick="speech('마');">마</button>
-        <button onclick="speech('바');">바</button>
-        <button onclick="speech('사');">사</button>
-        <button onclick="speech('아');">아</button>
-        <button onclick="speech('아1');">아1</button>
-        <button onclick="speech('자');">자</button>
-        <button onclick="speech('차');">차</button>
-        <button onclick="speech('카');">카</button>
-        <button onclick="speech('타');">타</button>
-        <button onclick="speech('파');">파</button>
-        <button onclick="speech('하');">하</button>
+        <button onclick="speech('가아');">가</button>
+        <button onclick="speech('나아');">나</button>
+        <button onclick="speech('다아');">다</button>
+        <button onclick="speech('라아');">라</button>
+        <button onclick="speech('마아');">마</button>
+        <button onclick="speech('바아');">바</button>
+        <button onclick="speech('사아');">사</button>
+        <button onclick="speech('아아');">아</button>
+        <button onclick="speech('자아');">자</button>
+        <button onclick="speech('차아');">차</button>
+        <button onclick="speech('카아');">카</button>
+        <button onclick="speech('타아');">타</button>
+        <button onclick="speech('파아');">파</button>
+        <button onclick="speech('하아');">하</button>
         <br>
         <textarea id="txtTotalk"></textarea>
         <input type="button" value="말하기" onclick="talk();"/>
@@ -96,7 +95,7 @@
             if (window.speechSynthesis.onvoiceschanged !== undefined) {
                 window.speechSynthesis.onvoiceschanged = setVoiceList;
             }
-            function speech_old(txt) {
+            function speech(txt) {
                 if(!window.speechSynthesis) {
                     alert("음성 재생을 지원하지 않는 브라우저입니다. 크롬, 파이어폭스 등의 최신 브라우저를 이용하세요");
                     return;
@@ -141,7 +140,7 @@
             // });
             function talk() {
                 const txt = document.getElementById("txtTotalk").value;
-                speech_old(txt);
+                speech(txt);
             }
         </script>
     </body>
