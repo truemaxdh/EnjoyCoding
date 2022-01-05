@@ -22,6 +22,7 @@ voiceLinks.forEach((item, i)=> {
     audio.src = voiceLinks[i];
     audio.preload = "auto";
     audio.volume = 0.5;
+    audio.playbackRate = 1.5;
     sounds.push(audio);
   }  
 });
