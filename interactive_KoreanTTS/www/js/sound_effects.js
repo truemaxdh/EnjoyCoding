@@ -1,19 +1,19 @@
 // Sound Play
 const voiceLinks = [
-  '가','sound/ga.mp3',
-  '나','sound/na.mp3',
-  '다','sound/da.mp3',
-  '라','sound/la.mp3',
-  '마','sound/ma.mp3',
-  '바','sound/ba.mp3',
-  '사','sound/sa.mp3',
-  '아','sound/aa.mp3',
-  '자','sound/ja.mp3',
-  '차','sound/cha.mp3',
-  '카','sound/ka.mp3',
-  '타','sound/ta.mp3',
-  '파','sound/pa.mp3',
-  '하','sound/ha.mp3'
+  '가','voice/ga.mp3',
+  '나','voice/na.mp3',
+  '다','voice/da.mp3',
+  '라','voice/la.mp3',
+  '마','voice/ma.mp3',
+  '바','voice/ba.mp3',
+  '사','voice/sa.mp3',
+  '아','voice/aa.mp3',
+  '자','voice/ja.mp3',
+  '차','voice/cha.mp3',
+  '카','voice/ka.mp3',
+  '타','voice/ta.mp3',
+  '파','voice/pa.mp3',
+  '하','voice/ha.mp3'
 ];
 let sounds = []; // sounds
 voiceLinks.forEach((item, i)=> {
