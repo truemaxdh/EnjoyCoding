@@ -85,7 +85,7 @@ function pageChange(newpageID) {
 
   if (AdMob.adStatus == 1) {
     try {
-      Android.adMobInterstitialLoad();
+      //Android.adMobInterstitialLoad();
       AdMob.adStatus = 2; 
     } catch(e) {
       toast("adMobInterstitialLoad failed.");
@@ -95,7 +95,7 @@ function pageChange(newpageID) {
   if (newpageID=='menu') {
     if (AdMob.adStatus > 0) {
       try {
-        Android.adMobInterstitialShow();
+        //Android.adMobInterstitialShow();
         AdMob.adStatus = 1; 
       } catch(e) {
         toast("adMobInterstitialShow failed." + e.message);
