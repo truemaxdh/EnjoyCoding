@@ -177,6 +177,15 @@ function onLoad() {
 }
 
 var isApp;
+if (typeof msgToFlutter !== 'undefined') {
+  Android = {
+    reqGamerProfile: ()=>{},
+    exitApp: ()=>{
+      msgToFlutter.postMessage("exitApp");
+    } 
+  }
+}
+
 if (typeof Android==='undefined') {
   isApp = false;
   addEventListener("load", onLoad);
