@@ -183,13 +183,13 @@ if (typeof msgToFlutter !== 'undefined') {
     exitApp: ()=>{
       msgToFlutter.postMessage("exitApp");
     },
-    unlockAchievement: (achvId)=>{alert(1);},
-    showAchievements: ()=>{alert(1);},
-    showLeaderboard: (leaderboardId)=>{alert(1);},
-    adMobInterstitialLoad: ()=>{alert(1);},
-    signInToGS: ()=>{alert(1);},
-    showToast: (msg)=>{alert(1);},
-    reqGamerProfile: ()=>{alert(1);}
+    unlockAchievement: (achvId)=>{},
+    showAchievements: ()=>{},
+    showLeaderboard: (leaderboardId)=>{},
+    adMobInterstitialLoad: ()=>{},
+    signInToGS: ()=>{},
+    showToast: (msg)=>{},
+    reqGamerProfile: ()=>{}
   }
 }
 
