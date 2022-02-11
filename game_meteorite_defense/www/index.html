@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-    <meta name="description" content="a simple flight shooting game, with only a few rules.Avoid bombs.Shoot coins, but not bump into coins.Coins are differ with their number in endurance and score." />
+    <meta name="description" content="Defense from meteorites." />
     
     <title>Meterorite Defense</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -76,20 +77,8 @@
     <div id = "intro" class="menu border_round">
     </div>
     <div id = "menu" class="menu border_round">
-      <div class = "topContent">
-        <center>
-          <div id="signInStat">
-            <span style='font-size:15px;'>Sign in with Google to share your scores and achievements with your friends.</span>
-          </div>
-          <button id="logOut" style="display:none;" onclick="Android.signOutFromGS();">SignOut</button>
-          <br>
-          <img id="logIn" src="img/btn_google_signin_dark_normal_web.png" onclick="Android.signInToGS();">
-          
-        </center>
-      </div>    
       <div class = "text">
         <h1>Meteorite Defense</h1>
-        <!--<a href="#" onclick="pageChange('game');">Start</a>-->
         <a href="#" onclick="openStageMap();">Start</a>
         <a href="#" onclick="ShowAchievements();">Show Achievements</a>
         <a href="#" onclick="ShowHighScores();">Show High Scores</a>
@@ -99,6 +88,13 @@
           <a href="#" class="soundEffectOnOff" onclick="soundEffectOnOff();">Sound Effect: On</a>
           <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.left='0';"><b>How to play</b></a>
         </div>
+        <br><br>
+        <div id="signInStat">
+          <span style='font-size:15px;color: silver;'>Sign in with Google to share your scores and achievements with your friends.</span>
+        </div>
+        <button id="logOut" style="display:none;" onclick="Android.signOutFromGS();">SignOut</button>
+        <br>
+        <img id="logIn" src="img/btn_google_signin_dark_normal_web.png" onclick="Android.signInToGS();">
       </div>
     </div>
     <div id = "game">
@@ -137,10 +133,10 @@
     <!-- How to play -->
     <div id="howtoplay" class="overlay" style="background-color:white;">
       <br>
-      <center><h1 style="color:#333;">Meteorite Defence</h1></center>
-      <h2 style="color:#555;">Meteorite Defence</h2>
+      <center><h1 style="color:#333;">Clear Meteorites</h1></center>
+      <h2 style="color:#555;">Clear Meteorites</h2>
       <p style="color:#777;font-weight:bold;">
-        &nbsp;Meteorite Defence
+        &nbsp;Clear Meteorites
         <br><br>
         Drag plane to control.<br>
         Missile is fired automately.<br>
