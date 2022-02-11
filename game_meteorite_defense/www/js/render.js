@@ -21,7 +21,7 @@ function render_init() {
 }
 
 function render() {
-  ctx_game.fillStyle = "black";
+  ctx_game.fillStyle = "#333";
   ctx_game.fillRect(0, 0, 540, 900);
 
   var o_met = met_0;
@@ -53,6 +53,6 @@ function render() {
   ctx_game.fillText('Score : ' + score, 20, 50);
   ctx_game.fillText('Stage : ' + stage, 250,50);
   ctx_game.font = '34px Sniglet-ExtraBold';
-  ctx_game.fillText('▒', 480,50);
+  ctx_game.fillText('▣', 480,50);
 }
 
