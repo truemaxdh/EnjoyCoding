@@ -213,7 +213,7 @@ function objStageClear() {
         ctx_game.fillText('Stage' + gamePlay.stage + ' Clear!', c_x - 200, c_y - 25);
         this.count_down -= gamePlay.animation_interval;
         if (this.count_down <= 0) {
-            stage++;
+            gamePlay.stage++;
             newStage();
         }
     }
