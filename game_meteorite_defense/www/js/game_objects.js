@@ -196,7 +196,7 @@ function objGameOver() {
 
 function objStageClear() {
     gameobj.call(this, 0, 0);
-    chkAndUnlockStage(stage);
+    chkAndUnlockStage(gamePlay.stage);
     this.count_down = 3000;
     this.render = function(ctx_game) {
         var c_x = ctx_game.canvas.width / 2;
@@ -210,7 +210,7 @@ function objStageClear() {
                 
         ctx_game.fillStyle = grd;
         ctx_game.font = '50px Sniglet-ExtraBold';
-        ctx_game.fillText('Stage' + stage + ' Clear!', c_x - 200, c_y - 25);
+        ctx_game.fillText('Stage' + gamePlay.stage + ' Clear!', c_x - 200, c_y - 25);
         this.count_down -= gamePlay.animation_interval;
         if (this.count_down <= 0) {
             stage++;
