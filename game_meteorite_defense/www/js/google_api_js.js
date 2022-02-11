@@ -20,8 +20,8 @@ var glGameSvc = {
 
 function chkAndUnlockStage(stage) {
   try {
-    if (Number(localStorage.getItem(stageStoreName)) < stage)
-      localStorage.setItem(stageStoreName, stage);
+    if (Number(localStorage.getItem(storageName.stage)) < stage)
+      localStorage.setItem(storageName.stage, stage);
   } catch(err) {}
 }
 
@@ -164,16 +164,12 @@ function onDeviceReady() {
     Android.reqGamerProfile();
   }
   
-  render_init();
-  init_user_input();
-  pageChange('menu');
+  gameInit();
 }
 
 // Do this when run on web
 function onLoad() {
-  render_init();
-  init_user_input();
-  pageChange('menu');
+  gameInit();
 }
 
 var isApp;
