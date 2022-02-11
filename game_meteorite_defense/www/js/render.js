@@ -3,7 +3,6 @@ var ctx_game;
 
 
 function render_init() {
-  canv_bg = document.getElementById('bg_canvas');
   canv_game = document.getElementById('game_canvas');
   
   var scr_w = window.innerWidth;
@@ -12,16 +11,13 @@ function render_init() {
   if ((scr_h * 0.54) > scr_w) {
       canv_game.style.width = "100vw";    
       canv_game.style.height = "167vw";
-      canv_bg.style.width = "33vw";    
-      canv_bg.style.height = "167vw";
   }
 
-  ctx_bg = canv_bg.getContext('2d');
   ctx_game = canv_game.getContext('2d');
 }
 
 function render() {
-  ctx_game.fillStyle = "#333";
+  ctx_game.fillStyle = "#222";
   ctx_game.fillRect(0, 0, 540, 900);
 
   var o_met = met_0;
@@ -50,9 +46,9 @@ function render() {
   
   ctx_game.fillStyle = '#ffa500';
   ctx_game.font = '30px Sniglet-ExtraBold';
-  ctx_game.fillText('Score : ' + score, 20, 50);
+  ctx_game.fillText('Score : ' + gamePlay.score, 20, 50);
   ctx_game.fillText('Stage : ' + stage, 250,50);
   ctx_game.font = '34px Sniglet-ExtraBold';
-  ctx_game.fillText('▣', 480,50);
+  ctx_game.fillText('||', 480,50);
 }
 
