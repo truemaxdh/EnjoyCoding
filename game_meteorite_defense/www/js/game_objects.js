@@ -102,13 +102,16 @@ function objMissile(x, y) {
 
 function objMet(x, y, size) {
     gameobj.call(this, x, y);
+    //const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "purple"];
     this.width = size;
     this.height = size;
     this.size = size;
     this.step_x = Math.random() * 13 - 6;
     this.step_y = Math.random() * 7 + 1;
-    this.rgbStroke = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
-    this.rgbFill = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
+    // this.rgbStroke = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
+    // this.rgbFill = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
+    //this.rgbStroke = colors[Math.floor(Math.random() * colors.length)];
+    //this.rgbFill = colors[Math.floor(Math.random() * colors.length)];
     this.bonusItem = (size > 30) ? 0 : ((Math.random() < 0.05) ? 1 : 0);
     this.move = function() {
         this.x += this.step_x;
@@ -126,8 +129,8 @@ function objMet(x, y, size) {
     };
     this.render = function(ctx_game) {
         ctx_game.beginPath();
-        ctx_game.strokeStyle = this.rgbStroke;
-        ctx_game.fillStyle = this.rgbFill;
+        ctx_game.strokeStyle = "white";
+        //ctx_game.fillStyle = this.rgbFill;
         ctx_game.moveTo(this.x + this.size / 3, this.y);
         ctx_game.lineTo(this.x, this.y + this.size / 3);
         ctx_game.lineTo(this.x, this.y + 2 * this.size / 3);
@@ -141,6 +144,20 @@ function objMet(x, y, size) {
         ctx_game.fill();
         ctx_game.stroke();
     };
+    this.divide = function() {
+        let met1 = new objMet(this.x, this.y, this.size);
+        let met2 = new objMet(this.x, this.y, this.size);
+        const step_x = Math.random() * 6 + 1;
+        met2.step_x = -step_x;
+        met2.step_x = step_x;
+        met2.step_y = met1.step_y;
+        push_to_chain(met1, met_0);
+        push_to_chain(met2, met_0);
+    }
+}
+
+function objExplode(x, y, size) {
+    
 }
 
 function objItemProtection(x, y) {
