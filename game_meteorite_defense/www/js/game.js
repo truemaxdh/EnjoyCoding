@@ -1,5 +1,10 @@
+const storageName = {
+    maxStage : "mdMaxClearedStage",
+    mileage : "mdMileage"
+}
+
 // concerning game frame
-var frame = {
+let frame = {
     animation_interval : 0,
     last_animation_time : 0,
     pause : true,
@@ -8,8 +13,11 @@ var frame = {
     effect_flag : false
 }
 
-// concerning score
-var score;
+// concerning game play
+var gamePlay = {
+    score : 0,
+    mileage : 0
+}
 
 // airplane
 var o_jet;
@@ -52,6 +60,18 @@ var _stage_design = [
     { stage : 14, met_interval : 1900, met_types : [150] },
 ];
 
+function gameInit() {
+    try {
+      if (!localStorage.getItem(storageName.mileage))
+        localStorage.setItem(storageName.mileage, 0);
+      gamePlay.mileage = Number(localStorage.getItem(storageName.mileage));
+    } catch(err) {}
+
+    render_init();
+    init_user_input();
+    pageChange('menu');
+}
+
 function newStage() {
     missile_0 = new gameobj(0,0);    
     met_0 = new gameobj(0,0);
@@ -65,12 +85,16 @@ function newStage() {
     millisec_played = game_design.stage_tick * (stage - 1) + 1;    
     frame.effect_flag = false;
     
+    gamePlay.mileage += 10;
+    try {
+      localStorage.setItem(storageName.mileage, gamePlay.mileage);
+    } catch(err) {}
 }
 
 function newGame() {
     frame.pause = true;
     frame.gameover_flag = false;
-    score = 0;
+    gamePlay.score = 0;
     
     o_jet = new objJet(310, 750);
     o_game_over = null;
@@ -93,14 +117,15 @@ function gameOver() {
         frame.pause = true;        
         if (isApp && glGameSvc.loginStatus) {
           try {  
-            Android.submitScore(glGameSvc.leaderboardId, score);
+            Android.submitScore(glGameSvc.leaderboardId, gamePlay.score);
           } catch(e) {
             Android.showToast("submitScoe failed.");
           }
 
         }
         OpenUserResult();
-        document.getElementById('user_score').innerHTML = score;
+        document.getElementById('user_score').innerHTML = gamePlay.score;
+        document.getElementById('user_mileage').innerHTML = gamePlay.mileage;
     }
     o_game_over.render(ctx_game);
 }
@@ -172,7 +197,7 @@ function upcoming_obj() {
 function hitMet(o_met) {
     playSound(sounds.hitMeteorite);
     remove_from_chain(o_met);
-    score += 20;
+    gamePlay.score += 20;
     o_met.size -= 30;
     if (o_met.bonusItem > 0) {
         push_to_chain(new objItemProtection(o_met.x, o_met.y), item_0);
@@ -181,7 +206,7 @@ function hitMet(o_met) {
         o_met.divide();
     }            
     try {
-        chkAndUnlockAchievement(score);
+        chkAndUnlockAchievement(gamePlay.score);
     } catch(err) {}
 }
 
