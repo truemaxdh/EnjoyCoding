@@ -3,20 +3,16 @@ const storageName = {
     mileage : "mdMileage"
 }
 
-// concerning game frame
-let frame = {
+// concerning game play
+var gamePlay = {
+    score : 0,
+    mileage : 0,
     animation_interval : 0,
     last_animation_time : 0,
     pause : true,
     gameover_flag : false,
     // concerning extra effect
     effect_flag : false
-}
-
-// concerning game play
-var gamePlay = {
-    score : 0,
-    mileage : 0
 }
 
 // airplane
@@ -81,9 +77,9 @@ function newStage() {
     missile_interval = game_design.missile_interval;
     met_interval = 0;
     
-    frame.last_animation_time = 0;
+    gamePlay.last_animation_time = 0;
     millisec_played = game_design.stage_tick * (stage - 1) + 1;    
-    frame.effect_flag = false;
+    gamePlay.effect_flag = false;
     
     gamePlay.mileage += 10;
     try {
@@ -92,29 +88,29 @@ function newStage() {
 }
 
 function newGame() {
-    frame.pause = true;
-    frame.gameover_flag = false;
+    gamePlay.pause = true;
+    gamePlay.gameover_flag = false;
     gamePlay.score = 0;
     
     o_jet = new objJet(310, 750);
     o_game_over = null;
     
     newStage();
-    frame.pause = false;
+    gamePlay.pause = false;
     playBGM();
     requestAnimationFrame(tick);
 }
 
 function gameOver() {
     if (o_game_over == null) {
-        frame.gameover_flag = true;
+        gamePlay.gameover_flag = true;
         o_game_over = new objGameOver();
         try {
             Android.vibrate(300);
         } catch(e) {}  
     } else if (o_game_over.count_down-- == 0) {
         pauseBGM();
-        frame.pause = true;        
+        gamePlay.pause = true;        
         if (isApp && glGameSvc.loginStatus) {
           try {  
             Android.submitScore(glGameSvc.leaderboardId, gamePlay.score);
@@ -131,26 +127,26 @@ function gameOver() {
 }
 
 function tick(cur_time) {
-    if (frame.last_animation_time==0) frame.last_animation_time = cur_time;
-    frame.animation_interval = cur_time - frame.last_animation_time;
-    if (frame.animation_interval > 30) {
-        frame.last_animation_time = cur_time;
-        millisec_played += frame.animation_interval;
+    if (gamePlay.last_animation_time==0) gamePlay.last_animation_time = cur_time;
+    gamePlay.animation_interval = cur_time - gamePlay.last_animation_time;
+    if (gamePlay.animation_interval > 30) {
+        gamePlay.last_animation_time = cur_time;
+        millisec_played += gamePlay.animation_interval;
 
-        if (!frame.effect_flag) {
+        if (!gamePlay.effect_flag) {
             upcoming_obj();
         }
         render();
-        if (frame.gameover_flag) {
+        if (gamePlay.gameover_flag) {
             gameOver();
         } else {
             proc_user_input();
-            if (!frame.effect_flag) {
+            if (!gamePlay.effect_flag) {
                 collision_check();
             }
         }
     }
-    if (!frame.pause) {
+    if (!gamePlay.pause) {
         requestAnimationFrame(tick);
     }
 }
@@ -171,7 +167,7 @@ function proc_user_input() {
             push_to_chain(o_missile, missile_0);
             playSound(sounds.fire);
         } 
-        missile_interval += frame.animation_interval;
+        missile_interval += gamePlay.animation_interval;
     } else {
         missile_interval = game_design.missile_interval;
     }
@@ -180,12 +176,12 @@ function proc_user_input() {
 function upcoming_obj() {
     // get stage
     if (stage < game_design.max_stage && millisec_played > (game_design.stage_tick * stage)) {
-        frame.effect_flag = true;
+        gamePlay.effect_flag = true;
         var o_stageClear = new objStageClear();
         push_to_chain(o_stageClear, met_0);
         met_interval = 0;
     } else {
-        met_interval += frame.animation_interval;
+        met_interval += gamePlay.animation_interval;
         if (stage_design.met_types.length > 0 && met_interval > stage_design.met_interval) {
             var o_met = new objMet(Math.random() * 540, 0, stage_design.met_types[parseInt(Math.random() * stage_design.met_types.length)]);
             push_to_chain(o_met, met_0);  
@@ -238,7 +234,7 @@ function collision_check() {
             hitMet(o_met);
         } else {
             remove_from_chain(o_met);
-            frame.gameover_flag = true;
+            gamePlay.gameover_flag = true;
         }
     }
 }
