@@ -75,7 +75,7 @@ function objJet(x, y) {
             this.protection--;
         }
         
-        if (frame.gameover_flag) {
+        if (gamePlay.gameover_flag) {
             ctx_game.beginPath();
             ctx_game.strokeStyle = "white";
             ctx_game.moveTo(this.x, this.y);
@@ -211,7 +211,7 @@ function objStageClear() {
         ctx_game.fillStyle = grd;
         ctx_game.font = '50px Sniglet-ExtraBold';
         ctx_game.fillText('Stage' + stage + ' Clear!', c_x - 200, c_y - 25);
-        this.count_down -= frame.animation_interval;
+        this.count_down -= gamePlay.animation_interval;
         if (this.count_down <= 0) {
             stage++;
             newStage();
