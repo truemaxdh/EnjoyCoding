@@ -34,7 +34,7 @@ h3 {
 .menu {
     width : 98vw;
     height : 94vh;
-    background : black;
+    background : #222;
     background-repeat : no-repeat;
     background-position : center center;
 }
@@ -174,7 +174,7 @@ body {
     }
 }
 
-#user_score {
+#user_score, #user_mileage {
     color:#f00;
     display:inline;
 }
