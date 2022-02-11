@@ -22,13 +22,13 @@
         pageChange('game');
       }
       
-      const stageStoreName = "mdMaxClearedStage";
+      //const stageStoreName = "mdMaxClearedStage";
       function openStageMap() {
         let maxStage = 14;
         try {
-          if (!localStorage.getItem(stageStoreName))
-            localStorage.setItem(stageStoreName, 0);
-          maxStage = Number(localStorage.getItem(stageStoreName)) + 1;
+          if (!localStorage.getItem(storageName.maxStage))
+            localStorage.setItem(storageName.maxStage, 0);
+          maxStage = Number(localStorage.getItem(storageName.maxStage)) + 1;
         } catch(err) {}
         for(let i = 1; i <= maxStage; i++) {
           document.getElementById('btnL' + i).disabled = false;
@@ -70,7 +70,7 @@
    body {
       /* Disables pull-to-refresh but allows overscroll glow effects. */
       overscroll-behavior-y: contain;
-      background-color: #333;
+      background-color: #222;
      }
   </style>
   </head>
@@ -79,7 +79,7 @@
     </div>
     <div id = "menu" class="menu border_round">
       <div class = "text">
-        <h1>Meteorite Defense</h1>
+        <h1>Clear Meteorites</h1>
         <a href="#" onclick="openStageMap();">Start</a>
         <a href="#" onclick="ShowAchievements();">Show Achievements</a>
         <a href="#" onclick="ShowHighScores();">Show High Scores</a>
@@ -100,7 +100,6 @@
     </div>
     <div id = "game">
       <audio id="bgm" src="sound/SpaceTrip.mp3" preload="auto" loop></audio>
-      <canvas id="bg_canvas" width="540" height="2700"></canvas>
       <canvas id="game_canvas" width="540" height="900"></canvas>
     </div>
     
@@ -113,6 +112,7 @@
       <div class="overlay-content">
         <img id="user_img" />
         <div class="text">You Scored <div id="user_score"></div></div>
+        <div class="text">Mileage : <div id="user_mileage"></div></div>
         <a href="#" onclick="ShowAchievements();">Show Achievements</a>
         <a href="#" onclick="ShowHighScores();">Show High Scores</a>
       </div>
