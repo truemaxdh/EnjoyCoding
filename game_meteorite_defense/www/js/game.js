@@ -7,12 +7,20 @@ const storageName = {
 var gamePlay = {
     score : 0,
     mileage : 0,
+
     animation_interval : 0,
     last_animation_time : 0,
     pause : true,
     gameover_flag : false,
     // concerning extra effect
-    effect_flag : false
+    effect_flag : false,
+
+    max_stage : 14,
+    stage_tick : 60000,
+    missile_interval : 200,
+
+    millisec_played : 0,
+    stage : 0
 }
 
 // airplane
@@ -29,16 +37,7 @@ var met_interval;
 // bonus item
 var item_0;
 
-// concerning stage
-var millisec_played;
-var stage;
-
-var game_design = {
-    max_stage : 14,
-    stage_tick : 60000,
-    missile_interval : 200
-}
-
+let stage_design;
 var _stage_design = [
     { stage : 1, met_interval : 1500, met_types : [30, 60] },
     { stage : 2, met_interval : 1600, met_types : [60] },
@@ -73,12 +72,12 @@ function newStage() {
     met_0 = new gameobj(0,0);
     item_0 = new gameobj(0,0);
     
-    stage_design = _stage_design[stage - 1];
-    missile_interval = game_design.missile_interval;
+    stage_design = _stage_design[gamePlay.stage - 1];
+    missile_interval = gamePlay.missile_interval;
     met_interval = 0;
     
     gamePlay.last_animation_time = 0;
-    millisec_played = game_design.stage_tick * (stage - 1) + 1;    
+    gamePlay.millisec_played = gamePlay.stage_tick * (gamePlay.stage - 1) + 1;    
     gamePlay.effect_flag = false;
     
     gamePlay.mileage += 10;
@@ -131,7 +130,7 @@ function tick(cur_time) {
     gamePlay.animation_interval = cur_time - gamePlay.last_animation_time;
     if (gamePlay.animation_interval > 30) {
         gamePlay.last_animation_time = cur_time;
-        millisec_played += gamePlay.animation_interval;
+        gamePlay.millisec_played += gamePlay.animation_interval;
 
         if (!gamePlay.effect_flag) {
             upcoming_obj();
@@ -161,21 +160,21 @@ function proc_user_input() {
         o_jet.x += dx;
         o_jet.y += dy;
         
-        if (missile_interval >= game_design.missile_interval) {
-            missile_interval -= game_design.missile_interval;
+        if (missile_interval >= gamePlay.missile_interval) {
+            missile_interval -= gamePlay.missile_interval;
             var o_missile = new objMissile(o_jet.x, o_jet.y);
             push_to_chain(o_missile, missile_0);
             playSound(sounds.fire);
         } 
         missile_interval += gamePlay.animation_interval;
     } else {
-        missile_interval = game_design.missile_interval;
+        missile_interval = gamePlay.missile_interval;
     }
 }
 
 function upcoming_obj() {
     // get stage
-    if (stage < game_design.max_stage && millisec_played > (game_design.stage_tick * stage)) {
+    if (gamePlay.stage < gamePlay.max_stage && gamePlay.millisec_played > (gamePlay.stage_tick * gamePlay.stage)) {
         gamePlay.effect_flag = true;
         var o_stageClear = new objStageClear();
         push_to_chain(o_stageClear, met_0);
