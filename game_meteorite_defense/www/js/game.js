@@ -178,8 +178,7 @@ function hitMet(o_met) {
         push_to_chain(new objItemProtection(o_met.x, o_met.y), item_0);
     }
     if (o_met.size > 0) {
-        push_to_chain(new objMet(o_met.x, o_met.y, o_met.size), met_0);
-        push_to_chain(new objMet(o_met.x, o_met.y, o_met.size), met_0);
+        o_met.divide();
     }            
     try {
         chkAndUnlockAchievement(score);
