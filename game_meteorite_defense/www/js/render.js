@@ -49,11 +49,6 @@ function render() {
   ctx_game.fillText('Score : ' + gamePlay.score, 20, 50);
   ctx_game.fillText('Stage : ' + gamePlay.stage, 250,50);
   ctx_game.font = '34px Sniglet-ExtraBold';
-  ctx_game.fillText('||', 480,50);
-  
-  ctx_game.font = '28px Sniglet-ExtraBold';
-  ctx_game.fillText('u x ' + (Math.round(user_x * 100) / 100) + ' y '+ (Math.round(user_y * 100)) / 100, 20,90);
-  ctx_game.fillText('o x ' + (Math.round(o_jet.x * 100) / 100) + ' y ' + (Math.round(o_jet.y * 100)) / 100, 20,140);
-  ctx_game.fillText('cg w ' + canv_game.width + ' c_w ' + canv_game.clientWidth, 20,180); 
+  ctx_game.fillText('||', 480,50); 
 }
 
