@@ -52,7 +52,7 @@ function render() {
   ctx_game.fillText('||', 480,50);
   
   ctx_game.font = '28px Sniglet-ExtraBold';
-  ctx_game.fillText('u x ' + user_x + ' y '+ user_y, 20,90);
-  ctx_game.fillText('o x ' + o_jet.x + ' y ' + o_jet.y, 20,140);
+  ctx_game.fillText('u x ' + (Math.round(user_x * 100) / 100) + ' y '+ (Math.round(user_y * 100)) / 100, 20,90);
+  ctx_game.fillText('o x ' + (Math.round(o_jet.x * 100) / 100) + ' y ' + (Math.round(o_jet.y * 100)) / 100, 20,140);
 }
 
