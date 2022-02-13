@@ -148,7 +148,7 @@ function objMet(x, y, size) {
         let met1 = new objMet(this.x, this.y, this.size);
         let met2 = new objMet(this.x, this.y, this.size);
         const step_x = Math.random() * 6 + 1;
-        met2.step_x = -step_x;
+        met1.step_x = -step_x;
         met2.step_x = step_x;
         met2.step_y = met1.step_y;
         push_to_chain(met1, met_0);
