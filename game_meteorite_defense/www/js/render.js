@@ -50,5 +50,9 @@ function render() {
   ctx_game.fillText('Stage : ' + gamePlay.stage, 250,50);
   ctx_game.font = '34px Sniglet-ExtraBold';
   ctx_game.fillText('||', 480,50);
+  
+  ctx_game.font = '28px Sniglet-ExtraBold';
+  ctx_game.fillText('u x ' + user_x + ' y '+ user_y, 20,90);
+  ctx_game.fillText('o x ' + o_jet.x + ' y ' + o_jet.y, 20,140);
 }
 
