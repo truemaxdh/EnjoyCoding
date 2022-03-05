@@ -16,7 +16,7 @@ var gamePlay = {
     effect_flag : false,
 
     max_stage : 14,
-    stage_tick : 60000,
+    stage_tick : 50000,
     missile_interval : 200,
 
     millisec_played : 0,
