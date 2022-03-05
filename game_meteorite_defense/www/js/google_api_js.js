@@ -20,9 +20,12 @@ var glGameSvc = {
 
 function chkAndUnlockStage(stage) {
   try {
+    alert(stage);
     if (Number(localStorage.getItem(storageName.stage)) < stage)
       localStorage.setItem(storageName.stage, stage);
-  } catch(err) {}
+  } catch(err) {
+    alert(err);
+  }
 }
 
 function chkAndUnlockAchievement(score) {
