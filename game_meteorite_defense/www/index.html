@@ -25,13 +25,10 @@
       function openStageMap() {
         let maxStage = 14;
         try {
-          msg = localStorage.getItem(storageName.maxStage);
           if (!localStorage.getItem(storageName.maxStage))
             localStorage.setItem(storageName.maxStage, 0);
-          maxStage = Number(localStorage.getItem(storageName.maxStage)) + 1;
-          msg += ',' + maxStage; 
+          maxStage = Number(localStorage.getItem(storageName.maxStage)) + 1; 
         } catch(err) {
-          msg += err.msessage;
         }
         for(let i = 1; i <= maxStage; i++) {
           document.getElementById('btnL' + i).disabled = false;
