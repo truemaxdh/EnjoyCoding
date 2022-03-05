@@ -1,6 +1,6 @@
-var canv_game;
-var ctx_game;
-
+let canv_game;
+let ctx_game;
+let msg = '';
 
 function render_init() {
   canv_game = document.getElementById('game_canvas');
@@ -49,6 +49,9 @@ function render() {
   ctx_game.fillText('Score : ' + gamePlay.score, 20, 50);
   ctx_game.fillText('Stage : ' + gamePlay.stage, 250,50);
   ctx_game.font = '34px Sniglet-ExtraBold';
-  ctx_game.fillText('||', 480,50); 
+  ctx_game.fillText('||', 480,50);
+  if (msg != '') {
+    ctx_game.fillText('msg : ' + msg, 20,80);
+  }
 }
 
