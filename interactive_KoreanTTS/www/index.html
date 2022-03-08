@@ -7,7 +7,7 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <meta name="description" content="interactive popping ballons" />
     
-    <title>Korean TTS</title>
+    <title>Hanguel Baloons</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="js/common.js"></script>
     <script src="js/sound_effects.js"></script>
@@ -31,14 +31,14 @@
   <body>
     <div id = "menu" class="menu">
       <div class = "text">
-        <h1>Korean TTS</h1>
-        <a href="#" onclick="openStageMap();"><b>Start</b></a>
-        <a href="#" onclick="ShowAchievements();"><b>Show Achievements</b></a>
-        <a href="#" onclick="ShowHighScores();"><b>Show High Scores</b></a>
-        <a href="#" onclick="showSubMenu();"><b>Show Sub Menu</b></a>
+        <h1>한글 풍선</h1>
+        <a href="#" onclick="openStageMap();"><b>시작</b></a>
+        <!--a href="#" onclick="ShowAchievements();"><b>Show Achievements</b></a>
+        <a href="#" onclick="ShowHighScores();"><b>Show High Scores</b></a-->
+        <a href="#" onclick="showSubMenu();"><b>서브 메뉴</b></a>
         <br>
         <div class = "smallText">
-          <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.left='0';"><b>How to play</b></a>
+          <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.left='0';"><b>즐기는 방법</b></a>
         </div>
       </div>
     </div>
@@ -55,9 +55,9 @@
       <!-- Overlay content -->
       <div class="overlay-content">
         <img id="user_img" />
-        <div class="text">You Scored <div id="user_score"></div></div>
-        <a href="#" onclick="ShowAchievements();">Show Achievements</a>
-        <a href="#" onclick="ShowHighScores();">Show High Scores</a>
+        <div class="text">점수 : <div id="user_score"></div></div>
+        <!--a href="#" onclick="ShowAchievements();">Show Achievements</a>
+        <a href="#" onclick="ShowHighScores();">Show High Scores</a-->
       </div>
     </div>
       
@@ -66,23 +66,24 @@
         
       <!-- Overlay content -->
       <div class="overlay-content">
-        <a href="#" id="bgmOnOff" onclick="BgmOnOff();">Background Music: On</a>
-        <a href="#" id="soundEffectOnOff" onclick="soundEffectOnOff();">Sound Effect: On</a>
-        <a href="#" onclick="pageChange('menu');hideSubMenu();">Exit Current Game</a>
-        <a href="#" onclick="Android.exitApp();">Exit App</a>
-        <a href="#" onclick="hideSubMenu();">Resume</a>
+        <a href="#" id="bgmOnOff" onclick="BgmOnOff();">배경음악: On</a>
+        <a href="#" id="soundEffectOnOff" onclick="soundEffectOnOff();">효과음: On</a>
+        <a href="#" onclick="pageChange('menu');hideSubMenu();">현재 게임 나가기</a>
+        <a href="#" onclick="Android.exitApp();">앱 종료</a>
+        <a href="#" onclick="hideSubMenu();">돌아가기</a>
       </div>
     </div>
       
     <!-- How to play -->
     <div id="howtoplay" class="overlay" style="background-color:white;">
       <br>
-      <center><h1 style="color:#333;">Korean TTS</h1></center>
-      <h2 style="color:#555;">A simple study tool</h2>
+      <center><h1 style="color:#333;">한글 충선</h1></center>
+      <h2 style="color:#555;">풍선 터뜨리기 게임을 통한 기초 발음 학습</h2>
       <p style="color:#777;font-weight:bold;">
-        &nbsp;Pop bubbles, and the Hangul sound written in it is played.<br>
+        &nbsp;가, 나, 다...등의 기초 한글이 적힌 풍선들이 떠오릅니다.<br>
+        &nbsp;풍선들을 터뜨리면, 풍선에 적힌 글자가 발음이 됩니다.<br>
         <br>
-        <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.left='-100%';">Back</a>
+        <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.left='-100%';">돌아가기</a>
         <br>
       </p>
     </div> 
@@ -94,7 +95,7 @@
       
       <!-- Overlay content -->
       <div class="overlay-content">
-        <div class="text">Select a stage to start</div><br>
+        <div class="text">시작할 레벨을 선택하세요.</div><br>
         <button class="round" onclick="goToStage(1);" id="btnL1">1</button>
         <button class="round" onclick="goToStage(2);" id="btnL2" disabled>2</button>
         <button class="round" onclick="goToStage(3);" id="btnL3" disabled>3</button><br>
