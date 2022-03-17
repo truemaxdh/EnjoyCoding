@@ -150,6 +150,27 @@ function onLoad() {
 }
 
 var isApp;
+if (typeof msgToFlutter !== 'undefined') {
+  Android = {
+    reqGamerProfile: ()=>{alert(1);},
+    exitApp: ()=>{
+      msgToFlutter.postMessage("exitApp");
+    },
+    unlockAchievement: (achvId)=>{},
+    showAchievements: ()=>{},
+    showLeaderboard: (leaderboardId)=>{},
+    adMobInterstitialLoad: ()=>{
+      msgToFlutter.postMessage("loadInterstitialAd");
+    },
+    adMobInterstitialShow: ()=>{
+      msgToFlutter.postMessage("showInterstitialAd");
+    },
+    signInToGS: ()=>{},
+    showToast: (msg)=>{},
+    reqGamerProfile: ()=>{}
+  }
+}
+
 if (typeof Android==='undefined') {
   isApp = false;
   addEventListener("load", onLoad);
