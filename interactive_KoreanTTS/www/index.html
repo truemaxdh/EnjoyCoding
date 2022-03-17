@@ -32,7 +32,6 @@
     <div id = "menu" class="menu">
       <div class = "text">
         <h1>한글 풍선</h1>
-        <br>
         <a href="#" onclick="openStageMap();"><b>시작</b></a>
         <!--a href="#" onclick="ShowAchievements();"><b>Show Achievements</b></a>
         <a href="#" onclick="ShowHighScores();"><b>Show High Scores</b></a-->
@@ -77,16 +76,17 @@
       
     <!-- How to play -->
     <div id="howtoplay" class="overlay" style="background-color:white;">
-      <br>
-      <center><h1 style="color:#333;">한글 충선</h1></center>
-      <h2 style="color:#555;">풍선 터뜨리기 게임을 통한 기초 발음 학습</h2>
-      <p style="color:#777;font-weight:bold;">
-        &nbsp;가, 나, 다...등의 기초 한글이 적힌 풍선들이 떠오릅니다.<br>
-        &nbsp;풍선들을 터뜨리면, 풍선에 적힌 글자가 발음이 됩니다.<br>
-        <br>
-        <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.left='-100%';">돌아가기</a>
-        <br>
-      </p>
+      <div class="overlay-content">
+        <center><h1 style="color:#333;">한글 충선</h1></center>
+        <h2 style="color:#555;">풍선 터뜨리기 게임을 통한 기초 발음 학습</h2>
+        <p style="color:#777;font-weight:bold;">
+          &nbsp;가, 나, 다...등의 기초 한글이 적힌 풍선들이 떠오릅니다.<br>
+          &nbsp;풍선들을 터뜨리면, 풍선에 적힌 글자가 발음이 됩니다.<br>
+          <br>
+          <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.left='-100%';">돌아가기</a>
+          <br>
+        </p>
+      </div>
     </div> 
       
     <!-- Stage Map -->
