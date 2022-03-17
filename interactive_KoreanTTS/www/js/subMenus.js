@@ -26,11 +26,11 @@ function ExitApp() {
 function BgmOnOff() {
   var el = document.getElementById("bgmOnOff");
   //console.log(el.innerHTML);
-  if (el.innerHTML == "Background Music: Off") {
-    el.innerHTML = "Background Music: On";
+  if (el.innerHTML == "배경음악: Off") {
+    el.innerHTML = "배경음악: On";
     soundSettings.bgm = "on";
   } else {
-    el.innerHTML = "Background Music: Off";
+    el.innerHTML = "배경음악: Off";
     soundSettings.bgm = "off";
   }
 }
@@ -38,11 +38,11 @@ function BgmOnOff() {
 function soundEffectOnOff() {
   var el = document.getElementById("soundEffectOnOff");
   //console.log(el.innerHTML);
-  if (el.innerHTML == "Sound Effect: Off") {
-    el.innerHTML = "Sound Effect: On";
+  if (el.innerHTML == "효과음: Off") {
+    el.innerHTML = "효과음: On";
     soundSettings.sound = "on";
   } else {
-    el.innerHTML = "Sound Effect: Off";
+    el.innerHTML = "효과음: Off";
     soundSettings.sound = "off";
   }
 }
