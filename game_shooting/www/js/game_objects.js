@@ -18,7 +18,7 @@ const URL_gameObjs = [
     'img/coin_bullet.png'
 ];
 
-for (var i=0; i<img_gameObjs.length; i++) {        
+for (let i=0; i<img_gameObjs.length; i++) {        
     img_gameObjs[i].src = URL_gameObjs[i];
 }   
 
