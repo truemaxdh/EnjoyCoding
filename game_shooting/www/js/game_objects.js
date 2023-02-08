@@ -112,8 +112,7 @@ function objDeadCoin(baseCoin) {
         
         this.count_down -= frame.animation_interval;
         if (this.count_down <= 0) {
-            coin_ends[0].next = coin_ends[1];
-            coin_ends[1].prev = coin_ends[0];
+            remove_from_chain(this, deadCoin_ends);
         }
     }
 }
