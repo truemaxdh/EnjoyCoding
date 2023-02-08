@@ -49,8 +49,8 @@ h3 {
 }
 
 .text a { 
-    color: #00ccff;
-    -webkit-text-stroke: 1px #09b;
+    color: #08a;
+    -webkit-text-stroke: 1px #0be;
     font-size: 25px; 
     text-align: center; 
     text-decoration: none;
@@ -63,7 +63,7 @@ h3 {
 
 .smallText a {
     font-size:17px;
-    color: #00ccff;
+    color: #08a;
     -webkit-text-stroke: 1px #09b;
 }
 
