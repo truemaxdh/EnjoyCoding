@@ -104,6 +104,7 @@ function objCoinGray(x, y, type) {
         ctx_game.drawImage(this.img, this.x, this.y);
         const alpha = (this.init_durability - this.durability) / this.init_durability;
         if (alpha > 0) {
+            console.log(alpha);
             ctx_game.globalAlpha = alpha;
             ctx_game.drawImage(this.img2, this.x, this.y);
             ctx_game.globalAlpha = 1;
