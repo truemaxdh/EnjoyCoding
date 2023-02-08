@@ -100,8 +100,8 @@ function objCoinGray(x, y, type) {
 
 function objDeadCoin(baseCoin) {
     gameobj.call(this, baseCoin.x, baseCoin.y);
-    this.step_x = baseCoin.step_x;
-    this.step_y = baseCoin.step_y;
+    this.step_x = 0;
+    this.step_y = 0;
     this.coin_num = baseCoin.coin_num;
     this.img = baseCoin.img2;
     this.count_down = 500;
