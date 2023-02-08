@@ -15,7 +15,6 @@ const URL_gameObjs = [
     'img/airplane.png', 'img/airplane_x.png', 'img/missile.png',
     'img/coin_gold_10.png', 'img/coin_gold_50.png', 'img/coin_gold_100.png',
     'img/coin_gray_10.png', 'img/coin_gray_50.png', 'img/coin_gray_100.png',
-    //'img/coin_gold_10.png', 'img/coin_gold_50.png', 'img/coin_gold_100.png',
     'img/coin_bullet.png'
 ];
 
@@ -105,9 +104,12 @@ function objDeadCoin(baseCoin) {
     this.step_y = baseCoin.step_y;
     this.coin_num = baseCoin.coin_num;
     this.img = baseCoin.img2;
-    this.count_down = 1000;
+    this.count_down = 500;
     this.render = function(ctx_game) {
+        const alpha = this.count_down / 500;
+        ctx_game.globalAlpha = alpha;
         ctx_game.drawImage(this.img, this.x, this.y);
+        ctx_game.globalAlpha = 1;
         
         if (this.next != null) {
             this.next.render(ctx_game);
