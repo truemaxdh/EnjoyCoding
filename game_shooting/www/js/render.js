@@ -60,6 +60,9 @@ function render() {
     if (coin_ends[0] != null) {
         coin_ends[0].render(ctx_game);
     }
+    if (deadCoin_ends[0] != null) {
+        deadCoin_ends[0].render(ctx_game);
+    }
     if (coin_bullet_ends[0] != null) {
         coin_bullet_ends[0].render(ctx_game);
     }
