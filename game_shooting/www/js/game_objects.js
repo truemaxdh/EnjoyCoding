@@ -14,8 +14,8 @@ var img_gameObjs = [
 var URL_gameObjs = [
     'img/airplane.png', 'img/airplane_x.png', 'img/missile.png',
     'img/coin_gold_10.png', 'img/coin_gold_50.png', 'img/coin_gold_100.png',
-    //'img/coin_gray_10.png', 'img/coin_gray_50.png', 'img/coin_gray_100.png',
-    'img/coin_gold_10.png', 'img/coin_gold_50.png', 'img/coin_gold_100.png',
+    'img/coin_gray_10.png', 'img/coin_gray_50.png', 'img/coin_gray_100.png',
+    //'img/coin_gold_10.png', 'img/coin_gold_50.png', 'img/coin_gold_100.png',
     'img/coin_bullet.png'
 ];
 
@@ -91,14 +91,28 @@ function objCoin(x, y, type) {
 
 var type_durability = [1, 2, 3];
 function objCoinGray(x, y, type) {
-    var rnd_x = Math.floor(Math.random() * 540);
+    const rnd_x = Math.floor(Math.random() * 540);
     gameobj.call(this, rnd_x, 0);
     this.step_x = (x - rnd_x);
     this.step_y = 220 + 30 * stage;
     this.coin_num = type_coinNum[type];
     this.durability = type_durability[type];
-    //this.img.src = 'img/coin_gray_' + this.coin_num + '.png';
-    this.img = img_coin_grays[type];
+    this.init_durability = type_durability[type];
+    this.img = img_coin_golds[type];
+    this.img2 = img_coin_grays[type];
+    this.render = function(ctx_game) {
+        ctx_game.drawImage(this.img, this.x, this.y);
+        const alpha = (this.init_durability - this.durability) / this.init_durability;
+        if (alpha > 0) {
+            ctx_game.globalAlpha = alpha;
+            ctx_game.drawImage(this.img2, this.x, this.y);
+            ctx_game.globalAlpha = 1;
+        }
+        if (this.next != null) {
+            this.next.render(ctx_game);
+        }
+        this.move();
+    }
 }
 
 function objCoinBullet(x, y) {
