@@ -1,6 +1,6 @@
-const img_airplane = new Image();
-const img_airplane_x = new Image();
-const img_missile = new Image();
+let img_airplane = new Image();
+let img_airplane_x = new Image();
+let img_missile = new Image();
 const img_coin_golds = [new Image(), new Image(), new Image()];
 const img_coin_grays = [new Image(), new Image(), new Image()];
 const img_coin_bullet = new Image();
@@ -18,6 +18,10 @@ const URL_gameObjs = [
     //'img/coin_gold_10.png', 'img/coin_gold_50.png', 'img/coin_gold_100.png',
     'img/coin_bullet.png'
 ];
+
+for (var i=0; i<img_gameObjs.length; i++) {        
+    img_gameObjs[i].src = URL_gameObjs[i];
+}   
 
 function gameobj(x, y) {
     this.x = x;
