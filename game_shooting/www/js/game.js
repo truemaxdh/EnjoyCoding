@@ -37,15 +37,7 @@ function _stage_def() {
     this.coinBullets = [0, 1, 0, 1, 0, 1, 1, 1, 1, 1];
 }
 
-let stage_design;/* = {
-    max_stage : 10,
-    stage_tick : 40000,
-    missile_interval : 200,
-    coin_interval : 4000,
-    bullet_interval : 3000,
-    coin_types : [[0], [0], [1], [1], [2], [2], [0, 1, 2], [0, 1, 2], [0, 1, 2], [0, 1, 2]],
-    coinBullets : [0, 1, 0, 1, 0, 1, 1, 1, 1, 1]
-}*/
+let stage_design;
 
 // concerning extra effect
 let effect_flag;
@@ -57,8 +49,7 @@ function game_init() {
     stage_design = new _stage_def();
     missile_interval = stage_design.missile_interval;
     millisec_played = 0;
-    //stage = _stage;
-    
+        
     stage_design.coin_interval -= 400 * (stage - 1);
     stage_design.bullet_interval -= 300 * (stage - 1);
             
@@ -73,6 +64,10 @@ function game_init() {
     coin_ends[0].next = coin_ends[1];
     coin_ends[1].prev = coin_ends[0];
     
+    deadCoin_ends[0] = new gameobj(0,0), coin_ends[1] = new gameobj(0,0);
+    deadCoin_ends[0].next = deadCoin_ends[1];
+    deadCoin_ends[1].prev = deadCoin_ends[0];
+        
     coin_bullet_ends[0] = new gameobj(0,0), coin_bullet_ends[1] = new gameobj(0,0);
     coin_bullet_ends[0].next = coin_bullet_ends[1];
     coin_bullet_ends[1].prev = coin_bullet_ends[0];
