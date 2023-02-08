@@ -64,7 +64,7 @@ function game_init() {
     coin_ends[0].next = coin_ends[1];
     coin_ends[1].prev = coin_ends[0];
     
-    deadCoin_ends[0] = new gameobj(0,0), coin_ends[1] = new gameobj(0,0);
+    deadCoin_ends[0] = new gameobj(0,0), deadCoin_ends[1] = new gameobj(0,0);
     deadCoin_ends[0].next = deadCoin_ends[1];
     deadCoin_ends[1].prev = deadCoin_ends[0];
         
