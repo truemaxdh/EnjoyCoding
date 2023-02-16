@@ -100,18 +100,29 @@ function objMissile(x, y) {
     this.step_y = -14;
 }
 
+function objMissile2(x, y, dx) {
+    gameobj.call(this, x + 47, y);
+    this.width = 6;
+    this.height = 6;
+    this.step_x = -dx / 2;
+    this.step_y = -10;
+    this.dx = dx;
+    this.render = function(ctx_game) {
+        ctx_game.beginPath();
+        ctx_game.fillStyle = "orange";
+        ctx_game.fillRect(this.x, this.y, this.width, this.height);
+        this.width += dx;
+    }
+    
+}
+
 function objMet(x, y, size) {
     gameobj.call(this, x, y);
-    //const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "purple"];
     this.width = size;
     this.height = size;
     this.size = size;
     this.step_x = Math.random() * 13 - 6;
     this.step_y = Math.random() * 7 + 1;
-    // this.rgbStroke = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
-    // this.rgbFill = "rgb(" + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + "," + (Math.random() * 240 + 16) + ")";
-    //this.rgbStroke = colors[Math.floor(Math.random() * colors.length)];
-    //this.rgbFill = colors[Math.floor(Math.random() * colors.length)];
     this.bonusItem = (size > 30) ? 0 : ((Math.random() < 0.05) ? 1 : 0);
     this.move = function() {
         this.x += this.step_x;
