@@ -162,8 +162,12 @@ function proc_user_input() {
         
         if (missile_interval >= gamePlay.missile_interval) {
             missile_interval -= gamePlay.missile_interval;
-            var o_missile = new objMissile(o_jet.x, o_jet.y);
+            let o_missile = new objMissile(o_jet.x, o_jet.y);
             push_to_chain(o_missile, missile_0);
+            if (gamePlay.stage > 2) {
+                let o_missile2 = new objMissile2(o_jet.x, o_jet.y, gamePlay.stage);
+                push_to_chain(o_missile2, missile_0);
+            }                
             playSound(sounds.fire);
         } 
         missile_interval += gamePlay.animation_interval;
