@@ -115,6 +115,9 @@ function objMissile2(x, y, dx) {
         ctx_game.stroke();
         
         this.step_y += 0.12;
+        if (this.step_y >= 3) {
+            remove_from_chain(this);
+        }
     }
     
 }
