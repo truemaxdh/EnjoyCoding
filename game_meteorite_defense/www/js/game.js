@@ -166,8 +166,8 @@ function proc_user_input() {
                 missile_interval[i] -= gamePlay.missile_interval[i];
                 const cnt = (i == 0) ? 1 : (gamePlay.stage - 1);
                 let dx = (1 - cnt) / 2;
-                for(let i = 0; i < cnt; i++) {
-                    let o_missile = new gamePlay.missiles[i](o_jet.x, o_jet.y, dx);
+                for(let m = 0; m < cnt; m++) {
+                    let o_missile = new gamePlay.missiles[i](o_jet.x, o_jet.y, dx + m);
                     push_to_chain(o_missile, missile_0);
                 }
             }
