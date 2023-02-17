@@ -102,10 +102,10 @@ function objMissile(x, y, dx) {
 
 function objMissile2(x, y, dx) {
     gameobj.call(this, x + 47, y);
-    this.width = 10;
-    this.height = 10;
+    this.width = 15;
+    this.height = 15;
     this.step_x = dx;
-    this.step_y = -15;
+    this.step_y = -12;
     this.dx = dx;
     this.render = function(ctx_game) {
         ctx_game.beginPath();
@@ -113,7 +113,7 @@ function objMissile2(x, y, dx) {
         ctx_game.arc(this.x + 5, this.y + 5, 5, 0, 2 * Math.PI);
         ctx_game.fill();
         
-        this.step_y += 0.15;
+        this.step_y += 0.12;
     }
     
 }
