@@ -165,8 +165,12 @@ function proc_user_input() {
             let o_missile = new objMissile(o_jet.x, o_jet.y);
             push_to_chain(o_missile, missile_0);
             if (gamePlay.stage > 2) {
-                let o_missile2 = new objMissile2(o_jet.x, o_jet.y, gamePlay.stage);
-                push_to_chain(o_missile2, missile_0);
+                const cnt = gamePlay.stage - 1;
+                let dx = (cnt - 1) / -2;
+                for(let i = 0; i < cnt; i++) {
+                    let o_missile2 = new objMissile2(o_jet.x, o_jet.y, dx++);
+                    push_to_chain(o_missile2, missile_0);
+                }
             }                
             playSound(sounds.fire);
         } 
