@@ -74,7 +74,7 @@ function newStage() {
     item_0 = new gameobj(0,0);
     
     stage_design = _stage_design[gamePlay.stage - 1];
-    missile_interval = gamePlay.missile_interval.map();
+    missile_interval = gamePlay.missile_interval.map(x=>x);
     met_interval = 0;
     
     gamePlay.last_animation_time = 0;
@@ -161,13 +161,13 @@ function proc_user_input() {
         o_jet.x += dx;
         o_jet.y += dy;
         
-        for(let i = 0; i < gamePlay.missile.length; i++) {
+        for(let i = 0; i < gamePlay.missiles.length; i++) {
             if (missile_interval[i] >= gamePlay.missile_interval[i]) {
                 missile_interval[i] -= gamePlay.missile_interval[i];
                 const cnt = (i == 0) ? 1 : (gamePlay.stage - 1);
                 let dx = (1 - cnt) / 2;
                 for(let i = 0; i < cnt; i++) {
-                    let o_missile = new gamePlay.missile[i](o_jet.x, o_jet.y, dx);
+                    let o_missile = new gamePlay.missiles[i](o_jet.x, o_jet.y, dx);
                     push_to_chain(o_missile, missile_0);
                 }
             }
@@ -175,7 +175,7 @@ function proc_user_input() {
         }
         playSound(sounds.fire);
     } else {
-        missile_interval = gamePlay.missile_interval.map();
+        missile_interval = gamePlay.missile_interval.map(x=>x);
     }
 }
 
