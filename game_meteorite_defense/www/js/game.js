@@ -171,7 +171,7 @@ function proc_user_input() {
                     push_to_chain(o_missile, missile_0);
                 }
             }
-            missile_interval += gamePlay.animation_interval;
+            missile_interval[i] += gamePlay.animation_interval;
         }
         playSound(sounds.fire);
     } else {
