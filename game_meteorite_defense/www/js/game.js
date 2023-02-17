@@ -17,7 +17,8 @@ var gamePlay = {
 
     max_stage : 14,
     stage_tick : 50000,
-    missile_interval : 200,
+    missile_interval : [200, 600],
+    missiles : [objMissile, objMissile2],
 
     millisec_played : 0,
     stage : 0
@@ -73,7 +74,7 @@ function newStage() {
     item_0 = new gameobj(0,0);
     
     stage_design = _stage_design[gamePlay.stage - 1];
-    missile_interval = gamePlay.missile_interval;
+    missile_interval = gamePlay.missile_interval.map();
     met_interval = 0;
     
     gamePlay.last_animation_time = 0;
@@ -160,23 +161,21 @@ function proc_user_input() {
         o_jet.x += dx;
         o_jet.y += dy;
         
-        if (missile_interval >= gamePlay.missile_interval) {
-            missile_interval -= gamePlay.missile_interval;
-            let o_missile = new objMissile(o_jet.x, o_jet.y);
-            push_to_chain(o_missile, missile_0);
-            if (gamePlay.stage > 2) {
-                const cnt = gamePlay.stage - 1;
-                let dx = (cnt - 1) / -2;
+        for(let i = 0; i < gamePlay.missile.length; i++) {
+            if (missile_interval[i] >= gamePlay.missile_interval[i]) {
+                missile_interval[i] -= gamePlay.missile_interval[i];
+                const cnt = (i == 0) ? 1 : (gamePlay.stage - 1);
+                let dx = (1 - cnt) / 2;
                 for(let i = 0; i < cnt; i++) {
-                    let o_missile2 = new objMissile2(o_jet.x, o_jet.y, dx++);
-                    push_to_chain(o_missile2, missile_0);
+                    let o_missile = new gamePlay.missile[i](o_jet.x, o_jet.y, dx);
+                    push_to_chain(o_missile, missile_0);
                 }
-            }                
-            playSound(sounds.fire);
-        } 
-        missile_interval += gamePlay.animation_interval;
+            }
+            missile_interval += gamePlay.animation_interval;
+        }
+        playSound(sounds.fire);
     } else {
-        missile_interval = gamePlay.missile_interval;
+        missile_interval = gamePlay.missile_interval.map();
     }
 }
 
