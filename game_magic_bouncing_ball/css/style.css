@@ -18,21 +18,21 @@ h1 {
     color:rgba(255,255,255, 0.8);
     -webkit-text-stroke: 3px #00ccff;
     font-family: "Sniglet-ExtraBold"; 
-    font-size: 49px;/*10vw;*/  
+    font-size: 49px;
     text-align: center; 
 }
 
 h3 { 
     color: #4d7bd5; 
     font-family: 'Sniglet-Regular'; 
-    font-size: 3vw; 
+    font-size: 35px; 
     text-align: center; 
     text-shadow: 1px 1px 2px #082b34;
 }
 
 .menu {
-    width:100vw;
-    height:94vh;
+    width:100%;
+    height:100%;
     margin:0px;
     padding:0px;
     background-image: url('../img/menu_bg.png');
@@ -89,8 +89,8 @@ body {
 }
 
 #game_canvas_landscape {
-    width:90vw;
-    height:54vw;
+    width:100%;
+    height:100%;
 }
 
 /* The Overlay (background) */
