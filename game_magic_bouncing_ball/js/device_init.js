@@ -26,7 +26,7 @@ function pageChange(newpageID) {
 function onDeviceReady() {
     document.removeEventListener('deviceready', onDeviceReady, false);
     render_init();
-    init_user_input();
+    //init_user_input();
 
     ///////////
     // AdMob //
