@@ -24,5 +24,6 @@ function iStage(stage) {
 	incy[1]=5;
 	
 	//timer=setInterval(draw,20); 
+	console.log(stage);
 	setTimeout(draw,500); 
 }

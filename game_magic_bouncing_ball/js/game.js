@@ -9,11 +9,31 @@
 				
 		w=canv_game.width;
 		h=canv_game.height;
+		if (!chkLandscapeMode()) {
+			alert("Please turn mobile to be landscape mode");
+			pageChange('menu');
+			return;
+		}
+		setToFullscreen();
 		
 		init_user_input();
 		initGame();
 	}
 	
+	function chkLandscapeMode() {
+		return (window.innerWidth > window.innerHeight);
+	}
+
+	function setToFullscreen() {
+		let container = canv_game.parentElement;
+		if (canv_game.requestFullscreen) {
+			container.requestFullscreen();
+		  } else if (canv_game.webkitRequestFullscreen) { /* Safari */
+			container.webkitRequestFullscreen();
+		  } else if (canv_game.msRequestFullscreen) { /* IE11 */
+		  	canv_game.msRequestFullscreen();
+		  }
+	}
 	/*
 		변수 설정
 	*/
@@ -88,20 +108,7 @@
 			// missile_interval += frame.animation_interval;
 			if (stopMode!="")
 			{
-				if (stopMode=="GameOver")
-				{
-					stopMode="";
-					sleep(500);
-					//location.href="HighScore.html?user_score="+score;
-				}
-				else if (stopMode=="StageCleared")
-				{
-					stopMode="";
-					sleep(500);
-					stage++;
-					initFontNLaserStyle();
-					iStage(stage);
-				}
+				
 			} else if (canFire)
 			{
 				canFire = false;
@@ -303,6 +310,20 @@
 			
 			if (stopMode=="") {
 	  			requestAnimationFrame(draw);
+			} else if (stopMode=="GameOver")
+			{
+				sleep(1500);
+				stopMode="";
+				pageChange('menu');
+				//location.href="HighScore.html?user_score="+score;
+			}
+			else if (stopMode=="StageCleared")
+			{
+				sleep(500);
+				stopMode="";
+				initFontNLaserStyle();
+				stage++;
+				iStage(stage);
 			}
 		}
 	}

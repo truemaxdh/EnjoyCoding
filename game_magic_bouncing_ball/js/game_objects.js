@@ -58,7 +58,7 @@ function objMainChr() {
         }
         
         ctx_game.drawImage(this.img, this.x, this.y);
-        console.log(this.x + "," + this.y);
+        //console.log(this.x + "," + this.y);
 
         if (this.next != null) {
             this.next.render(ctx_game);
