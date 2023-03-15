@@ -20,13 +20,13 @@ function gameobj(x, y) {
             }
         }
     }
-    this.render = function(ctx_game) {
+    this.render = function() {
         if (this.img != null) {
             ctx_game.drawImage(this.img, this.x, this.y);
         }
         
         if (this.next != null) {
-            this.next.render(ctx_game);
+            this.next.render();
         }
         //this.move();
     }
@@ -51,26 +51,57 @@ function objMainChr() {
     this.imgShield = new Image();
     this.imgShield.src="tennisBall.png";
 
-    this.render = function(ctx_game) {
+    this.render = function() {
         if (this.powerShield > 0) {
             this.powerShield--;
             ctx_game.drawImage(this.imgShield, this.x, this.y, this.img.width, this.img.height);
         }
         
         ctx_game.drawImage(this.img, this.x, this.y);
-        //console.log(this.x + "," + this.y);
 
         if (this.next != null) {
             this.next.render(ctx_game);
         }
-        //this.move();
     }
 }
 
-function objMagicBall(x, y) {
-    this.img = new Image();
-    this.img.src="magicBall.png";
+function objMagicBall(x, y, step_x, step_y, ballSize, ballStyle = 0) {
     gameobj.call(this, x, y);
+    this.step_x = step_x;
+    this.step_y = step_y;
+    this.ballSize = ballSize;
+    this.ballStyle = ballStyle;
+    this.img = new Image();
+    this.img.src = ["magicBall.png", "baloonBall.png", "tennisBall.png"][ballStyle];
+    
+    this.move = function() {
+        this.x += this.step_x;
+        this.y += this.step_y;
+
+        //check limits to make bounce
+        if (this.x > (w-this.ballSize) && this.step_x>0){
+            this.x=w-this.ballSize;
+            this.step_x=-this.step_x;
+            playSound(2);
+        }
+        if(this.y>(h-this.ballSize) && this.step_y>0){
+            this.y=h-this.ballSize;
+            this.step_y=-this.step_y; 
+            playSound(2);
+        }
+        if(this.x<this.ballSize && this.step_x<0){
+            this.step_x=-this.step_x;
+            playSound(2);
+        }
+        if(this.y<this.ballSize && this.step_y<0){
+            this.step_y=-this.step_y;
+            playSound(2);
+        }
+    }
+
+    this.render = function() {
+        ctx_game.drawImage(this.img, this.x, this.y, this.ballSize,this.ballSize);	
+    }
 }
 
 function objBonusBall() {

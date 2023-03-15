@@ -1,14 +1,11 @@
-	let canv_game;
 	let o_mainChr;
+	let balls = [];
 	
-	var w,h;
 	var stage=1;
 	
 	function init() {
-		canv_game = document.getElementById('game_canvas_landscape');
-				
-		w=canv_game.width;
-		h=canv_game.height;
+		render_init();
+		
 		if (!chkLandscapeMode()) {
 			alert("Please turn mobile to be landscape mode");
 			pageChange('menu');
@@ -72,7 +69,7 @@
 		
 		initFontNLaserStyle();
   		document.getElementById( 'bgm' ).play();
-		iStage(stage);
+		newStage(stage);
 	}
 
 	function initFontNLaserStyle() {
@@ -86,6 +83,29 @@
 
 		// Font
 		ctx.font = "bold 30px sans-serif";
+	}
+
+	function newStage(stage) {
+		// Ball Control
+		ballCnt=2;
+		// ballSize[0]=10 * Math.ceil((stage + 1) / 2) + 20;
+		// ballSize[1]=10 * Math.floor((stage + 1) / 2) + 20;
+		// ballStyle[0]=0;	
+		// ballStyle[1]=0;
+		// x[0]=100;
+		// incx[0]=-5;
+		// y[0]=100;
+		// incy[0]=5;
+		// x[1]=100;
+		// incx[1]=5;
+		// y[1]=100;
+		// incy[1]=5;
+		balls = [
+			new objMagicBall(100, 100, -5, 5, 10 * Math.ceil((stage + 1) / 2) + 20), 
+			new objMagicBall(100, 100, 5, 5, 10 * Math.floor((stage + 1) / 2) + 20)
+		];
+
+		setTimeout(tick,500); 
 	}
 
 	let canFire = true;
@@ -123,137 +143,120 @@
 	
 	function addBall(ballID)
 	{
-		if (ballSize[ballID]<25)
+		// if (ballSize[ballID]<25)
+		const ball = balls[ballID];
+		if (ball.ballSize < 25)
 			return;
+
 		score+=10;
-		switch(ballStyle[ballID]) {
+		switch(ball.ballStyle) {
 			case 0:	// general style
 				playSound(1);
-				ballSize[ballID]-=10;
+
+				ball.ballSize -=10;
 			
-				x[ballCnt]=x[ballID];
-				y[ballCnt]=y[ballID];
-				incx[ballCnt]=-incx[ballID];
-				incy[ballCnt]=incy[ballID];
-				ballStyle[ballCnt]=ballStyle[ballID];
-				ballSize[ballCnt]=ballSize[ballID];
-				ballCnt++;
+				balls[ballCnt++] = new objMagicBall(
+					ball.x, ball.y, -ball.step_x, ball.step_y, ball.ballSize, ball.ballStyle);
+				// x[ballCnt]=x[ballID];
+				// y[ballCnt]=y[ballID];
+				// incx[ballCnt]=-incx[ballID];
+				// incy[ballCnt]=incy[ballID];
+				// ballStyle[ballCnt]=ballStyle[ballID];
+				// ballSize[ballCnt]=ballSize[ballID];
+				//ballCnt++;
 				divideCnt++;
 				if (divideCnt==60)
 				{
-					x[ballCnt]=x[ballID];
-					y[ballCnt]=y[ballID];
-					incx[ballCnt]=0;
-					incy[ballCnt]=2;
-					ballStyle[ballCnt]=2;
-					ballSize[ballCnt]=30;
-					ballCnt++;
+					balls[ballCnt++] = new objMagicBall(
+						ball.x, ball.y, 0, 2, 30, 2);
+
+					// x[ballCnt]=x[ballID];
+					// y[ballCnt]=y[ballID];
+					// incx[ballCnt]=0;
+					// incy[ballCnt]=2;
+					// ballStyle[ballCnt]=2;
+					// ballSize[ballCnt]=30;
+					// ballCnt++;
 					divideCnt=0;
 				}
 				else if ((divideCnt%5)==0)
 				{
-					x[ballCnt]=x[ballID];
-					y[ballCnt]=y[ballID];
-					incx[ballCnt]=0;
-					incy[ballCnt]=2;
-					ballStyle[ballCnt]=1;
-					ballSize[ballCnt]=30;
-					ballCnt++;
-				} 
-			
+					balls[ballCnt++] = new objMagicBall(
+						ball.x, ball.y, 0, 2, 30, 1);
+
+					// x[ballCnt]=x[ballID];
+					// y[ballCnt]=y[ballID];
+					// incx[ballCnt]=0;
+					// incy[ballCnt]=2;
+					// ballStyle[ballCnt]=1;
+					// ballSize[ballCnt]=30;
+					// ballCnt++;
+				}			
 				break;
 			case 1:	// balloon style
-				//if (ballSize[ballID]>25)
-				//{
-					ballSize[ballID] = 0;
-					var cnt = ballCnt;
-					for (var i=0; i < cnt; i++) {
-						addBall(i);
-					}
-				//}
-				
+				ball.ballSize = 0;
+				const cnt = ballCnt;
+				for (let i=0; i < cnt; i++) {
+					addBall(i);
+				}
 				break;
 			case 2:	// tennis style
-				//if (ballSize[ballID]>25)
-				//{
-					playSound(3);
-					o_mainChr.powerShield+=200;	
-					ballSize[ballID] = 0;				
-				//}
+				playSound(3);
+				ball.ballSize = 0;
+				o_mainChr.powerShield+=200;	
 				break;
 		}
 	}
 
 	// Timer Tick
-	function draw(){
+	function tick(){
 
 		if (canv_game.getContext){
 			proc_user_input();
+			render();
+
 			var ctx = canv_game.getContext('2d');
-
-			//clears canvas
-			ctx.clearRect(0,0,w,h); 
-
-			// Draw Score
-			ctx.fillText("Stage: "+stage, 0, 30);
-			ctx.fillText("Remained: "+remained, 260, 30);
-			ctx.fillText("Score: "+score, 520, 30);
 			
-			o_mainChr.render(ctx);
-
-			// Draw Missile
-			if (missileX >= 0)
-			{
-				missileY-=20;
-				if (missileY>=0)
-				{
-					ctx.beginPath();
-					ctx.rect(missileX-3, missileY, 6, h-missileY);
-					ctx.closePath();
-					ctx.stroke();
-					ctx.fill();
-				}
-				else
-					missileX=-999;
-			}
-
 			// Draw Balls
 			var eliminatedBall=0;
 			for (var i=0;i<ballCnt;i++)
 			{  
-
-				if (ballSize[i]<25)
+				const ball = balls[i];
+				if (ball.ballSize<25)
 					eliminatedBall++;
 				else {
+					ball.move();
+					ball.render();
 					//increases circle coordinates
-					x[i]+=incx[i];
-					y[i]+=incy[i];
-
-					//check limits to make bounce
-					if (x[i]>(w-ballSize[i]) && incx[i]>0){
-						x[i]=w-ballSize[i];
-						incx[i]=-incx[i];
-						playSound(2);
-					}
-					if(y[i]>(h-ballSize[i]) && incy[i]>0){
-						y[i]=h-ballSize[i];
-						incy[i]=-incy[i]; 
-						playSound(2);
-					}
-					if(x[i]<ballSize[i] && incx[i]<0){
-						incx[i]=-incx[i];
-						playSound(2);
-					}
-					if(y[i]<ballSize[i] && incy[i]<0){
-						incy[i]=-incy[i];
-						playSound(2);
-					}
+					//x[i]+=incx[i];
+					//y[i]+=incy[i];
+					// //check limits to make bounce
+					// if (x[i]>(w-ballSize[i]) && incx[i]>0){
+					// 	x[i]=w-ballSize[i];
+					// 	incx[i]=-incx[i];
+					// 	playSound(2);
+					// }
+					// if(y[i]>(h-ballSize[i]) && incy[i]>0){
+					// 	y[i]=h-ballSize[i];
+					// 	incy[i]=-incy[i]; 
+					// 	playSound(2);
+					// }
+					// if(x[i]<ballSize[i] && incx[i]<0){
+					// 	incx[i]=-incx[i];
+					// 	playSound(2);
+					// }
+					// if(y[i]<ballSize[i] && incy[i]<0){
+					// 	incy[i]=-incy[i];
+					// 	playSound(2);
+					// }
 
 					//draws circle
-					ctx.drawImage(ballImgs[ballStyle[i]], x[i],y[i],ballSize[i],ballSize[i]);	
+					// ctx.drawImage(ballImgs[ballStyle[i]], x[i],y[i],ballSize[i],ballSize[i]);	
 					
 					// Check Collision with Missile
-					if ((x[i]+ballSize[i])>(missileX-3) && x[i]<(missileX+3) && missileY<(y[i]+ballSize[i]))
+					// if ((x[i]+ballSize[i])>(missileX-3) && x[i]<(missileX+3) && missileY<(y[i]+ballSize[i]))
+					if ((ball.x + ball.ballSize) > (missileX-3) && ball.x < (missileX+3) && 
+					    missileY < (ball.y + ball.ballSize))
 					{
 						missileX=-999;
 						missileY=-999;
@@ -261,10 +264,11 @@
 					}
 
 					// Check Collision with Main Character
-					if ((x[i]-o_mainChr.x)<(o_mainChr.img.width-5) && 
-						(o_mainChr.x-x[i])<(ballSize[i]-5) && (o_mainChr.y-y[i])<(ballSize[i]-5))
+					if ((ball.x - o_mainChr.x) < (o_mainChr.img.width-5) && 
+					    (o_mainChr.x - ball.x) < (ball.ballSize - 5) && 
+						(o_mainChr.y-ball.y) < (ball.ballSize-5))
 					{
-						switch(ballStyle[i]) {
+						switch(ball.ballStyle) {
 							case 0:
 								if (o_mainChr.powerShield > 0)
 									addBall(i);
@@ -309,7 +313,7 @@
 			}
 			
 			if (stopMode=="") {
-	  			requestAnimationFrame(draw);
+	  			requestAnimationFrame(tick);
 			} else if (stopMode=="GameOver")
 			{
 				sleep(1500);
@@ -323,7 +327,7 @@
 				stopMode="";
 				initFontNLaserStyle();
 				stage++;
-				iStage(stage);
+				newStage(stage);
 			}
 		}
 	}
