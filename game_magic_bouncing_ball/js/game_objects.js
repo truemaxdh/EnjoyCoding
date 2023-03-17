@@ -68,7 +68,7 @@ function objMainChr() {
 function objMagicBall(x, y, step_x, step_y, ballSize, ballStyle = 0) {
     gameobj.call(this, x, y);
     this.step_x = step_x;
-    //this.step_y = step_y;
+    this.step_y = step_y;
     this.ballSize = ballSize;
     this.ballStyle = ballStyle;
     this.img = new Image();

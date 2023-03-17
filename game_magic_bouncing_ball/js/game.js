@@ -83,8 +83,8 @@ function newStage(stage) {
 	// Ball Control
 	ballCnt=2;
 	balls = [
-		new objMagicBall(100, 100, -5, 5, 10 * Math.ceil((stage + 1) / 2) + 20), 
-		new objMagicBall(100, 100, 5, 5, 10 * Math.floor((stage + 1) / 2) + 20)
+		new objMagicBall(100, 100, -3, 0, 10 * Math.ceil((stage + 1) / 2) + 20), 
+		new objMagicBall(100, 100, 3, 0, 10 * Math.floor((stage + 1) / 2) + 20)
 	];
 
 	setTimeout(tick,500); 
