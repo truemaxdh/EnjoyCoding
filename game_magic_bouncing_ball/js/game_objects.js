@@ -68,7 +68,7 @@ function objMainChr() {
 function objMagicBall(x, y, step_x, step_y, ballSize, ballStyle = 0) {
     gameobj.call(this, x, y);
     this.step_x = step_x;
-    this.step_y = step_y;
+    //this.step_y = step_y;
     this.ballSize = ballSize;
     this.ballStyle = ballStyle;
     this.img = new Image();
@@ -77,6 +77,7 @@ function objMagicBall(x, y, step_x, step_y, ballSize, ballStyle = 0) {
     this.move = function() {
         this.x += this.step_x;
         this.y += this.step_y;
+        this.step_y += 0.1;
 
         //check limits to make bounce
         if (this.x > (w-this.ballSize) && this.step_x>0){
@@ -127,5 +128,11 @@ function objMissile() {
                 this.canFire = true;
             }
         }
+    }
+
+    this.fire = function() {      
+        this.canFire = false;
+        this.x = oMainChr.x+oMainChr.img.width/2;
+        this.y = oMainChr.y;    
     }
 }

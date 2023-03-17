@@ -101,9 +101,7 @@ function proc_user_input() {
 
 		if (stopMode == "" && oMissile.canFire)
 		{
-			oMissile.canFire = false;
-			oMissile.x = oMainChr.x+oMainChr.img.width/2;
-			oMissile.y = oMainChr.y;
+			oMissile.fire();
 		}
 	}
 }
