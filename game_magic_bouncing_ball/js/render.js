@@ -14,32 +14,14 @@ function render_init() {
 }
 
 function render() {
-  //clears canvas
+  //clear canvas
   ctx_game.clearRect(0,0,w,h);
 
   drawScore()
 
-  o_mainChr.render();
+  oMainChr.render();
 
-  drawMissile();
-}
-
-function drawMissile() {
-  // Draw Missile
-  if (missileX >= 0)
-  {
-      missileY-=20;
-      if (missileY>=0)
-      {
-          ctx_game.beginPath();
-          ctx_game.rect(missileX-3, missileY, 6, h-missileY);
-          ctx_game.closePath();
-          ctx_game.stroke();
-          ctx_game.fill();
-      }
-      else
-          missileX=-999;
-  }
+  oMissile.render();
 }
 
 function drawScore() {

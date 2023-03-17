@@ -104,18 +104,23 @@ function objMagicBall(x, y, step_x, step_y, ballSize, ballStyle = 0) {
     }
 }
 
-function objBonusBall() {
-    this.img = new Image();
-    this.img.src="baloonBall.png";
-    gameobj.call(this, x, y);
-}
-
-function objShield() {
-    this.img = new Image();
-    this.img.src="tennisBall.png";
-    gameobj.call(this, x, y);
-}
-
-function objMissile(x) {
-    
+function objMissile() {
+    gameobj.call(this, -999, -999);
+    this.canFire = true;
+    this.render = function() {
+        // Draw Missile
+        if (this.x >= 0)
+        {
+            this.y-=20;
+            if (this.y>=0)
+            {
+                ctx_game.beginPath();
+                ctx_game.rect(this.x-3, this.y, 6, h-this.y);
+                ctx_game.closePath();
+                ctx_game.stroke();
+                ctx_game.fill();
+            }
+            else this.y=-999;
+        }
+    }
 }
