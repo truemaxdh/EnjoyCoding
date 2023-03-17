@@ -33,7 +33,7 @@ function gameobj(x, y) {
 }
 
 function objMainChr() {    
-    gameobj.call(this, w/2, h - 75);
+    gameobj.call(this, w/2, h - 100);
     this.img = new Image();
     if (sessionStorage.carStyle=="1")
     {
@@ -120,7 +120,12 @@ function objMissile() {
                 ctx_game.stroke();
                 ctx_game.fill();
             }
-            else this.y=-999;
+            else 
+            {
+                this.x=-999;
+                this.y=-999;
+                this.canFire = true;
+            }
         }
     }
 }
