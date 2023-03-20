@@ -171,8 +171,8 @@ function tick(){
 				ball.move();
 				ball.render();
 
-				if ((ball.x + ball.ballSize) > (oMissile.x-3) && ball.x < (oMissile.x+3) && 
-					oMissile.y < (ball.y + ball.ballSize))
+				if ((ball.x + ball.ballSize) > (oMissile.x-oMissile.r) && ball.x < (oMissile.x+oMissile.r) && 
+				    (ball.y + ball.ballSize) > (oMissile.y-oMissile.r) && ball.y < (oMissile.y+oMissile.r))
 				{
 					oMissile.x = -999;
 					oMissile.y = -999;

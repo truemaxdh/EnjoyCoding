@@ -107,6 +107,7 @@ function objMagicBall(x, y, step_x, step_y, ballSize, ballStyle = 0) {
 
 function objMissile() {
     gameobj.call(this, -999, -999);
+    this.r = 5;
     this.canFire = true;
     this.render = function() {
         // Draw Missile
@@ -116,7 +117,8 @@ function objMissile() {
             if (this.y>=0)
             {
                 ctx_game.beginPath();
-                ctx_game.rect(this.x-3, this.y, 6, h-this.y);
+                ctx_game.arc(this.x, this.y, r, 0, 2 * Math.PI);
+                //ctx_game.rect(this.x-3, this.y, 6, h-this.y);
                 ctx_game.closePath();
                 ctx_game.stroke();
                 ctx_game.fill();
