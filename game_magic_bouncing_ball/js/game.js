@@ -106,18 +106,18 @@ function proc_user_input() {
 	}
 }
 
-function addBall(ballID)
+function addBall(ball)
 {
-	const ball = balls[ballID];
-	if (ball.ballSize < 25)
-		return;
+	//const ball = balls[ballID];
+	// if (ball.ballSize < 25)
+	// 	return;
 
 	score+=10;
 	switch(ball.ballStyle) {
 		case 0:	// general style
 			playSound(1);
 
-			ball.ballSize -=10;
+			// ball.ballSize -=10;
 		
 			balls[ballCnt++] = new objMagicBall(
 				ball.x, ball.y, -ball.step_x, ball.step_y, ball.ballSize, ball.ballStyle);
@@ -158,16 +158,17 @@ function tick(){
 		proc_user_input();
 		render();
 
-		var ctx = canv_game.getContext('2d');
+		const ctx = canv_game.getContext('2d');
 		
 		// Draw Balls
-		var eliminatedBall=0;
-		for (var i=0;i<ballCnt;i++)
-		{  
-			const ball = balls[i];
-			if (ball.ballSize<25)
-				eliminatedBall++;
-			else {
+		//var eliminatedBall=0;
+		if (ballCnt > 0) {
+			for (var i=0;i<ballCnt;i++)
+			{  
+				const ball = balls[i];
+			// if (ball.ballSize<25)
+			// 	eliminatedBall++;
+			// else {
 				ball.move();
 				ball.render();
 
@@ -177,7 +178,13 @@ function tick(){
 					oMissile.x = -999;
 					oMissile.y = -999;
 					oMissile.canFire = true;
-					addBall(i);
+					ball.ballSize -=10;
+					if (ball.ballSize < 25) {
+						ballCnt--;
+						balls.splice(i--);
+						continue;
+					}
+					addBall(ball);
 				}
 
 				// Check Collision with Main Character
@@ -209,17 +216,17 @@ function tick(){
 							}
 							break;
 						case 1:
-							addBall(i);
+							addBall(ball);
 							break;
 						case 2:
-							addBall(i);
+							addBall(ball);
 							break;
 					}
 				}						
+			//}
 			}
-		}
-		
-		if (eliminatedBall==ballCnt)
+		} else 		
+		//if (eliminatedBall==ballCnt)
 		{
 			ctx.font = "bold 60px sans-serif";
 			ctx.rotate(-0.35);
