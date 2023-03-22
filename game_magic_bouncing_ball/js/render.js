@@ -21,6 +21,7 @@ function render() {
 
   oMainChr.render();
 
+  oMissile.move();
   oMissile.render();
 }
 

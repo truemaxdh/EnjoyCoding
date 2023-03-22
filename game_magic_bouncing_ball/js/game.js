@@ -166,9 +166,7 @@ function tick(){
 			for (var i=0;i<ballCnt;i++)
 			{  
 				const ball = balls[i];
-			// if (ball.ballSize<25)
-			// 	eliminatedBall++;
-			// else {
+			
 				ball.move();
 				ball.render();
 

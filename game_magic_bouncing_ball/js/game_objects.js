@@ -110,20 +110,38 @@ function objMissile() {
     this.r = 8;
     this.speed = 5;
     this.canFire = true;
+    this.move = function() {
+        if (this.x > -999)
+        {
+            if (balls.length > 0) {
+                const target = [balls[0].x + balls[0].ballSize / 2, balls[0].y + balls[0].ballSize / 2];
+                const diff = [target[0] - this.x, target[1] - this.y];
+                const d = Math.sqrt(diff[0] * diff[0] + diff[1] * diff[1]);
+                if (d <= this.speed) {
+                    this.x = target[0];
+                    this.y = target[1];
+                } else {
+                    this.x += diff[0] * this.speed / d;
+                    this.y += diff[1] * this.speed / d;
+                }
+            }
+        }
+        else
+        {
+            this.y -= this.speed;
+            if (this.y < 0) {
+                this.x = -999;
+                this.y = -999;
+                this.canFire = true;
+            }
+        }
+    }
+
     this.render = function() {
         // Draw Missile
         if (this.x > -999)
         {
-            const target = [balls[0].x + balls[0].ballSize / 2, balls[0].y + balls[0].ballSize / 2];
-            const diff = [target[0] - this.x, target[1] - this.y];
-            const d = Math.sqrt(diff[0] * diff[0] + diff[1] * diff[1]);
-            if (d <= this.speed) {
-                this.x = target[0];
-                this.y = target[1];
-            } else {
-                this.x += diff[0] * this.speed / d;
-                this.y += diff[1] * this.speed / d;
-            }
+            
             ctx_game.beginPath();
             ctx_game.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
             //ctx_game.rect(this.x-3, this.y, 6, h-this.y);
