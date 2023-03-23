@@ -28,7 +28,6 @@ function gameobj(x, y) {
         if (this.next != null) {
             this.next.render();
         }
-        //this.move();
     }
 }
 
@@ -54,6 +53,9 @@ function objMainChr() {
     this.imgShield.src="tennisBall.png";
 
     this.render = function() {
+        this.w = this.img.width * 1.7;
+        this.h = this.img.height * 1.7;
+
         if (this.powerShield > 0) {
             this.powerShield--;
             ctx_game.drawImage(this.imgShield, this.x, this.y, this.w, this.h);
