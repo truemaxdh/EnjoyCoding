@@ -46,7 +46,9 @@ function objMainChr() {
     {
         this.img.src="mainChr_tran.png";
     }
-    
+    this.w = this.img.width * 1.7;
+    this.h = this.img.height * 1.7;
+
     this.powerShield = 0;
     this.imgShield = new Image();
     this.imgShield.src="tennisBall.png";
@@ -54,10 +56,10 @@ function objMainChr() {
     this.render = function() {
         if (this.powerShield > 0) {
             this.powerShield--;
-            ctx_game.drawImage(this.imgShield, this.x, this.y, this.img.width, this.img.height);
+            ctx_game.drawImage(this.imgShield, this.x, this.y, this.w, this.h);
         }
         
-        ctx_game.drawImage(this.img, this.x, this.y, this.img.width * 1.7, this.img.height * 1.7);
+        ctx_game.drawImage(this.img, this.x, this.y, this.w, this.h);
 
         if (this.next != null) {
             this.next.render(ctx_game);
@@ -158,28 +160,12 @@ function objMissile() {
             ctx_game.closePath();
             ctx_game.stroke();
             ctx_game.fill();
-            /*
-            if (this.y>=0)
-            {
-                ctx_game.beginPath();
-                ctx_game.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-                //ctx_game.rect(this.x-3, this.y, 6, h-this.y);
-                ctx_game.closePath();
-                ctx_game.stroke();
-                ctx_game.fill();
-            }
-            else 
-            {
-                this.x=-999;
-                this.y=-999;
-                this.canFire = true;
-            }*/
         }
     }
 
     this.fire = function() {      
         this.canFire = false;
-        this.x = oMainChr.x+oMainChr.img.width/2;
+        this.x = oMainChr.x+oMainChr.w/2;
         this.y = oMainChr.y;    
     }
 }

@@ -156,10 +156,11 @@ function tick(){
 				}
 
 				// Check Collision with Main Character
-				if ((ball.x - oMainChr.x) < (oMainChr.img.width-5) && 
+				if ((ball.x - oMainChr.x) < (oMainChr.w-5) && 
 					(oMainChr.x - ball.x) < (ball.ballSize - 5) && 
 					(oMainChr.y-ball.y) < (ball.ballSize-5))
 				{
+					balls.splice(i--, 1);
 					if (ball.ballStyle == 0 && oMainChr.powerShield <= 0) {
 						remained--;
 						if (remained<0)
@@ -177,7 +178,7 @@ function tick(){
 							oMainChr.x=0;
 							sleep(500);
 						}
-					} else {
+					} else {						
 						bonusBalls.push(ball);
 					}
 				}
