@@ -1,5 +1,4 @@
 // Ball Control
-var ballCnt;
 var ballSize=[];
 var x=[];
 var incx=[];

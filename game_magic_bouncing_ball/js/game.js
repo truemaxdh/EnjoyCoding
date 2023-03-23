@@ -81,7 +81,6 @@ function initFontNLaserStyle() {
 
 function newStage(stage) {
 	// Ball Control
-	ballCnt=2;
 	balls = [
 		new objMagicBall(100, 100, -3, 0, 10 * Math.ceil((stage + 1) / 2) + 20), 
 		new objMagicBall(100, 100, 3, 0, 10 * Math.floor((stage + 1) / 2) + 20)
@@ -108,52 +107,27 @@ function proc_user_input() {
 
 function addBall(ball)
 {
-	//const ball = balls[ballID];
-	// if (ball.ballSize < 25)
-	// 	return;
-
-	score+=10;
-	switch(ball.ballStyle) {
-		case 0:	// general style
-			playSound(1);
-
-			// ball.ballSize -=10;
-		
-			balls[ballCnt++] = new objMagicBall(
-				ball.x, ball.y, -ball.step_x, ball.step_y, ball.ballSize, ball.ballStyle);
-			
-			divideCnt++;
-			if (divideCnt==60)
-			{
-				balls[ballCnt++] = new objMagicBall(
-					ball.x, ball.y, 0, 2, 30, 2);
-
-				divideCnt=0;
-			}
-			else if ((divideCnt%5)==0)
-			{
-				balls[ballCnt++] = new objMagicBall(
-					ball.x, ball.y, 0, 2, 30, 1);
-			}			
-			break;
-		case 1:	// balloon style
-			ball.ballSize = 0;
-			const cnt = ballCnt;
-			for (let i=0; i < cnt; i++) {
-				addBall(i);
-			}
-			break;
-		case 2:	// tennis style
-			playSound(3);
-			ball.ballSize = 0;
-			oMainChr.powerShield+=200;	
-			break;
+	playSound(1);
+	balls.push(new objMagicBall(
+		ball.x, ball.y, ball.step_x, ball.step_y, ball.ballSize));
+	balls.push(new objMagicBall(
+		ball.x, ball.y, -ball.step_x, ball.step_y, ball.ballSize));
+	divideCnt++;
+	if (divideCnt==60)
+	{
+		balls.push(new objMagicBall(
+			ball.x, ball.y, 0, 2, 30, 2));
+		divideCnt=0;
+	}
+	else if ((divideCnt%5)==0)
+	{
+		balls.push(new objMagicBall(
+			ball.x, ball.y, 0, 2, 30, 1));
 	}
 }
 
 // Timer Tick
 function tick(){
-
 	if (canv_game.getContext){
 		proc_user_input();
 		render();
@@ -161,9 +135,9 @@ function tick(){
 		const ctx = canv_game.getContext('2d');
 		
 		// Draw Balls
-		//var eliminatedBall=0;
-		if (ballCnt > 0) {
-			for (var i=0;i<ballCnt;i++)
+		if (balls.length > 0) {
+			let bonusBalls = [];
+			for (let i=0;i<balls.length;i++)
 			{  
 				const ball = balls[i];
 			
@@ -176,13 +150,9 @@ function tick(){
 					oMissile.x = -999;
 					oMissile.y = -999;
 					oMissile.canFire = true;
-					ball.ballSize -=10;
-					if (ball.ballSize < 25) {
-						ballCnt--;
-						balls.splice(i--);
-						continue;
-					}
-					addBall(ball);
+					balls.splice(i--, 1);
+					bonusBalls.push(ball);
+					continue;
 				}
 
 				// Check Collision with Main Character
@@ -190,41 +160,53 @@ function tick(){
 					(oMainChr.x - ball.x) < (ball.ballSize - 5) && 
 					(oMainChr.y-ball.y) < (ball.ballSize-5))
 				{
-					switch(ball.ballStyle) {
-						case 0:
-							if (oMainChr.powerShield > 0)
-								addBall(i);
-							else {
-								remained--;
-								if (remained<0)
-								{
-									// GameOver
-									document.getElementById( 'bgm' ).pause();
-									ctx.font = "bold 60px sans-serif";
-									ctx.rotate(-0.40);
-									ctx.fillText("Game Over!!", 110, 380);
-									
-									stopMode="GameOver";
-								}
-								else
-								{
-									oMainChr.x=0;
-									sleep(500);
-								}
-							}
-							break;
-						case 1:
-							addBall(ball);
-							break;
-						case 2:
-							addBall(ball);
-							break;
+					if (ball.ballStyle == 0 && oMainChr.powerShield <= 0) {
+						remained--;
+						if (remained<0)
+						{
+							// GameOver
+							document.getElementById( 'bgm' ).pause();
+							ctx.font = "bold 60px sans-serif";
+							ctx.rotate(-0.40);
+							ctx.fillText("Game Over!!", 110, 380);
+							
+							stopMode="GameOver";
+						}
+						else
+						{
+							oMainChr.x=0;
+							sleep(500);
+						}
+					} else {
+						bonusBalls.push(ball);
 					}
-				}						
-			//}
+				}
 			}
+			bonusBalls.forEach((ball)=>{
+				switch(ball.ballStyle) {
+					case 0:	// general style
+						score+=10;
+						ball.ballSize -=10;
+						if (ball.ballSize > 25)
+							addBall(ball);
+						break;
+					case 1:	// balloon style
+						for(let i = 0; i < balls.length; i++) {
+							const ball1 = balls[i];
+							if (ball1.ballStyle == 0) {
+								ball1.ballSize -=10;
+								ball1.splice(i, 1);
+								if (ball1.ballSize > 25)
+									addBall(ball1);
+							}
+						}
+						break;
+					case 2:	// tennis style
+						oMainChr.powerShield+=200;	
+						break;
+				}
+			})
 		} else 		
-		//if (eliminatedBall==ballCnt)
 		{
 			ctx.font = "bold 60px sans-serif";
 			ctx.rotate(-0.35);

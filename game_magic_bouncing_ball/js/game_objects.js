@@ -72,8 +72,18 @@ function objMagicBall(x, y, step_x, step_y, ballSize, ballStyle = 0) {
     this.ballSize = ballSize;
     this.ballStyle = ballStyle;
     this.img = new Image();
-    this.img.src = ["magicBall.png", "baloonBall.png", "tennisBall.png"][ballStyle];
-    
+    switch(ballStyle) {
+        case 0:
+            this.img.src = "magicBall.png";
+            break;
+        case 1:
+            this.img.src = "baloonBall.png";
+            break;
+        case 2:
+            this.img.src = "tennisBall.png";
+            break;
+    }
+        
     this.move = function() {
         this.x += this.step_x;
         this.y += this.step_y;
