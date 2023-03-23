@@ -195,7 +195,7 @@ function tick(){
 							const ball1 = balls[i];
 							if (ball1.ballStyle == 0) {
 								ball1.ballSize -=10;
-								ball1.splice(i, 1);
+								balls.splice(i--, 1);
 								if (ball1.ballSize > 25)
 									addBall(ball1);
 							}
