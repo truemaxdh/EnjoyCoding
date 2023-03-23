@@ -192,9 +192,10 @@ function tick(){
 							addBall(ball);
 						break;
 					case 1:	// balloon style
-						for(let i = 0; i < balls.length; i++) {
-							const ball1 = balls[i];
-							balls.splice(i--, 1);
+						let oriCnt = balls.length;
+						for(let i = 0; i < oriCnt; i++) {
+							const ball1 = balls[0];
+							balls.splice(0, 1);
 							if (ball1.ballStyle == 0) {
 								ball1.ballSize -=10;								
 								if (ball1.ballSize > 25)
