@@ -194,9 +194,9 @@ function tick(){
 					case 1:	// balloon style
 						for(let i = 0; i < balls.length; i++) {
 							const ball1 = balls[i];
+							balls.splice(i--, 1);
 							if (ball1.ballStyle == 0) {
-								ball1.ballSize -=10;
-								balls.splice(i--, 1);
+								ball1.ballSize -=10;								
 								if (ball1.ballSize > 25)
 									addBall(ball1);
 							}
