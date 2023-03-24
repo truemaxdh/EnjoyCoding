@@ -26,7 +26,8 @@ function render() {
 }
 
 function drawScore() {
-    // Draw Score
+    // Font
+	  ctx_game.font = "bold 30px sans-serif";
     ctx_game.fillText("Stage: "+stage, 0, 30);
     ctx_game.fillText("Remained: "+remained, 260, 30);
     ctx_game.fillText("Score: "+score, 520, 30);
