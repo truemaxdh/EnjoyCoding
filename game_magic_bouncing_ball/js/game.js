@@ -1,24 +1,16 @@
 /*
 	변수 설정
 */
-let divideCnt=0;
+let gamePlay = {
+	divideCnt: 0,
+	score: 0,
+	remained: 3,
+	stopMode: "",
+	stopModeTimer: 0,
+	stage: 1
+};
 
-// Score
-var score=0;
-
-// Remained
-var remained=3;
-
-// Timer Handler
-var timer;
-
-// 일시정지 사유
-var stopMode="";
-
-let balls = [];
-	
-var stage=1;
-
+let balls;
 let oMainChr;
 let oMissile;
 
@@ -70,9 +62,17 @@ function initGame(){
 	oMainChr = new objMainChr();
 	oMissile = new objMissile();
 	
+	gamePlay.divideCnt = 0;
+	gamePlay.score = 0;
+	gamePlay.remained = 3;
+	gamePlay.stopMode = "";
+	gamePlay.stopModeTimer = 0;
+	gamePlay.stage = 1;
+
 	initFontNLaserStyle();
 	document.getElementById( 'bgm' ).play();
-	newStage(stage);
+	
+	newStage();
 }
 
 function initFontNLaserStyle() {
@@ -84,13 +84,16 @@ function initFontNLaserStyle() {
 	ctx_game.fillStyle = grd;
 }
 
-function newStage(stage) {
+function newStage() {
+	gamePlay.stopMode = "";
+	gamePlay.stopModeTimer = 0;
+	
 	// Ball Control
 	balls = [
-		new objMagicBall(100, 100, -3, 0, 10 * Math.ceil((stage + 1) / 2) + 20), 
-		new objMagicBall(100, 100, 3, 0, 10 * Math.floor((stage + 1) / 2) + 20)
+		new objMagicBall(100, 100, -3, 0, 10 * Math.ceil((gamePlay.stage + 1) / 2) + 20), 
+		new objMagicBall(100, 100, 3, 0, 10 * Math.floor((gamePlay.stage + 1) / 2) + 20)
 	];
-
+	
 	setTimeout(tick,500); 
 }
 
@@ -103,7 +106,7 @@ function proc_user_input() {
 
 		oMainChr.x += dx;
 
-		if (stopMode == "" && oMissile.canFire)
+		if (gamePlay.stopMode == "" && oMissile.canFire)
 		{
 			oMissile.fire();
 		}
@@ -117,14 +120,14 @@ function addBall(ball)
 		ball.x, ball.y, ball.step_x, ball.step_y, ball.ballSize));
 	balls.push(new objMagicBall(
 		ball.x, ball.y, -ball.step_x, ball.step_y, ball.ballSize));
-	divideCnt++;
-	if (divideCnt==60)
+	gamePlay.divideCnt++;
+	if (gamePlay.divideCnt==60)
 	{
 		balls.push(new objMagicBall(
 			ball.x, ball.y, 0, 2, 30, 2));
-		divideCnt=0;
+		gamePlay.divideCnt=0;
 	}
-	else if ((divideCnt%5)==0)
+	else if ((gamePlay.divideCnt%5)==0)
 	{
 		balls.push(new objMagicBall(
 			ball.x, ball.y, 0, 2, 30, 1));
@@ -137,105 +140,105 @@ function tick(){
 	proc_user_input();
 	render();
 
-	if (stopMode != "") {
+	if (gamePlay.stopMode != "") {
 		ctx_game.font = "bold 60px sans-serif";
 		//ctx.rotate(-0.40);
-		ctx_game.fillText(stopMode, 450 - 15 * stopMode.length, 380);
+		ctx_game.fillText(gamePlay.stopMode, 450 - 15 * gamePlay.stopMode.length, 380);
 		//ctx.rotate(0.40);
-		sleep(1000);
-		
-		const lastStopMode = stopMode;
-		stopMode="";
-		
-		if (lastStopMode=="Game Over")
-		{
-			document.getElementById( 'bgm' ).pause();
-			exitFullScreen();
-			pageChange('menu');
-			return;
-		}
-		else if (lastStopMode=="Stage Clear")
-		{
-			newStage(++stage);
-			return;
-		}
-	}
-	
-	
-	// Draw Balls
-	if (balls.length > 0) {
-		let bonusBalls = [];
-		for (let i=0;i<balls.length;i++)
-		{  
-			const ball = balls[i];
-		
-			ball.move();
-			ball.render();
-
-			if ((ball.x + ball.ballSize) > (oMissile.x-oMissile.r) && ball.x < (oMissile.x+oMissile.r) && 
-				(ball.y + ball.ballSize) > (oMissile.y-oMissile.r) && ball.y < (oMissile.y+oMissile.r))
+		if (gamePlay.stopModeTimer++ >= 60) {
+			if (gamePlay.stopMode=="Game Over")
 			{
-				oMissile.x = -999;
-				oMissile.y = -999;
-				oMissile.canFire = true;
-				balls.splice(i--, 1);
-				bonusBalls.push(ball);
-				continue;
+				document.getElementById( 'bgm' ).pause();
+				exitFullScreen();
+				pageChange('menu');
+				clearCanvas();
+				return;
 			}
-
-			// Check Collision with Main Character
-			if ((ball.x - oMainChr.x) < (oMainChr.w-5) && 
-				(oMainChr.x - ball.x) < (ball.ballSize - 5) && 
-				(oMainChr.y-ball.y) < (ball.ballSize-5))
+			else if (gamePlay.stopMode=="Stage Clear")
 			{
-				balls.splice(i--, 1);
-				if (ball.ballStyle == 0 && oMainChr.powerShield <= 0) {
-					remained--;
-					if (remained<0)
-					{
-						// Game Over
-						stopMode="GameOver";
-					}
-					else
-					{
-						oMainChr.x=0;
-						stopMode="Crashed";
-					}
-				} else {						
+				gamePlay.stage++;
+				newStage();
+				return;
+			} else {
+				gamePlay.stopMode = "";
+				gamePlay.stopModeTimer = 0;
+			}
+		}
+	} else {	
+		// Draw Balls
+		if (balls.length > 0) {
+			let bonusBalls = [];
+			for (let i=0;i<balls.length;i++)
+			{  
+				const ball = balls[i];
+			
+				ball.move();
+				ball.render();
+
+				if ((ball.x + ball.ballSize) > (oMissile.x-oMissile.r) && ball.x < (oMissile.x+oMissile.r) && 
+					(ball.y + ball.ballSize) > (oMissile.y-oMissile.r) && ball.y < (oMissile.y+oMissile.r))
+				{
+					oMissile.x = -999;
+					oMissile.y = -999;
+					oMissile.canFire = true;
+					balls.splice(i--, 1);
 					bonusBalls.push(ball);
+					continue;
+				}
+
+				// Check Collision with Main Character
+				if ((ball.x - oMainChr.x) < (oMainChr.w-5) && 
+					(oMainChr.x - ball.x) < (ball.ballSize - 5) && 
+					(oMainChr.y-ball.y) < (ball.ballSize-5))
+				{
+					balls.splice(i--, 1);
+					if (ball.ballStyle == 0 && oMainChr.powerShield <= 0) {
+						gamePlay.remained--;
+						if (gamePlay.remained<0)
+						{
+							// Game Over
+							gamePlay.stopMode="Game Over";
+						}
+						else
+						{
+							oMainChr.x=0;
+							gamePlay.stopMode="Crashed";
+						}
+					} else {						
+						bonusBalls.push(ball);
+					}
 				}
 			}
-		}
-		bonusBalls.forEach((ball)=>{
-			switch(ball.ballStyle) {
-				case 0:	// ball
-					score+=10;
-					ball.ballSize -=10;
-					if (ball.ballSize > 25)
-						addBall(ball);
-					break;
-				case 1:	// bonus(bomb)
-					let oriCnt = balls.length;
-					for(let i = 0; i < oriCnt; i++) {
-						const ball1 = balls[0];
-						balls.splice(0, 1);
-						if (ball1.ballStyle == 0) {
-							ball1.ballSize -=10;								
-							if (ball1.ballSize > 25)
-								addBall(ball1);
+			bonusBalls.forEach((ball)=>{
+				switch(ball.ballStyle) {
+					case 0:	// ball
+						gamePlay.score+=10;
+						ball.ballSize -=10;
+						if (ball.ballSize > 25)
+							addBall(ball);
+						break;
+					case 1:	// bonus(bomb)
+						let oriCnt = balls.length;
+						for(let i = 0; i < oriCnt; i++) {
+							const ball1 = balls[0];
+							balls.splice(0, 1);
+							if (ball1.ballStyle == 0) {
+								ball1.ballSize -=10;								
+								if (ball1.ballSize > 25)
+									addBall(ball1);
+							}
 						}
-					}
-					break;
-				case 2:	// shield
-					oMainChr.powerShield+=200;	
-					break;
-			}
-		})
-	} else 		
-	{
-		stopMode="Stage Clear";
+						break;
+					case 2:	// shield
+						oMainChr.powerShield+=200;	
+						break;
+				}
+			})
+		} else 		
+		{
+			gamePlay.stopMode="Stage Clear";
+		}
 	}
-	
 	requestAnimationFrame(tick);
 }
 
