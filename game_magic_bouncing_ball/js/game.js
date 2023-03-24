@@ -22,7 +22,7 @@ function init() {
 	render_init();
 	
 	if (!chkLandscapeMode()) {
-		alert("Please turn mobile to be landscape mode");
+		alert("Please rotate your mobile to landscape mode");
 		pageChange('menu');
 		return;
 	}
