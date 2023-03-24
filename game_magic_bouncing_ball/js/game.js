@@ -141,6 +141,7 @@ function tick(){
 	render();
 
 	if (gamePlay.stopMode != "") {
+		balls.forEach((ball)=>ball.render());
 		ctx_game.font = "bold 60px sans-serif";
 		//ctx.rotate(-0.40);
 		ctx_game.fillText(gamePlay.stopMode, 450 - 15 * gamePlay.stopMode.length, 380);
