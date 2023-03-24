@@ -67,10 +67,11 @@ function initGame(){
 
 function initFontNLaserStyle() {
 	// Laser
-	let gradient = ctx_game.createLinearGradient(0, 0, 400, 400);
-	gradient.addColorStop(0, "rgb(255, 0, 0)");
-	gradient.addColorStop(1, "rgb(255, 255, 0)");
-	ctx_game.fillStyle = gradient;
+	let grd=ctx_game.createLinearGradient(0, 0, ctx_game.canvas.width,0);
+        grd.addColorStop("0","magenta");
+        grd.addColorStop("0.5","blue");
+        grd.addColorStop("1.0","red");
+	ctx_game.fillStyle = grd;
 
 	// Font
 	ctx_game.font = "bold 30px sans-serif";
