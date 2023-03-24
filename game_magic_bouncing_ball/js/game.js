@@ -34,7 +34,7 @@ function init() {
 		pageChange('menu');
 		return;
 	}
-	setToFullscreen();
+	setFullscreen();
 	
 	init_user_input();
 	initGame();
@@ -44,15 +44,25 @@ function chkLandscapeMode() {
 	return (window.innerWidth > window.innerHeight);
 }
 
-function setToFullscreen() {
+function setFullscreen() {
 	let container = canv_game.parentElement;
 	if (canv_game.requestFullscreen) {
 		container.requestFullscreen();
-		} else if (canv_game.webkitRequestFullscreen) { /* Safari */
+	} else if (canv_game.webkitRequestFullscreen) { /* Safari */
 		container.webkitRequestFullscreen();
-		} else if (canv_game.msRequestFullscreen) { /* IE11 */
+	} else if (canv_game.msRequestFullscreen) { /* IE11 */
 		canv_game.msRequestFullscreen();
-		}
+	}
+}
+
+function exitFullScreen() {
+	if (document.exitFullscreen) {
+		document.exitFullscreen();
+	} else if (document.webkitExitFullscreen) { /* Safari */
+		document.webkitExitFullscreen();
+	} else if (document.msExitFullscreen) { /* IE11 */
+		document.msExitFullscreen();
+	}
 }
 
 // Initialize
@@ -72,9 +82,6 @@ function initFontNLaserStyle() {
         grd.addColorStop("0.5","blue");
         grd.addColorStop("1.0","red");
 	ctx_game.fillStyle = grd;
-
-	// Font
-	ctx_game.font = "bold 30px sans-serif";
 }
 
 function newStage(stage) {
@@ -131,6 +138,7 @@ function tick(){
 	render();
 
 	if (stopMode != "") {
+		ctx_game.font = "bold 60px sans-serif";
 		//ctx.rotate(-0.40);
 		ctx_game.fillText(stopMode, 450 - 15 * stopMode.length, 380);
 		//ctx.rotate(0.40);
@@ -142,13 +150,12 @@ function tick(){
 		if (lastStopMode=="Game Over")
 		{
 			document.getElementById( 'bgm' ).pause();
+			exitFullScreen();
 			pageChange('menu');
-			//document.location.reload();
 			return;
 		}
 		else if (lastStopMode=="Stage Clear")
 		{
-			//initFontNLaserStyle();
 			newStage(++stage);
 			return;
 		}
