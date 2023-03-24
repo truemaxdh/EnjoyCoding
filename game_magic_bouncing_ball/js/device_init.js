@@ -1,5 +1,3 @@
-var isApp;
-
 // pages
 var pageIDs = ['intro','menu','game'];
 function pageChange(newpageID) {
@@ -21,43 +19,8 @@ function pageChange(newpageID) {
     } 
 }
 
-
-// Do this when run as app
-function onDeviceReady() {
-    document.removeEventListener('deviceready', onDeviceReady, false);
-    render_init();
-    //init_user_input();
-
-    ///////////
-    // AdMob //
-    ///////////
-    initAd();
-    ///////////////////////////
-    // Google Game Services  //
-    ///////////////////////////
-    window.game.setUp();
-    window.game.login();
-    window.game.onLoginSucceeded = function(result) {
-		//var playerDetail = result;
-        pageChange('menu');
-    };
-    window.game.onLoginFailed = function() {
-        pageChange('menu');
-    };
-}
-
-// Do this when run on web
-function onLoad() {
-    //render_init();
-    //init_user_input();
+window.onload = function() {
+    sleep(1000);
     pageChange('menu');
-}
+};
 
-if (location.href.indexOf('truemaxdh.github.io') < 0 &&
-    location.href.indexOf('localhost') < 0) {
-    isApp = true;
-    document.addEventListener("deviceready", onDeviceReady, false);
-} else {
-    isApp = false;
-    addEventListener("load", onLoad);
-}

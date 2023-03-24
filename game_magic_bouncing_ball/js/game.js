@@ -55,7 +55,6 @@ function setToFullscreen() {
 		}
 }
 
-
 // Initialize
 function initGame(){
 	oMainChr = new objMainChr();
@@ -67,16 +66,14 @@ function initGame(){
 }
 
 function initFontNLaserStyle() {
-	var ctx = canv_game.getContext('2d');
-
 	// Laser
-	var gradient = ctx.createLinearGradient(0, 0, 400, 400);
+	let gradient = ctx_game.createLinearGradient(0, 0, 400, 400);
 	gradient.addColorStop(0, "rgb(255, 0, 0)");
 	gradient.addColorStop(1, "rgb(255, 255, 0)");
-	ctx.fillStyle = gradient;
+	ctx_game.fillStyle = gradient;
 
 	// Font
-	ctx.font = "bold 30px sans-serif";
+	ctx_game.font = "bold 30px sans-serif";
 }
 
 function newStage(stage) {
@@ -128,112 +125,110 @@ function addBall(ball)
 
 // Timer Tick
 function tick(){
-	if (canv_game.getContext){
-		proc_user_input();
-		render();
+	
+	proc_user_input();
+	render();
 
-		const ctx = canv_game.getContext('2d');
+	if (stopMode != "") {
+		//ctx.rotate(-0.40);
+		ctx_game.fillText(stopMode, 450 - 15 * stopMode.length, 380);
+		//ctx.rotate(0.40);
+		sleep(1000);
 		
-		// Draw Balls
-		if (balls.length > 0) {
-			let bonusBalls = [];
-			for (let i=0;i<balls.length;i++)
-			{  
-				const ball = balls[i];
-			
-				ball.move();
-				ball.render();
-
-				if ((ball.x + ball.ballSize) > (oMissile.x-oMissile.r) && ball.x < (oMissile.x+oMissile.r) && 
-				    (ball.y + ball.ballSize) > (oMissile.y-oMissile.r) && ball.y < (oMissile.y+oMissile.r))
-				{
-					oMissile.x = -999;
-					oMissile.y = -999;
-					oMissile.canFire = true;
-					balls.splice(i--, 1);
-					bonusBalls.push(ball);
-					continue;
-				}
-
-				// Check Collision with Main Character
-				if ((ball.x - oMainChr.x) < (oMainChr.w-5) && 
-					(oMainChr.x - ball.x) < (ball.ballSize - 5) && 
-					(oMainChr.y-ball.y) < (ball.ballSize-5))
-				{
-					balls.splice(i--, 1);
-					if (ball.ballStyle == 0 && oMainChr.powerShield <= 0) {
-						remained--;
-						if (remained<0)
-						{
-							// GameOver
-							document.getElementById( 'bgm' ).pause();
-							ctx.font = "bold 60px sans-serif";
-							ctx.rotate(-0.40);
-							ctx.fillText("Game Over!!", 110, 380);
-							
-							stopMode="GameOver";
-						}
-						else
-						{
-							oMainChr.x=0;
-							sleep(500);
-						}
-					} else {						
-						bonusBalls.push(ball);
-					}
-				}
-			}
-			bonusBalls.forEach((ball)=>{
-				switch(ball.ballStyle) {
-					case 0:	// general style
-						score+=10;
-						ball.ballSize -=10;
-						if (ball.ballSize > 25)
-							addBall(ball);
-						break;
-					case 1:	// balloon style
-						let oriCnt = balls.length;
-						for(let i = 0; i < oriCnt; i++) {
-							const ball1 = balls[0];
-							balls.splice(0, 1);
-							if (ball1.ballStyle == 0) {
-								ball1.ballSize -=10;								
-								if (ball1.ballSize > 25)
-									addBall(ball1);
-							}
-						}
-						break;
-					case 2:	// tennis style
-						oMainChr.powerShield+=200;	
-						break;
-				}
-			})
-		} else 		
-		{
-			ctx.font = "bold 60px sans-serif";
-			ctx.rotate(-0.35);
-			ctx.fillText("Stage Cleared!!", 90, 380);
-			ctx.rotate(0.35);		
-			stopMode="StageCleared";
-		}
+		const lastStopMode = stopMode;
+		stopMode="";
 		
-		if (stopMode=="") {
-			requestAnimationFrame(tick);
-		} else if (stopMode=="GameOver")
+		if (lastStopMode=="Game Over")
 		{
-			sleep(1500);
-			stopMode="";
+			document.getElementById( 'bgm' ).pause();
 			pageChange('menu');
+			//document.location.reload();
+			return;
 		}
-		else if (stopMode=="StageCleared")
+		else if (lastStopMode=="Stage Clear")
 		{
-			sleep(500);
-			stopMode="";
-			initFontNLaserStyle();
-			stage++;
-			newStage(stage);
+			//initFontNLaserStyle();
+			newStage(++stage);
+			return;
 		}
 	}
+	
+	
+	// Draw Balls
+	if (balls.length > 0) {
+		let bonusBalls = [];
+		for (let i=0;i<balls.length;i++)
+		{  
+			const ball = balls[i];
+		
+			ball.move();
+			ball.render();
+
+			if ((ball.x + ball.ballSize) > (oMissile.x-oMissile.r) && ball.x < (oMissile.x+oMissile.r) && 
+				(ball.y + ball.ballSize) > (oMissile.y-oMissile.r) && ball.y < (oMissile.y+oMissile.r))
+			{
+				oMissile.x = -999;
+				oMissile.y = -999;
+				oMissile.canFire = true;
+				balls.splice(i--, 1);
+				bonusBalls.push(ball);
+				continue;
+			}
+
+			// Check Collision with Main Character
+			if ((ball.x - oMainChr.x) < (oMainChr.w-5) && 
+				(oMainChr.x - ball.x) < (ball.ballSize - 5) && 
+				(oMainChr.y-ball.y) < (ball.ballSize-5))
+			{
+				balls.splice(i--, 1);
+				if (ball.ballStyle == 0 && oMainChr.powerShield <= 0) {
+					remained--;
+					if (remained<0)
+					{
+						// Game Over
+						stopMode="GameOver";
+					}
+					else
+					{
+						oMainChr.x=0;
+						stopMode="Crashed";
+					}
+				} else {						
+					bonusBalls.push(ball);
+				}
+			}
+		}
+		bonusBalls.forEach((ball)=>{
+			switch(ball.ballStyle) {
+				case 0:	// ball
+					score+=10;
+					ball.ballSize -=10;
+					if (ball.ballSize > 25)
+						addBall(ball);
+					break;
+				case 1:	// bonus(bomb)
+					let oriCnt = balls.length;
+					for(let i = 0; i < oriCnt; i++) {
+						const ball1 = balls[0];
+						balls.splice(0, 1);
+						if (ball1.ballStyle == 0) {
+							ball1.ballSize -=10;								
+							if (ball1.ballSize > 25)
+								addBall(ball1);
+						}
+					}
+					break;
+				case 2:	// shield
+					oMainChr.powerShield+=200;	
+					break;
+			}
+		})
+	} else 		
+	{
+		stopMode="Stage Clear";
+	}
+	
+	requestAnimationFrame(tick);
 }
 
 function sleep(ms)
