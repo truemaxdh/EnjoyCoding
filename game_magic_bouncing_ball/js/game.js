@@ -131,7 +131,7 @@ function addBall(ball)
 	if (gamePlay.divideCnt==20)
 	{
 		balls.push(new objMagicBall(
-			ball.x, ball.y, 0, 2, 30, 2));
+			ball.x, ball.y, 0, 2, 30, 1));
 		gamePlay.divideCnt=0;
 	}
 	
