@@ -13,23 +13,22 @@ function render_init() {
   ctx_game = canv_game.getContext('2d');
 }
 
-function render() {
-  //clear canvas
+function clearCanvas() {
   ctx_game.clearRect(0,0,w,h);
-
-  drawScore()
-
-  oMainChr.render();
-
+}
+function render() {
+  clearCanvas();
+  drawScore();
   oMissile.move();
   oMissile.render();
+  oMainChr.render();
 }
 
 function drawScore() {
     // Font
 	  ctx_game.font = "bold 30px sans-serif";
-    ctx_game.fillText("Stage: "+stage, 0, 30);
-    ctx_game.fillText("Remained: "+remained, 260, 30);
-    ctx_game.fillText("Score: "+score, 520, 30);
+    ctx_game.fillText("Stage: "+ gamePlay.stage, 0, 30);
+    ctx_game.fillText("Remained: "+ gamePlay.remained, 260, 30);
+    ctx_game.fillText("Score: "+ gamePlay.score, 520, 30);
     
 }
