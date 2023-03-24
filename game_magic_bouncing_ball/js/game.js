@@ -121,17 +121,20 @@ function addBall(ball)
 	balls.push(new objMagicBall(
 		ball.x, ball.y, -ball.step_x, ball.step_y, ball.ballSize));
 	gamePlay.divideCnt++;
-	if (gamePlay.divideCnt==60)
+	
+	if ((gamePlay.divideCnt%5)==0)
+	{
+		balls.push(new objMagicBall(
+			ball.x, ball.y, 0, 2, 30, 2));
+	}
+	
+	if (gamePlay.divideCnt==20)
 	{
 		balls.push(new objMagicBall(
 			ball.x, ball.y, 0, 2, 30, 2));
 		gamePlay.divideCnt=0;
 	}
-	else if ((gamePlay.divideCnt%5)==0)
-	{
-		balls.push(new objMagicBall(
-			ball.x, ball.y, 0, 2, 30, 1));
-	}
+	
 }
 
 // Timer Tick
