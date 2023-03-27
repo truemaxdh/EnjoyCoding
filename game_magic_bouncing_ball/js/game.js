@@ -29,7 +29,9 @@ function init() {
 	
 	if (document.location.href.indexOf("WEB_VIEW") < 0) {
 		setFullscreen();
-	}	
+	} else {
+		alert("WEB_VIEW");
+	}
 	
 	init_user_input();
 	initGame();
