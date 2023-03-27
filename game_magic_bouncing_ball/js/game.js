@@ -30,8 +30,8 @@ function init() {
 	if (document.location.href.indexOf("WEB_VIEW") < 0) {
 		setFullscreen();
 	} else {
-		canv_game.style.width = window.innerWidth;
-		canv_game.style.height = window.innerHeight;
+		canv_game.style.width = window.innerWidth + "px";
+		canv_game.style.height = window.innerHeight + "px";
 	 	alert(canv_game.style.width + " * " + canv_game.style.height);
 	}
 	
