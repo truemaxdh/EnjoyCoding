@@ -27,11 +27,14 @@ function init() {
 		return;
 	}
 	
-	if (document.location.href.indexOf("WEB_VIEW") < 0) {
+	//if (document.location.href.indexOf("WEB_VIEW") < 0) {
 		setFullscreen();
-	} else {
-		alert("WEB_VIEW");
-	}
+	// } else {
+	// 	alert("WEB_VIEW");
+	// }
+
+	canv_game.style.width = window.innerWidth;
+	canv_game.style.height = window.innerHeight;
 	
 	init_user_input();
 	initGame();
