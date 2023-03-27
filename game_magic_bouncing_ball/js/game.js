@@ -30,9 +30,10 @@ function init() {
 	if (document.location.href.indexOf("WEB_VIEW") < 0) {
 		setFullscreen();
 	} else {
-		canv_game.style.width = window.innerWidth + "px";
-		canv_game.style.height = window.innerHeight + "px";
-	 	alert(canv_game.style.width + " * " + canv_game.style.height);
+		const container = canv_game.parentElement;
+		container.style.width = window.innerWidth + "px";
+		container.style.height = window.innerHeight + "px";
+	 	alert(container.style.width + " * " + container.style.height);
 	}
 	
 	init_user_input();
@@ -44,7 +45,7 @@ function chkLandscapeMode() {
 }
 
 function setFullscreen() {
-	let container = canv_game.parentElement;
+	const container = canv_game.parentElement;
 	if (canv_game.requestFullscreen) {
 		container.requestFullscreen();
 	} else if (canv_game.webkitRequestFullscreen) { /* Safari */
