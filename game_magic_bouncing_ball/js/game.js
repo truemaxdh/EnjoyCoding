@@ -26,6 +26,9 @@ function init() {
 		pageChange('menu');
 		return;
 	}
+	const userAgent = navigator.userAgent.toUpperCase();
+	alert(userAgent);
+	
 	setFullscreen();
 	
 	init_user_input();
