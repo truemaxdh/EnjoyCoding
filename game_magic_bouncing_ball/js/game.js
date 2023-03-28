@@ -33,7 +33,6 @@ function init() {
 		const container = canv_game.parentElement;
 		container.style.width = window.innerWidth + "px";
 		container.style.height = window.innerHeight + "px";
-	 	alert(container.style.width + " * " + container.style.height);
 	}
 	
 	init_user_input();
@@ -51,7 +50,7 @@ function setFullscreen() {
 	} else if (canv_game.webkitRequestFullscreen) { /* Safari */
 		container.webkitRequestFullscreen();
 	} else if (canv_game.msRequestFullscreen) { /* IE11 */
-		canv_game.msRequestFullscreen();
+		container.msRequestFullscreen();
 	}
 }
 
