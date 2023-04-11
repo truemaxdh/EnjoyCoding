@@ -17,7 +17,7 @@ var gamePlay = {
 
     max_stage : 14,
     stage_tick : 50000,
-    missile_interval : [200, 500],
+    missile_interval : [200, 1000],
     missiles : [objMissile, objMissile2],
 
     millisec_played : 0,
@@ -164,7 +164,7 @@ function proc_user_input() {
         for(let i = 0; i < gamePlay.missiles.length; i++) {
             if (missile_interval[i] >= gamePlay.missile_interval[i]) {
                 missile_interval[i] -= gamePlay.missile_interval[i];
-                const cnt = (i == 0) ? 1 : (gamePlay.stage - 1);
+                const cnt = (i == 0) ? 1 : (gamePlay.stage / 2);
                 let dx = (1 - cnt) / 2;
                 for(let m = 0; m < cnt; m++) {
                     let o_missile = new gamePlay.missiles[i](o_jet.x, o_jet.y, dx + m);
