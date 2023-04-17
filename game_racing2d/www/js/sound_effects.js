@@ -64,7 +64,7 @@ function speedSound(speed) {
 	//with(G=createGain())
 	with(audioContext)
 	with(G)
-	for(i in D=[speed, speed, speed])
+	for(i in D=[speed * 2])
 	with(createOscillator())
 	if(D[i])
 	connect(G),
@@ -73,5 +73,6 @@ function speedSound(speed) {
 	frequency.setValueAtTime(440*1.06**(13-D[i]),i*.1),
 	gain.setValueAtTime(1,i*.1),
 	gain.setTargetAtTime(.0001,i*.1+.08,.005),
-	stop(i*.1+.09)
+	//stop(i*.1+.09)
+	stop(i*.5)
 }
