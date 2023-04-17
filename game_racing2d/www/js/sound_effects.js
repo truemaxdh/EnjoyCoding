@@ -56,3 +56,18 @@ function test() {
 						 57,65,66,7,8,9,10,11,12,13,31,32,38,49,50,51,56,57,66,67,8,9,10,11,12,22,23,24,25,26,27,28,29,30,31,32,37,38,44,45,46,47,48,49,56,
 						 57,67,22,23,24,25,26,27,28,29,30,37,38,56,57,67,68,56,57,68,68][i]/5,connect(destination),frequency.value=988/1.06**v)+stop(e+.2)})
 }
+
+function speedSound(speed) {
+	with(new AudioContext)
+	with(G=createGain())
+	for(i in D=[speed, speed, speed])
+	with(createOscillator())
+	if(D[i])
+	connect(G),
+	G.connect(destination),
+	start(i*.1),
+	frequency.setValueAtTime(440*1.06**(13-D[i]),i*.1),
+	gain.setValueAtTime(1,i*.1),
+	gain.setTargetAtTime(.0001,i*.1+.08,.005),
+	stop(i*.1+.09)
+}
