@@ -57,9 +57,13 @@ function test() {
 						 57,67,22,23,24,25,26,27,28,29,30,37,38,56,57,67,68,56,57,68,68][i]/5,connect(destination),frequency.value=988/1.06**v)+stop(e+.2)})
 }
 
+const audioContext = new AudioContext();
+const G = audioContext.createGain();
 function speedSound(speed) {
-	with(new AudioContext)
-	with(G=createGain())
+	//with(new AudioContext)
+	//with(G=createGain())
+	with(audioContext)
+	with(G)
 	for(i in D=[speed, speed, speed])
 	with(createOscillator())
 	if(D[i])
