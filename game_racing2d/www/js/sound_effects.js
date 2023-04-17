@@ -73,9 +73,9 @@ function speedSound(speed) {
 	connect(G),
 	G.connect(destination),
 	start(i*.5),
-	frequency.setValueAtTime(440*1.06**(13-D[i]),i*.1),
-	gain.setValueAtTime(1,i*.1),
-	gain.setTargetAtTime(.0001,i*.1+.08,.005),
+	frequency.setValueAtTime(440*1.06**(13-D[i]),i*.5),
+	gain.setValueAtTime(1,i*.5),
+	gain.setTargetAtTime(.0001,i*.5+.49,.005),
 	//stop(i*.1+.09)
 	stop(i*.5 + .5)
 }
