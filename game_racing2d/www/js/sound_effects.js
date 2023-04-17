@@ -59,7 +59,10 @@ function test() {
 
 const audioContext = new AudioContext();
 const G = audioContext.createGain();
+let lastSoundTime = 0;
 function speedSound(speed) {
+	if ((gamePlay.last_animation_time - lastSoundTime) < 500) return;
+	lastSoundTime = gamePlay.last_animation_time;
 	//with(new AudioContext)
 	//with(G=createGain())
 	with(audioContext)
