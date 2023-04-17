@@ -138,6 +138,7 @@ class objCar extends gameobj {
 
     move() {
         this.speed.add(this.accel);
+        speedSound(this.speed.v2);
         if (this.speed.v2 > this.maxSpeedV2) {
             this.speed.v2 = this.maxSpeedV2;
         }
