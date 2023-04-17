@@ -32,6 +32,7 @@ function _objStage(stageNum) {
 
 
 function newGame() {
+  test();
   gameCanvas.init();
   init_user_input();
   gamePlay.init();
