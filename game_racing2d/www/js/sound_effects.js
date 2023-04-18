@@ -55,10 +55,10 @@ const audioContext = new AudioContext();
 const G = audioContext.createGain();
 let lastSoundTime = 0;
 function speedSound(speed) {
-	if ((gamePlay.last_animation_time - lastSoundTime) < 150) return;
+	if ((gamePlay.last_animation_time - lastSoundTime) < 80) return;
 	lastSoundTime = gamePlay.last_animation_time;
 	const now = audioContext.currentTime;
-	const freq = speed / 1.5;
+	const freq = speed / 1.6;
 	with(audioContext)
 	with(G)
 	with(createOscillator())
@@ -67,5 +67,5 @@ function speedSound(speed) {
 	start(now),
 	frequency.setValueAtTime(200 * freq,now),
 	gain.setValueAtTime(1,now),
-	stop(now + .14)
+	stop(now + .06)
 }
