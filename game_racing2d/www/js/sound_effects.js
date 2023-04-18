@@ -63,19 +63,20 @@ let lastSoundTime = 0;
 function speedSound(speed) {
 	if ((gamePlay.last_animation_time - lastSoundTime) < 500) return;
 	lastSoundTime = gamePlay.last_animation_time;
+	const now = audioContext.currentTime;
+	const freq = speed * 2;
 	//with(new AudioContext)
 	//with(G=createGain())
 	with(audioContext)
 	with(G)
-	for(i in D=[speed * 2])
+	//for(i in D=[speed * 2])
 	with(createOscillator())
-	if(D[i])
+	//if(D[i])
 	connect(G),
 	G.connect(destination),
-	start(i*.5),
-	frequency.setValueAtTime(440*1.06**(13-D[i]),i*.5),
-	gain.setValueAtTime(1,i*.5),
-	gain.setTargetAtTime(.0001,i*.5+.49,.005),
-	//stop(i*.1+.09)
-	stop(i*.5 + .5)
+	start(now),
+	frequency.setValueAtTime(440*1.06**(13-freq),now),
+	gain.setValueAtTime(1,now),
+	//gain.setTargetAtTime(.0001,i*.5+.49,.005),
+	stop(now + .5)
 }
