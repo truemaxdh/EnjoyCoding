@@ -1,11 +1,5 @@
 // Sound Play
 var sounds = []; // sounds
-// sounds[0] = new Audio('sound/divide.wav');
-// sounds[0].volume = 0.7;
-// sounds[1] = new Audio('sound/divide.wav');
-// sounds[1].volume = 0.7;
-// sounds[2] = new Audio('sound/divide.wav');
-// sounds[2].volume = 0.7;
 	
 function playSound(soundID)
 {
@@ -61,22 +55,17 @@ const audioContext = new AudioContext();
 const G = audioContext.createGain();
 let lastSoundTime = 0;
 function speedSound(speed) {
-	if ((gamePlay.last_animation_time - lastSoundTime) < 200) return;
+	if ((gamePlay.last_animation_time - lastSoundTime) < 150) return;
 	lastSoundTime = gamePlay.last_animation_time;
 	const now = audioContext.currentTime;
-	const freq = speed * 2.5;
-	//with(new AudioContext)
-	//with(G=createGain())
+	const freq = speed / 1.5;
 	with(audioContext)
 	with(G)
-	//for(i in D=[speed * 2])
 	with(createOscillator())
-	//if(D[i])
 	connect(G),
 	G.connect(destination),
 	start(now),
 	frequency.setValueAtTime(440*1.06**freq,now),
 	gain.setValueAtTime(1,now),
-	//gain.setTargetAtTime(.0001,i*.5+.49,.005),
-	stop(now + .2)
+	stop(now + .14)
 }
