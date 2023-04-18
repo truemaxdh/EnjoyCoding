@@ -192,11 +192,45 @@ class objCar extends gameobj {
     }
 }
 
-class objCarAI extends objCar {
-    constructor(road, car, stage) {
+class objCarNPC extends objCar {
+    constructor(road, car) {
         super(road);
         this.car = car;
-        this.center.v1 += this.r * 4;
+    }
+
+    render() {
+        const stepY = gameCanvas.h / this.road.vHeight;
+        const dLength = this.car.runningLength - this.runningLength;
+        this.center.v2 = this.car.center.v2 + dLength * stepY;
+        super.render();
+    }
+}
+
+class objCarAI1 extends objCarNPC {
+    constructor(road, car, stage) {
+        super(road, car);
+        //this.center.v1 += this.r * 4;
+        this.runningLength += this.r * 2;
+        this.maxSpeedV2 = 1.5 + stage * 0.2;
+        this.accel.v1 = ((stage % 2) == 1) ? 1 : -1;
+        this.bodyColor = "blue";
+        this.wheelColor = "#777";
+    }
+
+    move() {
+        super.move();
+        let d1, d2;
+        [d1, d2] = gameObjects.road.dists(this);
+        if (d1 <= 0) this.accel.v1 = 1;
+        else if (d2 <=0) this.accel.v1 = -1;
+    }
+}
+
+class objCarAI2 extends objCarNPC {
+    constructor(road, car, stage) {
+        super(road, car);
+        //this.center.v1 += this.r * 4;
+        this.runningLength += this.r * 4;
         this.maxSpeedV2 = 1.5 + stage * 0.2;
         this.bodyColor = "purple";
         this.wheelColor = "#777";
@@ -206,19 +240,9 @@ class objCarAI extends objCar {
         super.move();
         let d1, d2;
         [d1, d2] = gameObjects.road.dists(this);
-        const dSum = d1 + d2;
-        if ((d1 / dSum) < 0.4) {
-            this.accel.v1 = 1;
-        } else if ((d2 / dSum) < 0.4) {
-            this.accel.v1 = -1;
-        }
-    }
-
-    render() {
-        const stepY = gameCanvas.h / this.road.vHeight;
-        const dLength = this.car.runningLength - this.runningLength;
-        this.center.v2 = this.car.center.v2 + dLength * stepY;
-        super.render();
+        if (d1 < d2) this.accel.v1 = 1;
+        else if (d1 > d2) this.accel.v1 = -1;
+        else this.accel.v1 = 0;
     }
 }
 
@@ -278,24 +302,28 @@ class objStageClear extends gameobj {
 let gameObjects = {
     road: null,
     car: null,
-    carAI: null,
+    carAI: [],
     gameOver: null,
     stageClear: null,
     init : function() {
         this.road = new objRoad();
         this.car = new objCar(this.road);
-        this.carAI = new objCarAI(this.road, this.car, gamePlay.stageNum);
+        this.carAI = [];
+        this.carAI.push(new objCarAI1(this.road, this.car, gamePlay.stageNum));
+        if (stageNum > 1) {
+            this.carAI.push(new objCarAI2(this.road, this.car, gamePlay.stageNum));
+        }
         this.gameOver = new objGameOver();
     },
     move : function() {
         this.road.move();
         this.car.move();
-        this.carAI.move();
+        this.carAI.forEach((v, i)=>v.move());
         this.road.speed.v2 = this.car.speed.v2;
     },
     render : function() {
         this.road.render();
         this.car.render();
-        this.carAI.render();
+        this.carAI.forEach((v, i)=>v.render());
     }
 }
