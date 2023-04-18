@@ -102,12 +102,17 @@ function stageCleared() {
   gamePlay.setStage(gamePlay.stageNum + 1);
 }
 
-function upcoming_obj() {
-  
-}
+function upcoming_obj() {}
 
 function collision_check() {
-  gameObjects.car.collision_chk(gameObjects.carAI);
   gameObjects.road.collision_chk(gameObjects.car);
-  gameObjects.road.collision_chk(gameObjects.carAI);
+  for(let i = 0; i < gameObjects.carAI.length; i++) {
+    let ai = gameObjects.carAI[i];
+    gameObjects.road.collision_chk(ai);
+    gameObjects.car.collision_chk(ai);
+    for(let j = (i + 1); j < gameObjects.carAI.length; j++) {
+      let ai1 = gameObjects.carAI[j];
+      ai.collision_check(ai1);
+    }    
+  }  
 }
