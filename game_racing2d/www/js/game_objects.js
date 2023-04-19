@@ -211,7 +211,7 @@ class objCarAI1 extends objCarNPC {
         super(road, car);
         //this.center.v1 += this.r * 4;
         this.runningLength = Math.floor(road.vHeight * 0.3);
-        this.maxSpeedV2 = 1.5 + stage * 0.2;
+        this.maxSpeedV2 = 1.5 + stage * 0.1;
         this.accel.v1 = ((stage % 2) == 1) ? 1 : -1;
         this.bodyColor = "blue";
         this.wheelColor = "#777";
@@ -232,7 +232,25 @@ class objCarAI2 extends objCarNPC {
         super(road, car);
         //this.center.v1 += this.r * 4;
         this.runningLength = Math.floor(road.vHeight * 0.4);
-        this.maxSpeedV2 = 1.5 + stage * 0.2;
+        this.maxSpeedV2 = 1.5 + stage * 0.1;
+        this.bodyColor = "skyblue";
+        this.wheelColor = "#777";
+    }
+
+    move() {
+        super.move();
+        if (this.car.center.v1 > this.center.v1) this.accel.v1 = 0.5;
+        if (this.car.center.v1 < this.center.v1) this.accel.v1 = -0.5;
+        else this.accel.v1 = 0;
+    }
+}
+
+class objCarAI3 extends objCarNPC {
+    constructor(road, car, stage) {
+        super(road, car);
+        //this.center.v1 += this.r * 4;
+        this.runningLength = Math.floor(road.vHeight * 0.5);
+        this.maxSpeedV2 = 1.5 + stage * 0.1;
         this.bodyColor = "purple";
         this.wheelColor = "#777";
     }
@@ -313,6 +331,9 @@ let gameObjects = {
         this.carAI.push(new objCarAI1(this.road, this.car, gamePlay.stageNum));
         if (gamePlay.stageNum > 1) {
             this.carAI.push(new objCarAI2(this.road, this.car, gamePlay.stageNum));
+        }
+        if (gamePlay.stageNum > 2) {
+            this.carAI.push(new objCarAI3(this.road, this.car, gamePlay.stageNum));
         }
         this.gameOver = new objGameOver();
     },
