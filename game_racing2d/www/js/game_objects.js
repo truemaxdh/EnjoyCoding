@@ -221,8 +221,9 @@ class objCarAI1 extends objCarNPC {
         super.move();
         let d1, d2;
         [d1, d2] = gameObjects.road.dists(this);
-        if (d1 <= 0) this.accel.v1 = 1;
-        else if (d2 <=0) this.accel.v1 = -1;
+        if (this.r > d1) this.accel.v1 = 1;
+        else if (this.r > d2) this.accel.v1 = -1;
+        else this.accel.v1 *= 1. / .8;
     }
 }
 
