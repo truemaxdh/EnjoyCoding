@@ -112,7 +112,7 @@ function collision_check() {
     gameObjects.car.collision_chk(ai);
     for(let j = (i + 1); j < gameObjects.carAI.length; j++) {
       let ai1 = gameObjects.carAI[j];
-      ai.collision_check(ai1);
+      ai.collision_chk(ai1);
     }    
   }  
 }
