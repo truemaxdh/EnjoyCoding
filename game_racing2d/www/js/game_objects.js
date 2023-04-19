@@ -240,7 +240,7 @@ class objCarAI2 extends objCarNPC {
     move() {
         super.move();
         if (this.car.center.v1 > this.center.v1) this.accel.v1 = 0.5;
-        if (this.car.center.v1 < this.center.v1) this.accel.v1 = -0.5;
+        else if (this.car.center.v1 < this.center.v1) this.accel.v1 = -0.5;
         else this.accel.v1 = 0;
     }
 }
