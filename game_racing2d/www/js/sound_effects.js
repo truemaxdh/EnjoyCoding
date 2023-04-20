@@ -53,19 +53,19 @@ function test() {
 
 const audioContext = new AudioContext();
 const G = audioContext.createGain();
-let lastSoundTime = 0;
-function speedSound(speed) {
-	if ((gamePlay.last_animation_time - lastSoundTime) < 80) return;
-	lastSoundTime = gamePlay.last_animation_time;
+let lastSoundTimes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+function speedSound(channel, speed) {
+	if ((gamePlay.last_animation_time - lastSoundTimes[channel]) < 80) return;
+	lastSoundTimes[channel] = gamePlay.last_animation_time;
 	const now = audioContext.currentTime;
-	const freq = speed / 1.6;
 	with(audioContext)
 	with(G)
 	with(createOscillator())
 	connect(G),
 	G.connect(destination),
 	start(now),
-	frequency.setValueAtTime(100 + 100 * freq, now),
+	frequency.setValueAtTime(100 + 120 * speed, now),
 	gain.setValueAtTime(1,now),
 	stop(now + .06)
 }
