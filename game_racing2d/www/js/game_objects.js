@@ -134,11 +134,11 @@ class objCar extends gameobj {
         this.unitRotate = Math.PI / 6;
         this.bodyColor = "orange";
         this.wheelColor = "black";
+        this.carIdx = 0;
     }
 
     move() {
         this.speed.add(this.accel);
-        speedSound(this.speed.v2);
         if (this.speed.v2 > this.maxSpeedV2) {
             this.speed.v2 = this.maxSpeedV2;
         }
@@ -172,6 +172,8 @@ class objCar extends gameobj {
         if (this.next != null) {
             this.next.render();
         }
+
+        speedSound(this.carIdx, this.speed.v2);
     }
 
     collision_chk(other) {
@@ -193,9 +195,10 @@ class objCar extends gameobj {
 }
 
 class objCarNPC extends objCar {
-    constructor(road, car) {
+    constructor(road, protagonist, carIdx) {
         super(road);
-        this.car = car;
+        this.car = protagonist;
+        this.carIdx = carIdx;
     }
 
     render() {
@@ -207,8 +210,8 @@ class objCarNPC extends objCar {
 }
 
 class objCarAI1 extends objCarNPC {
-    constructor(road, car, stage) {
-        super(road, car);
+    constructor(road, protagonist, carIdx, stage) {
+        super(road, protagonist, carIdx);
         //this.center.v1 += this.r * 4;
         this.runningLength = Math.floor(road.vHeight * 0.3);
         this.maxSpeedV2 = 1.5 + stage * 0.1;
@@ -228,8 +231,8 @@ class objCarAI1 extends objCarNPC {
 }
 
 class objCarAI2 extends objCarNPC {
-    constructor(road, car, stage) {
-        super(road, car);
+    constructor(road, protagonist, carIdx, stage) {
+        super(road, protagonist, carIdx);
         //this.center.v1 += this.r * 4;
         this.runningLength = Math.floor(road.vHeight * 0.4);
         this.maxSpeedV2 = 1.5 + stage * 0.1;
@@ -246,8 +249,8 @@ class objCarAI2 extends objCarNPC {
 }
 
 class objCarAI3 extends objCarNPC {
-    constructor(road, car, stage) {
-        super(road, car);
+    constructor(road, protagonist, carIdx, stage) {
+        super(road, protagonist, carIdx);
         //this.center.v1 += this.r * 4;
         this.runningLength = Math.floor(road.vHeight * 0.5);
         this.maxSpeedV2 = 1.5 + stage * 0.1;
@@ -328,12 +331,12 @@ let gameObjects = {
         this.road = new objRoad();
         this.car = new objCar(this.road);
         this.carAI = [];
-        this.carAI.push(new objCarAI1(this.road, this.car, gamePlay.stageNum));
+        this.carAI.push(new objCarAI1(this.road, this.car, 1, gamePlay.stageNum));
         if (gamePlay.stageNum > 1) {
-            this.carAI.push(new objCarAI2(this.road, this.car, gamePlay.stageNum));
+            this.carAI.push(new objCarAI2(this.road, this.car, 2, gamePlay.stageNum));
         }
         if (gamePlay.stageNum > 2) {
-            this.carAI.push(new objCarAI3(this.road, this.car, gamePlay.stageNum));
+            this.carAI.push(new objCarAI3(this.road, this.car, 3, gamePlay.stageNum));
         }
         this.gameOver = new objGameOver();
     },
