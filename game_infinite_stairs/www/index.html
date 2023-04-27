@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="description" content="Infinite Stairs." />
+    
+    <title>Infinite Stairs</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/sound_effects.js"></script>
+    <script src="js/game_objects.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/user_input.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/menu_manager.js"></script>
+    <script>
+      function goToStage(_stage) {
+        document.getElementById('StageMap').style.left='-100%';
+        gamePlay.stage = _stage;
+        pageChange('game');
+      }
+      
+      function openStageMap() {
+        let maxStage = 20;
+        try {
+          if (!localStorage.getItem(storageName.maxStage))
+            localStorage.setItem(storageName.maxStage, 0);
+          maxStage = Number(localStorage.getItem(storageName.maxStage)) + 1; 
+        } catch(err) {
+        }
+        for(let i = 1; i <= maxStage; i++) {
+          document.getElementById('btnL' + i).disabled = false;
+        }
+        document.getElementById('StageMap').style.left='0';
+      }
+      
+      function BgmOnOff() {
+        var els = document.getElementsByClassName("bgmOnOff");
+        for (var i = 0; i < els.length; i++) {
+          var el = els[i];
+          if (el.innerHTML == "Background Music: Off") {
+            el.innerHTML = "Background Music: On";
+            soundSettings.bgm = "on";
+          } else {
+            el.innerHTML = "Background Music: Off";
+            soundSettings.bgm = "off";
+          }
+        }
+      }
+      
+      function soundEffectOnOff() {
+        var els = document.getElementsByClassName("soundEffectOnOff");
+        for (var i = 0; i < els.length; i++) {
+          var el = els[i];
+          if (el.innerHTML == "Sound Effect: Off") {
+            el.innerHTML = "Sound Effect: On";
+            soundSettings.sound = "on";
+          } else {
+            el.innerHTML = "Sound Effect: Off";
+            soundSettings.sound = "off";
+          }
+        }
+      }
+    </script>
+  <style>
+   body {
+      /* Disables pull-to-refresh but allows overscroll glow effects. */
+      overscroll-behavior-y: contain;
+      background-color: #222;
+     }
+  </style>
+  </head>
+  <body>
+    <div id = "intro" class="menu border_round">
+    </div>
+    <div id = "menu" class="menu border_round">
+      <div class = "text">
+        <h1>끝없는 계단</h1>
+        <br>
+        <a href="#" onclick="openStageMap();"><h2>Start</h2></a>
+        <!--a href="#" onclick="ShowAchievements();">Show Achievements</a-->
+        <!--a href="#" onclick="ShowHighScores();">Show High Scores</a-->
+        <br>
+        <br>
+        <div class = "smallText">
+          <a href="#" class="bgmOnOff" onclick="BgmOnOff();">Background Music: On</a>
+          <a href="#" class="soundEffectOnOff" onclick="soundEffectOnOff();">Sound Effect: On</a>
+          <br>
+          <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.left='0';"><b>How to play</b></a>
+        </div>
+        <br><br>
+        <!--div id="signInStat">
+          <span style='font-size:15px;color: silver;'>Sign in with Google to share your scores and achievements with your friends.</span>
+        </div>
+        <button id="logOut" style="display:none;" onclick="Android.signOutFromGS();">SignOut</button>
+        <br>
+        <img id="logIn" src="img/btn_google_signin_dark_normal_web.png" onclick="Android.signInToGS();"-->
+      </div>
+    </div>
+    <div id = "game">
+      <audio id="bgm" src="sound/SpaceTrip.mp3" preload="auto" loop></audio>
+      <canvas id="game_canvas" width="540" height="900"></canvas>
+    </div>
+    
+    <!-- The overlay -->
+    <div id="user_result" class="overlay">
+      <!-- Button to close the overlay navigation -->
+      <a href="javascript:void(0)" class="closebtn" onclick="CloseUserResult()">&times;</a>
+
+      <!-- Overlay content -->
+      <div class="overlay-content">
+        <img id="user_img" />
+        <div class="text">You Scored <div id="user_score"></div></div>
+        <div class="text">Mileage : <div id="user_mileage"></div></div>
+        <!--a href="#" onclick="ShowAchievements();">Show Achievements</a>
+        <a href="#" onclick="ShowHighScores();">Show High Scores</a-->
+      </div>
+    </div>
+    
+    <!-- Submenu -->
+    <div id="Submenu" class="overlay">
+      
+      <!-- Overlay content -->
+      <div class="overlay-content">
+        <a href="#" class="bgmOnOff" onclick="BgmOnOff();">Background Music: On</a>
+        <a href="#" class="soundEffectOnOff" onclick="soundEffectOnOff();">Sound Effect: On</a>
+        <a href="#" onclick="pageChange('menu');hideSubMenu();">Exit Current Game</a>
+        <a href="#" onclick="Android.exitApp();">Exit App</a>
+        <a href="#" onclick="hideSubMenu();">Resume</a>
+      </div>
+    </div>
+    
+    <!-- How to play -->
+    <div id="howtoplay" class="overlay" style="background-color:white;">
+      <br>
+      <center><h1 style="color:#333;">Clear Meteorites</h1></center>
+      <h2 style="color:#555;">Clear Meteorites</h2>
+      <p style="color:#777;font-weight:bold;">
+        &nbsp;Clear Meteorites
+        <br><br>
+        Drag plane to control.<br>
+        Missile is fired automately.<br>
+        <br>
+        <a href="javascript:void(0)" onclick="document.getElementById('howtoplay').style.left='-100%';">Back</a>
+        <br>
+      </p>
+    </div> 
+    
+    <!-- Stage Map -->
+    <div id="StageMap" class="overlay">
+      <!-- Button to close the overlay navigation -->
+      <a href="javascript:void(0)" class="closebtn" onclick="document.getElementById('StageMap').style.left='-100%';">&times;</a>
+      
+      <!-- Overlay content -->
+      <div class="overlay-content">
+        <div class="text">Select a stage to start</div><br>
+        <button class="round" onclick="goToStage(1);" id="btnL1">1</button>
+        <button class="round" onclick="goToStage(2);" id="btnL2" disabled>2</button>
+        <button class="round" onclick="goToStage(3);" id="btnL3" disabled>3</button><br>
+        <button class="round" onclick="goToStage(4);" id="btnL4" disabled>4</button>
+        <button class="round" onclick="goToStage(5);" id="btnL5" disabled>5</button>
+        <button class="round" onclick="goToStage(6);" id="btnL6" disabled>6</button><br>
+        <button class="round" onclick="goToStage(7);" id="btnL7" disabled>7</button>
+        <button class="round" onclick="goToStage(8);" id="btnL8" disabled>8</button>
+        <button class="round" onclick="goToStage(9);" id="btnL9" disabled>9</button><br>
+        <button class="round" onclick="goToStage(10);" id="btnL10" disabled>10</button>
+        <button class="round" onclick="goToStage(11);" id="btnL11" disabled>11</button>
+        <button class="round" onclick="goToStage(12);" id="btnL12" disabled>12</button><br>
+        <button class="round" onclick="goToStage(13);" id="btnL13" disabled>13</button>
+        <button class="round" onclick="goToStage(14);" id="btnL14" disabled>14</button>
+      </div>        
+    </div>    
+  </body>
+</html>
