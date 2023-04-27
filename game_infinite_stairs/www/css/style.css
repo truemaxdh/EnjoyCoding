@@ -1,0 +1,200 @@
+/* common */
+@font-face {
+    font-family: "Sniglet-Regular";
+    src: url("../fonts/Sniglet-Regular.ttf") format("opentype");   
+    /* Make sure you defined the correct path, which is related to
+        the location of your file `my_css.css` */ 
+}
+
+@font-face {
+    font-family: "Sniglet-ExtraBold";
+    src: url("../fonts/Sniglet-ExtraBold.ttf") format("opentype");   
+    /* Make sure you defined the correct path, which is related to
+        the location of your file `my_css.css` */ 
+}
+
+/* menu */
+h1 { 
+    /* color: #4d7bd5; */
+    color: silver; 
+    font-family: "Sniglet-ExtraBold"; 
+    font-size: 55px;/*10vw;*/  
+    text-align: center; 
+    text-shadow: 10px 10px 5px #a73; 
+}
+
+h3 { 
+    color: #4d7bd5; 
+    font-family: 'Sniglet-Regular'; 
+    font-size: 3vw; 
+    text-align: center; 
+    text-shadow: 1px 1px 2px #082b34;
+}
+
+.menu {
+    width : 98vw;
+    height : 94vh;
+    background : #222;
+    background-repeat : no-repeat;
+    background-position : center center;
+}
+
+.text {
+    font-family: 'Sniglet-Regular'; 
+    position : relative;
+    top: 15%;
+    /* transform: translateY(-50%); */
+}
+
+.text a { 
+    /* color: #4d7bd5; */
+    color: silver; 
+    font-size: 25px; 
+    text-align: center; 
+    text-shadow: 3px 3px 5px gold;
+    text-decoration: none;
+    display: block; 
+}
+
+.text a:hover, .text a:focus {
+    color: #d54d7b;
+}
+
+.smallText {
+    
+}
+
+.smallText a {
+    font-size:17px;
+    color: silver;
+    text-shadow: 2px 2px 5px gold;
+}
+
+.smallText a:hover, .smallText a:focus {
+    color: #d54d7b;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.topContent {
+    position:fixed;
+    top : 0px;
+    width:100%;
+    font-family: "Sniglet-Regular";
+    color : silver;
+}
+
+/* game */
+body {
+    text-align: center;
+    padding : 0px;
+    margin : 0px;
+    background-color : black;
+}
+
+#bg_canvas {
+    width:18vh;
+    height:90vh;
+    display:none;
+}
+
+#game_canvas {
+    width:54vh;
+    height:90vh;
+    /*border:1px solid #d3d3d3;*/
+}
+
+#game_canvas_landscape {
+    width:90vh;
+    height:54vh;
+}
+
+/* The Overlay (background) */
+.overlay {
+    /* Height & width depends on how you want to reveal the overlay (see JS below) */    
+    height: 100%;
+    width: 100%;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: -100%;
+    top: 0;
+    background-color: rgb(0,0,0); /* Black fallback color */
+    background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+}
+
+/* Position the content inside the overlay */
+.overlay-content {
+    position: relative;
+    top: 25%; /* 25% from the top */
+    width: 100%; /* 100% width */
+    text-align: center; /* Centered text/links */
+    margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+}
+
+/* The navigation links inside the overlay */
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 31px;
+    font-family: 'Sniglet-Regular'; 
+    color: #818181;
+    display: block; /* Display block instead of inline */
+    transition: 0.3s; /* Transition effects on hover (color) */
+}
+
+/* When you mouse over the navigation links, change their color */
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+/* Position the close button (top right corner) */
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+.overlay .text {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 33px;
+    color: #cacaca;
+    display: block; /* Display block instead of inline */
+}
+
+/* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
+@media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+    }
+}
+
+#user_score, #user_mileage {
+    color:#f00;
+    display:inline;
+}
+
+button {
+    color: #cacaca;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    font-size : 15px;
+    border: 2px solid white;
+    margin:2px;
+}
+
+button:disabled {
+    color: #777;
+    border: 2px solid #777;
+}
+
+.round {
+    width : 45px;
+    height : 45px;
+    border-radius : 50%;
+}
