@@ -117,7 +117,7 @@ function objMissile2(x, y, dx) {
 
         const tgt = met_0.next;
         if (tgt != null) {
-        const div = Math.sqrt(Math.pow(tgt.x - this.x, 2) + Math.pow(tgt.y - this.y, 2)) / 4;       
+        const div = Math.sqrt(Math.pow(tgt.x - this.x, 2) + Math.pow(tgt.y - this.y, 2)) / 5;       
             this.step_x = (tgt.x - this.x) / div;
             this.step_y = (tgt.y - this.y) / div;
         }
