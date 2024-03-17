@@ -107,15 +107,19 @@ function objMissile2(x, y, dx) {
     this.radius = 8;
     this.step_x = dx;
     this.step_y = -12;
+    this.life = 100;
     this.render = function(ctx_game) {
         ctx_game.beginPath();
-        ctx_game.strokeStyle = "darkorange";
+        ctx_game.fillStyle = "rgba(255,140,0," + this.life / 100 + ")";
         ctx_game.arc(this.x + this.radius, this.y + this.radius, this.radius, 0, 2 * Math.PI);
         ctx_game.lineWidth = 4;
         ctx_game.stroke();
+
+        const dist = Math.sqrt(Math.pow(met_0.x - this.x, 2) + Math.pow(met_0.y - this.y, 2);       
+        this.step_x += (met_0.x - this.x) / dist;
+        this.step_y += (met_0.y - this.y) / dist;
         
-        this.step_y += 0.12;
-        if (this.step_y >= 3) {
+        if (this.life-- <= 0) {
             remove_from_chain(this);
         }
     }
