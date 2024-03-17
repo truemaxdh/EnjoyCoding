@@ -17,7 +17,7 @@ var gamePlay = {
 
     max_stage : 14,
     stage_tick : 50000,
-    missile_interval : [200, 1000],
+    missile_interval : [300, 3000],
     missiles : [objMissile, objMissile2],
 
     millisec_played : 0,
