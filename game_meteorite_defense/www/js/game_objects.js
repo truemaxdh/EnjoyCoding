@@ -65,8 +65,10 @@ function objJet(x, y) {
         ctx_game.stroke();
         
         if (this.protection > 0) {
+            let alpha = this.protection / 200;
+            if (alpha > 0.5) alpha = 0.5;
             ctx_game.beginPath();
-            ctx_game.fillStyle = "rgba(255,255,255,0.5)";
+            ctx_game.fillStyle = "rgba(255,255,255," + alpha + ")";
             ctx_game.strokeStyle = "white";
             ctx_game.lineWidth = 2;
             ctx_game.arc(this.x + 50, this.y + 50, 50, 0, 2 * Math.PI);
