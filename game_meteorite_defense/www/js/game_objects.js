@@ -115,9 +115,9 @@ function objMissile2(x, y, dx) {
         ctx_game.lineWidth = 4;
         ctx_game.stroke();
 
-        const dist = Math.sqrt(Math.pow(met_0.x - this.x, 2) + Math.pow(met_0.y - this.y, 2));       
-        this.step_x += (met_0.x - this.x) / dist;
-        this.step_y += (met_0.y - this.y) / dist;
+        const div = Math.sqrt(Math.pow(met_0.x - this.x, 2) + Math.pow(met_0.y - this.y, 2)) * 10;       
+        this.step_x += (met_0.x - this.x) / div;
+        this.step_y += (met_0.y - this.y) / div;
         
         if (this.life-- <= 0) {
             remove_from_chain(this);
