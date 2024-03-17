@@ -107,7 +107,7 @@ function objMissile2(x, y, dx) {
     this.radius = 8;
     this.step_x = dx;
     this.step_y = -12;
-    this.life = 100;
+    this.life = 1500;
     this.render = function(ctx_game) {
         ctx_game.beginPath();
         ctx_game.fillStyle = "rgba(255,140,0," + this.life / 100 + ")";
@@ -115,7 +115,7 @@ function objMissile2(x, y, dx) {
         ctx_game.lineWidth = 4;
         ctx_game.stroke();
 
-        const div = Math.sqrt(Math.pow(met_0.x - this.x, 2) + Math.pow(met_0.y - this.y, 2)) * 2;       
+        const div = Math.sqrt(Math.pow(met_0.x - this.x, 2) + Math.pow(met_0.y - this.y, 2)) / 2;       
         this.step_x = (met_0.x - this.x) / div;
         this.step_y = (met_0.y - this.y) / div;
         
