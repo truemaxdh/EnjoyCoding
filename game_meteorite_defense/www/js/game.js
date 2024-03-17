@@ -35,6 +35,8 @@ var missile_interval;
 var met_0;
 var met_interval;
 
+let missTgt;
+
 // bonus item
 var item_0;
 
@@ -71,6 +73,7 @@ function gameInit() {
 function newStage() {
     missile_0 = new gameobj(0,0);    
     met_0 = new gameobj(0,0);
+    missTgt = null;
     item_0 = new gameobj(0,0);
     
     stage_design = _stage_design[gamePlay.stage - 1];
@@ -164,7 +167,7 @@ function proc_user_input() {
         for(let i = 0; i < gamePlay.missiles.length; i++) {
             if (missile_interval[i] >= gamePlay.missile_interval[i]) {
                 missile_interval[i] -= gamePlay.missile_interval[i];
-                const cnt = (i == 0) ? 1 : (gamePlay.stage / 2);
+                const cnt = 1;
                 let dx = (1 - cnt) / 2;
                 for(let m = 0; m < cnt; m++) {
                     let o_missile = new gamePlay.missiles[i](o_jet.x, o_jet.y, dx + m);
