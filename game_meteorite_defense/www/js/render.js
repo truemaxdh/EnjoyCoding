@@ -29,6 +29,7 @@ function render() {
     o_met.render(ctx_game);
     o_met.move();
   }
+  missTgt = o_met;
   
   while(o_missile.next != null) {
     o_missile = o_missile.next;
