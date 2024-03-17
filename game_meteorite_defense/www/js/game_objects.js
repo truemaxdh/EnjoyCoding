@@ -113,7 +113,7 @@ function objMissile2(x, y, dx) {
         ctx_game.fillStyle = "rgba(255,140,0," + this.life / 100 + ")";
         ctx_game.arc(this.x + this.radius, this.y + this.radius, this.radius, 0, 2 * Math.PI);
         ctx_game.lineWidth = 4;
-        ctx_game.stroke();
+        ctx_game.fill();
 
         const tgt = met_0.next;
         if (tgt != null) {
