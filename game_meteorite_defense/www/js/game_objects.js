@@ -117,7 +117,7 @@ function objMissile2(x, y, dx) {
         ctx_game.lineWidth = 4;
         ctx_game.fill();
 
-        const tgt = met_0.next;
+        const tgt = missTgt;
         if (tgt != null) {
         const div = Math.sqrt(Math.pow(tgt.x - this.x, 2) + Math.pow(tgt.y - this.y, 2)) / 5;       
             this.step_x = (tgt.x - this.x) / div;
