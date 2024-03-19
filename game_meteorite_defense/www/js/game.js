@@ -163,6 +163,11 @@ function proc_user_input() {
 
         o_jet.x += dx;
         o_jet.y += dy;
+
+        if (o_jet.x < -50) o_jet.x = -50;
+        if (o_jet.y < -50) o_jet.y = -50;
+        if (o_jet.x > (540 - 50)) o_jet.x = (540 -50);
+        if (o_jet.y < (900 - 50)) o_jet.y = (900 - 50);
         
         for(let i = 0; i < gamePlay.missiles.length; i++) {
             if (missile_interval[i] >= gamePlay.missile_interval[i]) {
