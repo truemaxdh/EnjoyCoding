@@ -12,6 +12,176 @@
         overscroll-behavior-y: contain;
       }
     </style>
+    <style>
+      @media(orientation: portrait) {
+        html {
+          transform: rotate(90deg);
+          transform-origin: top left;
+          position:absolute;
+          top:0;
+          left:100%;
+          width:100vh;
+          height:100vw;
+        }
+      }
+
+      #game_canvas_back {
+        position : absolute;
+        width: 100%;
+        height: 100%;
+        left: 0%;
+        top: 0%;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      #status {
+        position: absolute;
+        left: 0%;
+        top: 0%;
+        width: 100%;
+        height: 5%;
+      }
+
+      #sky {
+        position: absolute;
+        left: 0%;
+        top: 0%;
+        width: 100%;
+        height: 80%;
+      }
+      
+      #sun {
+        position: absolute;
+        left: 80%;
+        top: 20%;
+        /* width: 100%;
+        height: 80%; */
+        -webkit-animation: sun 6s linear infinite;
+        animation: sun 6s linear infinite;
+      }
+
+      #land_line {
+        position: absolute;
+        left: 0%;
+        bottom: 0%;
+        width: 100%;
+        height: 20%;
+      }
+
+      #mountain1 {
+        position: absolute;
+        width:100%;
+        height:80%;
+        bottom:20%;  
+        -webkit-animation: h_scroll100 12s linear -6s infinite;
+        animation: h_scroll100 12s linear -6s infinite;
+      }
+
+      #mountain1_2 {
+        position: absolute;
+        width:100%;
+        height:80%;
+        bottom:20%;
+        -webkit-animation: h_scroll100 12s linear infinite;
+        animation: h_scroll100 12s linear infinite;
+      }
+
+      #mountain2 {
+        position: absolute;
+        width:50%;
+        height:80%;
+        bottom:20%;
+        -webkit-animation: h_scroll50 7s linear infinite;
+        animation: h_scroll100 7s linear infinite;
+      }
+
+      #mountain2_2 {
+        position: absolute;
+        width:50%;
+        height:80%;
+        bottom:20%;
+        -webkit-animation: h_scroll50 7s linear -3.5s infinite;
+        animation: h_scroll100 7s linear -3.5s infinite;
+      }
+
+      #car {
+        position: absolute;
+        left: 10%;
+        bottom: 20%;
+        width: 100px;
+        height: 70px;
+        transition:0.5s;
+      }
+
+      #tree {
+        position: absolute;
+        width:100px;
+        height:160px;
+        bottom: 20%;  
+        -webkit-animation-name: h_scroll;
+        -webkit-animation-duration: 3s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+        animation-name: h_scroll;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+
+      #obstacle {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        bottom: 20%;  
+        -webkit-animation-name: h_scroll;
+        -webkit-animation-duration: 2s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+        animation-name: h_scroll;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+
+      @-webkit-keyframes h_scroll {
+        0% {left:105%;}
+        100% {left:-10%;}
+      }
+
+      @keyframes h_scroll {
+        0% {left:105%;}
+        100% {left:-10%;}
+      }
+
+      @-webkit-keyframes h_scroll100 {
+        0% {left:100%;}
+        100% {left:-100%;}
+      }
+
+      @keyframes h_scroll100 {
+        0% {left:100%;}
+        100% {left:-100%;}
+      }
+
+      @-webkit-keyframes h_scroll50 {
+        0% {left:100%;}
+        100% {left:-50%;}
+      }
+
+      @keyframes h_scroll50 {
+        0% {left:100%;}
+        100% {left:-50%;}
+      }
+
+      @keyframes sun {
+        0% {fill:orange;}
+        50% {fill:red;}
+        100% {fill:orange;}
+      }
+
+    </style>
+    
     <link rel="stylesheet" href="css/style.css">
     <script src="js/sound_effects.js"></script>
     <script src="js/game_objects.js"></script>
@@ -19,8 +189,146 @@
     <script src="js/user_input.js"></script>
     <script src="js/game.js"></script>	  
     <script src="js/device_init.js"></script>
+    <script>
+      let jumping = false;
+      function jump() {
+        const car = document.getElementById("car");
+        const car_pos = car.getBoundingClientRect();
+        const canv_pos = document.getElementById("game_canvas_back").getBoundingClientRect();
+        
+        if (window.matchMedia("(orientation: portrait)").matches) {
+          rotateSwap(car_pos);
+          rotateSwap(canv_pos);
+        }
+
+        if (jumping) {
+          car.style.bottom = "60%";
+          setTimeout(function() {
+            car.style.bottom="40%";
+            jumping = true;
+          }, 500);
+          setTimeout(function() {
+            car.style.bottom="20%";
+            jumping = false;
+          }, 1000);
+        } else {
+          jumping = true;
+          car.style.bottom = "40%";
+          setTimeout(function() {
+            car.style.bottom="20%";
+            jumping = false;
+          }, 500);
+        }
+        
+      }
+
+      function startAnimation() {
+        requestAnimationFrame(tick_back);
+      }
+
+      function tick_back() {
+        
+        // collition check
+        let canv_pos = document.getElementById("game_canvas_back").getBoundingClientRect();
+        let car_pos = document.getElementById("car").getBoundingClientRect();
+        let obs_pos = document.getElementById("obstacle").getBoundingClientRect();
+        const status = document.getElementById("status");
+        
+        if (window.matchMedia("(orientation: portrait)").matches) {
+          car_pos = rotateSwap(car_pos);
+          obs_pos = rotateSwap(obs_pos);
+          canv_pos = rotateSwap(canv_pos);
+        }
+        
+        // status.innerHTML = window.matchMedia("(orientation: portrait)").matches;
+        // status.innerHTML += "<font color='orange'>" + canv_pos.height + "," + (car_pos.top + car_pos.height) + "</font>";
+        // status.innerHTML += "<font color='green'>" + car_pos.left + "," + car_pos.top + "</font>";
+        // status.innerHTML += "<font color='blue'>" + obs_pos.left + "," + obs_pos.top + "</font>";
+        if ((car_pos.left + car_pos.width) > obs_pos.left &&
+            car_pos.left < (obs_pos.left + obs_pos.width) && 
+            (car_pos.top + car_pos.height) > obs_pos.top &&
+            car_pos.top < (obs_pos.top + obs_pos.height)) {
+              status.innerHTML += "<b><font color='#c3c'>game over</font></b>";
+        }
+        
+        // Jump when car and object are close
+        const minDist = canv_pos.width / 10;
+        const dist = obs_pos.left - (car_pos.left + car_pos.width);
+        //status.innerHTML = "<font color='orange'>" + minDist + "," + dist + "</font>";
+        if (dist < minDist && dist > 0 && !jumping) {
+            jump();
+        }           
+
+        requestAnimationFrame(tick_back);
+      }
+
+      function rotateSwap(a) {
+        const b = {
+          left: a.top,
+          top: a.left,
+          width: a.height,
+          height: a.width
+        };
+        return b;
+      }
+    </script>
+
   </head>
   <body id="body">
+  
+    <div id="game_canvas_back" width="900" height="600" onclick="jump();">
+      <svg id="sky">
+        <rect x="0" y="0" rx="0" ry="0" width="100%" height="100%" 
+          style="fill:skyblue;" />
+      </svg>
+      <svg id="sun" width="100" height="100">
+        <circle cx="50" cy="50" r="50" />
+      </svg>
+      <svg id="land_line">
+        <rect x="0" y="0" rx="0" ry="0" width="100%" height="100%" 
+          style="fill:#F0DB66;" />
+      </svg>
+      <div id="status"></div>
+      <svg id="mountain1" width="100%" height="100%" viewbox="0 0 100 80" preserveAspectRatio="none">
+        <polygon points="0,80 50,50 100,80" fill="#3c3" />
+      </svg>
+      <svg id="mountain1_2" width="100%" height="100%" viewbox="0 0 100 80" preserveAspectRatio="none">
+        <polygon points="0,80 50,45 100,80" fill="#3c3" />
+      </svg>
+      <svg id="mountain2" width="100%" height="100%" viewbox="0 0 100 80" preserveAspectRatio="none">
+        <polygon points="0,80 50,40 100,80" fill="#2b2" />
+      </svg>
+      <svg id="mountain2_2" width="100%" height="100%" viewbox="0 0 100 80" preserveAspectRatio="none">
+        <polygon points="0,80 50,35 100,80" fill="#2b2" />
+      </svg>
+
+
+      <svg id="tree">
+        <rect x="38" y="100" width="24" height="60" style="fill:brown;" />
+        <circle cx="50" cy="15" r="15" fill="green" />
+        <circle cx="38" cy="40" r="15" fill="green" />
+        <circle cx="62" cy="40" r="15" fill="green" />
+        <circle cx="26" cy="65" r="15" fill="green" />
+        <circle cx="50" cy="65" r="15" fill="green" />
+        <circle cx="74" cy="65" r="15" fill="green" />
+        <circle cx="14" cy="90" r="14" fill="green" />
+        <circle cx="38" cy="90" r="15" fill="green" />
+        <circle cx="62" cy="90" r="15" fill="green" />
+        <circle cx="86" cy="90" r="14" fill="green" />
+      </svg>
+      <svg id="obstacle">
+        <circle cx="20" cy="20" r="20" fill="gray" />
+      </svg>
+      <svg id="car">
+        <rect x="30" y="5" rx="3" ry="3" width="40" height="25" 
+          style="fill:#ccc;stroke:red;stroke-width:14;" />
+        <rect x="0" y="23" rx="8" ry="8" width="100" height="30" 
+          style="fill:red;" />
+        <circle cx="30" cy="50" r="12" stroke="black" stroke-width="10" fill="gray" />
+        <circle cx="70" cy="50" r="12" stroke="black" stroke-width="10" fill="gray" />
+      </svg>
+    </div>
+
     <div id = "intro" class="menu border_round">
       <div class = "text">
         <h1>Magic Ball</h1>
@@ -37,7 +345,7 @@
     </div>
     <div id = "game">
       <audio id="bgm" src="sound/ArirangTroll.mp3" preload="auto" loop></audio>
-      <canvas id="game_canvas_landscape" width="900" height="600" style="background:#ffa;"></canvas>
+      <canvas id="game_canvas_landscape" width="900" height="600"></canvas>
     </div>    
     <!-- The overlay -->
     <div id="user_result" class="overlay">
