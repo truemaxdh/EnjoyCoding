@@ -20,6 +20,7 @@ function pageChange(newpageID) {
 }
 
 window.onload = function() {
+    startAnimation();
     sleep(1000);
     pageChange('menu');
 };
