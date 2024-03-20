@@ -239,18 +239,7 @@
           obs_pos = rotateSwap(obs_pos);
           canv_pos = rotateSwap(canv_pos);
         }
-        
-        // status.innerHTML = window.matchMedia("(orientation: portrait)").matches;
-        // status.innerHTML += "<font color='orange'>" + canv_pos.height + "," + (car_pos.top + car_pos.height) + "</font>";
-        // status.innerHTML += "<font color='green'>" + car_pos.left + "," + car_pos.top + "</font>";
-        // status.innerHTML += "<font color='blue'>" + obs_pos.left + "," + obs_pos.top + "</font>";
-        if ((car_pos.left + car_pos.width) > obs_pos.left &&
-            car_pos.left < (obs_pos.left + obs_pos.width) && 
-            (car_pos.top + car_pos.height) > obs_pos.top &&
-            car_pos.top < (obs_pos.top + obs_pos.height)) {
-              status.innerHTML += "<b><font color='#c3c'>game over</font></b>";
-        }
-        
+                
         // Jump when car and object are close
         const minDist = canv_pos.width / 10;
         const dist = obs_pos.left - (car_pos.left + car_pos.width);
