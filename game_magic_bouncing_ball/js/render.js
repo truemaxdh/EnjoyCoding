@@ -15,6 +15,12 @@ function render_init() {
 
 function clearCanvas() {
   ctx_game.clearRect(0,0,w,h);
+
+  // ctx_game.beginPath();
+  // ctx_game.lineWidth = "10";
+  // ctx_game.strokeStyle = "blue";
+  // ctx_game.rect(0,0,w,h);
+  // ctx_game.stroke();
 }
 function render() {
   clearCanvas();
