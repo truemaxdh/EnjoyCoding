@@ -30,7 +30,7 @@ function init() {
 	if (document.location.href.indexOf("WEB_VIEW") < 0) {
 		setFullscreen();
 	} else {
-		const container = canv_game.parentElement;
+		const container = canv_game.parentElement.parentElement;
 		container.style.width = window.innerWidth + "px";
 		container.style.height = window.innerHeight + "px";
 	}
@@ -44,7 +44,8 @@ function chkLandscapeMode() {
 }
 
 function setFullscreen() {
-	const container = canv_game.parentElement;
+	//const container = canv_game.parentElement;
+	const container = canv_game.parentElement.parentElement;
 	if (canv_game.requestFullscreen) {
 		container.requestFullscreen();
 	} else if (canv_game.webkitRequestFullscreen) { /* Safari */
