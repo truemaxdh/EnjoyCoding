@@ -122,9 +122,13 @@ function objMagicBall(x, y, step_x, step_y, ballSize, ballStyle = 0) {
 function objMissile() {
     gameobj.call(this, -999, -999);
     this.r = 8;
+    this,oldX = this.x;
+    this.oldY = this.y + this.r;
     this.speed = 7;
     this.canFire = true;
     this.move = function() {
+        this.oldX = this.x;
+        this.oldY = this.y;
         if (this.x > -999)
         {
             if (balls.length > 0) {
@@ -139,8 +143,17 @@ function objMissile() {
                     this.y += diff[1] * this.speed / d;
                 }
             }
+            else
+            {
+                this.y -= this.speed;
+                if (this.y < 0) {
+                    this.x = -999;
+                    this.y = -999;
+                    this.canFire = true;
+                }
+            }
         }
-        else
+        /*else
         {
             this.y -= this.speed;
             if (this.y < 0) {
@@ -148,18 +161,23 @@ function objMissile() {
                 this.y = -999;
                 this.canFire = true;
             }
-        }
+        }*/
     }
 
     this.render = function() {
         if (this.x > -999)
         {
-            
-            ctx_game.beginPath();
+            /*ctx_game.beginPath();
             ctx_game.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
             ctx_game.closePath();
             ctx_game.stroke();
-            ctx_game.fill();
+            ctx_game.fill();*/
+            ctx_game.lineWidth = this.r;
+            
+            ctx_game.beginPath();
+            ctx_game.moveTo(this.oldX, this.oldY);
+            ctx_game.moveTo(this.x, this.y);
+            ctx_game.stroke();
         }
     }
 
