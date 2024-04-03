@@ -98,8 +98,8 @@ function newStage() {
 	
 	// Ball Control
 	balls = [
-		new objMagicBall(100, 100, -3, 0, 10 * Math.ceil((gamePlay.stage + 1) / 2) + 20), 
-		new objMagicBall(100, 100, 3, 0, 10 * Math.floor((gamePlay.stage + 1) / 2) + 20)
+		new objMagicBall(w / 2, 100, -3, 0, 10 * Math.ceil((gamePlay.stage + 1) / 2) + 20, 0), 
+		new objMagicBall(w / 2, 100, 3, 0, 10 * Math.floor((gamePlay.stage + 1) / 2) + 20, 0)
 	];
 	
 	setTimeout(tick,500); 
@@ -113,7 +113,9 @@ function proc_user_input() {
 		user_y_ori = user_y;
 
 		oMainChr.x += dx;
-
+		if (oMainChr.x < -35) oMainChr.x = -35;
+		if (oMainChr.x > (w - 35)) oMainChr.x = w - 35;
+		 
 		if (gamePlay.stopMode == "" && oMissile.canFire)
 		{
 			oMissile.fire();
@@ -125,21 +127,21 @@ function addBall(ball)
 {
 	playSound(1);
 	balls.push(new objMagicBall(
-		ball.x, ball.y, ball.step_x, ball.step_y, ball.ballSize));
+		ball.x, ball.y, ball.step_x, ball.step_y, ball.ballSize, ball.ballSize + 10));
 	balls.push(new objMagicBall(
-		ball.x, ball.y, -ball.step_x, ball.step_y, ball.ballSize));
+		ball.x, ball.y, -ball.step_x, ball.step_y, ball.ballSize, ball.ballSize + 10));
 	gamePlay.divideCnt++;
 	
 	if ((gamePlay.divideCnt%5)==0)
 	{
 		balls.push(new objMagicBall(
-			ball.x, ball.y, 0, 2, 30, 2));
+			ball.x, ball.y, 0, 2, 30, 0, 2));
 	}
 	
 	if (gamePlay.divideCnt==20)
 	{
 		balls.push(new objMagicBall(
-			ball.x, ball.y, 0, 2, 30, 1));
+			ball.x, ball.y, 0, 2, 30, 0, 1));
 		gamePlay.divideCnt=0;
 	}
 	

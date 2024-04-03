@@ -45,16 +45,16 @@ function objMainChr() {
     {
         this.img.src="mainChr_tran.png";
     }
-    this.w = this.img.width * 1.7;
-    this.h = this.img.height * 1.7;
+    this.w = this.img.width * 1.4;
+    this.h = this.img.height * 1.4;
 
     this.powerShield = 0;
     this.imgShield = new Image();
     this.imgShield.src="tennisBall.png";
 
     this.render = function() {
-        this.w = this.img.width * 1.7;
-        this.h = this.img.height * 1.7;
+        this.w = this.img.width * 1.4;
+        this.h = this.img.height * 1.4;
 
         if (this.powerShield > 0) {
             this.powerShield--;
@@ -69,10 +69,11 @@ function objMainChr() {
     }
 }
 
-function objMagicBall(x, y, step_x, step_y, ballSize, ballStyle = 0) {
+function objMagicBall(x, y, step_x, step_y, ballSize, size, ballStyle = 0) {
     gameobj.call(this, x, y);
-    this.step_x = step_x;
-    this.step_y = step_y;
+    this.step_x = step_x + Math.random() * 2 - 1;
+    this.step_y = step_y + Math.random() * 2 - 1;
+    this.size = size;
     this.ballSize = ballSize;
     this.ballStyle = ballStyle;
     this.img = new Image();
@@ -92,6 +93,8 @@ function objMagicBall(x, y, step_x, step_y, ballSize, ballStyle = 0) {
         this.x += this.step_x;
         this.y += this.step_y;
         this.step_y += 0.1;
+        if (this.size < this.ballSize) this.size += 0.25;
+        if (this.size > this.ballSize) this.size -= 0.25;
 
         //check limits to make bounce
         if (this.x > (w-this.ballSize) && this.step_x>0){
@@ -115,7 +118,7 @@ function objMagicBall(x, y, step_x, step_y, ballSize, ballStyle = 0) {
     }
 
     this.render = function() {
-        ctx_game.drawImage(this.img, this.x, this.y, this.ballSize,this.ballSize);	
+        ctx_game.drawImage(this.img, this.x, this.y, this.size,this.size);	
     }
 }
 
