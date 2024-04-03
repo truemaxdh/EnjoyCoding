@@ -167,17 +167,19 @@ function objMissile() {
     this.render = function() {
         if (this.x > -999)
         {
-            /*ctx_game.beginPath();
+            const d = [this.x - this.oldX, this.y - this.oldY];
+            ctx_game.beginPath();
+            ctx_game.strokeStyle = "#F0DB66";
+            ctx_game.lineWidth = this.r;
+            ctx_game.moveTo(this.x, this.y);
+            ctx_game.lineTo(this.x - 4 * d[0], this.y - 4 * d[1]);
+            ctx_game.stroke();
+            ctx_game.closePath();
+
+            ctx_game.beginPath();
             ctx_game.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
             ctx_game.closePath();
-            ctx_game.stroke();
-            ctx_game.fill();*/
-            ctx_game.lineWidth = this.r;
-            
-            ctx_game.beginPath();
-            ctx_game.moveTo(this.oldX, this.oldY);
-            ctx_game.lineTo(this.x, this.y);
-            ctx_game.stroke();
+            ctx_game.fill();            
         }
     }
 
