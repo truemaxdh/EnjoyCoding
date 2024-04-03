@@ -176,7 +176,7 @@ function objMissile() {
             
             ctx_game.beginPath();
             ctx_game.moveTo(this.oldX, this.oldY);
-            ctx_game.moveTo(this.x, this.y);
+            ctx_game.lineTo(this.x, this.y);
             ctx_game.stroke();
         }
     }
