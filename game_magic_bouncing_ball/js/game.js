@@ -201,9 +201,9 @@ function tick(){
 				}
 
 				// Check Collision with Main Character
-				if ((ball.x - oMainChr.x) < (oMainChr.w-5) && 
-					(oMainChr.x - ball.x) < (ball.ballSize - 5) && 
-					(oMainChr.y-ball.y) < (ball.ballSize-5))
+				if ((ball.x - oMainChr.x) < (oMainChr.w-10) && 
+					(oMainChr.x + 10 - ball.x) < ball.size && 
+					(oMainChr.y + 10 - ball.y) < ball.size)
 				{
 					balls.splice(i--, 1);
 					if (ball.ballStyle == 0 && oMainChr.powerShield <= 0) {
