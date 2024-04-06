@@ -33,7 +33,8 @@ function render() {
 function drawScore() {
     // Font
 	  ctx_game.font = "bold 30px sans-serif";
-    ctx_game.fillText("[24_4_3_1]Stage: "+ gamePlay.stage, 0, 30);
+    ctx_game.fillStyle = 'orange';
+    ctx_game.fillText("Stage: "+ gamePlay.stage, 0, 30);
     ctx_game.fillText("Remained: "+ gamePlay.remained, 260, 30);
     ctx_game.fillText("Score: "+ gamePlay.score, 520, 30);
     

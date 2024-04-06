@@ -118,7 +118,22 @@ function objMagicBall(x, y, step_x, step_y, ballSize, size, ballStyle = 0) {
     }
 
     this.render = function() {
-        ctx_game.drawImage(this.img, this.x, this.y, this.size,this.size);	
+        if (ballStyle == 0) {
+            var offset = (this.size / 3);
+            var gradient = ctx_game.createRadialGradient(
+                this.x + offset * 2, this.y + offset, this.size / 5,
+                this.x, this.y, this.size / 2);
+            
+            gradient.addColorStop(0, 'beige');
+            gradient.addColorStop(1, 'darksalmon');
+            ctx_game.fillStyle = gradient;
+            ctx_game.beginPath();
+            ctx_game.arc(this.x + this.size / 2, this.y + this.size / 2, this.size / 2, 0, 2 * Math.PI);
+            ctx_game.fill();
+            ctx_game.closePath();
+        } else {
+            ctx_game.drawImage(this.img, this.x, this.y, this.size,this.size);	            
+        }
     }
 }
 
@@ -182,6 +197,7 @@ function objMissile() {
             ctx_game.beginPath();
             ctx_game.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
             ctx_game.closePath();
+            ctx_game.fillStyle = 'orange';
             ctx_game.fill();            
         }
     }
