@@ -93,7 +93,7 @@ function objMagicBall(x, y, step_x, step_y, ballSize, size, ballStyle = 0) {
         this.x += this.step_x;
         this.y += this.step_y;
         this.step_y += 0.1;
-        if (this.size < this.ballSize) this.size += 0.25;
+        if (this.size < this.ballSize) this.size += 0.5;
         if (this.size > this.ballSize) this.size -= 0.25;
 
         //check limits to make bounce
@@ -122,7 +122,7 @@ function objMagicBall(x, y, step_x, step_y, ballSize, size, ballStyle = 0) {
             var offset = (this.size / 3);
             var gradient = ctx_game.createRadialGradient(
                 this.x + offset * 2, this.y + offset, this.size / 5,
-                this.x, this.y, this.size / 2);
+                this.x, this.y, this.size);
             
             gradient.addColorStop(0, 'beige');
             gradient.addColorStop(1, 'darksalmon');
@@ -130,7 +130,9 @@ function objMagicBall(x, y, step_x, step_y, ballSize, size, ballStyle = 0) {
             ctx_game.beginPath();
             ctx_game.arc(this.x + this.size / 2, this.y + this.size / 2, this.size / 2, 0, 2 * Math.PI);
             ctx_game.fill();
-            ctx_game.closePath();
+            // ctx_game.strokeStyle = 'black';
+            // ctx_game.rect(this.x, this.y, this.size, this.size);
+            // ctx_game.stroke();
         } else {
             ctx_game.drawImage(this.img, this.x, this.y, this.size,this.size);	            
         }
