@@ -183,7 +183,8 @@ function proc_user_input() {
         }
         playSound(sounds.fire);
     } else {
-        missile_interval = gamePlay.missile_interval.map(x=>x);
+        // missile_interval = gamePlay.missile_interval.map(x=>x);
+        missile_interval[0] = gamePlay.missile_interval[0];
     }
 }
 
