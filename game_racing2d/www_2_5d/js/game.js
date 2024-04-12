@@ -103,6 +103,7 @@ function upcoming_obj() {
     let obs = new objObstacle(gameObjects.car);
     obs.prev = gameObjects.car;
     obs.next = gameObjects.car.next;
+    gameObjects.car.next.prev = obs;
     gameObjects.car.next = obs;
   }
 }
