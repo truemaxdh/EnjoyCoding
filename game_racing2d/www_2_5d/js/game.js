@@ -99,13 +99,13 @@ function stageCleared() {
 }
 
 function upcoming_obj() {
-  if (Math.random() > 0.9) {
-    let obs = new objObstacle(gameObjects.car);
-    obs.prev = gameObjects.car;
-    obs.next = gameObjects.car.next;
-    gameObjects.car.next.prev = obs;
-    gameObjects.car.next = obs;
-  }
+  // if (Math.random() > 0.9) {
+  //   let obs = new objObstacle(gameObjects.car);
+  //   obs.prev = gameObjects.car;
+  //   obs.next = gameObjects.car.next;
+  //   gameObjects.car.next.prev = obs;
+  //   gameObjects.car.next = obs;    
+  // }
 }
 
 function collision_check() {  
