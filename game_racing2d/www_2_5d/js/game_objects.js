@@ -6,6 +6,8 @@ class gameobj {
         this.accel = new Vector3D(0, 0, 0);
         this.prev = null;
         this.next = null;
+
+        this.objID = gameObjects.objID++;
     }
     
     move() {
@@ -29,15 +31,17 @@ class gameobj {
 
 class objCar extends gameobj {
     constructor() {
-        super(0, 0, gameObjects.vanishingDt, 50, 0, 0, 0);
+        super(0, 0, gameObjects.vanishingDt, 40, 0, 0, 0);
     
-        this.maxSpeedV3 = 3.5;
+        this.maxSpeedV3 = 100;
         this.accel.v3 = 0.01;
         this.rotate = 0;
         this.unitRotate = Math.PI / 6;
         this.bodyColor = "orange";
         this.wheelColor = "black";
         this.carIdx = 0;
+
+        console.log(this.objID + ":car");
     }
 
     move() {
@@ -83,9 +87,94 @@ class objCar extends gameobj {
 
     realCoord(vec3D) {
         let f = this.getFactor(vec3D);
-        let XYZ = this.center.clone().subtract(vec3D).multiply1D(f);
+        let XYZ = vec3D.clone().subtract(this.center).multiply1D(f);
         XYZ.add(new Vector3D(gameCanvas.w / 2, gameCanvas.h / 2, 0));
         return XYZ;
+    }
+}
+
+class extraobj extends gameobj {
+    constructor(car, x, y, z, r) {
+        super(x, y, z, r, 0, 0, 0);
+        this.car = car;
+        //console.log(this.objID + ":extra");
+    }
+
+    move() {
+        this.speed.v3 = this.car.speed.v3;        
+        super.move();
+        
+        if (this.center.v3 > this.car.center.v3) {
+            console.log(this.objID + "expire");
+            this.prev.next = this.next;
+            this.next.prev = this.prev;
+        }        
+    }
+
+    fillPoligon(vectors, color) {
+        const ctx = gameCanvas.ctx;
+        ctx.fillStyle = color;
+        ctx.strokeStyle = color;
+        ctx.beginPath();
+        
+        for(let i = 0; i < vectors.length; i++) {
+            const drawPos = this.car.realCoord(vectors[i]);
+            console.log(drawPos.v1 + "," + drawPos.v2);
+            if (i == 0) ctx.moveTo(drawPos.v1, drawPos.v2);
+            else ctx.lineTo(drawPos.v1, drawPos.v2);
+        }
+        ctx.closePath();
+        ctx.fill();
+
+        //super.render();
+    }
+}
+
+class objRoad extends extraobj {
+    constructor(car, lastRoad) {
+        let center, r = 200;
+        if (lastRoad == null)
+            center = new Vector3D(gameCanvas.w * 0.5, 180, 0);
+        else {
+            center = lastRoad.center.clone();
+            center.v1 = center.v1 + 20 * (Math.random() - 0.5);
+            //center.v2 = prune(center.v2 + 10 * (Math.random() - 0.5), 0, 80);
+            r = lastRoad.r;
+        }
+        super(car, center.v1, center.v2, 0, r);
+        
+        this.lastRoad = lastRoad;
+        this.color = 'beige';
+        this.len = 100;
+        this.flgNewRoad = true;
+
+        this.prev = car;
+        this.next = car.next;
+        car.next.prev = this;
+        car.next = this;
+    }
+
+    render() {
+        if (this.lastRoad != null) {
+            const c = this.center;
+            const r = this.r;
+            const lastC = this.lastRoad.center;
+            const lastR = this.lastRoad.r; 
+            super.fillPoligon([
+                new Vector3D(c.v1 - this.r, c.v2, c.v3),
+                new Vector3D(c.v1 + this.r, c.v2, c.v3),
+                new Vector3D(lastC.v1 + lastR, lastC.v2, lastC.v3),
+                new Vector3D(lastC.v1 - lastR, lastC.v2, lastC.v3),
+            ], this.color);
+        }
+        
+        if (this.flgNewRoad && this.center.v3 > this.len) {
+            
+            new objRoad(this.car, this);
+            this.flgNewRoad = false;
+        }
+
+        super.render();
     }
 }
 
@@ -175,21 +264,23 @@ let gameObjects = {
     car: null,
     gameOver: null,
     stageClear: null,
-    vanishingDt: 500,
+    vanishingDt: 1500,
     init : function() {
         this.car = new objCar();
         const dummy = new gameobj();
-        dummy.prev = this.car;
         this.car.next = dummy;
-        this.gameOver = new objGameOver();
+        dummy.prev = this.car;
+        new objRoad(this.car, null);
+        //this.gameOver = new objGameOver();
     },
     move : function() {
         this.car.move();
     },
     render : function() {
         const ctx = gameCanvas.ctx;
-        ctx.fillStyle = 'beige';
+        ctx.fillStyle = 'green';
         ctx.fillRect(0, 0, gameCanvas.w, gameCanvas.h);
         this.car.render();
-    }
+    },
+    objID : 0
 }
