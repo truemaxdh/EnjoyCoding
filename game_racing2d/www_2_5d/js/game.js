@@ -68,11 +68,11 @@ function gameOver() {
 
 function proc_user_input() {
   if (user_pressing) {
-    if (user_x > gameObjects.car.center.v1) {
-      gameObjects.car.accel.v1 = 1;
+    if (user_x > gameObjects.cam.center.v1) {
+      gameObjects.cam.accel.v1 = 1;
     }
-    else if (user_x < gameObjects.car.center.v1) {
-      gameObjects.car.accel.v1 = -1;
+    else if (user_x < gameObjects.cam.center.v1) {
+      gameObjects.cam.accel.v1 = -1;
     }
   } else {
   }
@@ -83,7 +83,7 @@ function handleOrientation(event) {
   //let beta = event.beta;
   let gamma = event.gamma;
   gamma = prune(gamma, -1, 1);
-  gameObjects.car.accel.v1 = gamma;
+  gameObjects.cam.accel.v1 = gamma;
 }
 
 function checkStageCleared() {
