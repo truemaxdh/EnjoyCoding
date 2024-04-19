@@ -3,7 +3,7 @@ class gameobj {
         this.center = new Vector3D(x, y, z);
         this.r = r;
         this.speed = new Vector3D(dx, dy, dz);
-        this.accel = new Vector3D(0, 0, 0);
+        
         this.prev = null;
         this.next = null;
 
@@ -11,8 +11,6 @@ class gameobj {
     }
     
     move() {
-        this.speed.add(this.accel);
-        this.center.add(this.speed);
         if (this.next != null) {
             this.next.move();
         }
@@ -29,56 +27,26 @@ class gameobj {
     }
 }
 
-class objCar extends gameobj {
+class objCam extends gameobj {
     constructor() {
-        super(0, 0, gameObjects.vanishingDt, 40, 0, 0, 0);
-    
-        this.maxSpeedV3 = 100;
-        this.accel.v3 = 0.01;
-        this.rotate = 0;
-        this.unitRotate = Math.PI / 6;
-        this.bodyColor = "orange";
-        this.wheelColor = "black";
-        this.carIdx = 0;
+        super(0, 0, gameObjects.vanishingDt, 0, 0, 0, 0);
+        this.accel = new Vector3D(0, 0, 100);
+        this.maxSpeedV3 = 1000;
 
-        console.log(this.objID + ":car");
+        console.log(this.objID + ":cam");
     }
 
     move() {
+        this.speed.add(this.accel);
+        
         if (this.speed.v3 > this.maxSpeedV3) {
             this.speed.v3 = this.maxSpeedV3;
         }
-        super.move();
-        
-        if (this.speed.v3 < 0 || this.rotate > 0) {
-            this.rotate += this.unitRotate;
-            if (this.rotate >= 2 * Math.PI) {
-                this.rotate = 0;
-            }
-        }
-        
-        this.center.v3 = gameObjects.vanishingDt;
 
-        this.accel.multiply1D(0.8);
+        this.accel.v1 *= 0.8;
         this.speed.multiply1D(0.8);
-        this.accel.v3 = 0.2;
-    }
-    
-    render() {
-        const ctx = gameCanvas.ctx;
-        ctx.save();
-        const drawPos = this.realCoord(this.center);
-        ctx.translate(drawPos.v1, drawPos.v2);
-        ctx.rotate(this.rotate);
-        ctx.strokeStyle = this.bodyColor;
-        ctx.strokeRect(-this.r, -this.r, 2 * this.r, 2 * this.r);
-        ctx.restore();
 
-        speedSound(this.carIdx, this.speed.v2);
-
-        if (this.next != null) {
-            this.next.render();
-        }
+        super.move();
     }
 
     getFactor(vec3D) {
@@ -94,17 +62,25 @@ class objCar extends gameobj {
 }
 
 class extraobj extends gameobj {
-    constructor(car, x, y, z, r) {
+    constructor(cam, x, y, z, r) {
         super(x, y, z, r, 0, 0, 0);
-        this.car = car;
-        //console.log(this.objID + ":extra");
+        this.cam = cam;
+
+        if (cam.next != null) {
+            this.next = cam.next;
+            cam.next.prev = this;
+        }
+        this.prev = cam;
+        cam.next = this;
+        
     }
 
     move() {
-        this.speed.v3 = this.car.speed.v3;        
+        this.speed.v3 = this.cam.speed.v3;
+        this.center.add(this.speed);     
         super.move();
         
-        if (this.center.v3 > this.car.center.v3) {
+        if (this.center.v3 > this.cam.center.v3) {
             console.log(this.objID + "expire");
             this.prev.next = this.next;
             this.next.prev = this.prev;
@@ -116,42 +92,71 @@ class extraobj extends gameobj {
         ctx.fillStyle = color;
         ctx.strokeStyle = color;
         ctx.beginPath();
-        
         for(let i = 0; i < vectors.length; i++) {
-            const drawPos = this.car.realCoord(vectors[i]);
-            console.log(drawPos.v1 + "," + drawPos.v2);
+            const drawPos = this.cam.realCoord(vectors[i]);
             if (i == 0) ctx.moveTo(drawPos.v1, drawPos.v2);
             else ctx.lineTo(drawPos.v1, drawPos.v2);
         }
         ctx.closePath();
         ctx.fill();
-
-        //super.render();
     }
 }
 
+class objCar extends extraobj {
+    constructor(cam) {
+        const r = 150;
+        super(cam, 0, 150, cam.center.v3 - 300 - r, r);
+        
+        this.fixedCenter = this.center.clone();
+        
+        this.rotate = 0;
+        this.unitRotate = Math.PI / 6;
+        this.bodyColor = "orange";
+        this.wheelColor = "black";
+        this.carIdx = 0;
+
+        console.log(this.objID + ":car");
+    }
+
+    move() {
+        this.speed.v1 = this.cam.speed.v1;
+        this.center.add(this.speed);        
+    }
+    
+    render() {
+        const c = this.center;
+        const r = this.r;
+        super.fillPoligon([
+            new Vector3D(c.v1 - this.r, c.v2, c.v3 - this.r),
+            new Vector3D(c.v1 + this.r, c.v2, c.v3 - this.r),
+            new Vector3D(c.v1 + this.r, c.v2, c.v3 + this.r),
+            new Vector3D(c.v1 - this.r, c.v2, c.v3 + this.r)
+        ], this.bodyColor);
+
+        speedSound(this.carIdx, this.speed.v2);
+
+        super.render();
+    }    
+}
+
+
 class objRoad extends extraobj {
-    constructor(car, lastRoad) {
+    constructor(cam, lastRoad) {
         let center, r = 200;
         if (lastRoad == null)
-            center = new Vector3D(gameCanvas.w * 0.5, 180, 0);
+            center = new Vector3D(0, 200, 0);
         else {
             center = lastRoad.center.clone();
             center.v1 = center.v1 + 20 * (Math.random() - 0.5);
             //center.v2 = prune(center.v2 + 10 * (Math.random() - 0.5), 0, 80);
             r = lastRoad.r;
         }
-        super(car, center.v1, center.v2, 0, r);
+        super(cam, center.v1, center.v2, 0, r);
         
         this.lastRoad = lastRoad;
         this.color = 'beige';
         this.len = 100;
-        this.flgNewRoad = true;
-
-        this.prev = car;
-        this.next = car.next;
-        car.next.prev = this;
-        car.next = this;
+        this.flgNewRoad = true;        
     }
 
     render() {
@@ -170,7 +175,7 @@ class objRoad extends extraobj {
         
         if (this.flgNewRoad && this.center.v3 > this.len) {
             
-            new objRoad(this.car, this);
+            new objRoad(this.cam, this);
             this.flgNewRoad = false;
         }
 
@@ -261,26 +266,23 @@ class objStageClear extends gameobj {
 }   
 
 let gameObjects = {
-    car: null,
+    cam: null,
     gameOver: null,
     stageClear: null,
-    vanishingDt: 1500,
+    vanishingDt: 80000,
     init : function() {
-        this.car = new objCar();
-        const dummy = new gameobj();
-        this.car.next = dummy;
-        dummy.prev = this.car;
-        new objRoad(this.car, null);
-        //this.gameOver = new objGameOver();
+        this.cam = new objCam();
+        new objCar(this.cam);
+        new objRoad(this.cam, null);
     },
     move : function() {
-        this.car.move();
+        this.cam.move();
     },
     render : function() {
         const ctx = gameCanvas.ctx;
-        ctx.fillStyle = 'green';
+        ctx.fillStyle = 'lightgreen';
         ctx.fillRect(0, 0, gameCanvas.w, gameCanvas.h);
-        this.car.render();
+        this.cam.render();
     },
     objID : 0
 }
