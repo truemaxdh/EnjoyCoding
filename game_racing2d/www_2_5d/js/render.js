@@ -35,7 +35,9 @@ let gameCanvas = {
     }
   },
   render : function() {
-    gameObjects.render();
+    this.ctx.fillStyle = 'lightgreen';
+    this.ctx.fillRect(0, 0, this.w, this.h);
+    gObj.render();
     this.ctx.drawImage(img_pause, 0, 0, 40, 40, this.w - 60, 20, 40, 40);
     this.ctx.fillStyle = '#ffa500';
     this.ctx.font = '28px Sniglet-ExtraBold';

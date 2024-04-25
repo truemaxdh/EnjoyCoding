@@ -35,21 +35,21 @@ function newGame() {
   gameCanvas.init();
   init_user_input();
   gamePlay.init();
-  gameObjects.init();
+  gObj.init();
   gamePlay.startStage();
 }
 
 function tick(timeStamp) {
   if ((timeStamp - gamePlay.last_animation_time) > gamePlay.animation_interval) {
     gamePlay.last_animation_time = timeStamp;
-    gameObjects.move();
+    gObj.move();
     gameCanvas.render();
     if (gamePlay.gameover_flag) {
       gameOver();
     } else {
       proc_user_input();
       if (gamePlay.effect_flag || checkStageCleared()) {
-        gameObjects.stageClear.render();
+        gObj.stageClear.render();
       } else {
         upcoming_obj();
         collision_check();
@@ -63,16 +63,16 @@ function tick(timeStamp) {
 
 function gameOver() {
   gamePlay.gameover_flag = true;
-  oageObjects.gameOver.render();
+  gObj.gameOver.render();
 }
 
 function proc_user_input() {
   if (user_pressing) {
-    if (user_x > gameObjects.cam.center.v1) {
-      gameObjects.cam.accel.v1 = 1;
+    if (user_x > gObj.cam.center.v1) {
+      gObj.cam.accel.v1 = 1;
     }
-    else if (user_x < gameObjects.cam.center.v1) {
-      gameObjects.cam.accel.v1 = -1;
+    else if (user_x < gObj.cam.center.v1) {
+      gObj.cam.accel.v1 = -1;
     }
   } else {
   }
@@ -83,7 +83,7 @@ function handleOrientation(event) {
   //let beta = event.beta;
   let gamma = event.gamma;
   gamma = prune(gamma, -1, 1);
-  gameObjects.cam.accel.v1 = gamma;
+  gObj.cam.accel.v1 = gamma;
 }
 
 function checkStageCleared() {
@@ -94,17 +94,17 @@ function checkStageCleared() {
 function stageCleared() {
   chkAndUnlockStage(gamePlay.stageNum);
   gamePlay.effect_flag = true;
-  gameObjects.stageClear = new objStageClear(gamePlay.stageNum);
+  gObj.stageClear = new objStageClear(gamePlay.stageNum);
   gamePlay.setStage(gamePlay.stageNum + 1);
 }
 
 function upcoming_obj() {
   // if (Math.random() > 0.9) {
-  //   let obs = new objObstacle(gameObjects.car);
-  //   obs.prev = gameObjects.car;
-  //   obs.next = gameObjects.car.next;
-  //   gameObjects.car.next.prev = obs;
-  //   gameObjects.car.next = obs;    
+  //   let obs = new objObstacle(gObj.car);
+  //   obs.prev = gObj.car;
+  //   obs.next = gObj.car.next;
+  //   gObj.car.next.prev = obs;
+  //   gObj.car.next = obs;    
   // }
 }
 

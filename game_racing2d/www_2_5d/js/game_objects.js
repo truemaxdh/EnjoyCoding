@@ -7,7 +7,7 @@ class gameobj {
         this.prev = null;
         this.next = null;
 
-        this.objID = gameObjects.objID++;
+        this.objID = gObj.objID++;
     }
     
     move() {
@@ -29,9 +29,9 @@ class gameobj {
 
 class objCam extends gameobj {
     constructor() {
-        super(0, 0, gameObjects.vanishingDt, 0, 0, 0, 0);
-        this.accel = new Vector3D(0, 0, 100);
-        this.maxSpeedV3 = 1000;
+        super(0, 0, gObj.vanishingDt, 0, 0, 0, 0);
+        this.accel = new Vector3D(0, 0, -100);
+        this.maxSpeedV3 = -1000;
 
         console.log(this.objID + ":cam");
     }
@@ -39,9 +39,11 @@ class objCam extends gameobj {
     move() {
         this.speed.add(this.accel);
         
-        if (this.speed.v3 > this.maxSpeedV3) {
+        if (this.speed.v3 < this.maxSpeedV3) {
             this.speed.v3 = this.maxSpeedV3;
         }
+
+        this.center.v1 += this.speed.v1;
 
         this.accel.v1 *= 0.8;
         this.speed.multiply1D(0.8);
@@ -55,9 +57,9 @@ class objCam extends gameobj {
 
     realCoord(vec3D) {
         let f = this.getFactor(vec3D);
-        let XYZ = vec3D.clone().subtract(this.center).multiply1D(f);
-        XYZ.add(new Vector3D(gameCanvas.w / 2, gameCanvas.h / 2, 0));
-        return XYZ;
+        let XY0 = vec3D.clone().subtract(this.center).multiply1D(f);
+        XY0.add(new Vector3D(gObj.camXYH.x, gObj.camXYH.y, -XY0.v3));
+        return XY0;
     }
 }
 
@@ -76,12 +78,11 @@ class extraobj extends gameobj {
     }
 
     move() {
-        this.speed.v3 = this.cam.speed.v3;
-        this.center.add(this.speed);     
+        this.center.v3 -= this.cam.speed.v3;     
         super.move();
         
         if (this.center.v3 > this.cam.center.v3) {
-            console.log(this.objID + "expire");
+            //console.log(this.objID + "expire");
             this.prev.next = this.next;
             this.next.prev = this.prev;
         }        
@@ -94,6 +95,7 @@ class extraobj extends gameobj {
         ctx.beginPath();
         for(let i = 0; i < vectors.length; i++) {
             const drawPos = this.cam.realCoord(vectors[i]);
+            console.log(this.objID + ":" + drawPos.v1 + "," + drawPos.v2);
             if (i == 0) ctx.moveTo(drawPos.v1, drawPos.v2);
             else ctx.lineTo(drawPos.v1, drawPos.v2);
         }
@@ -104,8 +106,8 @@ class extraobj extends gameobj {
 
 class objCar extends extraobj {
     constructor(cam) {
-        const r = 150;
-        super(cam, 0, 150, cam.center.v3 - 300 - r, r);
+        const r = 100;
+        super(cam, 0, gObj.camXYH.h, cam.center.v3 - 300 - r, r);
         
         this.fixedCenter = this.center.clone();
         
@@ -119,16 +121,16 @@ class objCar extends extraobj {
     }
 
     move() {
-        this.speed.v1 = this.cam.speed.v1;
-        this.center.add(this.speed);        
+        this.center.v1 = this.cam.center.v1;
     }
     
     render() {
         const c = this.center;
         const r = this.r;
+        //console.log(this.objID + ":" + c.v1 + "," + c.v2 + "," + c.v3 + "," + r);
         super.fillPoligon([
-            new Vector3D(c.v1 - this.r, c.v2, c.v3 - this.r),
-            new Vector3D(c.v1 + this.r, c.v2, c.v3 - this.r),
+            new Vector3D(c.v1 - this.r, c.v2, c.v3 - this.r * 10),
+            new Vector3D(c.v1 + this.r, c.v2, c.v3 - this.r * 10),
             new Vector3D(c.v1 + this.r, c.v2, c.v3 + this.r),
             new Vector3D(c.v1 - this.r, c.v2, c.v3 + this.r)
         ], this.bodyColor);
@@ -139,12 +141,11 @@ class objCar extends extraobj {
     }    
 }
 
-
 class objRoad extends extraobj {
     constructor(cam, lastRoad) {
-        let center, r = 200;
+        let center, r = 400;
         if (lastRoad == null)
-            center = new Vector3D(0, 200, 0);
+            center = new Vector3D(0, gObj.camXYH.h, 0);
         else {
             center = lastRoad.center.clone();
             center.v1 = center.v1 + 20 * (Math.random() - 0.5);
@@ -155,7 +156,9 @@ class objRoad extends extraobj {
         
         this.lastRoad = lastRoad;
         this.color = 'beige';
-        this.len = 100;
+        this.lineColor = 'yellow';
+        this.lineR = 30;
+        this.len = 1000;
         this.flgNewRoad = true;        
     }
 
@@ -164,13 +167,25 @@ class objRoad extends extraobj {
             const c = this.center;
             const r = this.r;
             const lastC = this.lastRoad.center;
-            const lastR = this.lastRoad.r; 
+            const lastR = this.lastRoad.r;             
+            
+            // road
             super.fillPoligon([
-                new Vector3D(c.v1 - this.r, c.v2, c.v3),
-                new Vector3D(c.v1 + this.r, c.v2, c.v3),
+                new Vector3D(c.v1 - r, c.v2, c.v3),
+                new Vector3D(c.v1 + r, c.v2, c.v3),
                 new Vector3D(lastC.v1 + lastR, lastC.v2, lastC.v3),
                 new Vector3D(lastC.v1 - lastR, lastC.v2, lastC.v3),
             ], this.color);
+
+            // center line
+            const lineR = this.lineR;
+            const lineEnd = c.add(lastC.subtract(c).multiply1D(0.5));
+            super.fillPoligon([
+                new Vector3D(c.v1 - lineR, c.v2, c.v3),
+                new Vector3D(c.v1 + lineR, c.v2, c.v3),
+                new Vector3D(lineEnd.v1 + lineR, lineEnd.v2, lineEnd.v3),
+                new Vector3D(lineEnd.v1 - lineR, lineEnd.v2, lineEnd.v3)
+            ], this.lineColor);        
         }
         
         if (this.flgNewRoad && this.center.v3 > this.len) {
@@ -260,17 +275,23 @@ class objStageClear extends gameobj {
         this.count_down--;
         if (this.count_down <= 0) {
             gamePlay.effect_flag = false;
-            gameObjects.init();
+            gObj.init();
         }
     }
 }   
 
-let gameObjects = {
+let gObj = {
     cam: null,
     gameOver: null,
     stageClear: null,
-    vanishingDt: 80000,
+    vanishingDt: 10000,
+    camXYH: null,
     init : function() {
+        this.camXYH = {
+            x: gameCanvas.w / 2, 
+            y: gameCanvas.h / 3,
+            h: gameCanvas.h * 2 / 3};
+        console.log(this.camXYH);
         this.cam = new objCam();
         new objCar(this.cam);
         new objRoad(this.cam, null);
@@ -279,9 +300,6 @@ let gameObjects = {
         this.cam.move();
     },
     render : function() {
-        const ctx = gameCanvas.ctx;
-        ctx.fillStyle = 'lightgreen';
-        ctx.fillRect(0, 0, gameCanvas.w, gameCanvas.h);
         this.cam.render();
     },
     objID : 0
