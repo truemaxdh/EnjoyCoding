@@ -68,13 +68,9 @@ function gameOver() {
 
 function proc_user_input() {
   if (user_pressing) {
-    if (user_x > gObj.cam.center.v1) {
-      gObj.cam.accel.v1 = 1;
-    }
-    else if (user_x < gObj.cam.center.v1) {
-      gObj.cam.accel.v1 = -1;
-    }
-  } else {
+    const dir = user_x - gameCanvas.w / 2;
+    if (dir > 0) gObj.cam.accel.v1 = 1;
+    else if (dir < 0) gObj.cam.accel.v1 = -1;
   }
 }
 
