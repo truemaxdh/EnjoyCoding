@@ -179,7 +179,7 @@ class objRoad extends extraobj {
 
             // center line
             const lineR = this.lineR;
-            const lineEnd = c.add(lastC.subtract(c).multiply1D(0.5));
+            const lineEnd = c.clone().add(lastC.clone().subtract(c).multiply1D(0.5));
             super.fillPoligon([
                 new Vector3D(c.v1 - lineR, c.v2, c.v3),
                 new Vector3D(c.v1 + lineR, c.v2, c.v3),
