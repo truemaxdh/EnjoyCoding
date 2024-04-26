@@ -95,7 +95,7 @@ class extraobj extends gameobj {
         ctx.beginPath();
         for(let i = 0; i < vectors.length; i++) {
             const drawPos = this.cam.realCoord(vectors[i]);
-            console.log(this.objID + ":" + drawPos.v1 + "," + drawPos.v2);
+            //console.log(this.objID + ":" + drawPos.v1 + "," + drawPos.v2);
             if (i == 0) ctx.moveTo(drawPos.v1, drawPos.v2);
             else ctx.lineTo(drawPos.v1, drawPos.v2);
         }
