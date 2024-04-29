@@ -162,6 +162,11 @@ class objRoad extends extraobj {
         this.flgNewRoad = true;        
     }
 
+    move() {
+        super.move();
+        this.car_collision_chk();
+    }
+
     render() {
         if (this.lastRoad != null) {
             const c = this.center;
@@ -195,6 +200,22 @@ class objRoad extends extraobj {
         }
 
         super.render();
+    }
+
+    car_collision_chk() {
+        const carCent = gObj.car.center;
+        const camCent = this.cam.center;
+        const cent = this.center;
+        if (carCent.v3 > (cent.v3 - this.len) &&
+          carCent.v3 < (cent.v3 + this.len)) {
+            const carR = gObj.car.r;
+            const lLimit = cent.v1 - this.r;
+            const rLimit = cent.v1 + this.r;
+            if ((camCent.v1 - carR) < lLimit)
+                camCent.v1 = 2 * (lLimit + carR) - camCent.v1;
+            if ((carCent.v1 + carR) > rLimit)
+                camCent.v1 = 2 * (rLimit - carR) - camCent.v1;
+        }
     }
 }
 
@@ -282,6 +303,7 @@ class objStageClear extends gameobj {
 
 let gObj = {
     cam: null,
+    car: null,
     gameOver: null,
     stageClear: null,
     vanishingDt: 10000,
@@ -293,7 +315,7 @@ let gObj = {
             h: gameCanvas.h * 2 / 3};
         console.log(this.camXYH);
         this.cam = new objCam();
-        new objCar(this.cam);
+        this.car = new objCar(this.cam);
         new objRoad(this.cam, null);
     },
     move : function() {
