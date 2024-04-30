@@ -156,9 +156,9 @@ class objRoad extends extraobj {
         
         this.lastRoad = lastRoad;
         this.color = 'beige';
-        this.lineColor = 'yellow';
+        this.lineColor = 'gold';
         this.lineR = 30;
-        this.len = 1000;
+        this.len = 2000;
         this.flgNewRoad = true;        
     }
 
@@ -169,7 +169,10 @@ class objRoad extends extraobj {
 
     render() {
         if (this.lastRoad != null) {
-            const c = this.center;
+            let c = this.center.clone();
+            if (this.flgNewRoad) {
+                c.v3 = 0;
+            }
             const r = this.r;
             const lastC = this.lastRoad.center;
             const lastR = this.lastRoad.r;             
@@ -183,6 +186,7 @@ class objRoad extends extraobj {
             ], this.color);
 
             // center line
+            c = this.center.clone();
             const lineR = this.lineR;
             const lineEnd = c.clone().add(lastC.clone().subtract(c).multiply1D(0.5));
             super.fillPoligon([
@@ -211,10 +215,14 @@ class objRoad extends extraobj {
             const carR = gObj.car.r;
             const lLimit = cent.v1 - this.r;
             const rLimit = cent.v1 + this.r;
-            if ((camCent.v1 - carR) < lLimit)
+            if ((camCent.v1 - carR) < lLimit) {
                 camCent.v1 = 2 * (lLimit + carR) - camCent.v1;
-            if ((carCent.v1 + carR) > rLimit)
+                if (gObj.car.speed.v1 < 0) gObj.car.speed.v1 *= -1;
+            }
+            if ((carCent.v1 + carR) > rLimit) {
                 camCent.v1 = 2 * (rLimit - carR) - camCent.v1;
+                if (gObj.car.speed.v1 > 0) gObj.car.speed.v1 *= -1;
+            }
         }
     }
 }
@@ -311,8 +319,8 @@ let gObj = {
     init : function() {
         this.camXYH = {
             x: gameCanvas.w / 2, 
-            y: gameCanvas.h / 3,
-            h: gameCanvas.h * 2 / 3};
+            y: gameCanvas.h / 5,
+            h: gameCanvas.h * 4 / 5};
         console.log(this.camXYH);
         this.cam = new objCam();
         this.car = new objCar(this.cam);
