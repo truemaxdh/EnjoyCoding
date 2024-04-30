@@ -31,7 +31,7 @@ class objCam extends gameobj {
     constructor() {
         super(0, 0, gObj.vanishingDt, 0, 0, 0, 0);
         this.accel = new Vector3D(0, 0, -100);
-        this.maxSpeedV3 = -1000;
+        this.maxSpeedV3 = -100;
 
         console.log(this.objID + ":cam");
     }
@@ -52,7 +52,7 @@ class objCam extends gameobj {
     }
 
     getFactor(vec3D) {
-        return vec3D.v3 / this.center.v3;
+        return 200 / (this.center.v3 - vec3D.v3);
     }
 
     realCoord(vec3D) {
@@ -81,7 +81,7 @@ class extraobj extends gameobj {
         this.center.v3 -= this.cam.speed.v3;     
         super.move();
         
-        if (this.center.v3 > this.cam.center.v3) {
+        if (this.center.v3 > (this.cam.center.v3 - 100)) {
             //console.log(this.objID + "expire");
             this.prev.next = this.next;
             this.next.prev = this.prev;
@@ -95,7 +95,8 @@ class extraobj extends gameobj {
         ctx.beginPath();
         for(let i = 0; i < vectors.length; i++) {
             const drawPos = this.cam.realCoord(vectors[i]);
-            //console.log(this.objID + ":" + drawPos.v1 + "," + drawPos.v2);
+            if (color == "orange")
+                console.log(this.objID + ":" + drawPos.v1 + "," + drawPos.v2);
             if (i == 0) ctx.moveTo(drawPos.v1, drawPos.v2);
             else ctx.lineTo(drawPos.v1, drawPos.v2);
         }
@@ -106,8 +107,8 @@ class extraobj extends gameobj {
 
 class objCar extends extraobj {
     constructor(cam) {
-        const r = 100;
-        super(cam, 0, gObj.camXYH.h, cam.center.v3 - 300 - r, r);
+        const r = 90;
+        super(cam, 0, gObj.camXYH.h, cam.center.v3 - 210 - r, r);
         
         this.fixedCenter = this.center.clone();
         
@@ -129,8 +130,8 @@ class objCar extends extraobj {
         const r = this.r;
         //console.log(this.objID + ":" + c.v1 + "," + c.v2 + "," + c.v3 + "," + r);
         super.fillPoligon([
-            new Vector3D(c.v1 - this.r, c.v2, c.v3 - this.r * 10),
-            new Vector3D(c.v1 + this.r, c.v2, c.v3 - this.r * 10),
+            new Vector3D(c.v1 - this.r, c.v2, c.v3 - this.r),
+            new Vector3D(c.v1 + this.r, c.v2, c.v3 - this.r),
             new Vector3D(c.v1 + this.r, c.v2, c.v3 + this.r),
             new Vector3D(c.v1 - this.r, c.v2, c.v3 + this.r)
         ], this.bodyColor);
@@ -145,20 +146,21 @@ class objRoad extends extraobj {
     constructor(cam, lastRoad) {
         let center, r = 400;
         if (lastRoad == null)
-            center = new Vector3D(0, gObj.camXYH.h, 0);
+            center = new Vector3D(0, gObj.camXYH.h, gObj.vanishingDt - 200);
         else {
             center = lastRoad.center.clone();
             center.v1 = center.v1 + 20 * (Math.random() - 0.5);
             //center.v2 = prune(center.v2 + 10 * (Math.random() - 0.5), 0, 80);
+            center.v3 = 0;
             r = lastRoad.r;
         }
-        super(cam, center.v1, center.v2, 0, r);
+        super(cam, center.v1, center.v2, center.v3, r);
         
         this.lastRoad = lastRoad;
-        this.color = 'beige';
+        this.color = 'whitesmoke';
         this.lineColor = 'gold';
         this.lineR = 30;
-        this.len = 2000;
+        this.len = 500;
         this.flgNewRoad = true;        
     }
 
@@ -314,7 +316,7 @@ let gObj = {
     car: null,
     gameOver: null,
     stageClear: null,
-    vanishingDt: 10000,
+    vanishingDt: 50000,
     camXYH: null,
     init : function() {
         this.camXYH = {
