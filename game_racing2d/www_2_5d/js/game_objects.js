@@ -144,14 +144,14 @@ class objCar extends extraobj {
 
 class objRoad extends extraobj {
     constructor(cam, lastRoad) {
-        let center, r = 400;
+        let center, r = 400, len = 500;
         if (lastRoad == null)
             center = new Vector3D(0, gObj.camXYH.h, gObj.vanishingDt - 200);
         else {
             center = lastRoad.center.clone();
             center.v1 = center.v1 + 20 * (Math.random() - 0.5);
             //center.v2 = prune(center.v2 + 10 * (Math.random() - 0.5), 0, 80);
-            center.v3 = 0;
+            center.v3 -= len;
             r = lastRoad.r;
         }
         super(cam, center.v1, center.v2, center.v3, r);
@@ -160,7 +160,7 @@ class objRoad extends extraobj {
         this.color = 'whitesmoke';
         this.lineColor = 'gold';
         this.lineR = 30;
-        this.len = 500;
+        this.len = len;
         this.flgNewRoad = true;        
     }
 
