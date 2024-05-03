@@ -64,17 +64,28 @@ class objCam extends gameobj {
 }
 
 class extraobj extends gameobj {
-    constructor(cam, x, y, z, r) {
+    constructor(cam, x, y, z, r, car = null) {
         super(x, y, z, r, 0, 0, 0);
         this.cam = cam;
+        if (car == null) {
+            if (cam.next != null) {
+                this.next = cam.next;
+                cam.next.prev = this;
+            }
+            this.prev = cam;
+            cam.next = this;
+        } else {
+            this.car = car;
 
-        if (cam.next != null) {
-            this.next = cam.next;
-            cam.next.prev = this;
+            this.next = car;
+            this.prev = car.prev;
+
+            car.prev.next = this;
+            car.prev = this;
+
+            console.log("quiz:" + this.objID);
         }
-        this.prev = cam;
-        cam.next = this;
-        
+
     }
 
     move() {
@@ -95,13 +106,23 @@ class extraobj extends gameobj {
         ctx.beginPath();
         for(let i = 0; i < vectors.length; i++) {
             const drawPos = this.cam.realCoord(vectors[i]);
-            if (color == "orange")
-                console.log(this.objID + ":" + drawPos.v1 + "," + drawPos.v2);
+            // if (color == "orange")
+            //     console.log(this.objID + ":" + drawPos.v1 + "," + drawPos.v2);
             if (i == 0) ctx.moveTo(drawPos.v1, drawPos.v2);
             else ctx.lineTo(drawPos.v1, drawPos.v2);
         }
         ctx.closePath();
         ctx.fill();
+    }
+
+    fillText(vector, size, color, text) {
+        const drawPos = this.cam.realCoord(vector);
+        const f = this.cam.getFactor(vector);
+        const ctx = gameCanvas.ctx;
+        ctx.fillStyle = color;
+        ctx.strokeStyle = color;
+        ctx.font = Math.floor(size * f) + "px bold Arial";
+        ctx.fillText(text, drawPos.v1, drawPos.v2);
     }
 }
 
@@ -229,32 +250,67 @@ class objRoad extends extraobj {
     }
 }
 
-class objObstacle extends gameobj {
-    constructor(car) {
-        super(gameCanvas.w * (0.5 * Math.random() - 0.25), gameCanvas.h * (0.5 * Math.random() - 0.25), 0, 100, 0, 0, 0);
-        this.car = car;
-        this.color = getRndColor(50, 50, 50, 206);
+class objQuiz extends extraobj {
+    constructor() {
+        super(gObj.cam, 0, 0, 0, 400, gObj.car);
+        
+        this.leftColor = 'darkslategray';
+        this.rightColor = 'darkslateblue';
+
+        this.leftChar = String.fromCharCode(65 + Math.random() * 26);
+        this.rightChar = this.leftChar;
+        while(this.leftChar == this.rightChar)
+            this.rightChar = String.fromCharCode(65 + Math.random() * 26);
+        this.answer = (Math.random() < 0.5) ? this.leftChar : this.rightChar;
+
+        this.chkFlag = true;
     }
 
     move() {
-        this.speed.v3 = this.car.speed.v3;        
         super.move();
-
-        if (this.center.v3 > this.car.center.v3) {
-            this.prev.next = this.next;
-            this.next.prev = this.prev;
-            console.log("expire");
-        }
+        this.car_collision_chk();
     }
 
     render() {
-        const f = this.car.getFactor(this.center);
-        const drawPos = this.car.realCoord(this.center);
-        const ctx = gameCanvas.ctx;
-        ctx.fillStyle = this.color;
-        ctx.fillRect(drawPos.v1, drawPos.v2, f * this.r, f * this.r);
+        const r = this.r;
+        const c = this.center;
+
+        // panel
+        super.fillPoligon([
+            new Vector3D(c.v1 - r, c.v2 - r / 2, c.v3),
+            new Vector3D(c.v1, c.v2 - r / 2, c.v3),
+            new Vector3D(c.v1, c.v2 + r / 2, c.v3),
+            new Vector3D(c.v1 - r, c.v2 + r / 2, c.v3)
+        ], this.rightColor);
+        super.fillPoligon([
+            new Vector3D(c.v1, c.v2 - r / 2, c.v3),
+            new Vector3D(c.v1 + r, c.v2 - r / 2, c.v3),
+            new Vector3D(c.v1 + r, c.v2 + r / 2, c.v3),
+            new Vector3D(c.v1, c.v2 + r / 2, c.v3)
+        ], this.leftColor);
+
+        // alphabet
+        super.fillText(new Vector3D(c.v1 - r, c.v2 - r / 2, c.v3), 
+            r, this.leftColor, this.leftChar);
+        super.fillText(new Vector3D(c.v1, c.v2 - r / 2, c.v3), 
+            r, this.rightColor, this.rightChar);
         
         super.render();
+    }
+
+    car_collision_chk() {
+        const carCent = gObj.car.center;
+        const cent = this.center;
+        if (carCent.v3 <= cent.v3 && this.chkFlag) {
+            this.chkFlag = false;
+
+            const selectedAnswer = (carCent.v1 < cent.v1) ? this.leftChar : this.rightChar;
+
+            if (this.answer != selectedAnswer)
+                this.cam.speed.v3 = 0;
+                
+            new objQuiz();
+        }        
     }
 }
 
@@ -327,6 +383,7 @@ let gObj = {
         this.cam = new objCam();
         this.car = new objCar(this.cam);
         new objRoad(this.cam, null);
+        new objQuiz();
     },
     move : function() {
         this.cam.move();
