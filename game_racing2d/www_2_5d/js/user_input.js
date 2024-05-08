@@ -60,11 +60,15 @@ function init_user_input() {
 }
 
 function showSubMenu() {
+  if (gamePlay.pause) {
+    hideSubMenu();
+    return;
+  }
   if (curPage == 'game') {
     gamePlay.pause = true;
     pauseBGM();
   }
-  document.getElementById("Submenu").style.left = "0";
+  // document.getElementById("Submenu").style.left = "0";
 }
 
 function hideSubMenu() {
