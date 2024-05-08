@@ -31,7 +31,7 @@ class objCam extends gameobj {
     constructor() {
         super(0, 0, gObj.vanishingDt, 0, 0, 0, 0);
         this.accel = new Vector3D(0, 0, -100);
-        this.maxSpeedV3 = -100;
+        this.maxSpeedV3 = -220;
 
         console.log(this.objID + ":cam");
     }
@@ -92,7 +92,7 @@ class extraobj extends gameobj {
         this.center.v3 -= this.cam.speed.v3;     
         super.move();
         
-        if (this.center.v3 > (this.cam.center.v3 - 100)) {
+        if (this.center.v3 > (this.cam.center.v3 + this.cam.maxSpeedV3)) {
             //console.log(this.objID + "expire");
             this.prev.next = this.next;
             this.next.prev = this.prev;
@@ -119,10 +119,14 @@ class extraobj extends gameobj {
         const drawPos = this.cam.realCoord(vector);
         const f = this.cam.getFactor(vector);
         const ctx = gameCanvas.ctx;
-        ctx.fillStyle = color;
-        ctx.strokeStyle = color;
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'center';
         ctx.font = Math.floor(size * f) + "px bold Arial";
+        ctx.fillStyle = color;
         ctx.fillText(text, drawPos.v1, drawPos.v2);
+        // ctx.strokeStyle = 'beige';
+        // ctx.lineWidth = 1;
+        // ctx.strokeText(text, drawPos.v1, drawPos.v2);
     }
 }
 
@@ -167,7 +171,7 @@ class objRoad extends extraobj {
     constructor(cam, lastRoad) {
         let center, r = 400, len = 500;
         if (lastRoad == null)
-            center = new Vector3D(0, gObj.camXYH.h, gObj.vanishingDt - 200);
+            center = new Vector3D(0, gObj.camXYH.h, cam.center.v3 + cam.maxSpeedV3 - len);
         else {
             center = lastRoad.center.clone();
             center.v1 = center.v1 + 20 * (Math.random() - 0.5);
@@ -252,9 +256,9 @@ class objRoad extends extraobj {
 
 class objQuiz extends extraobj {
     constructor() {
-        super(gObj.cam, 0, 0, 0, 400, gObj.car);
+        super(gObj.cam, 0, 0, 0, 500, gObj.car);
         
-        this.leftColor = 'darkslategray';
+        this.leftColor = 'orange';
         this.rightColor = 'darkslateblue';
 
         this.leftChar = String.fromCharCode(65 + Math.random() * 26);
@@ -290,9 +294,9 @@ class objQuiz extends extraobj {
         ], this.leftColor);
 
         // alphabet
-        super.fillText(new Vector3D(c.v1 - r, c.v2 - r / 2, c.v3), 
+        super.fillText(new Vector3D(c.v1 - r / 2, c.v2, c.v3), 
             r, this.leftColor, this.leftChar);
-        super.fillText(new Vector3D(c.v1, c.v2 - r / 2, c.v3), 
+        super.fillText(new Vector3D(c.v1 + r / 2, c.v2, c.v3), 
             r, this.rightColor, this.rightChar);
         
         super.render();
@@ -372,7 +376,7 @@ let gObj = {
     car: null,
     gameOver: null,
     stageClear: null,
-    vanishingDt: 50000,
+    vanishingDt: 30000,
     camXYH: null,
     init : function() {
         this.camXYH = {
