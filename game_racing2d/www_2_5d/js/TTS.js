@@ -45,7 +45,7 @@ let TTS = {
     }
 }
 
+TTS.init();
 if (window.speechSynthesis.onvoiceschanged !== undefined) {
      window.speechSynthesis.onvoiceschanged = function() {TTS.init()};
 }
-
