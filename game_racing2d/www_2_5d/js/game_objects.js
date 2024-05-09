@@ -31,7 +31,7 @@ class objCam extends gameobj {
     constructor() {
         super(0, 0, gObj.vanishingDt, 0, 0, 0, 0);
         this.accel = new Vector3D(0, 0, -100);
-        this.maxSpeedV3 = -220;
+        this.maxSpeedV3 = -180;
 
         console.log(this.objID + ":cam");
     }
