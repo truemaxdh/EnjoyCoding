@@ -174,7 +174,7 @@ class objRoad extends extraobj {
             center = new Vector3D(0, gObj.camXYH.h, cam.center.v3 + cam.maxSpeedV3 - len);
         else {
             center = lastRoad.center.clone();
-            center.v1 = center.v1 + 20 * (Math.random() - 0.5);
+            //center.v1 = center.v1 + 20 * (Math.random() - 0.5);
             //center.v2 = prune(center.v2 + 10 * (Math.random() - 0.5), 0, 80);
             center.v3 -= len;
             r = lastRoad.r;
@@ -272,6 +272,7 @@ class objQuiz extends extraobj {
 
     move() {
         super.move();
+        TTS.speech(this.answer);
         this.car_collision_chk();
     }
 
@@ -310,8 +311,12 @@ class objQuiz extends extraobj {
 
             const selectedAnswer = (carCent.v1 < cent.v1) ? this.leftChar : this.rightChar;
 
-            if (this.answer != selectedAnswer)
-                this.cam.speed.v3 = 0;
+            if (this.answer != selectedAnswer) {
+                console.log('X');
+                this.cam.speed.v3 *= -10;
+            } else {
+                console.log('O');
+            }                
                 
             new objQuiz();
         }        
