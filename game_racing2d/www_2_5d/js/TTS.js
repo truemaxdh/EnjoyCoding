@@ -3,7 +3,7 @@ let TTS = {
     pitch: 1,
     rate: 1,
     lastSpeechTime: 0,
-    speechInterval: 1500,
+    speechInterval: 1000,
     init: function() {
         const voices = window.speechSynthesis.getVoices();
         voices.some(vo=>{
