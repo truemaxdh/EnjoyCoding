@@ -12,8 +12,8 @@ let TTS = {
                 return true;
             } else return false;
         });
-        if (this.engVoice == null) alert('voice not found');
-        else alert(this.engVoice.lang);
+        //if (this.engVoice == null) alert('voice not found');
+        //else alert(this.engVoice.lang);
     },
     speech: function(txt) {
         if ((this.lastSpeechTime + this.speechInterval) > gamePlay.last_animation_time)
