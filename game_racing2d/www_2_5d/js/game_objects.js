@@ -133,13 +133,15 @@ class extraobj extends gameobj {
 class objCar extends extraobj {
     constructor(cam) {
         const r = 90;
-        super(cam, 0, gObj.camXYH.h, cam.center.v3 - 210 - r, r);
+        super(cam, 0, gObj.camXYH.h - 15, cam.center.v3 - 210 - r, r);
         
         this.fixedCenter = this.center.clone();
         
         this.rotate = 0;
         this.unitRotate = Math.PI / 6;
         this.bodyColor = "orange";
+        this.bodyColor2 = "chocolate";
+        this.bodyColor3 = "coral";
         this.wheelColor = "black";
         this.carIdx = 0;
 
@@ -154,12 +156,38 @@ class objCar extends extraobj {
         const c = this.center;
         const r = this.r;
         //console.log(this.objID + ":" + c.v1 + "," + c.v2 + "," + c.v3 + "," + r);
+        
+        [c.v1 - this.r, c.v1 + this.r].forEach(v1=>{
+            [c.v3 - this.r + 40, c.v3 + this.r - 30].forEach(v3=>{
+                super.fillPoligon([
+                    new Vector3D(v1 - 20, c.v2, v3 - 20),
+                    new Vector3D(v1 + 20, c.v2, v3 - 20),
+                    new Vector3D(v1 + 20, c.v2, v3 + 20),
+                    new Vector3D(v1 - 20, c.v2, v3 + 20)
+                ], this.wheelColor);
+            });
+        });
+
         super.fillPoligon([
             new Vector3D(c.v1 - this.r, c.v2, c.v3 - this.r),
             new Vector3D(c.v1 + this.r, c.v2, c.v3 - this.r),
             new Vector3D(c.v1 + this.r, c.v2, c.v3 + this.r),
             new Vector3D(c.v1 - this.r, c.v2, c.v3 + this.r)
         ], this.bodyColor);
+        
+        super.fillPoligon([
+            new Vector3D(c.v1 - this.r + 30, c.v2 - 35, c.v3 + 10),
+            new Vector3D(c.v1 + this.r - 30, c.v2 - 35, c.v3 + 10),
+            new Vector3D(c.v1 + this.r - 10, c.v2 - 35, c.v3 + this.r - 5),
+            new Vector3D(c.v1 - this.r + 10, c.v2 - 35, c.v3 + this.r - 5)
+        ], this.bodyColor2);
+
+        super.fillPoligon([
+            new Vector3D(c.v1 - this.r + 10, c.v2 - 35, c.v3 + this.r - 5),
+            new Vector3D(c.v1 + this.r - 10, c.v2 - 35, c.v3 + this.r - 5),
+            new Vector3D(c.v1 + this.r, c.v2, c.v3 + this.r),
+            new Vector3D(c.v1 - this.r, c.v2, c.v3 + this.r)
+        ], this.bodyColor3);
 
         speedSound(this.carIdx, this.speed.v2);
 
