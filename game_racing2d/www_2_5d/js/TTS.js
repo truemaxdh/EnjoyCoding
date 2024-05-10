@@ -2,7 +2,8 @@ let TTS = {
     engVoice: null,
     pitch: 1,
     rate: 1,
-    speeching: false,
+    lastSpeechTime: 0,
+    speechInterval: 1500,
     init: function() {
         const voices = window.speechSynthesis.getVoices();
         voices.some(vo=>{
@@ -15,9 +16,11 @@ let TTS = {
         else alert(this.engVoice.lang);
     },
     speech: function(txt) {
-        // if (gamePlay.stageNum == 1)
-        //     alert(gamePlay.stageNum + ":" + txt);
-        if (this.speeching) return;
+        if ((this.lastSpeechTime + this.speechInterval) > gamePlay.last_animation_time)
+            return;
+        console.log('speech: ' + txt);
+        this.lastSpeechTime = gamePlay.last_animation_time;
+        //if (this.speeching) return;
         if(!window.speechSynthesis) {
             alert("음성 재생을 지원하지 않는 브라우저입니다. 크롬, 파이어폭스 등의 최신 브라우저를 이용하세요");
             return;
@@ -25,15 +28,15 @@ let TTS = {
 
         this.speeching = true;
         let utterThis = new SpeechSynthesisUtterance(txt);
-        utterThis.onend = function (event) {
-            //console.log('speech end', event);
-            TTS.speeching = false;
-        };
+        // utterThis.onend = function (event) {
+        //     //console.log('speech end', event);
+        //     TTS.speeching = false;
+        // };
     
-        utterThis.onerror = function(event) {
-            //console.log('speech error', event);
-            TTS.speeching = false;
-        };
+        // utterThis.onerror = function(event) {
+        //     //console.log('speech error', event);
+        //     TTS.speeching = false;
+        // };
 
         utterThis.voice = this.engVoice;
         utterThis.lang = this.engVoice.lang;
