@@ -142,6 +142,7 @@ class objCar extends extraobj {
         this.bodyColor = "orange";
         this.bodyColor2 = "chocolate";
         this.bodyColor3 = "coral";
+        this.bodyColor4 = "darksalmon";
         this.wheelColor = "black";
         this.carIdx = 0;
 
@@ -174,20 +175,27 @@ class objCar extends extraobj {
             new Vector3D(c.v1 + this.r, c.v2, c.v3 + this.r),
             new Vector3D(c.v1 - this.r, c.v2, c.v3 + this.r)
         ], this.bodyColor);
-        
+
         super.fillPoligon([
-            new Vector3D(c.v1 - this.r + 30, c.v2 - 35, c.v3 + 10),
-            new Vector3D(c.v1 + this.r - 30, c.v2 - 35, c.v3 + 10),
+            new Vector3D(c.v1 - this.r, c.v2, c.v3 - this.r),
+            new Vector3D(c.v1 + this.r, c.v2, c.v3 - this.r),
+            new Vector3D(c.v1 + this.r - 30, c.v2 - 35, c.v3 + this.r - 50),
+            new Vector3D(c.v1 - this.r + 30, c.v2 - 35, c.v3 + this.r - 50),            
+        ], this.bodyColor4);
+
+        super.fillPoligon([
+            new Vector3D(c.v1 - this.r + 30, c.v2 - 35, c.v3 + this.r - 50),
+            new Vector3D(c.v1 + this.r - 30, c.v2 - 35, c.v3 + this.r - 50),
             new Vector3D(c.v1 + this.r - 10, c.v2 - 35, c.v3 + this.r - 5),
             new Vector3D(c.v1 - this.r + 10, c.v2 - 35, c.v3 + this.r - 5)
-        ], this.bodyColor2);
+        ], this.bodyColor3);
 
         super.fillPoligon([
             new Vector3D(c.v1 - this.r + 10, c.v2 - 35, c.v3 + this.r - 5),
             new Vector3D(c.v1 + this.r - 10, c.v2 - 35, c.v3 + this.r - 5),
             new Vector3D(c.v1 + this.r, c.v2, c.v3 + this.r),
             new Vector3D(c.v1 - this.r, c.v2, c.v3 + this.r)
-        ], this.bodyColor3);
+        ], this.bodyColor2);
 
         speedSound(this.carIdx, this.speed.v2);
 
