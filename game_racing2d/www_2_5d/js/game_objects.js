@@ -83,7 +83,7 @@ class extraobj extends gameobj {
             car.prev.next = this;
             car.prev = this;
 
-            console.log("quiz:" + this.objID);
+            //console.log("quiz:" + this.objID);
         }
 
     }
@@ -359,6 +359,55 @@ class objQuiz extends extraobj {
     }
 }
 
+class objTree extends extraobj {
+    constructor(lr) {
+        console.log('new tree:' + lr);
+        const x = (lr == 0) ? -425:425;
+        super(gObj.cam, x, gObj.camXYH.h, 0, 25, gObj.car);
+        
+        this.height = Math.random() * 150 + 150;
+        this.stemColor = 'brown';
+        this.leafColor = 'green';
+        this.lr = lr;
+        this.chkDist = 5000;
+        this.newFlag = true;  
+    }
+
+    render() {
+        const r = this.r;
+        const c = this.center;
+        const h = this.height;
+        const hH = h / 2;
+        // console.log(r);
+        // console.log(c);
+        // console.log(h);
+        // console.log(hH);
+
+        // stem
+        super.fillPoligon([
+            new Vector3D(c.v1 - r, c.v2, c.v3),
+            new Vector3D(c.v1 + r, c.v2, c.v3),
+            new Vector3D(c.v1 + r, c.v2 - hH, c.v3),
+            new Vector3D(c.v1 - r, c.v2 - hH, c.v3)
+        ], this.stemColor);
+
+        //leaf
+        super.fillPoligon([
+            new Vector3D(c.v1 - 2 * r, c.v2 - h, c.v3),
+            new Vector3D(c.v1 + 2 * r, c.v2 - h, c.v3),
+            new Vector3D(c.v1 + 2 * r, c.v2 - hH, c.v3),
+            new Vector3D(c.v1 - 2 * r, c.v2 - hH, c.v3)
+        ], this.leafColor);
+
+        super.render();
+        console.log(c.v3);
+        if (this.newFlag && c.v3 > this.chkDist) {
+            new objTree(1 - this.lr);
+            this.newFlag = false;
+        }
+    }
+}
+
 class objGameOver extends gameobj {
     constructor() {
         super(0, 0, 0, 0, 0);
@@ -429,6 +478,7 @@ let gObj = {
         this.car = new objCar(this.cam);
         new objRoad(this.cam, null);
         new objQuiz();
+        new objTree(0);
     },
     move : function() {
         this.cam.move();
