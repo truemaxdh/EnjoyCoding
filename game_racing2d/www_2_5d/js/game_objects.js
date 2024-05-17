@@ -31,7 +31,7 @@ class objCam extends gameobj {
     constructor() {
         super(0, 0, gObj.vanishingDt, 0, 0, 0, 0);
         this.accel = new Vector3D(0, 0, -100);
-        this.maxSpeedV3 = -180;
+        this.maxSpeedV3 = -100;
 
         console.log(this.objID + ":cam");
     }
@@ -365,9 +365,10 @@ class objTree extends extraobj {
         const x = (lr == 0) ? -425:425;
         super(gObj.cam, x, gObj.camXYH.h, 0, 25, gObj.car);
         
-        this.height = Math.random() * 150 + 150;
+        this.height = Math.random() * 250 + 250;
         this.stemColor = 'brown';
         this.leafColor = 'green';
+        this.leafColor2 = 'lightgreen';
         this.lr = lr;
         this.chkDist = 5000;
         this.newFlag = true;  
@@ -378,29 +379,40 @@ class objTree extends extraobj {
         const c = this.center;
         const h = this.height;
         const hH = h / 2;
-        // console.log(r);
-        // console.log(c);
-        // console.log(h);
-        // console.log(hH);
-
+        
         // stem
         super.fillPoligon([
-            new Vector3D(c.v1 - r, c.v2, c.v3),
-            new Vector3D(c.v1 + r, c.v2, c.v3),
-            new Vector3D(c.v1 + r, c.v2 - hH, c.v3),
-            new Vector3D(c.v1 - r, c.v2 - hH, c.v3)
+            new Vector3D(c.v1 - r, c.v2, c.v3 + 2 * r),
+            new Vector3D(c.v1 + r, c.v2, c.v3 + 2 * r),
+            new Vector3D(c.v1 + r, c.v2 - hH, c.v3 + 2 * r),
+            new Vector3D(c.v1 - r, c.v2 - hH, c.v3 + 2 * r)
         ], this.stemColor);
 
         //leaf
         super.fillPoligon([
-            new Vector3D(c.v1 - 2 * r, c.v2 - h, c.v3),
-            new Vector3D(c.v1 + 2 * r, c.v2 - h, c.v3),
-            new Vector3D(c.v1 + 2 * r, c.v2 - hH, c.v3),
-            new Vector3D(c.v1 - 2 * r, c.v2 - hH, c.v3)
+            new Vector3D(c.v1 - 2 * r, c.v2 - h, c.v3 + 2 * r),
+            new Vector3D(c.v1 + 2 * r, c.v2 - h, c.v3 + 2 * r),
+            new Vector3D(c.v1 + 2 * r, c.v2 - hH, c.v3 + 2 * r),
+            new Vector3D(c.v1 - 2 * r, c.v2 - hH, c.v3 + 2 * r)
         ], this.leafColor);
 
+        if (this.lr == 0)
+            super.fillPoligon([
+                new Vector3D(c.v1 + 2 * r, c.v2 - h, c.v3 - 2 * r),
+                new Vector3D(c.v1 + 2 * r, c.v2 - h, c.v3 + 2 * r),
+                new Vector3D(c.v1 + 2 * r, c.v2 - hH, c.v3 + 2 * r),
+                new Vector3D(c.v1 + 2 * r, c.v2 - hH, c.v3 - 2 * r)
+            ], this.leafColor2);
+        else 
+            super.fillPoligon([
+                new Vector3D(c.v1 - 2 * r, c.v2 - h, c.v3 - 2 * r),
+                new Vector3D(c.v1 - 2 * r, c.v2 - h, c.v3 + 2 * r),
+                new Vector3D(c.v1 - 2 * r, c.v2 - hH, c.v3 + 2 * r),
+                new Vector3D(c.v1 - 2 * r, c.v2 - hH, c.v3 - 2 * r)
+            ], this.leafColor2);
+
         super.render();
-        console.log(c.v3);
+        //console.log(c.v3);
         if (this.newFlag && c.v3 > this.chkDist) {
             new objTree(1 - this.lr);
             this.newFlag = false;
