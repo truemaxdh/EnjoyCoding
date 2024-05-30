@@ -67,24 +67,24 @@ class extraobj extends gameobj {
     constructor(cam, x, y, z, r, car = null) {
         super(x, y, z, r, 0, 0, 0);
         this.cam = cam;
-        if (car == null) {
+        //if (car == null) {
             if (cam.next != null) {
                 this.next = cam.next;
                 cam.next.prev = this;
             }
             this.prev = cam;
             cam.next = this;
-        } else {
-            this.car = car;
+        // } else {
+        //     this.car = car;
 
-            this.next = car;
-            this.prev = car.prev;
+        //     this.next = car;
+        //     this.prev = car.prev;
 
-            car.prev.next = this;
-            car.prev = this;
+        //     car.prev.next = this;
+        //     car.prev = this;
 
-            //console.log("quiz:" + this.objID);
-        }
+        //     //console.log("quiz:" + this.objID);
+        // }
 
     }
 
@@ -106,8 +106,6 @@ class extraobj extends gameobj {
         ctx.beginPath();
         for(let i = 0; i < vectors.length; i++) {
             const drawPos = this.cam.realCoord(vectors[i]);
-            // if (color == "orange")
-            //     console.log(this.objID + ":" + drawPos.v1 + "," + drawPos.v2);
             if (i == 0) ctx.moveTo(drawPos.v1, drawPos.v2);
             else ctx.lineTo(drawPos.v1, drawPos.v2);
         }
@@ -350,7 +348,9 @@ class objQuiz extends extraobj {
             if (this.answer != selectedAnswer) {
                 console.log('X');
                 this.cam.speed.v3 *= -10;
+                gamePlay.score -= 5;
             } else {
+                gamePlay.score += 10;
                 console.log('O');
             }                
                 
@@ -367,8 +367,10 @@ class objTree extends extraobj {
         
         this.height = Math.random() * 250 + 250;
         this.stemColor = 'brown';
-        this.leafColor = 'green';
-        this.leafColor2 = 'lightgreen';
+        this.stemColor2 = 'SaddleBrown';
+        this.leafColor = 'ForestGreen';
+        this.leafColor2 = 'DarkGreen';
+        this.leafColor3 = 'LimeGreen';
         this.lr = lr;
         this.chkDist = 5000;
         this.newFlag = true;  
@@ -382,34 +384,70 @@ class objTree extends extraobj {
         
         // stem
         super.fillPoligon([
-            new Vector3D(c.v1 - r, c.v2, c.v3 + 2 * r),
-            new Vector3D(c.v1 + r, c.v2, c.v3 + 2 * r),
-            new Vector3D(c.v1 + r, c.v2 - hH, c.v3 + 2 * r),
-            new Vector3D(c.v1 - r, c.v2 - hH, c.v3 + 2 * r)
+            new Vector3D(c.v1 - r, c.v2, c.v3 + r),
+            new Vector3D(c.v1 + r, c.v2, c.v3 + r),
+            new Vector3D(c.v1 + r, c.v2 - hH, c.v3 + r),
+            new Vector3D(c.v1 - r, c.v2 - hH, c.v3 + r)
         ], this.stemColor);
 
         //leaf
         super.fillPoligon([
             new Vector3D(c.v1 - 2 * r, c.v2 - h, c.v3 + 2 * r),
             new Vector3D(c.v1 + 2 * r, c.v2 - h, c.v3 + 2 * r),
-            new Vector3D(c.v1 + 2 * r, c.v2 - hH, c.v3 + 2 * r),
-            new Vector3D(c.v1 - 2 * r, c.v2 - hH, c.v3 + 2 * r)
-        ], this.leafColor);
+            new Vector3D(c.v1 + 2 * r, c.v2 - h, c.v3 - 2 * r),
+            new Vector3D(c.v1 - 2 * r, c.v2 - h, c.v3 - 2 * r)
+        ], this.leafColor3);
 
-        if (this.lr == 0)
+        if (this.lr == 0) {
+            // stem
+            super.fillPoligon([
+                new Vector3D(c.v1 + r, c.v2, c.v3 - r),
+                new Vector3D(c.v1 + r, c.v2, c.v3 + r),
+                new Vector3D(c.v1 + r, c.v2 - hH, c.v3 + r),
+                new Vector3D(c.v1 + r, c.v2 - hH, c.v3 - r)
+            ], this.stemColor2);
+
+            //leaf
+            super.fillPoligon([
+                new Vector3D(c.v1 - 2 * r, c.v2 - h, c.v3 + 2 * r),
+                new Vector3D(c.v1 + 2 * r, c.v2 - h, c.v3 + 2 * r),
+                new Vector3D(c.v1 + 2 * r, c.v2 - hH, c.v3 + 2 * r),
+                new Vector3D(c.v1 - 2 * r, c.v2 - hH, c.v3 + 2 * r)
+            ], this.leafColor);
+
+            // left
             super.fillPoligon([
                 new Vector3D(c.v1 + 2 * r, c.v2 - h, c.v3 - 2 * r),
                 new Vector3D(c.v1 + 2 * r, c.v2 - h, c.v3 + 2 * r),
                 new Vector3D(c.v1 + 2 * r, c.v2 - hH, c.v3 + 2 * r),
                 new Vector3D(c.v1 + 2 * r, c.v2 - hH, c.v3 - 2 * r)
             ], this.leafColor2);
-        else 
+        }
+        else {
+            // stem
+            super.fillPoligon([
+                new Vector3D(c.v1 - r, c.v2, c.v3 - r),
+                new Vector3D(c.v1 - r, c.v2, c.v3 + r),
+                new Vector3D(c.v1 - r, c.v2 - hH, c.v3 + r),
+                new Vector3D(c.v1 - r, c.v2 - hH, c.v3 - r)
+            ], this.stemColor2);
+
+            //leaf
+            super.fillPoligon([
+                new Vector3D(c.v1 - 2 * r, c.v2 - h, c.v3 + 2 * r),
+                new Vector3D(c.v1 + 2 * r, c.v2 - h, c.v3 + 2 * r),
+                new Vector3D(c.v1 + 2 * r, c.v2 - hH, c.v3 + 2 * r),
+                new Vector3D(c.v1 - 2 * r, c.v2 - hH, c.v3 + 2 * r)
+            ], this.leafColor);
+
+            // left
             super.fillPoligon([
                 new Vector3D(c.v1 - 2 * r, c.v2 - h, c.v3 - 2 * r),
                 new Vector3D(c.v1 - 2 * r, c.v2 - h, c.v3 + 2 * r),
                 new Vector3D(c.v1 - 2 * r, c.v2 - hH, c.v3 + 2 * r),
                 new Vector3D(c.v1 - 2 * r, c.v2 - hH, c.v3 - 2 * r)
             ], this.leafColor2);
+        }
 
         super.render();
         //console.log(c.v3);
